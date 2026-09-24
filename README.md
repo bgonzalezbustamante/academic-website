@@ -34,9 +34,9 @@ The current foundation includes:
 - RPC-only Supabase client
 - public publication listing
 - stable publication detail routes with optional local-static Key highlights
-- standalone Projects listing and `/project/[slug]` detail routes
+- standalone Projects listing and `/project/[slug]` detail routes, including Research outputs with associated publications and public conference presentations
 - homepage Featured projects carousel ordered by latest end year, using funder imagery first
-- TERGAP detail-page map derived from a compact snapshot of the public TERGAP dashboard metrics, including the source update timestamp; Home/Projects cards use the ERC funder logo
+- TERGAP detail-page map derived from a compact snapshot of the public TERGAP dashboard metrics, matching the TERGAP dashboard map canvas/no-data treatment and original colour scale; Home/Projects cards use the ERC funder logo
 - standalone Conferences dashboard with KPI cards, presentation geography and a compact 10-row paginated presentation table
 - current-year two-sided presentation Roadmap using public event short names
 - current-year public Activity over time heatmap
