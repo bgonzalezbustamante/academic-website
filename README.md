@@ -34,8 +34,9 @@ The current foundation includes:
 - RPC-only Supabase client
 - public publication listing
 - stable publication detail routes with optional local-static Key highlights
+- citation-based Publications listing enriched only through `get_public_paper(slug)`, with client-side year and Publication index filters
 - standalone Projects listing and `/project/[slug]` detail routes, including Research outputs with associated publications and public conference presentations
-- homepage Featured projects carousel ordered by latest end year, using funder imagery first
+- homepage Featured publications and Featured projects shown in two-column grids on wider screens; Featured projects remain ordered by latest end year and use funder imagery first
 - TERGAP detail-page map derived from a compact snapshot of the public TERGAP dashboard metrics, matching the TERGAP dashboard map canvas/no-data treatment and original colour scale; Home/Projects cards use the ERC funder logo
 - standalone Conferences dashboard with KPI cards, presentation geography and a compact 10-row paginated presentation table
 - current-year two-sided presentation Roadmap using public event short names
@@ -99,7 +100,7 @@ npm run check:public-contract
 
 The contract check:
 
-- verifies `list_public_papers()` and keeps Key highlight fields detail-only;
+- verifies `list_public_papers()` and keeps citation/Key highlight fields detail-only;
 - resolves a listed publication through `get_public_paper(text)`;
 - verifies `list_public_projects()` and `get_public_project(text)`, including `funder_note`;
 - confirms project publication slugs resolve only to papers returned by the public publication list;
