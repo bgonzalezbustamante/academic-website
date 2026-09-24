@@ -7,13 +7,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import ConferenceOverviewTable from '@/components/conference-overview-table'
-import FormattedText from '@/components/formatted-text'
 import {
   formatProjectStatus,
   formatProjectYears,
 } from '@/components/project-card'
 import ProjectCardVisual from '@/components/project-card-visual'
 import PublicationCard from '@/components/publication-card'
+import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 import ResilientLocalImage from '@/components/resilient-local-image'
 import TergapProjectMap from '@/components/tergap-project-map'
 import { listPublicPapers } from '@/lib/publications'
@@ -131,10 +131,9 @@ export default async function ProjectPage({ params }: Props) {
 
         <section className="project-detail-section">
           <h2>About the project</h2>
-          <FormattedText
-            className="project-abstract"
-            text={project.abstract}
-          />
+          <p className="project-abstract research-markdown-source">
+            {project.abstract}
+          </p>
         </section>
 
         {(project.publication_slugs.length > 0 ||
@@ -222,6 +221,7 @@ export default async function ProjectPage({ params }: Props) {
           </section>
         )}
 
+        <ResearchMarkdownEnhancer />
       </div>
     </article>
   )
