@@ -102,16 +102,30 @@ Available now:
 
 Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart):
 
-- long-form biography
-- detailed appointments/positions
-- education
-- projects/resource cards
-- teaching/service
-- contact presentation
+- education detail beyond the current short biography
+- projects/resource cards beyond the current selected project links
+- teaching/service detail
 - CV asset/link
 - historic publication corpus not yet present in Research Dashboard
 
+The homepage profile, three main appointments, portrait, selected project links, email and institutional address are now maintained directly in this public repository as presentation content.
+
 These should not be copied into a new database or CMS in this repository.
+
+## Publication key highlights
+
+A publication-detail **Key highlight** panel with an image is feasible and fits the intended design. It should not be hard-coded per slug in this repository because the Research Dashboard is the canonical administrative layer for paper presentation metadata.
+
+The current public paper RPC does not expose highlight content. The minimal future extension should therefore live in `paper_public_metadata` and be returned by `get_public_paper(text)` only:
+
+- `highlight_text` — optional short public-facing highlight;
+- `highlight_image_url` — optional URL for an intentionally public image;
+- `highlight_image_alt` — required accessibility text when an image is supplied;
+- optionally `highlight_image_caption` for a short source/caption line.
+
+`list_public_papers()` does not need these fields unless highlights are later shown in publication listings. The image should be stored in an explicitly public media location (for example a dedicated public Supabase Storage bucket managed through the Dashboard) rather than exposing private Dashboard files or credentials.
+
+No public-contract change is implemented in this repository; it should be made deliberately in Research Dashboard before the visual component is enabled.
 
 ## Local validation
 
