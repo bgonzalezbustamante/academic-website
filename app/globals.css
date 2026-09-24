@@ -65,12 +65,33 @@ h2 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.35rem); }
 .abstract-section { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
 .abstract-section h2 { font-size: 1.6rem; }
 .abstract-section p { font-size: 1.04rem; line-height: 1.8; }
+
+.release-list { display: grid; gap: 1.5rem; }
+.release-card { border: 1px solid var(--line); background: var(--paper); padding: clamp(1.4rem, 3vw, 2rem); box-shadow: 0 12px 32px rgba(0,33,71,.05); }
+.release-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.release-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
+.release-title-row h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+.release-badge, .release-date { display: inline-flex; align-items: center; border-radius: 999px; padding: .25rem .6rem; font-size: .75rem; font-weight: 650; }
+.release-badge { border: 1px solid var(--sky); background: #eef5fb; color: var(--blue); }
+.release-date { border: 1px solid var(--line); background: var(--background); color: var(--muted); white-space: nowrap; }
+.release-comparison { margin: .55rem 0 0; color: var(--ink); font-size: .9rem; font-weight: 650; }
+.release-summary { margin: 1.1rem 0 0; color: var(--muted); }
+.release-sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.release-section { border: 1px solid var(--line); background: var(--background); padding: 1rem 1.1rem; }
+.release-section h3 { margin: 0; font-family: var(--serif); color: var(--blue); font-size: 1.08rem; }
+.release-section ul { margin: .8rem 0 0; padding-left: 1.1rem; color: var(--ink); }
+.release-section li + li { margin-top: .45rem; }
+.release-history-link { margin: 1.25rem 0 0; font-weight: 650; }
+
 .site-footer { border-top: 1px solid var(--line); background: var(--shell); }
 .footer-inner { min-height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: .82rem; }
 .footer-inner p { margin: 0; }
 ::selection { background: var(--sky); color: var(--blue); }
+
 @media (max-width: 760px) {
   .hero-grid { grid-template-columns: 1fr; }
   .architecture-card { max-width: 620px; }
+  .release-heading { flex-direction: column; }
+  .release-sections { grid-template-columns: 1fr; }
   .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 1rem; }
 }
