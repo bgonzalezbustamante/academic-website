@@ -1,3 +1,4 @@
+import { faCreativeCommons } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
@@ -21,7 +22,13 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer-meta">
-          <p>© {new Date().getFullYear()} {siteProfile.name}</p>
+          <p className="footer-license">
+            <FontAwesomeIcon
+              icon={faCreativeCommons}
+              aria-hidden="true"
+            />
+            <span>{new Date().getFullYear()} {siteProfile.name}</span>
+          </p>
           <p>
             <Link href="/release-notes">
               {currentRelease.version} &quot;{currentRelease.codename}&quot;
