@@ -1715,6 +1715,20 @@ h4 {
   line-height: 1.4;
 }
 
+.conference-presentation-title-link {
+  color: var(--oxford-charcoal);
+  text-decoration: none;
+}
+
+.conference-presentation-title-link:hover,
+.conference-presentation-title-link:focus-visible {
+  color: var(--oxford-coral);
+}
+
+.conference-presentation-title-link .inline-external-icon {
+  flex: 0 0 auto;
+}
+
 .conference-table-link {
   display: inline-flex;
   align-items: center;
