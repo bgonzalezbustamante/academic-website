@@ -79,6 +79,7 @@
 - Changed the Publications and Conferences authorship KPI from co-authorship percentage to single-author percentage.
 - Removed the Conference Type column and added client-side pagination at 10 presentation rows per page.
 - Removed the optional external-link column from conference presentation tables so rows without URLs no longer show a trailing dash; the shared change applies both to the Conferences overview and project Research outputs.
+- Conference presentation titles now become external links when a public URL is available, using the same small coral external-arrow treatment as biography links.
 - Added the same reusable Oxford-styled world-map system for TERGAP and Conferences using `react-simple-maps`, `world-atlas` and ISO-country conversion.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
