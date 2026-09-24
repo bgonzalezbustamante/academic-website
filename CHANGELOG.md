@@ -19,10 +19,14 @@
 
 - Reworked the site around the Research Dashboard visual language: Roboto interface typography, Noto Serif editorial text, Oxford blue, charcoal, ash, stone, off-white and cool-grey surfaces.
 - Added the OCPSG Benchmarking coral (`#FE615A`) and teal (`#00AAB4`) palette as restrained accent colours for links, icons and small emphasis states.
-- Reduced the homepage name scale and replaced the poster-like hero with a compact bordered profile card and Dashboard-style affiliation cards.
+- Reduced the homepage name scale further and restored a portrait-led academic profile layout, with the three positions shown as compact one-line entries directly below the name.
 - Added a third main position: Research Leader, Oxford Computational Political Science Group, with external institutional links for Leiden University, Universidad Diego Portales and OCPSG.
-- Replaced the BGB header mark with a three-affiliation strip. The existing OCPSG SVG is carried forward from `academic-kickstart`; Leiden and UDP currently use monochrome wordmark fallbacks until the supplied source logo files are available in the repository.
+- Replaced the BGB header mark with a three-affiliation home link using the supplied Leiden University, Universidad Diego Portales and OCPSG logo assets in a consistent monochrome treatment.
 - Added Font Awesome 7 and Academicons for academic profiles, external links and publication resources.
+- Restored the profile portrait from `academic-kickstart` and prioritised the supplied Leiden seal as the site favicon.
+- Added the revised two-paragraph academic biography with external links to ECPR, TERGAP, COST Action CA22150 and the Enlace-Inserción UDP project.
+- Added compact public email and Leiden University Wijnhaven address information to the footer.
+- Rebalanced the colour system toward Oxford blue and Oxford coral, reserving Oxford aqua for small interactive states and using a washed Oxford-blue background for supporting surfaces.
 
 `Phase 4 foundation`
 
