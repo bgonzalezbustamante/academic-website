@@ -45,7 +45,7 @@ export default async function PublicationsPage() {
 
   return (
     <section className="page-section">
-      <div className="site-shell narrow-shell">
+      <div className="site-shell">
         <p className="eyebrow">Research output</p>
         <h1>Publications</h1>
         <p className="page-lead">
