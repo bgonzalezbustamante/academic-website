@@ -55,10 +55,12 @@
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Moved publication Key highlights below the Abstract on publication-detail pages.
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
+- Project Research outputs now combine associated public publications and the public `conference_presentations[]` contract; conference presentations reuse the Conferences Overview table.
+- Reordered project detail content so Research outputs follows About the project and Funding is always the final section.
 - Restored two project cards per row on wider screens.
 - Added a TERGAP-specific world coverage map on the TERGAP detail page, using a compact 47-country snapshot derived from `tergap-dashboard` and displaying its generation timestamp.
 - Reused the TERGAP dashboard ERC logo as the TERGAP funder image on Home/Projects cards and in the Funding block when no Dashboard funder-image filename is configured.
-- Fixed map contrast decisively: no-data countries now use warm cream (`#F6F1E8`), while any country with coverage starts at saturated Oxford aqua (`#00AAB4`) rather than a pale blue. Added explicit no-data legend keys; Conference hover uses Oxford blue/coral treatment.
+- Matched the TERGAP detail map to the original dashboard: map canvas `#eef0f7`, grey not-collected countries `#e8eaed`, original six-step scale from `#e7eaf4` to `#001158`, and teal hover `#007679`. Conferences uses the same canvas/grey no-data treatment while retaining an Oxford aqua/blue/coral scale.
 - Reworked `/conferences` into a dashboard-style view headed by “Conference and public presentations”: KPI cards first, then the geographic map, followed by a compact presentation table.
 - Removed the Conference Type column and added client-side pagination at 10 presentation rows per page.
 - Added the same reusable Oxford-styled world-map system for TERGAP and Conferences using `react-simple-maps`, `world-atlas` and ISO-country conversion.
