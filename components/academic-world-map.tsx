@@ -69,8 +69,11 @@ function getFill(value: number, maximum: number) {
 
 function formatUpdated(value: string) {
   return new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
     timeZone: 'Europe/Amsterdam',
     timeZoneName: 'short',
   }).format(new Date(value))
