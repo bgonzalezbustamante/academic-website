@@ -86,6 +86,8 @@ export default async function ProjectPage({ params }: Props) {
     : isTergap
       ? '/funders/erc-logo.png'
       : null
+  const funderImageIsLossless =
+    funderImage?.toLowerCase().endsWith('.png') ?? false
 
   return (
     <article className="page-section">
@@ -196,6 +198,8 @@ export default async function ProjectPage({ params }: Props) {
                       width={150}
                       height={80}
                       sizes="150px"
+                      quality={funderImageIsLossless ? undefined : 90}
+                      unoptimized={funderImageIsLossless}
                     />
                   )}
 
