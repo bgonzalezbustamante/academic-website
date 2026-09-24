@@ -45,14 +45,17 @@
 - Added a British-English `/dora` page summarising the San Francisco Declaration on Research Assessment and its implications for responsible research assessment.
 - Added the official horizontal DORA signatory badge as a local public asset.
 - Migrated the legacy `/credit` Contributor Roles Taxonomy page, including all fourteen CRediT badges, while dropping the former Training Data Lab cross-reference.
-- Defined, but did not implement, the minimal future public-contract extension needed for optional publication Key highlight text and imagery.
+- Integrated detail-only publication Key highlights from `get_public_paper(slug)`, with optional text, local static images, supplied alt text and restrained captions under `/public/publication-highlights/<paper-slug>/`.
+- Added RPC-backed `/projects` and `/project/[slug]` routes with Featured projects, canonical project URLs, years, status, funder presentation, optional local project/funder imagery and associated Public publications.
+- Added an RPC-backed `/conferences` page using presentation-specific ordered authors while deliberately excluding private notes and Dashboard paper relationships.
+- Added Projects and Conferences to standalone navigation without changing the agreed homepage sequence: Featured publications → DORA / CRediT → Activity over time.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
 `local development and validation`
 
 - Added `npm run typecheck` and `npm run check` for local TypeScript and lint validation.
-- Added `npm run check:public-contract` to validate the three public RPCs using only the Supabase publishable key.
-- Added payload-shape validation for public papers and aggregate work analytics while accepting an empty curated publication list.
+- Expanded `npm run check:public-contract` to validate Publications/detail highlights, Projects/detail, Conferences and aggregate work analytics using only the Supabase publishable key.
+- Added boundary checks ensuring Key highlights remain detail-only, project publication slugs resolve only to Public papers, and conference notes/owner/paper IDs are absent.
 - Standardised the application on Node.js 22 or later because the current Supabase JavaScript stack has ended Node 20 support and uses native WebSocket support available in Node 22+.
 - Documented the local-first workflow and target information architecture in the README and architecture notes.
 
