@@ -64,9 +64,11 @@ export const releases: ReleaseNote[] = [
           'Added a standalone Conferences page backed only by the public conference RPC, preserving presentation-specific author order while excluding private notes and linked-paper metadata.',
           'Added a Featured projects carousel after Featured publications, ordered by later end year first and preferring funder imagery.',
           'Added a current-year horizontal two-sided presentation Roadmap using event short names ordered chronologically by presentation date.',
-          'Moved the DORA / CRediT cards below Activity over time and retained the standalone Projects and Conferences navigation.',
+          'Reordered the homepage to Academic profile, DORA / CRediT, Featured publications, Featured projects, Activity over time, then Roadmap.',
           'Restyled publication and project classification/status metadata as compact tags.',
           'Moved publication Key highlights below Abstract and extended project Funding with the public funder note and configured funder logo.',
+          'Restored two project cards per row on wider screens and added a TERGAP-specific world coverage map sourced from a compact public tergap-dashboard snapshot with its update timestamp.',
+          'Reworked Conferences into a public dashboard for presentations from 2020 onwards, with a geographic map, presentation/country/co-authorship KPIs and a compact presentation table.',
         ],
       },
       {
