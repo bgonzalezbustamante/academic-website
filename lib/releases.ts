@@ -55,7 +55,7 @@ export const releases: ReleaseNote[] = [
           'Confirmed that an empty public-paper list is a valid curated state and does not trigger access to legacy or private data.',
           'Kept service-role credentials, private Dashboard tables, internal workflow metadata, work-session details and account data outside the public application.',
           'Rendered the current-year Activity over time heatmap from the anonymous aggregate work-analytics RPC using the same thresholds as Research Dashboard.',
-          'Added public cards for Working Hours per day and Coffee per working day, both formatted to one decimal with an on-average label, without exposing raw sessions or daily coffee counts.',
+          'Added public cards for Working Hours per day and Coffee per working day, with working time formatted as hours/minutes and coffee to one decimal, both with an on-average label, without exposing raw sessions or daily coffee counts.',
           'Tightened the homepage vertical rhythm between the profile, featured publications and public activity sections.',
           'Documented the minimal future contract extension required for optional publication Key highlight text and imagery without implementing it in the public repository.',
         ],
