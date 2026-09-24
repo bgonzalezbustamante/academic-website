@@ -461,6 +461,8 @@ h4 {
 }
 
 #publications.section,
+.featured-projects-section.section,
+.roadmap-section.section,
 .activity-section.section {
   padding: clamp(1.9rem, 4vw, 3rem) 0;
 }
@@ -541,16 +543,33 @@ h4 {
   color: var(--oxford-coral);
 }
 
-.publication-meta {
+.metadata-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.38rem 0.7rem;
-  color: var(--oxford-coral);
+  gap: 0.38rem;
   font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.69rem;
+}
+
+.metadata-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  border: 1px solid rgba(0, 33, 71, 0.14);
+  border-radius: 999px;
+  background: var(--oxford-blue-wash);
+  padding: 0.18rem 0.48rem;
+  color: var(--oxford-blue);
+  font-size: 0.66rem;
   font-weight: 700;
-  letter-spacing: 0.065em;
+  letter-spacing: 0.045em;
+  line-height: 1;
   text-transform: uppercase;
+}
+
+.metadata-tag-accent {
+  border-color: rgba(254, 97, 90, 0.58);
+  background: rgba(254, 97, 90, 0.09);
+  color: var(--oxford-blue);
 }
 
 .authors,
@@ -730,6 +749,167 @@ h4 {
   line-height: 1.5;
 }
 
+
+/* Featured project carousel */
+
+.featured-projects-section {
+  background: var(--paper);
+}
+
+.featured-projects-carousel {
+  position: relative;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin: -0.2rem 0 0.65rem;
+}
+
+.carousel-controls button {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--oxford-blue);
+  cursor: pointer;
+}
+
+.carousel-controls button:hover,
+.carousel-controls button:focus-visible {
+  border-color: rgba(254, 97, 90, 0.55);
+  background: var(--oxford-blue-wash);
+  color: var(--oxford-coral);
+}
+
+.carousel-controls svg {
+  width: 0.72rem;
+}
+
+.featured-projects-track {
+  display: flex;
+  gap: 0.9rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: thin;
+  padding: 0.1rem 0 0.55rem;
+}
+
+.featured-project-slide {
+  flex: 0 0 min(560px, calc(100vw - 3rem));
+  scroll-snap-align: start;
+}
+
+.featured-project-slide .project-card {
+  height: 100%;
+}
+
+/* Presentation roadmap */
+
+.roadmap-section {
+  background: var(--oxford-off-white);
+}
+
+.roadmap-scroll {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 0.25rem 0 0.55rem;
+}
+
+.roadmap-timeline {
+  position: relative;
+  width: max-content;
+  min-width: 100%;
+  min-height: 164px;
+  display: flex;
+  align-items: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.roadmap-timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: var(--oxford-stone);
+  transform: translateY(-50%);
+}
+
+.roadmap-item {
+  position: relative;
+  min-width: 170px;
+  flex: 1 0 170px;
+}
+
+.roadmap-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  background: var(--oxford-coral);
+  box-shadow: 0 0 0 1px rgba(0, 33, 71, 0.15);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.roadmap-item::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 18px;
+  background: rgba(254, 97, 90, 0.58);
+  transform: translateX(-50%);
+}
+
+.roadmap-item-upper::after {
+  top: calc(50% - 18px);
+}
+
+.roadmap-item-lower::after {
+  top: 50%;
+}
+
+.roadmap-label {
+  position: absolute;
+  left: 50%;
+  width: 148px;
+  border: 1px solid rgba(0, 33, 71, 0.12);
+  border-radius: 0.45rem;
+  background: var(--paper);
+  padding: 0.42rem 0.5rem;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 650;
+  line-height: 1.3;
+  text-align: center;
+  transform: translateX(-50%);
+  box-shadow: 0 3px 10px rgba(0, 33, 71, 0.025);
+}
+
+.roadmap-item-upper .roadmap-label {
+  bottom: calc(50% + 18px);
+}
+
+.roadmap-item-lower .roadmap-label {
+  top: calc(50% + 18px);
+}
+
 /* Projects */
 
 
@@ -782,6 +962,17 @@ h4 {
 }
 
 .project-card-visual img {
+  display: block;
+}
+
+.project-card-funder-image {
+  width: min(78%, 190px);
+  max-height: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.project-card-project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -801,15 +992,7 @@ h4 {
 
 .project-meta,
 .project-detail-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.38rem 0.65rem;
-  color: var(--oxford-coral);
-  font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  margin-bottom: 0.15rem;
 }
 
 .project-short-title {
@@ -837,21 +1020,10 @@ h4 {
 }
 
 .project-funder {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-top: 0.7rem;
+  margin: 0.7rem 0 0;
   color: var(--oxford-ash);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.76rem;
-}
-
-.project-funder img {
-  max-width: 72px;
-  max-height: 32px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
 }
 
 .project-card-links {
@@ -960,11 +1132,24 @@ h4 {
 }
 
 .project-detail-funder img {
-  max-width: 120px;
-  max-height: 58px;
+  max-width: 150px;
+  max-height: 76px;
   width: auto;
   height: auto;
   object-fit: contain;
+}
+
+.project-funding-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.project-funder-note {
+  max-width: 680px;
+  margin: 0.75rem 0 0;
+  color: var(--oxford-ash);
+  font-size: 0.84rem;
+  line-height: 1.65;
 }
 
 .project-external-link {
@@ -1060,7 +1245,8 @@ h4 {
 /* Research practice */
 
 .practice-section {
-  padding: 0 0 clamp(1.8rem, 3.5vw, 2.7rem);
+  border-top: 1px solid rgba(217, 216, 214, 0.78);
+  padding: clamp(1.9rem, 4vw, 3rem) 0;
 }
 
 .practice-grid {
@@ -1715,6 +1901,10 @@ h4 {
     grid-template-columns: 1fr;
   }
 
+  .featured-project-slide {
+    flex-basis: min(500px, calc(100vw - 2rem));
+  }
+
   .practice-grid {
     grid-template-columns: 1fr;
   }
@@ -1797,6 +1987,20 @@ h4 {
 
   .project-card {
     grid-template-columns: 108px minmax(0, 1fr);
+  }
+
+  .featured-project-slide {
+    flex-basis: calc(100vw - 2rem);
+  }
+
+  .roadmap-item {
+    min-width: 145px;
+    flex-basis: 145px;
+  }
+
+  .roadmap-label {
+    width: 126px;
+    font-size: 0.7rem;
   }
 
   .project-card-visual {
