@@ -27,6 +27,7 @@ export type PublicProject = {
   title: string
   abstract: string
   funder: string
+  funder_note: string | null
   url: string | null
   start_year: number | null
   end_year: number | null
@@ -39,6 +40,7 @@ export type PublicProject = {
 
 export type PublicConferencePresentation = {
   event_name: string
+  event_short_name: string
   location: string | null
   presentation_date: string | null
   presentation_title: string | null
