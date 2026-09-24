@@ -137,6 +137,7 @@ export default async function ConferencesPage() {
                 countries={mapCountries}
                 ariaLabel="World map showing conference presentations by country from 2020 onwards"
                 valueLabel="presentations"
+                singularValueLabel="presentation"
               />
             </section>
 
