@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import PublicationKeyHighlight from '@/components/publication-key-highlight'
+import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 import PublicationLinks from '@/components/publication-links'
 import { getPublicPaper } from '@/lib/publications'
 
@@ -79,11 +80,14 @@ export default async function PublicationPage({ params }: Props) {
         {paper.abstract && (
           <section className="abstract-section">
             <h2>Abstract</h2>
-            <p>{paper.abstract}</p>
+            <p className="research-markdown-source abstract-markdown-source">
+              {paper.abstract}
+            </p>
           </section>
         )}
 
         <PublicationKeyHighlight paper={paper} />
+        <ResearchMarkdownEnhancer />
       </div>
     </article>
   )
