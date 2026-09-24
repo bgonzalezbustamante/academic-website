@@ -33,6 +33,8 @@ The current foundation includes:
 - stable publication detail routes
 - current-year public Activity over time heatmap
 - current-year average working time and coffee summary cards
+- DORA signatory card and `/dora` responsible-research-assessment statement
+- CRediT card and migrated `/credit` Contributor Roles Taxonomy page
 - public-safe error handling
 - local validation of the Supabase public contract
 - v6 changelog and structured public release notes
