@@ -37,6 +37,7 @@
 - Added an RPC-only Supabase client for explicitly curated public paper data.
 - Confirmed that zero Public papers is a valid current state of `list_public_papers()` and designed the site to handle that state without private-data fallback.
 - Reserved the aggregate public work-analytics contract for the later analytics phase without exposing additional Dashboard data.
+- Defined, but did not implement, the minimal future public-contract extension needed for optional publication Key highlight text and imagery.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
 `local development and validation`
