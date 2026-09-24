@@ -28,6 +28,7 @@ type Props = {
   compact?: boolean
   updatedAt?: string | null
   palette?: MapPalette
+  noDataLabel?: string
 }
 
 type HoveredCountry = {
@@ -39,31 +40,38 @@ const WORLD_MAP = worldMap as unknown as GeographyData
 
 const MAP_PALETTES: Record<
   MapPalette,
-  { shades: string[]; empty: string; hover: string }
+  {
+    shades: string[]
+    empty: string
+    hover: string
+    border: string
+  }
 > = {
   tergap: {
     shades: [
-      '#d5e1ed',
-      '#afc2d4',
-      '#809db9',
-      '#557b9c',
-      '#315a7d',
+      '#00AAB4',
+      '#008C9A',
+      '#006C82',
+      '#004D69',
+      '#003454',
       '#002147',
     ],
-    empty: '#f4f0e9',
-    hover: '#00AAB4',
+    empty: '#F6F1E8',
+    hover: '#FE615A',
+    border: '#FFFFFF',
   },
   conference: {
     shades: [
-      '#d9f3f5',
-      '#9fdee2',
-      '#55c5cc',
       '#00AAB4',
-      '#456d91',
-      '#002147',
+      '#1597A7',
+      '#3E7896',
+      '#59677F',
+      '#7A5369',
+      '#FE615A',
     ],
-    empty: '#f6eee9',
-    hover: '#FE615A',
+    empty: '#F6F1E8',
+    hover: '#002147',
+    border: '#FFFFFF',
   },
 }
 
@@ -86,7 +94,7 @@ function getFill(
   }
 
   if (maximum === 1) {
-    return shades[Math.floor(shades.length / 2)]
+    return shades[0]
   }
 
   const scaled = Math.log1p(value) / Math.log1p(maximum)
@@ -121,6 +129,7 @@ export default function AcademicWorldMap({
   compact = false,
   updatedAt = null,
   palette = 'tergap',
+  noDataLabel = 'No coverage',
 }: Props) {
   const byIso3 = useMemo(
     () =>
@@ -200,8 +209,8 @@ export default function AcademicWorldMap({
                             mapPalette.empty
                           )
                     }
-                    stroke="#ffffff"
-                    strokeWidth={0.6}
+                    stroke={mapPalette.border}
+                    strokeWidth={0.7}
                     tabIndex={datum && !compact ? 0 : -1}
                     aria-label={
                       datum && !compact
@@ -231,7 +240,7 @@ export default function AcademicWorldMap({
             <strong>{hovered.label}</strong>
             <span>
               {hovered.value == null
-                ? 'No records'
+                ? noDataLabel
                 : formatValue(hovered.value)}
             </span>
           </div>
@@ -240,16 +249,27 @@ export default function AcademicWorldMap({
 
       <div className="world-map-footer">
         <div className="world-map-legend">
-          <span>Fewer</span>
-          <span className="world-map-shades" aria-hidden="true">
-            {mapPalette.shades.map((shade) => (
-              <span
-                key={shade}
-                style={{ backgroundColor: shade }}
-              />
-            ))}
+          <span className="world-map-no-data-key">
+            <span
+              className="world-map-no-data-swatch"
+              style={{ backgroundColor: mapPalette.empty }}
+              aria-hidden="true"
+            />
+            {noDataLabel}
           </span>
-          <span>More</span>
+
+          <span className="world-map-gradient-key">
+            <span>Fewer</span>
+            <span className="world-map-shades" aria-hidden="true">
+              {mapPalette.shades.map((shade) => (
+                <span
+                  key={shade}
+                  style={{ backgroundColor: shade }}
+                />
+              ))}
+            </span>
+            <span>More</span>
+          </span>
         </div>
 
         {updatedAt && (
