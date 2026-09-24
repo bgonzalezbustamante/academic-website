@@ -998,11 +998,11 @@ h4 {
 .roadmap-label {
   position: absolute;
   left: 50%;
-  width: 148px;
-  display: flex;
+  width: 164px;
+  display: grid;
+  gap: 0.2rem;
   align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
+  justify-items: center;
   border: 1px solid rgba(0, 33, 71, 0.12);
   border-radius: 0.45rem;
   background: var(--paper);
@@ -1015,6 +1015,26 @@ h4 {
   text-align: center;
   transform: translateX(-50%);
   box-shadow: 0 3px 10px rgba(0, 33, 71, 0.025);
+}
+
+.roadmap-label-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.roadmap-label-main > span {
+  min-width: 0;
+}
+
+.roadmap-label-location {
+  color: var(--oxford-ash);
+  font-size: 0.64rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-transform: none;
 }
 
 .roadmap-item-upper .roadmap-label {
@@ -2452,8 +2472,12 @@ h4 {
   }
 
   .roadmap-label {
-    width: 126px;
+    width: 136px;
     font-size: 0.7rem;
+  }
+
+  .roadmap-label-location {
+    font-size: 0.6rem;
   }
 
   .project-card-visual {
