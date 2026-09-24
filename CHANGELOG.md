@@ -39,7 +39,7 @@
 - Added an RPC-only Supabase client for explicitly curated public paper data.
 - Confirmed that zero Public papers is a valid current state of `list_public_papers()` and designed the site to handle that state without private-data fallback.
 - Added a current-year public Activity over time heatmap using only `get_public_work_analytics(year)` and the same working-time thresholds as Research Dashboard.
-- Added current-year cards for Working Hours per day and Coffee per working day, both shown to one decimal with an `on average` label, without exposing individual sessions or daily coffee counts.
+- Added current-year cards for Working Hours per day and Coffee per working day, with working time shown as hours/minutes and coffee shown to one decimal, both with an `on average` label, without exposing individual sessions or daily coffee counts.
 - Tightened the vertical spacing between the Academic profile, Featured publications and Activity over time sections.
 - Defined, but did not implement, the minimal future public-contract extension needed for optional publication Key highlight text and imagery.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
