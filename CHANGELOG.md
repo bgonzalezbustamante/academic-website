@@ -15,11 +15,20 @@
 - Kept [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart) unchanged and in production during parallel development.
 - Preserved the detailed pre-v6 history in the [legacy CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
+`design system and academic identity`
+
+- Reworked the site around the Research Dashboard visual language: Roboto interface typography, Noto Serif editorial text, Oxford blue, charcoal, ash, stone, off-white and cool-grey surfaces.
+- Added the OCPSG Benchmarking coral (`#FE615A`) and teal (`#00AAB4`) palette as restrained accent colours for links, icons and small emphasis states.
+- Reduced the homepage name scale and replaced the poster-like hero with a compact bordered profile card and Dashboard-style affiliation cards.
+- Added a third main position: Research Leader, Oxford Computational Political Science Group, with external institutional links for Leiden University, Universidad Diego Portales and OCPSG.
+- Replaced the BGB header mark with a three-affiliation strip. The existing OCPSG SVG is carried forward from `academic-kickstart`; Leiden and UDP currently use monochrome wordmark fallbacks until the supplied source logo files are available in the repository.
+- Added Font Awesome 7 and Academicons for academic profiles, external links and publication resources.
+
 `Phase 4 foundation`
 
 - Added a Next.js App Router and TypeScript foundation with a distinct public academic-site design.
 - Added responsive global navigation, footer, homepage, publication listing and stable publication-detail routes.
-- Replaced the initial developer-facing homepage architecture card with a public academic profile presentation covering dual appointments and research interests.
+- Replaced the initial developer-facing homepage architecture card with a public academic profile presentation covering three main appointments and research interests.
 - Refined the responsive site shell for smaller screens.
 - Added an RPC-only Supabase client for explicitly curated public paper data.
 - Confirmed that zero Public papers is a valid current state of `list_public_papers()` and designed the site to handle that state without private-data fallback.
