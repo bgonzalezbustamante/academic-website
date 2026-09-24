@@ -36,6 +36,7 @@ export type PublicProject = {
   project_image_filename: string | null
   funder_image_filename: string | null
   publication_slugs: string[]
+  conference_presentations: PublicConferencePresentation[]
 }
 
 export type PublicConferencePresentation = {
