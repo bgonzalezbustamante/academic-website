@@ -10,6 +10,7 @@ function normalizeConferencePresentation(
 ): PublicConferencePresentation {
   return {
     event_name: String(row.event_name ?? ''),
+    event_short_name: String(row.event_short_name ?? ''),
     location: nullableString(row.location),
     presentation_date: nullableString(row.presentation_date),
     presentation_title: nullableString(row.presentation_title),
