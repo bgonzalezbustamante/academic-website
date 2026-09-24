@@ -134,7 +134,7 @@ Available now:
 Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart):
 
 - education detail beyond the current short biography
-- projects/resource cards beyond the current selected project links
+- legacy project/resource material not yet represented by a Public Research Dashboard project record
 - teaching/service detail
 - CV asset/link
 - historic publication corpus not yet present in Research Dashboard
