@@ -28,6 +28,21 @@ The current production contract can validly return zero public papers when no Da
 
 Aggregate work analytics are available but remain unrendered until Phase 7.
 
+### Proposed publication key-highlight extension
+
+A publication-detail **Key highlight** block with an image is feasible, but the current public paper RPC intentionally does not expose presentation fields for it. The public site must not work around that boundary with direct table access or a per-slug hard-coded data source.
+
+The minimal future contract change should remain in the public-presentation layer, conceptually adding nullable fields such as:
+
+- `highlight_text`
+- `highlight_image_url`
+- `highlight_image_alt`
+- optionally `highlight_caption`
+
+These belong naturally with `paper_public_metadata`, because they describe website presentation rather than the canonical research record. Only `get_public_paper(slug)` needs to expose them initially; `list_public_papers()` does not need the fields unless a future listing design also uses highlight imagery.
+
+For Dashboard-managed images, a dedicated explicitly public Supabase Storage location would preserve the same security model: the Dashboard manages the asset, while the public site receives only the curated public URL and metadata through the RPC. This extension remains **proposed only** in Phase 4 and requires a separate Dashboard/public-contract change before implementation.
+
 ## Information architecture
 
 The current Hugo/Wowchemy homepage combines profile, publications/preprints, projects/resources and contact information. The replacement preserves that conceptual structure without reproducing Wowchemy's widget system.
@@ -57,10 +72,12 @@ The public site deliberately shares a visual family with Research Dashboard whil
 - Noto Serif is used for longer editorial/body text.
 - Oxford blue (`#002147`) is the primary structural colour.
 - Research Dashboard charcoal, ash, stone, off-white, cool-grey and sky-blue tokens provide the neutral surface system.
-- OCPSG coral (`#FE615A`) and teal (`#00AAB4`) are used sparingly for links, icons and emphasis.
+- Oxford coral (`#FE615A`) is the main secondary accent for links, rules and emphasis.
+- Oxford aqua (`#00AAB4`) is deliberately limited to small interactive states.
+- A washed Oxford-blue surface (`#edf2f7`) provides supporting backgrounds without competing with the primary blue/coral identity.
 - Font Awesome provides general interface/brand icons; Academicons provides scholarly identifiers such as ORCID, Google Scholar and DOI.
 
-Institutional branding is presented as a compact monochrome affiliation strip. The OCPSG SVG is carried forward from the predecessor repository. The exact Leiden and UDP source logo files should replace the current text-based fallbacks once those assets are available in this repository; the component is designed for that direct swap. A Leiden-prioritised favicon is likewise deferred until the approved/source Leiden asset is available.
+Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
 
 ## Immediate data sources
 
