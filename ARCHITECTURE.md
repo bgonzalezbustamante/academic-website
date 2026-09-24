@@ -51,7 +51,7 @@ The site never derives a Supabase Storage URL for these assets. The supplied alt
 
 ### Projects and Conferences
 
-Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables.
+Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
 
 Project images and funder logos are local static assets:
 
@@ -60,7 +60,7 @@ Project images and funder logos are local static assets:
 /public/funders/<funder_image_filename>
 ```
 
-Conferences are supplied exclusively through `list_public_conference_presentations()`. The site preserves RPC ordering and presentation-specific author order. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
+Conferences are supplied exclusively through `list_public_conference_presentations()`. The standalone Conferences page preserves RPC ordering and presentation-specific author order. The homepage Roadmap filters presentations to the current Europe/Amsterdam year, orders them chronologically by `presentation_date`, and uses only `event_short_name` as its visible timeline label. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
 
 ## Information architecture
 
@@ -72,8 +72,10 @@ The planned public structure is:
 /
 ├── academic profile / research interests
 ├── featured publications
-├── DORA / CRediT research-practice cards
+├── featured projects carousel
+├── current-year presentation Roadmap
 ├── Activity over time
+├── DORA / CRediT research-practice cards
 └── contact / external links
 
 /publications
@@ -125,9 +127,9 @@ Available now:
 - publication index
 - aggregate work analytics
 - detail-only publication Key highlight metadata
-- public projects with canonical URL, years, status, Featured state and static asset filenames
+- public projects with canonical URL, years, status, Featured state, funder note and static asset filenames
 - associated publication slugs restricted to independently Public papers
-- conference presentations with presentation-specific ordered authors
+- conference presentations with public short event names and presentation-specific ordered authors
 
 ### Legacy academic website
 
