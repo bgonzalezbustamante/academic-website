@@ -751,6 +751,10 @@ h4 {
   gap: 0.9rem;
 }
 
+.featured-project-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .project-card {
   min-width: 0;
   display: grid;
