@@ -1,3 +1,4 @@
+import { normalizeConferencePresentation } from '@/lib/conferences'
 import { createPublicSupabaseClient } from '@/lib/supabase/public'
 import type { PublicProject } from '@/types/public'
 
@@ -33,6 +34,15 @@ function normalizeProject(
       nullableString(row.funder_image_filename),
     publication_slugs: Array.isArray(row.publication_slugs)
       ? row.publication_slugs.map((slug) => String(slug))
+      : [],
+    conference_presentations: Array.isArray(
+      row.conference_presentations
+    )
+      ? row.conference_presentations.map((presentation) =>
+          normalizeConferencePresentation(
+            presentation as Record<string, unknown>
+          )
+        )
       : [],
   }
 }
