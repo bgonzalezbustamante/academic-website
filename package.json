@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck",
+    "check:public-contract": "node --env-file=.env.local scripts/check-public-contract.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",
