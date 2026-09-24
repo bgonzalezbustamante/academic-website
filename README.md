@@ -8,7 +8,7 @@ Current development release: **v6.0.0-rc.1 "Swift Harbour"**.
 
 ## Architecture
 
-This repository is the public/read-only presentation layer. [Research Dashboard](https://github.com/bgonzalezbustamante/research-dashboard) remains the authenticated administrative application and the canonical source for public paper metadata.
+This repository is the public/read-only presentation layer. [Research Dashboard](https://github.com/bgonzalezbustamante/research-dashboard) remains the authenticated administrative application and the canonical source for public research metadata.
 
 The website consumes only the explicit anonymous-safe Supabase RPC contracts:
 
@@ -36,7 +36,8 @@ The current foundation includes:
 - stable publication detail routes with optional local-static Key highlights
 - standalone Projects listing and `/project/[slug]` detail routes
 - homepage Featured projects carousel ordered by latest end year, using funder imagery first
-- standalone Conferences page using presentation-specific public authors
+- TERGAP project maps derived from a compact snapshot of the public TERGAP dashboard metrics, including the source update timestamp
+- standalone Conferences dashboard with presentation geography, summary indicators and a compact presentation table
 - current-year two-sided presentation Roadmap using public event short names
 - current-year public Activity over time heatmap
 - current-year average working time and coffee summary cards
@@ -71,6 +72,16 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 The application expects a modern Supabase publishable key (`sb_publishable_...`), not a service-role key.
+
+### TERGAP map snapshot
+
+The TERGAP project map uses the same `react-simple-maps` / `world-atlas` approach as [tergap-dashboard](https://github.com/bgonzalezbustamante/tergap-dashboard), but the academic website does **not** copy the full dashboard metrics file. Instead, `public/data/tergap-map.json` is a compact derived snapshot containing only:
+
+- the TERGAP dashboard `generated_at` timestamp;
+- the collection window;
+- country name, ISO-3 code and complete-article count.
+
+When the TERGAP dashboard metrics are refreshed, this small snapshot should be regenerated from its public `public/data/dashboard_metrics.json`.
 
 ### Local checks
 
