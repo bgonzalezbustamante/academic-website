@@ -90,10 +90,12 @@ export default async function ProjectPage({ params }: Props) {
         )}
         <h1>{project.title}</h1>
 
-        <div className="project-detail-meta">
-          {status && <span>{status}</span>}
-          {years && <span>{years}</span>}
-          {project.featured && <span>Featured</span>}
+        <div className="metadata-tags project-detail-meta">
+          {status && <span className="metadata-tag">{status}</span>}
+          {years && <span className="metadata-tag">{years}</span>}
+          {project.featured && (
+            <span className="metadata-tag metadata-tag-accent">Featured</span>
+          )}
         </div>
 
         {projectImage ? (
@@ -124,23 +126,33 @@ export default async function ProjectPage({ params }: Props) {
           />
         </section>
 
-        {(project.funder || project.url) && (
+        {(project.funder || project.funder_note || project.url) && (
           <section className="project-detail-section project-funding-section">
-            <div>
+            <div className="project-funding-content">
               <p className="eyebrow">Funding</p>
-              {project.funder && (
+
+              {(project.funder || funderImage) && (
                 <div className="project-detail-funder">
                   {funderImage && (
                     <ResilientLocalImage
                       src={funderImage}
-                      alt=""
-                      width={120}
-                      height={64}
-                      sizes="120px"
+                      alt={project.funder ? `${project.funder} logo` : 'Funder logo'}
+                      width={150}
+                      height={80}
+                      sizes="150px"
                     />
                   )}
-                  <strong>{project.funder}</strong>
+
+                  {project.funder && (
+                    <strong>{project.funder}</strong>
+                  )}
                 </div>
+              )}
+
+              {project.funder_note && (
+                <p className="project-funder-note">
+                  {project.funder_note}
+                </p>
               )}
             </div>
 
