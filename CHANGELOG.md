@@ -26,7 +26,7 @@
 - Restored the profile portrait from `academic-kickstart` and prioritised the supplied Leiden seal as the site favicon.
 - Added the revised two-paragraph academic biography with consistent external-link arrows for the ECPR Political Methodology Steering Committee, TERGAP, COST Action CA22150 and the Enlace-Inserción UDP project.
 - Added compact public email and Leiden University Wijnhaven address information to the footer, with a Creative Commons mark beside the year and name.
-- Renamed the research-interest panel to `Main Interests` and replaced text bullets with a shared research icon.
+- Renamed the research-interest panel to `Main Interests` and restored compact coral square bullets.
 - Removed the redundant Publications button below the biography.
 - Rebalanced the colour system toward Oxford blue and Oxford coral, reserving Oxford aqua for small interactive states and using a washed Oxford-blue background for supporting surfaces.
 
@@ -39,7 +39,8 @@
 - Added an RPC-only Supabase client for explicitly curated public paper data.
 - Confirmed that zero Public papers is a valid current state of `list_public_papers()` and designed the site to handle that state without private-data fallback.
 - Added a current-year public Activity over time heatmap using only `get_public_work_analytics(year)` and the same working-time thresholds as Research Dashboard.
-- Added current-year cards for average net working time per working day and average coffees per working day, without exposing individual sessions or daily coffee counts.
+- Added current-year cards for Working Hours per day and Coffee per working day, both shown to one decimal with an `on average` label, without exposing individual sessions or daily coffee counts.
+- Tightened the vertical spacing between the Academic profile, Featured publications and Activity over time sections.
 - Defined, but did not implement, the minimal future public-contract extension needed for optional publication Key highlight text and imagery.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
