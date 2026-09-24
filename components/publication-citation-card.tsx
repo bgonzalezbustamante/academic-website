@@ -13,9 +13,20 @@ function publicationYear(date: string | null) {
 
 function renderCitation(citation: string) {
   return citation
-    .split(/(\*[^*]+\*)/g)
+    .split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)
     .filter(Boolean)
     .map((segment, index) => {
+      if (
+        segment.startsWith('**') &&
+        segment.endsWith('**')
+      ) {
+        return (
+          <strong className="citation-bold" key={index}>
+            {segment.slice(2, -2)}
+          </strong>
+        )
+      }
+
       if (
         segment.startsWith('*') &&
         segment.endsWith('*')
