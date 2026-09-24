@@ -22,6 +22,7 @@ export default function TergapProjectMap({
       ariaLabel="World map showing TERGAP news-corpus coverage by collection country"
       valueLabel="articles"
       singularValueLabel="article"
+      palette="tergap"
       compact={compact}
       updatedAt={tergapMapData.generated_at}
     />
