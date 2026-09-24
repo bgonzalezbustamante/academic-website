@@ -970,8 +970,23 @@ h4 {
 
 .world-map-legend {
   display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.85rem;
+}
+
+.world-map-no-data-key,
+.world-map-gradient-key {
+  display: inline-flex;
   align-items: center;
   gap: 0.38rem;
+}
+
+.world-map-no-data-swatch {
+  width: 16px;
+  height: 10px;
+  border: 1px solid #d8cdbd;
+  border-radius: 2px;
 }
 
 .world-map-shades {
