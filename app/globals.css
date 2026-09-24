@@ -229,7 +229,7 @@ h4 {
 .hero-name {
   margin: 0;
   color: var(--oxford-blue);
-  font-size: clamp(1.9rem, 3.1vw, 2.65rem);
+  font-size: clamp(1.8rem, 2.7vw, 2.35rem);
   font-weight: 650;
   letter-spacing: -0.025em;
   line-height: 1.08;
@@ -891,7 +891,7 @@ h4 {
   }
 
   .hero-name {
-    font-size: 1.9rem;
+    font-size: 1.75rem;
   }
 
   .position-line p {
