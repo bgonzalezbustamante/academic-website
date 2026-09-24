@@ -787,6 +787,10 @@ h4 {
   line-height: 1.8;
 }
 
+.abstract-section > .research-markdown-rendered {
+  margin-top: 0.75rem;
+}
+
 
 
 
@@ -833,7 +837,7 @@ h4 {
   white-space: pre-line;
 }
 
-.key-highlight-markdown-rendered {
+.research-markdown-rendered {
   display: grid;
   gap: 0.75rem;
   margin-top: 0.8rem;
@@ -842,12 +846,12 @@ h4 {
   line-height: 1.8;
 }
 
-.key-highlight-markdown-paragraph,
-.key-highlight-markdown-rendered p {
+.research-markdown-paragraph,
+.research-markdown-rendered p {
   margin: 0;
 }
 
-.key-highlight-markdown-heading {
+.research-markdown-heading {
   margin: 0.35rem 0 0;
   color: var(--oxford-blue);
   font-family: var(--font-roboto), Arial, sans-serif;
@@ -855,39 +859,39 @@ h4 {
   line-height: 1.3;
 }
 
-.key-highlight-markdown-rendered h2,
-.key-highlight-markdown-rendered h3 {
+.research-markdown-rendered h2,
+.research-markdown-rendered h3 {
   font-size: 1.08rem;
 }
 
-.key-highlight-markdown-rendered h4 {
+.research-markdown-rendered h4 {
   font-size: 1rem;
 }
 
-.key-highlight-markdown-strong {
+.research-markdown-strong {
   color: var(--oxford-charcoal);
   font-weight: 700;
 }
 
-.key-highlight-markdown-link {
+.research-markdown-link {
   color: var(--oxford-blue);
   font-weight: 600;
 }
 
-.key-highlight-markdown-list {
+.research-markdown-list {
   margin: 0;
   padding-left: 1.25rem;
 }
 
-.key-highlight-markdown-list li + li {
+.research-markdown-list li + li {
   margin-top: 0.25rem;
 }
 
-.key-highlight-markdown-list li::marker {
+.research-markdown-list li::marker {
   color: var(--oxford-coral);
 }
 
-.key-highlight-markdown-quote {
+.research-markdown-quote {
   margin: 0;
   border-left: 3px solid var(--oxford-coral);
   padding-left: 0.9rem;
@@ -895,7 +899,7 @@ h4 {
   font-style: italic;
 }
 
-.key-highlight-markdown-inline-code {
+.research-markdown-inline-code {
   border-radius: 0.25rem;
   background: var(--oxford-shell);
   padding: 0.08rem 0.28rem;
@@ -903,7 +907,7 @@ h4 {
   font-size: 0.9em;
 }
 
-.key-highlight-markdown-code-block {
+.research-markdown-code-block {
   margin: 0;
   overflow-x: auto;
   border: 1px solid var(--oxford-stone);
@@ -912,7 +916,7 @@ h4 {
   padding: 0.8rem;
 }
 
-.key-highlight-markdown-code {
+.research-markdown-code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.84rem;
 }
@@ -1496,6 +1500,11 @@ h4 {
 
 .project-abstract p + p {
   margin-top: 0.9rem;
+}
+
+.project-detail-section > .research-markdown-rendered {
+  margin-top: 0.75rem;
+  font-size: 0.96rem;
 }
 
 .project-output-group {
