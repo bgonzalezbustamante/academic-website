@@ -1,5 +1,8 @@
+import { faArrowUpRightFromSquare, faBookOpen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
+import AcademicLinks from '@/components/academic-links'
 import PublicationCard from '@/components/publication-card'
 import { siteProfile } from '@/content/site'
 import { listPublicPapers } from '@/lib/publications'
@@ -22,56 +25,56 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="hero">
-        <div className="site-shell hero-grid">
-          <div>
-            <p className="eyebrow">Academic profile</p>
-            <h1>{siteProfile.name}</h1>
+      <section className="hero-section">
+        <div className="site-shell">
+          <div className="hero-card">
+            <div className="hero-main">
+              <p className="eyebrow">Academic profile</p>
+              <h1 className="hero-name">{siteProfile.name}</h1>
+              <p className="hero-copy">{siteProfile.intro}</p>
 
-            <div className="appointment-list">
-              <p>
-                <strong>{siteProfile.primaryRole}</strong>
-                <span>{siteProfile.primaryAffiliation}</span>
-              </p>
-              <p>
-                <strong>{siteProfile.secondaryRole}</strong>
-                <span>{siteProfile.secondaryAffiliation}</span>
-              </p>
+              <div className="hero-actions">
+                <Link className="button primary" href="/publications">
+                  <FontAwesomeIcon icon={faBookOpen} aria-hidden="true" />
+                  <span>Publications</span>
+                </Link>
+              </div>
+
+              <AcademicLinks />
             </div>
 
-            <p className="hero-copy">{siteProfile.intro}</p>
-
-            <div className="hero-actions">
-              <Link className="button primary" href="/publications">
-                Publications
-              </Link>
-              <a
-                className="button secondary"
-                href={siteProfile.links.orcid}
-                target="_blank"
-                rel="noreferrer"
-              >
-                ORCID
-              </a>
-              <a
-                className="button secondary"
-                href={siteProfile.links.scholar}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Google Scholar
-              </a>
-            </div>
+            <aside className="research-panel">
+              <p className="kicker">Research interests</p>
+              <ul className="interest-list">
+                {siteProfile.researchAreas.map((area) => (
+                  <li key={area}>{area}</li>
+                ))}
+              </ul>
+            </aside>
           </div>
 
-          <aside className="profile-card">
-            <p className="kicker">Research interests</p>
-            <ul className="interest-list">
-              {siteProfile.researchAreas.map((area) => (
-                <li key={area}>{area}</li>
-              ))}
-            </ul>
-          </aside>
+          <div className="positions-grid" aria-label="Academic positions">
+            {siteProfile.positions.map((position) => (
+              <a
+                key={position.institution}
+                className="position-card"
+                href={position.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="position-accent" aria-hidden="true" />
+                <span className="position-copy">
+                  <strong>{position.role}</strong>
+                  <span>{position.institution}</span>
+                </span>
+                <FontAwesomeIcon
+                  className="position-link-icon"
+                  icon={faArrowUpRightFromSquare}
+                  aria-hidden="true"
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -82,7 +85,10 @@ export default async function HomePage() {
               <p className="eyebrow">Research</p>
               <h2>Featured publications</h2>
             </div>
-            <Link href="/publications">View all</Link>
+            <Link className="section-link" href="/publications">
+              View all
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
 
           {featured.length > 0 ? (
