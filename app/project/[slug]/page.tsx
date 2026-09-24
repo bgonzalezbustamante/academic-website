@@ -83,9 +83,11 @@ export default async function ProjectPage({ params }: Props) {
     <article className="page-section">
       <div className="site-shell narrow-shell project-detail">
         <p className="eyebrow">Project</p>
-        <p className="project-detail-short-title">
-          {project.short_title}
-        </p>
+        {project.short_title && (
+          <p className="project-detail-short-title">
+            {project.short_title}
+          </p>
+        )}
         <h1>{project.title}</h1>
 
         <div className="project-detail-meta">
