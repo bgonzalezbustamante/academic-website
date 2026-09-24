@@ -39,26 +39,25 @@ export default function PublicationLinks({ paper }: Props) {
       href: paper.dataset_url,
       icon: <FontAwesomeIcon icon={faDatabase} aria-hidden="true" />,
     },
-  ].filter(
-    (entry): entry is typeof entry & { href: string } =>
-      Boolean(entry.href)
-  )
+  ]
 
-  if (links.length === 0) return null
+  if (!links.some((link) => Boolean(link.href))) return null
 
   return (
     <div className="link-row" aria-label="Publication resources">
-      {links.map((link) => (
-        <a
-          key={`${link.label}-${link.href}`}
-          href={link.href}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {link.icon}
-          <span>{link.label}</span>
-        </a>
-      ))}
+      {links.map((link) =>
+        link.href ? (
+          <a
+            key={`${link.label}-${link.href}`}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {link.icon}
+            <span>{link.label}</span>
+          </a>
+        ) : null
+      )}
     </div>
   )
 }
