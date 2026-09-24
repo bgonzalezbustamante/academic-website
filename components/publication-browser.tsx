@@ -1,5 +1,11 @@
 'use client'
 
+import {
+  faBookOpen,
+  faFileLines,
+  faUserGroup,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState } from 'react'
 
 import PublicationCitationCard, {
@@ -45,6 +51,26 @@ export default function PublicationBrowser({ papers }: Props) {
     [papers]
   )
 
+  const journalCount = useMemo(
+    () =>
+      new Set(
+        papers
+          .map((paper) => paper.venue?.trim())
+          .filter((value): value is string => Boolean(value))
+      ).size,
+    [papers]
+  )
+
+  const coauthorshipPercentage = useMemo(() => {
+    if (papers.length === 0) return 0
+
+    const coauthored = papers.filter(
+      (paper) => paper.authors.length > 1
+    ).length
+
+    return (coauthored / papers.length) * 100
+  }, [papers])
+
   const filtered = useMemo(
     () =>
       papers.filter((paper) => {
@@ -64,6 +90,41 @@ export default function PublicationBrowser({ papers }: Props) {
 
   return (
     <>
+      <section
+        className="conference-stats-grid publication-stats-grid"
+        aria-label="Publication summary"
+      >
+        <article className="conference-stat-card">
+          <div className="conference-stat-icon">
+            <FontAwesomeIcon icon={faFileLines} aria-hidden="true" />
+          </div>
+          <div>
+            <p>Papers</p>
+            <strong>{papers.length.toLocaleString('en-GB')}</strong>
+          </div>
+        </article>
+
+        <article className="conference-stat-card">
+          <div className="conference-stat-icon">
+            <FontAwesomeIcon icon={faBookOpen} aria-hidden="true" />
+          </div>
+          <div>
+            <p>Journals</p>
+            <strong>{journalCount.toLocaleString('en-GB')}</strong>
+          </div>
+        </article>
+
+        <article className="conference-stat-card">
+          <div className="conference-stat-icon">
+            <FontAwesomeIcon icon={faUserGroup} aria-hidden="true" />
+          </div>
+          <div>
+            <p>Co-authorship</p>
+            <strong>{coauthorshipPercentage.toFixed(1)}%</strong>
+          </div>
+        </article>
+      </section>
+
       <div className="publication-filters">
         <label>
           <span>Year</span>
