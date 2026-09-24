@@ -48,7 +48,7 @@ export default function AcademicLinks() {
           ) : (
             <FontAwesomeIcon icon={link.icon} aria-hidden="true" />
           )}
-          <span>{link.label}</span>
+          <span className="sr-only">{link.label}</span>
         </a>
       ))}
     </nav>
