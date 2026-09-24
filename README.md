@@ -37,7 +37,7 @@ The legacy Hugo/Wowchemy publication corpus is intentionally **not** imported he
 
 ## Local development
 
-Next.js 16 requires Node.js 20.9 or later. The repository also declares this requirement in `package.json`.
+This project requires **Node.js 22 or later**. Next.js 16 itself supports older Node 20 releases, but the current Supabase JavaScript stack no longer supports Node 20 and relies on native WebSocket support available in Node 22+.
 
 ```bash
 git clone https://github.com/bgonzalezbustamante/academic-website.git
