@@ -1,5 +1,3 @@
-import { faCircleNodes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -77,14 +75,7 @@ export default async function HomePage() {
               <p className="kicker">Main Interests</p>
               <ul className="interest-list">
                 {siteProfile.researchAreas.map((area) => (
-                  <li key={area}>
-                    <FontAwesomeIcon
-                      className="interest-icon"
-                      icon={faCircleNodes}
-                      aria-hidden="true"
-                    />
-                    <span>{area}</span>
-                  </li>
+                  <li key={area}>{area}</li>
                 ))}
               </ul>
             </div>
