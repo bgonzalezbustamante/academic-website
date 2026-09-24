@@ -48,7 +48,13 @@
 - Integrated detail-only publication Key highlights from `get_public_paper(slug)`, with optional text, local static images, supplied alt text and restrained captions under `/public/publication-highlights/<paper-slug>/`.
 - Added RPC-backed `/projects` and `/project/[slug]` routes with Featured projects, canonical project URLs, years, status, funder presentation, optional local project/funder imagery and associated Public publications.
 - Added an RPC-backed `/conferences` page using presentation-specific ordered authors while deliberately excluding private notes and Dashboard paper relationships.
-- Added Projects and Conferences to standalone navigation without changing the agreed homepage sequence: Featured publications → DORA / CRediT → Activity over time.
+- Added Projects and Conferences to standalone navigation.
+- Added a homepage Featured projects carousel immediately after Featured publications, ordered by later project end year first and using configured funder imagery before project imagery.
+- Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
+- Moved the DORA / CRediT research-practice cards below Activity over time.
+- Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
+- Moved publication Key highlights below the Abstract on publication-detail pages.
+- Extended Project Funding presentation with the configured funder logo and public `funder_note`.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
 `local development and validation`
