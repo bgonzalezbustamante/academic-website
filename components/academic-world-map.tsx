@@ -44,34 +44,37 @@ const MAP_PALETTES: Record<
     shades: string[]
     empty: string
     hover: string
+    background: string
     border: string
   }
 > = {
   tergap: {
     shades: [
-      '#00AAB4',
-      '#008C9A',
-      '#006C82',
-      '#004D69',
-      '#003454',
-      '#002147',
+      '#e7eaf4',
+      '#c5cbe0',
+      '#9da7c8',
+      '#707fab',
+      '#3d5284',
+      '#001158',
     ],
-    empty: '#F6F1E8',
-    hover: '#FE615A',
-    border: '#FFFFFF',
+    empty: '#e8eaed',
+    hover: '#007679',
+    background: '#eef0f7',
+    border: '#ffffff',
   },
   conference: {
     shades: [
+      '#bfecef',
+      '#79d5db',
       '#00AAB4',
-      '#1597A7',
-      '#3E7896',
-      '#59677F',
-      '#7A5369',
-      '#FE615A',
+      '#397d9c',
+      '#31556f',
+      '#002147',
     ],
-    empty: '#F6F1E8',
-    hover: '#002147',
-    border: '#FFFFFF',
+    empty: '#e8eaed',
+    hover: '#FE615A',
+    background: '#eef0f7',
+    border: '#ffffff',
   },
 }
 
@@ -94,7 +97,7 @@ function getFill(
   }
 
   if (maximum === 1) {
-    return shades[0]
+    return shades[Math.floor(shades.length / 2)]
   }
 
   const scaled = Math.log1p(value) / Math.log1p(maximum)
@@ -129,7 +132,7 @@ export default function AcademicWorldMap({
   compact = false,
   updatedAt = null,
   palette = 'tergap',
-  noDataLabel = 'No coverage',
+  noDataLabel = 'Not collected',
 }: Props) {
   const byIso3 = useMemo(
     () =>
@@ -169,7 +172,10 @@ export default function AcademicWorldMap({
           : 'academic-world-map'
       }
     >
-      <div className="world-map-frame">
+      <div
+        className="world-map-frame"
+        style={{ backgroundColor: mapPalette.background }}
+      >
         <ComposableMap
           projection="geoEqualEarth"
           projectionConfig={{ scale: 150 }}
@@ -210,7 +216,7 @@ export default function AcademicWorldMap({
                           )
                     }
                     stroke={mapPalette.border}
-                    strokeWidth={0.7}
+                    strokeWidth={0.55}
                     tabIndex={datum && !compact ? 0 : -1}
                     aria-label={
                       datum && !compact
@@ -249,15 +255,6 @@ export default function AcademicWorldMap({
 
       <div className="world-map-footer">
         <div className="world-map-legend">
-          <span className="world-map-no-data-key">
-            <span
-              className="world-map-no-data-swatch"
-              style={{ backgroundColor: mapPalette.empty }}
-              aria-hidden="true"
-            />
-            {noDataLabel}
-          </span>
-
           <span className="world-map-gradient-key">
             <span>Fewer</span>
             <span className="world-map-shades" aria-hidden="true">
@@ -269,6 +266,15 @@ export default function AcademicWorldMap({
               ))}
             </span>
             <span>More</span>
+          </span>
+
+          <span className="world-map-no-data-key">
+            <span
+              className="world-map-no-data-swatch"
+              style={{ backgroundColor: mapPalette.empty }}
+              aria-hidden="true"
+            />
+            {noDataLabel}
           </span>
         </div>
 
