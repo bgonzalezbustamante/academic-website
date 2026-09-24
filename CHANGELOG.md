@@ -41,6 +41,10 @@
 - Added a current-year public Activity over time heatmap using only `get_public_work_analytics(year)` and the same working-time thresholds as Research Dashboard.
 - Added current-year cards for Working Hours per day and Coffee per working day, with working time shown as hours/minutes and coffee shown to one decimal, both with an `on average` label, without exposing individual sessions or daily coffee counts.
 - Tightened the vertical spacing between the Academic profile, Featured publications and Activity over time sections.
+- Added two research-practice cards between Featured publications and Activity over time: DORA signer and Pro CRediT.
+- Added a British-English `/dora` page summarising the San Francisco Declaration on Research Assessment and its implications for responsible research assessment.
+- Added the official horizontal DORA signatory badge as a local public asset.
+- Migrated the legacy `/credit` Contributor Roles Taxonomy page, including all fourteen CRediT badges, while dropping the former Training Data Lab cross-reference.
 - Defined, but did not implement, the minimal future public-contract extension needed for optional publication Key highlight text and imagery.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
