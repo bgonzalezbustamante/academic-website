@@ -29,6 +29,7 @@ const PUBLIC_PROJECT_FIELDS = [
   'title',
   'abstract',
   'funder',
+  'funder_note',
   'url',
   'start_year',
   'end_year',
@@ -41,6 +42,7 @@ const PUBLIC_PROJECT_FIELDS = [
 
 const PUBLIC_CONFERENCE_FIELDS = [
   'event_name',
+  'event_short_name',
   'location',
   'presentation_date',
   'presentation_title',
@@ -163,6 +165,13 @@ function assertConferenceShape(presentation) {
     presentation,
     'Public conference presentation'
   )
+
+  if (
+    typeof presentation.event_short_name !== 'string' ||
+    !presentation.event_short_name.trim()
+  ) {
+    fail('Conference presentation event_short_name must be non-empty.')
+  }
 
   if (!Array.isArray(presentation.authors)) {
     fail('Conference presentation authors must be an array.')
