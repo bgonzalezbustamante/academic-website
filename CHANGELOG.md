@@ -51,10 +51,14 @@
 - Added Projects and Conferences to standalone navigation.
 - Added a homepage Featured projects carousel immediately after Featured publications, ordered by later project end year first and using configured funder imagery before project imagery.
 - Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
-- Moved the DORA / CRediT research-practice cards below Activity over time.
+- Reordered the homepage to Academic profile → DORA / CRediT → Featured publications → Featured projects → Activity over time → Roadmap.
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Moved publication Key highlights below the Abstract on publication-detail pages.
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
+- Restored two project cards per row on wider screens.
+- Added a TERGAP-specific world coverage map in place of the normal project image, using a compact 47-country snapshot derived from `tergap-dashboard` and displaying its generation timestamp.
+- Reworked `/conferences` into a dashboard-style view for presentations from 2020 onwards: geographic map first, then KPI cards for presentations, countries and co-authorship, followed by a compact presentation table.
+- Added the same reusable Oxford-styled world-map system for TERGAP and Conferences using `react-simple-maps`, `world-atlas` and ISO-country conversion.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
 `local development and validation`
