@@ -55,7 +55,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Added local lint and TypeScript validation commands.',
           'Added a publishable-key public-contract check for publication listing, slug lookup and aggregate work analytics.',
-          'Documented Node.js 20.9 or later and a local-first development workflow for the release-candidate stage.',
+          'Standardised local and deployment runtimes on Node.js 22 or later for compatibility with the current Supabase JavaScript stack.',
           'Defined the intended information architecture while keeping full profile, projects, teaching and contact content deferred to Phase 6.',
         ],
       },
