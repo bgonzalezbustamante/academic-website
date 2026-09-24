@@ -1,56 +1,40 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
-const institutions = [
+const logos = [
   {
-    href: 'https://www.universiteitleiden.nl/en',
-    label: 'Leiden University',
-    mark: (
-      <span className="institution-wordmark leiden-wordmark" aria-hidden="true">
-        <span>Leiden</span>
-        <small>University</small>
-      </span>
-    ),
+    src: '/branding/leiden.webp',
+    alt: 'Leiden University',
   },
   {
-    href: 'https://www.udp.cl/',
-    label: 'Universidad Diego Portales',
-    mark: (
-      <span className="institution-wordmark udp-wordmark" aria-hidden="true">
-        udp
-      </span>
-    ),
+    src: '/branding/udp.webp',
+    alt: 'Universidad Diego Portales',
   },
   {
-    href: 'https://www.politics.ox.ac.uk/oxford-computational-political-science-group',
-    label: 'Oxford Computational Political Science Group',
-    mark: (
-      <Image
-        className="institution-logo-image"
-        src="/branding/ocpsg.svg"
-        alt=""
-        width={34}
-        height={34}
-      />
-    ),
+    src: '/branding/ocpsg.webp',
+    alt: 'Oxford Computational Political Science Group',
   },
 ] as const
 
 export default function InstitutionStrip() {
   return (
-    <div className="institution-strip" aria-label="Academic affiliations">
-      {institutions.map((institution) => (
-        <a
-          key={institution.label}
-          className="institution-mark"
-          href={institution.href}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={institution.label}
-          title={institution.label}
-        >
-          {institution.mark}
-        </a>
+    <Link
+      className="institution-strip"
+      href="/"
+      aria-label="Bastián González-Bustamante home"
+      title="Home"
+    >
+      {logos.map((logo) => (
+        <span className="institution-mark" key={logo.alt}>
+          <Image
+            className="institution-logo-image"
+            src={logo.src}
+            alt=""
+            width={42}
+            height={42}
+          />
+        </span>
       ))}
-    </div>
+    </Link>
   )
 }
