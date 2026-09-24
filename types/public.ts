@@ -15,6 +15,7 @@ export type PublicPaper = {
 }
 
 export type PublicPaperDetail = PublicPaper & {
+  citation: string | null
   highlight_text: string | null
   highlight_image_filename: string | null
   highlight_image_alt: string | null
