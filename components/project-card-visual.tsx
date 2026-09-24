@@ -36,6 +36,8 @@ export default function ProjectCardVisual({
 
   const [index, setIndex] = useState(0)
   const current = candidates[index]
+  const currentIsLossless =
+    current?.src.toLowerCase().endsWith('.png') ?? false
 
   if (!current) {
     return (
@@ -59,6 +61,8 @@ export default function ProjectCardVisual({
       width={720}
       height={440}
       sizes="(max-width: 760px) 100vw, 360px"
+      quality={currentIsLossless ? undefined : 90}
+      unoptimized={currentIsLossless}
       onError={() => setIndex((value) => value + 1)}
     />
   )
