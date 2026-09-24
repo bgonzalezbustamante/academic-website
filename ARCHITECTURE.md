@@ -22,26 +22,45 @@ The site is allowed to call only:
 
 - `list_public_papers()`
 - `get_public_paper(text)`
+- `list_public_projects()`
+- `get_public_project(text)`
+- `list_public_conference_presentations()`
 - `get_public_work_analytics(year)`
 
 The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
 
 Aggregate work analytics are rendered on the homepage for the current Europe/Amsterdam calendar year. The public site reproduces the Dashboard Activity over time heatmap from daily net working minutes and shows only the two annual averages already exposed by the RPC: net working time per working day and coffees per working day.
 
-### Proposed publication key-highlight extension
+### Publication Key highlights
 
-A publication-detail **Key highlight** block with an image is feasible, but the current public paper RPC intentionally does not expose presentation fields for it. The public site must not work around that boundary with direct table access or a per-slug hard-coded data source.
-
-The minimal future contract change should remain in the public-presentation layer, conceptually adding nullable fields such as:
+Key highlights are deliberately detail-only presentation metadata. `list_public_papers()` remains the compact canonical publication listing and does not expose them. `get_public_paper(text)` additionally provides:
 
 - `highlight_text`
-- `highlight_image_url`
+- `highlight_image_filename`
 - `highlight_image_alt`
-- optionally `highlight_caption`
+- `highlight_image_caption`
 
-These belong naturally with `paper_public_metadata`, because they describe website presentation rather than the canonical research record. Only `get_public_paper(slug)` needs to expose them initially; `list_public_papers()` does not need the fields unless a future listing design also uses highlight imagery.
+When configured, the publication detail route resolves the image only from the academic website's local static convention:
 
-For Dashboard-managed images, a dedicated explicitly public Supabase Storage location would preserve the same security model: the Dashboard manages the asset, while the public site receives only the curated public URL and metadata through the RPC. This extension remains **proposed only** in Phase 4 and requires a separate Dashboard/public-contract change before implementation.
+```text
+/public/publication-highlights/<paper-slug>/<filename>
+→ /publication-highlights/<paper-slug>/<filename>
+```
+
+The site never derives a Supabase Storage URL for these assets. The supplied alt text is used when an image filename exists, captions remain optional, and an entirely empty highlight configuration renders nothing.
+
+### Projects and Conferences
+
+Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables.
+
+Project images and funder logos are local static assets:
+
+```text
+/public/projects/<slug>/<project_image_filename>
+/public/funders/<funder_image_filename>
+```
+
+Conferences are supplied exclusively through `list_public_conference_presentations()`. The site preserves RPC ordering and presentation-specific author order. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
 
 ## Information architecture
 
@@ -52,12 +71,18 @@ The planned public structure is:
 ```text
 /
 ├── academic profile / research interests
-├── featured research
-├── projects and resources          (Phase 6)
-└── contact / external links        (Phase 6)
+├── featured publications
+├── DORA / CRediT research-practice cards
+├── Activity over time
+└── contact / external links
 
 /publications
 └── /publication/[slug]
+
+/projects
+└── /project/[slug]
+
+/conferences
 
 /dora
 /credit
@@ -99,6 +124,10 @@ Available now:
 - featured state
 - publication index
 - aggregate work analytics
+- detail-only publication Key highlight metadata
+- public projects with canonical URL, years, status, Featured state and static asset filenames
+- associated publication slugs restricted to independently Public papers
+- conference presentations with presentation-specific ordered authors
 
 ### Legacy academic website
 
@@ -113,21 +142,6 @@ Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustam
 The homepage profile, three main appointments, portrait, selected project links, email and institutional address are now maintained directly in this public repository as presentation content. The same applies to the DORA statement and the migrated CRediT taxonomy page, which are static research-practice content rather than Dashboard-managed records.
 
 These should not be copied into a new database or CMS in this repository.
-
-## Publication key highlights
-
-A publication-detail **Key highlight** panel with an image is feasible and fits the intended design. It should not be hard-coded per slug in this repository because the Research Dashboard is the canonical administrative layer for paper presentation metadata.
-
-The current public paper RPC does not expose highlight content. The minimal future extension should therefore live in `paper_public_metadata` and be returned by `get_public_paper(text)` only:
-
-- `highlight_text` — optional short public-facing highlight;
-- `highlight_image_url` — optional URL for an intentionally public image;
-- `highlight_image_alt` — required accessibility text when an image is supplied;
-- optionally `highlight_image_caption` for a short source/caption line.
-
-`list_public_papers()` does not need these fields unless highlights are later shown in publication listings. The image should be stored in an explicitly public media location (for example a dedicated public Supabase Storage bucket managed through the Dashboard) rather than exposing private Dashboard files or credentials.
-
-No public-contract change is implemented in this repository; it should be made deliberately in Research Dashboard before the visual component is enabled.
 
 ## Local validation
 
@@ -146,7 +160,7 @@ The production domain remains on the predecessor site until Phase 8.
 ## Deferred work
 
 - Phase 5 legacy publication reconciliation/import
-- Phase 6 full profile/projects/teaching content
-- Phase 7 citation metadata, OpenGraph, sitemap, redirects and SEO hardening beyond the already implemented public activity heatmap
+- Phase 6 remaining full-profile, teaching/service and CV content
+- Phase 7 citation metadata, sitemap, redirects and SEO hardening beyond the detail metadata and public activity heatmap already implemented
 - Phase 8 production domain migration and continuous-deployment finalisation
 - Phase 9 archival of `academic-kickstart` after verified migration
