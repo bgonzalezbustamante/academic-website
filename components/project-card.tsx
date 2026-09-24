@@ -77,7 +77,9 @@ export default function ProjectCard({
           {(featured || project.featured) && <span>Featured</span>}
         </div>
 
-        <p className="project-short-title">{project.short_title}</p>
+        {project.short_title && (
+          <p className="project-short-title">{project.short_title}</p>
+        )}
 
         <h2>
           <Link href={`/project/${project.slug}`}>
