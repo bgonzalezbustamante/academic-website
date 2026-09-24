@@ -54,6 +54,7 @@ export const releases: ReleaseNote[] = [
           'Confirmed that an empty public-paper list is a valid curated state and does not trigger access to legacy or private data.',
           'Kept service-role credentials, private Dashboard tables, internal workflow metadata, work-session details and account data outside the public application.',
           'Reserved aggregate public work analytics for the later analytics phase without broadening the existing public contract.',
+          'Documented the minimal future contract extension required for optional publication Key highlight text and imagery without implementing it in the public repository.',
         ],
       },
       {
