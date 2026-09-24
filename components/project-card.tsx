@@ -1,10 +1,8 @@
-import {
-  faArrowUpRightFromSquare,
-  faDiagramProject,
-} from '@fortawesome/free-solid-svg-icons'
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
+import ProjectCardVisual from '@/components/project-card-visual'
 import ResilientLocalImage from '@/components/resilient-local-image'
 import type { PublicProject } from '@/types/public'
 
@@ -52,29 +50,20 @@ export default function ProjectCard({
           : 'project-card'
       }
     >
-      <div className="project-card-visual" aria-hidden={!projectImage}>
-        {projectImage ? (
-          <ResilientLocalImage
-            src={projectImage}
-            alt=""
-            width={720}
-            height={440}
-            sizes="(max-width: 760px) 100vw, 320px"
-          />
-        ) : (
-          <FontAwesomeIcon
-            className="project-fallback-icon"
-            icon={faDiagramProject}
-            aria-hidden="true"
-          />
-        )}
+      <div className="project-card-visual" aria-hidden="true">
+        <ProjectCardVisual
+          funderImage={funderImage}
+          projectImage={projectImage}
+        />
       </div>
 
       <div className="project-card-content">
-        <div className="project-meta">
-          {status && <span>{status}</span>}
-          {years && <span>{years}</span>}
-          {(featured || project.featured) && <span>Featured</span>}
+        <div className="metadata-tags project-meta">
+          {status && <span className="metadata-tag">{status}</span>}
+          {years && <span className="metadata-tag">{years}</span>}
+          {(featured || project.featured) && (
+            <span className="metadata-tag metadata-tag-accent">Featured</span>
+          )}
         </div>
 
         {project.short_title && (
