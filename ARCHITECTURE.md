@@ -26,7 +26,7 @@ The site is allowed to call only:
 
 The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
 
-Aggregate work analytics are available but remain unrendered until Phase 7.
+Aggregate work analytics are rendered on the homepage for the current Europe/Amsterdam calendar year. The public site reproduces the Dashboard Activity over time heatmap from daily net working minutes and shows only the two annual averages already exposed by the RPC: net working time per working day and coffees per working day.
 
 ### Proposed publication key-highlight extension
 
@@ -145,6 +145,6 @@ The production domain remains on the predecessor site until Phase 8.
 
 - Phase 5 legacy publication reconciliation/import
 - Phase 6 full profile/projects/teaching content
-- Phase 7 activity heatmap, citation metadata, OpenGraph, sitemap, redirects and SEO hardening
+- Phase 7 citation metadata, OpenGraph, sitemap, redirects and SEO hardening beyond the already implemented public activity heatmap
 - Phase 8 production domain migration and continuous-deployment finalisation
 - Phase 9 archival of `academic-kickstart` after verified migration
