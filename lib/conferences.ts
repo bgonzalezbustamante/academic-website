@@ -21,8 +21,9 @@ function normalizeConferencePresentation(
   }
 }
 
-export async function listPublicConferencePresentations():
-Promise<PublicConferencePresentation[]> {
+export async function listPublicConferencePresentations(): Promise<
+  PublicConferencePresentation[]
+> {
   const supabase = createPublicSupabaseClient()
   const { data, error } = await supabase.rpc(
     'list_public_conference_presentations'
