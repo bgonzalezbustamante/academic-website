@@ -57,7 +57,7 @@ export const releases: ReleaseNote[] = [
           'Rendered the current-year Activity over time heatmap from the anonymous aggregate work-analytics RPC using the same thresholds as Research Dashboard.',
           'Added public cards for Working Hours per day and Coffee per working day, with working time formatted as hours/minutes and coffee to one decimal, both with an on-average label, without exposing raw sessions or daily coffee counts.',
           'Tightened the homepage vertical rhythm between the profile, featured publications and public activity sections.',
-          'Added paired DORA signer and Pro CRediT research-practice cards between featured publications and public activity.',
+          'Added paired DORA signer and Pro CRediT research-practice cards immediately below the Academic profile.',
           'Added a British-English DORA statement page using a local official signatory badge and migrated the legacy CRediT Contributor Roles Taxonomy page with all fourteen badges, omitting the former Training Data Lab cross-reference.',
           'Integrated detail-only publication Key highlights from the public paper detail RPC, using local static assets and supplied accessibility text without enlarging the publication-list contract.',
           'Added standalone Projects listing/detail routes backed only by public project RPCs, including Featured state, years, canonical URLs, local project/funder imagery and associated Public publication slugs.',
