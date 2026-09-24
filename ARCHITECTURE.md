@@ -60,7 +60,7 @@ Project images and funder logos are local static assets:
 /public/funders/<funder_image_filename>
 ```
 
-Conferences are supplied exclusively through `list_public_conference_presentations()`. The standalone Conferences dashboard filters to presentations from 2020 onwards, derives its country count from the final `City, Country` location segment, computes co-authorship from the supplied ordered `authors[]`, and maps presentation counts by country. Its compact presentation table preserves the RPC's descending-date record order. The homepage Roadmap filters presentations to the current Europe/Amsterdam year, orders them chronologically by `presentation_date`, and uses only `event_short_name` as its visible timeline label. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
+Conferences are supplied exclusively through `list_public_conference_presentations()`. The standalone Conferences dashboard derives its country count from the final `City, Country` location segment, computes co-authorship from the supplied ordered `authors[]`, presents KPI cards before an Oxford blue/coral/aqua map, and uses a compact 10-row paginated presentation table while preserving the RPC's descending-date record order. The homepage Roadmap filters presentations to the current Europe/Amsterdam year, orders them chronologically by `presentation_date`, and uses only `event_short_name` as its visible timeline label. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
 
 ### TERGAP geographic snapshot
 
@@ -70,7 +70,7 @@ TERGAP geographic coverage is sourced from the separate public [tergap-dashboard
 /public/data/tergap-map.json
 ```
 
-It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry, matching the TERGAP dashboard's technical approach while applying the Oxford blue/coral Swift Harbour visual system.
+It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry, matching the TERGAP dashboard's technical approach while applying the Oxford blue/coral/aqua Swift Harbour visual system. The TERGAP map is shown on the TERGAP detail page; project cards use funder imagery instead, with the TERGAP ERC logo supplied locally as a presentation fallback.
 
 ## Information architecture
 
