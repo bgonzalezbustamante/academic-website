@@ -333,6 +333,14 @@ h4 {
   color: var(--oxford-coral);
 }
 
+.bio-external-icon {
+  width: 0.56rem;
+  height: 0.56rem;
+  margin-left: 0.3rem;
+  color: var(--oxford-coral);
+  vertical-align: 0.03rem;
+}
+
 .research-interests {
   width: 100%;
   max-width: 220px;
@@ -351,15 +359,18 @@ h4 {
 }
 
 .interest-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--oxford-charcoal);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.78rem;
   line-height: 1.4;
 }
 
-.interest-list li::before {
-  content: '—';
-  margin-right: 0.45rem;
+.interest-icon {
+  width: 0.72rem;
+  min-width: 0.72rem;
   color: var(--oxford-coral);
 }
 
@@ -645,6 +656,219 @@ h4 {
   line-height: 1.8;
 }
 
+
+/* Public work analytics */
+
+.activity-section {
+  background: var(--oxford-blue-wash);
+}
+
+.activity-intro {
+  margin: 0.35rem 0 0;
+  color: var(--oxford-ash);
+  font-size: 0.9rem;
+}
+
+.analytics-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+
+.analytics-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.65rem;
+  background: var(--paper);
+  padding: 1rem 1.1rem;
+  box-shadow: 0 4px 14px rgba(0, 33, 71, 0.025);
+}
+
+.analytics-stat-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--oxford-blue-wash);
+  color: var(--oxford-coral);
+}
+
+.analytics-stat-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.analytics-stat-card p {
+  margin: 0;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.analytics-stat-card strong {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--oxford-blue);
+  font-family: var(--font-noto-serif), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.activity-card {
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.65rem;
+  background: var(--paper);
+  padding: 1.15rem;
+  box-shadow: 0 4px 14px rgba(0, 33, 71, 0.025);
+}
+
+.activity-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.activity-card-label {
+  margin: 0;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.activity-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.32rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.68rem;
+}
+
+.heatmap-legend-cell,
+.heatmap-cell {
+  border-radius: 2px;
+}
+
+.heatmap-legend-cell {
+  width: 12px;
+  height: 12px;
+}
+
+.activity-scroll {
+  margin-top: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+}
+
+.activity-heatmap {
+  min-width: 820px;
+}
+
+.activity-months {
+  display: grid;
+  grid-template-columns: repeat(53, minmax(0, 1fr));
+  gap: 4px;
+  margin-left: 36px;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.66rem;
+}
+
+.activity-months span {
+  white-space: nowrap;
+}
+
+.activity-grid-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 0.45rem;
+}
+
+.activity-day-labels {
+  width: 28px;
+  flex: 0 0 28px;
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 4px;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.6rem;
+}
+
+.activity-day-labels span {
+  display: flex;
+  align-items: center;
+}
+
+.activity-weeks {
+  flex: 1;
+  display: grid;
+  gap: 4px;
+}
+
+.activity-week {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.heatmap-cell {
+  display: block;
+  min-height: 10px;
+  aspect-ratio: 1;
+}
+
+.heatmap-cell.outside-year {
+  background: transparent;
+}
+
+.level-0 {
+  background: var(--oxford-shell);
+}
+
+.level-1 {
+  background: #e0f2fe;
+}
+
+.level-2 {
+  background: #7dd3fc;
+}
+
+.level-3 {
+  background: #0ea5e9;
+}
+
+.level-4 {
+  background: #0369a1;
+}
+
+.level-5 {
+  background: var(--oxford-blue);
+}
+
+.activity-bins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--oxford-stone);
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.68rem;
+}
+
 /* Release notes */
 
 .release-list {
@@ -801,6 +1025,17 @@ h4 {
   text-align: right;
 }
 
+.footer-license {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.footer-license svg {
+  width: 0.82rem;
+  color: var(--oxford-coral);
+}
+
 .footer-inner p {
   margin: 0;
 }
@@ -845,6 +1080,10 @@ h4 {
 
   .position-line p {
     padding-top: 0.12rem;
+  }
+
+  .analytics-summary-grid {
+    grid-template-columns: 1fr;
   }
 
   .release-sections {
