@@ -175,6 +175,7 @@ export default async function ConferencesPage() {
                 valueLabel="presentations"
                 singularValueLabel="presentation"
                 palette="conference"
+                noDataLabel="No presentations"
               />
             </section>
 
