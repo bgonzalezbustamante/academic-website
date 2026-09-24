@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 import AcademicLinks from '@/components/academic-links'
 import ExternalInlineLink from '@/components/external-inline-link'
-import FeaturedProjectsCarousel from '@/components/featured-projects-carousel'
 import PositionList from '@/components/position-list'
 import PresentationRoadmap from '@/components/presentation-roadmap'
 import PublicWorkAnalyticsSection from '@/components/public-work-analytics'
+import ProjectCard from '@/components/project-card'
 import PublicationCard from '@/components/publication-card'
 import ResearchPracticeCards from '@/components/research-practice-cards'
 import { siteProfile } from '@/content/site'
@@ -23,16 +23,24 @@ import type {
 
 export const revalidate = 300
 
-function getCurrentAmsterdamYear() {
-  return Number(
-    new Intl.DateTimeFormat(
-      'en-GB',
-      {
-        timeZone: 'Europe/Amsterdam',
-        year: 'numeric',
-      }
-    ).format(new Date())
+function getCurrentAmsterdamDateParts() {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Amsterdam',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date())
+
+  const value = Object.fromEntries(
+    parts
+      .filter((part) => part.type !== 'literal')
+      .map((part) => [part.type, part.value])
   )
+
+  return {
+    year: Number(value.year),
+    date: `${value.year}-${value.month}-${value.day}`,
+  }
 }
 
 function orderFeaturedProjects(projects: PublicProject[]) {
@@ -65,7 +73,8 @@ export default async function HomePage() {
   let projectsAvailable = true
   let conferencesAvailable = true
 
-  const currentYear = getCurrentAmsterdamYear()
+  const currentAmsterdam = getCurrentAmsterdamDateParts()
+  const currentYear = currentAmsterdam.year
 
   try {
     const papers = await listPublicPapers()
@@ -195,7 +204,7 @@ export default async function HomePage() {
           </div>
 
           {featuredPapers.length > 0 ? (
-            <div className="publication-list">
+            <div className="publication-list featured-publication-grid">
               {featuredPapers.map((paper) => (
                 <PublicationCard key={paper.slug} paper={paper} />
               ))}
@@ -226,7 +235,15 @@ export default async function HomePage() {
           </div>
 
           {featuredProjects.length > 0 ? (
-            <FeaturedProjectsCarousel projects={featuredProjects} />
+            <div className="project-grid home-featured-project-grid">
+              {featuredProjects.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  project={project}
+                  featured
+                />
+              ))}
+            </div>
           ) : (
             <div className="empty-state">
               <p>
@@ -268,14 +285,15 @@ export default async function HomePage() {
         <PresentationRoadmap
           presentations={presentations}
           year={currentYear}
+          currentDate={currentAmsterdam.date}
         />
       ) : (
         <section className="section roadmap-section" id="roadmap">
           <div className="site-shell">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">Current year</p>
-                <h2>Roadmap</h2>
+                <p className="eyebrow">Roadmap</p>
+                <h2>Presentations during {currentYear}</h2>
               </div>
               <Link className="section-link" href="/conferences">
                 View all
