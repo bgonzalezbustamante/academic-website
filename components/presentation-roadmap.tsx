@@ -1,3 +1,8 @@
+import {
+  faCalendarDays,
+  faCircleCheck,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
 import type { PublicConferencePresentation } from '@/types/public'
@@ -81,7 +86,14 @@ export default function PresentationRoadmap({
                     title={`${shortName} — ${formatAccessibleDate(date)}`}
                     aria-label={`${shortName}, ${formatAccessibleDate(date)}${isPast ? ', past presentation' : ', upcoming presentation'}`}
                   >
-                    <span className="roadmap-label">{shortName}</span>
+                    <span className="roadmap-label">
+                      <FontAwesomeIcon
+                        className="roadmap-status-icon"
+                        icon={isPast ? faCircleCheck : faCalendarDays}
+                        aria-hidden="true"
+                      />
+                      <span>{shortName}</span>
+                    </span>
                     <span className="roadmap-node" aria-hidden="true" />
                   </li>
                 )
