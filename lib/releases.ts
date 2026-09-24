@@ -36,15 +36,27 @@ export const releases: ReleaseNote[] = [
         items: [
           'Added a Next.js App Router and TypeScript foundation for a distinct public academic website.',
           'Added responsive site navigation, footer, homepage, publication listing and stable publication detail routes.',
+          'Replaced the development-oriented homepage architecture panel with a visitor-facing academic profile showing dual appointments and research interests.',
           'Introduced a restrained academic design system drawing on the visual language used across related projects without reproducing the Research Dashboard interface.',
+          'Added public-safe page error handling without falling back to private Dashboard data.',
         ],
       },
       {
         title: 'Public data boundary',
         items: [
           'Connected publication rendering only to explicit anonymous-safe Supabase RPC contracts maintained by Research Dashboard.',
+          'Confirmed that an empty public-paper list is a valid curated state and does not trigger access to legacy or private data.',
           'Kept service-role credentials, private Dashboard tables, internal workflow metadata, work-session details and account data outside the public application.',
           'Reserved aggregate public work analytics for the later analytics phase without broadening the existing public contract.',
+        ],
+      },
+      {
+        title: 'Local development',
+        items: [
+          'Added local lint and TypeScript validation commands.',
+          'Added a publishable-key public-contract check for publication listing, slug lookup and aggregate work analytics.',
+          'Documented Node.js 20.9 or later and a local-first development workflow for the release-candidate stage.',
+          'Defined the intended information architecture while keeping full profile, projects, teaching and contact content deferred to Phase 6.',
         ],
       },
       {
