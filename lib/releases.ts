@@ -62,7 +62,11 @@ export const releases: ReleaseNote[] = [
           'Integrated detail-only publication Key highlights from the public paper detail RPC, using local static assets and supplied accessibility text without enlarging the publication-list contract.',
           'Added standalone Projects listing/detail routes backed only by public project RPCs, including Featured state, years, canonical URLs, local project/funder imagery and associated Public publication slugs.',
           'Added a standalone Conferences page backed only by the public conference RPC, preserving presentation-specific author order while excluding private notes and linked-paper metadata.',
-          'Kept the homepage sequence unchanged: Featured publications, DORA / CRediT, then Activity over time.',
+          'Added a Featured projects carousel after Featured publications, ordered by later end year first and preferring funder imagery.',
+          'Added a current-year horizontal two-sided presentation Roadmap using event short names ordered chronologically by presentation date.',
+          'Moved the DORA / CRediT cards below Activity over time and retained the standalone Projects and Conferences navigation.',
+          'Restyled publication and project classification/status metadata as compact tags.',
+          'Moved publication Key highlights below Abstract and extended project Funding with the public funder note and configured funder logo.',
         ],
       },
       {
