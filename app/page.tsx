@@ -3,15 +3,21 @@ import Link from 'next/link'
 
 import AcademicLinks from '@/components/academic-links'
 import ExternalInlineLink from '@/components/external-inline-link'
+import FeaturedProjectsCarousel from '@/components/featured-projects-carousel'
 import PositionList from '@/components/position-list'
+import PresentationRoadmap from '@/components/presentation-roadmap'
+import PublicWorkAnalyticsSection from '@/components/public-work-analytics'
 import PublicationCard from '@/components/publication-card'
 import ResearchPracticeCards from '@/components/research-practice-cards'
-import PublicWorkAnalyticsSection from '@/components/public-work-analytics'
 import { siteProfile } from '@/content/site'
+import { listPublicConferencePresentations } from '@/lib/conferences'
 import { listPublicPapers } from '@/lib/publications'
+import { listPublicProjects } from '@/lib/projects'
 import { getPublicWorkAnalytics } from '@/lib/work-analytics'
 import type {
+  PublicConferencePresentation,
   PublicPaper,
+  PublicProject,
   PublicWorkAnalytics,
 } from '@/types/public'
 
@@ -29,20 +35,58 @@ function getCurrentAmsterdamYear() {
   )
 }
 
+function orderFeaturedProjects(projects: PublicProject[]) {
+  return [...projects]
+    .filter((project) => project.featured)
+    .sort((a, b) => {
+      const endDifference =
+        (b.end_year ?? Number.NEGATIVE_INFINITY) -
+        (a.end_year ?? Number.NEGATIVE_INFINITY)
+
+      if (endDifference !== 0) return endDifference
+
+      const startDifference =
+        (b.start_year ?? Number.NEGATIVE_INFINITY) -
+        (a.start_year ?? Number.NEGATIVE_INFINITY)
+
+      if (startDifference !== 0) return startDifference
+
+      return a.title.localeCompare(b.title)
+    })
+}
+
 export default async function HomePage() {
-  let featured: PublicPaper[] = []
-  let publicationsAvailable = true
+  let featuredPapers: PublicPaper[] = []
+  let featuredProjects: PublicProject[] = []
+  let presentations: PublicConferencePresentation[] = []
   let workAnalytics: PublicWorkAnalytics | null = null
+
+  let publicationsAvailable = true
+  let projectsAvailable = true
+  let conferencesAvailable = true
 
   const currentYear = getCurrentAmsterdamYear()
 
   try {
     const papers = await listPublicPapers()
-    featured = papers
+    featuredPapers = papers
       .filter((paper) => paper.featured)
       .slice(0, 3)
   } catch {
     publicationsAvailable = false
+  }
+
+  try {
+    const projects = await listPublicProjects()
+    featuredProjects = orderFeaturedProjects(projects)
+  } catch {
+    projectsAvailable = false
+  }
+
+  try {
+    presentations = await listPublicConferencePresentations()
+  } catch {
+    conferencesAvailable = false
   }
 
   try {
@@ -148,9 +192,9 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {featured.length > 0 ? (
+          {featuredPapers.length > 0 ? (
             <div className="publication-list">
-              {featured.map((paper) => (
+              {featuredPapers.map((paper) => (
                 <PublicationCard key={paper.slug} paper={paper} />
               ))}
             </div>
@@ -166,7 +210,57 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <ResearchPracticeCards />
+      <section className="section featured-projects-section" id="featured-projects">
+        <div className="site-shell">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Research portfolio</p>
+              <h2>Featured projects</h2>
+            </div>
+            <Link className="section-link" href="/projects">
+              View all
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          {featuredProjects.length > 0 ? (
+            <FeaturedProjectsCarousel projects={featuredProjects} />
+          ) : (
+            <div className="empty-state">
+              <p>
+                {projectsAvailable
+                  ? 'No featured projects are currently available.'
+                  : 'Projects are temporarily unavailable.'}
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {conferencesAvailable ? (
+        <PresentationRoadmap
+          presentations={presentations}
+          year={currentYear}
+        />
+      ) : (
+        <section className="section roadmap-section" id="roadmap">
+          <div className="site-shell">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Current year</p>
+                <h2>Roadmap</h2>
+              </div>
+              <Link className="section-link" href="/conferences">
+                View all
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="empty-state">
+              <p>Presentation roadmap is temporarily unavailable.</p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {workAnalytics ? (
         <PublicWorkAnalyticsSection
@@ -192,6 +286,8 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      <ResearchPracticeCards />
     </>
   )
 }
