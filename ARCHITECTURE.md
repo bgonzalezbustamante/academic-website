@@ -51,7 +51,7 @@ The site never derives a Supabase Storage URL for these assets. The supplied alt
 
 ### Projects and Conferences
 
-Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
+Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
 
 Project images and funder logos are local static assets:
 
@@ -70,7 +70,7 @@ TERGAP geographic coverage is sourced from the separate public [tergap-dashboard
 /public/data/tergap-map.json
 ```
 
-It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry, matching the TERGAP dashboard's technical approach while applying the Oxford blue/coral/aqua Swift Harbour visual system. The TERGAP map is shown on the TERGAP detail page; project cards use funder imagery instead, with the TERGAP ERC logo supplied locally as a presentation fallback.
+It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry. TERGAP uses the original dashboard treatment exactly for the map canvas/background (`#eef0f7`), not-collected geography (`#e8eaed`), six-step logarithmic scale (`#e7eaf4` → `#001158`) and teal hover (`#007679`). Conferences uses the same canvas and grey no-data geography but keeps its Oxford aqua/blue/coral presentation scale. The TERGAP map is shown on the TERGAP detail page; project cards use funder imagery instead, with the TERGAP ERC logo supplied locally as a presentation fallback.
 
 ## Information architecture
 
