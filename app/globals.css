@@ -1354,7 +1354,7 @@ h4 {
 
 .conference-table {
   width: 100%;
-  min-width: 980px;
+  min-width: 860px;
   border-collapse: collapse;
 }
 
@@ -1429,6 +1429,50 @@ h4 {
 
 .conference-table-link svg {
   width: 0.7rem;
+}
+
+.conference-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.72rem;
+}
+
+.conference-pagination p {
+  margin: 0;
+}
+
+.conference-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.conference-pagination-controls button {
+  border: 1px solid var(--oxford-stone);
+  border-radius: 999px;
+  background: var(--paper);
+  padding: 0.35rem 0.7rem;
+  color: var(--oxford-blue);
+  font-size: 0.7rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.conference-pagination-controls button:hover:not(:disabled),
+.conference-pagination-controls button:focus-visible:not(:disabled) {
+  border-color: rgba(254, 97, 90, 0.55);
+  background: var(--oxford-blue-wash);
+  color: var(--oxford-coral);
+}
+
+.conference-pagination-controls button:disabled {
+  cursor: default;
+  opacity: 0.42;
 }
 
 .sr-only {
@@ -2105,6 +2149,11 @@ h4 {
 
   .conference-stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .conference-pagination {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .world-map-footer {
