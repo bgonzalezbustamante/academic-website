@@ -1,0 +1,193 @@
+import {
+  faArrowUpRightFromSquare,
+  faDiagramProject,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
+import FormattedText from '@/components/formatted-text'
+import ProjectCard, {
+  formatProjectStatus,
+  formatProjectYears,
+} from '@/components/project-card'
+import PublicationCard from '@/components/publication-card'
+import ResilientLocalImage from '@/components/resilient-local-image'
+import { listPublicPapers } from '@/lib/publications'
+import { getPublicProject } from '@/lib/projects'
+import type { PublicPaper } from '@/types/public'
+
+type Props = {
+  params: Promise<{ slug: string }>
+}
+
+export const revalidate = 300
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const project = await getPublicProject(slug)
+
+  if (!project) return { title: 'Project not found' }
+
+  const description =
+    project.abstract || project.funder || 'Academic research project.'
+
+  return {
+    title: project.title,
+    description,
+    alternates: {
+      canonical: `/project/${project.slug}`,
+    },
+    openGraph: {
+      title: project.title,
+      description,
+      type: 'article',
+    },
+  }
+}
+
+export default async function ProjectPage({ params }: Props) {
+  const { slug } = await params
+  const project = await getPublicProject(slug)
+
+  if (!project) notFound()
+
+  let associatedPublications: PublicPaper[] = []
+  let publicationsAvailable = true
+
+  if (project.publication_slugs.length > 0) {
+    try {
+      const publicPapers = await listPublicPapers()
+      const papersBySlug = new Map(
+        publicPapers.map((paper) => [paper.slug, paper])
+      )
+
+      associatedPublications = project.publication_slugs
+        .map((paperSlug) => papersBySlug.get(paperSlug))
+        .filter((paper): paper is PublicPaper => Boolean(paper))
+    } catch {
+      publicationsAvailable = false
+    }
+  }
+
+  const years = formatProjectYears(project)
+  const status = formatProjectStatus(project.status)
+  const projectImage = project.project_image_filename
+    ? `/projects/${project.slug}/${project.project_image_filename}`
+    : null
+  const funderImage = project.funder_image_filename
+    ? `/funders/${project.funder_image_filename}`
+    : null
+
+  return (
+    <article className="page-section">
+      <div className="site-shell narrow-shell project-detail">
+        <p className="eyebrow">Project</p>
+        <p className="project-detail-short-title">
+          {project.short_title}
+        </p>
+        <h1>{project.title}</h1>
+
+        <div className="project-detail-meta">
+          {status && <span>{status}</span>}
+          {years && <span>{years}</span>}
+          {project.featured && <span>Featured</span>}
+        </div>
+
+        {projectImage ? (
+          <div className="project-detail-image">
+            <ResilientLocalImage
+              src={projectImage}
+              alt=""
+              width={1200}
+              height={700}
+              sizes="(max-width: 900px) 100vw, 850px"
+              priority
+            />
+          </div>
+        ) : (
+          <div
+            className="project-detail-image project-detail-image-fallback"
+            aria-hidden="true"
+          >
+            <FontAwesomeIcon icon={faDiagramProject} />
+          </div>
+        )}
+
+        <section className="project-detail-section">
+          <h2>About the project</h2>
+          <FormattedText
+            className="project-abstract"
+            text={project.abstract}
+          />
+        </section>
+
+        {(project.funder || project.url) && (
+          <section className="project-detail-section project-funding-section">
+            <div>
+              <p className="eyebrow">Funding</p>
+              {project.funder && (
+                <div className="project-detail-funder">
+                  {funderImage && (
+                    <ResilientLocalImage
+                      src={funderImage}
+                      alt=""
+                      width={120}
+                      height={64}
+                      sizes="120px"
+                    />
+                  )}
+                  <strong>{project.funder}</strong>
+                </div>
+              )}
+            </div>
+
+            {project.url && (
+              <a
+                className="project-external-link"
+                href={project.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Project website
+                <FontAwesomeIcon
+                  icon={faArrowUpRightFromSquare}
+                  aria-hidden="true"
+                />
+              </a>
+            )}
+          </section>
+        )}
+
+        {project.publication_slugs.length > 0 && (
+          <section className="project-detail-section">
+            <div className="section-heading compact-heading">
+              <div>
+                <p className="eyebrow">Research outputs</p>
+                <h2>Associated publications</h2>
+              </div>
+            </div>
+
+            {!publicationsAvailable ? (
+              <div className="empty-state">
+                <p>Associated publications are temporarily unavailable.</p>
+              </div>
+            ) : associatedPublications.length > 0 ? (
+              <div className="publication-list">
+                {associatedPublications.map((paper) => (
+                  <PublicationCard key={paper.slug} paper={paper} />
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <p>No associated public publications are currently available.</p>
+              </div>
+            )}
+          </section>
+        )}
+      </div>
+    </article>
+  )
+}
+
+void ProjectCard
