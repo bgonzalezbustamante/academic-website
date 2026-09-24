@@ -49,6 +49,19 @@ The planned public structure is:
 
 A separate Preprints route is not required at the architecture level. Public research outputs can be presented from the same canonical publication contract and grouped later according to curated metadata if the final content design calls for it.
 
+## Design system
+
+The public site deliberately shares a visual family with Research Dashboard while remaining a distinct academic website.
+
+- Roboto is used for navigation, headings, controls, labels and compact metadata.
+- Noto Serif is used for longer editorial/body text.
+- Oxford blue (`#002147`) is the primary structural colour.
+- Research Dashboard charcoal, ash, stone, off-white, cool-grey and sky-blue tokens provide the neutral surface system.
+- OCPSG coral (`#FE615A`) and teal (`#00AAB4`) are used sparingly for links, icons and emphasis.
+- Font Awesome provides general interface/brand icons; Academicons provides scholarly identifiers such as ORCID, Google Scholar and DOI.
+
+Institutional branding is presented as a compact monochrome affiliation strip. The OCPSG SVG is carried forward from the predecessor repository. The exact Leiden and UDP source logo files should replace the current text-based fallbacks once those assets are available in this repository; the component is designed for that direct swap. A Leiden-prioritised favicon is likewise deferred until the approved/source Leiden asset is available.
+
 ## Immediate data sources
 
 ### Research Dashboard public contracts
