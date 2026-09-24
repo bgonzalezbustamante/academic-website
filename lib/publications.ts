@@ -33,6 +33,7 @@ function normalizePaperDetail(
 ): PublicPaperDetail {
   return {
     ...normalizePaper(row),
+    citation: nullableString(row.citation),
     highlight_text: nullableString(row.highlight_text),
     highlight_image_filename:
       nullableString(row.highlight_image_filename),
