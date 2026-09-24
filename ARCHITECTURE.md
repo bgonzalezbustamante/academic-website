@@ -59,6 +59,8 @@ The planned public structure is:
 /publications
 └── /publication/[slug]
 
+/dora
+/credit
 /release-notes
 ```
 
@@ -108,7 +110,7 @@ Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustam
 - CV asset/link
 - historic publication corpus not yet present in Research Dashboard
 
-The homepage profile, three main appointments, portrait, selected project links, email and institutional address are now maintained directly in this public repository as presentation content.
+The homepage profile, three main appointments, portrait, selected project links, email and institutional address are now maintained directly in this public repository as presentation content. The same applies to the DORA statement and the migrated CRediT taxonomy page, which are static research-practice content rather than Dashboard-managed records.
 
 These should not be copied into a new database or CMS in this repository.
 
