@@ -14,7 +14,7 @@ The website consumes only the explicit anonymous-safe Supabase RPC contracts:
 
 - `list_public_papers()`
 - `get_public_paper(text)`
-- `get_public_work_analytics(year)` (reserved for the later public-analytics phase)
+- `get_public_work_analytics(year)`
 
 It must not query Research Dashboard tables directly or use a service-role key.
 
@@ -31,6 +31,8 @@ The current foundation includes:
 - RPC-only Supabase client
 - public publication listing
 - stable publication detail routes
+- current-year public Activity over time heatmap
+- current-year average working time and coffee summary cards
 - public-safe error handling
 - local validation of the Supabase public contract
 - v6 changelog and structured public release notes
