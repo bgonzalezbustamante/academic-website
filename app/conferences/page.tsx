@@ -20,7 +20,7 @@ import type { PublicConferencePresentation } from '@/types/public'
 export const metadata: Metadata = {
   title: 'Conferences',
   description:
-    'Conference presentations by Bastián González-Bustamante and collaborators from 2020 onwards.',
+    'Conference and public presentations by Bastián González-Bustamante and collaborators.',
   alternates: {
     canonical: '/conferences',
   },
