@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import ConferenceOverviewTable from '@/components/conference-overview-table'
 import FormattedText from '@/components/formatted-text'
 import {
   formatProjectStatus,
@@ -136,6 +137,44 @@ export default async function ProjectPage({ params }: Props) {
           />
         </section>
 
+        {(project.publication_slugs.length > 0 ||
+          project.conference_presentations.length > 0) && (
+          <section className="project-detail-section project-outputs-section">
+            <h2>Research outputs</h2>
+
+            {project.publication_slugs.length > 0 && (
+              <div className="project-output-group">
+                <h3>Associated publications</h3>
+
+                {!publicationsAvailable ? (
+                  <div className="empty-state">
+                    <p>Associated publications are temporarily unavailable.</p>
+                  </div>
+                ) : associatedPublications.length > 0 ? (
+                  <div className="publication-list">
+                    {associatedPublications.map((paper) => (
+                      <PublicationCard key={paper.slug} paper={paper} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="empty-state">
+                    <p>No associated public publications are currently available.</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {project.conference_presentations.length > 0 && (
+              <div className="project-output-group">
+                <h3>Conference presentations</h3>
+                <ConferenceOverviewTable
+                  presentations={project.conference_presentations}
+                />
+              </div>
+            )}
+          </section>
+        )}
+
         {(project.funder || project.funder_note || project.url) && (
           <section className="project-detail-section project-funding-section">
             <div className="project-funding-content">
@@ -183,32 +222,6 @@ export default async function ProjectPage({ params }: Props) {
           </section>
         )}
 
-        {project.publication_slugs.length > 0 && (
-          <section className="project-detail-section">
-            <div className="section-heading compact-heading">
-              <div>
-                <p className="eyebrow">Research outputs</p>
-                <h2>Associated publications</h2>
-              </div>
-            </div>
-
-            {!publicationsAvailable ? (
-              <div className="empty-state">
-                <p>Associated publications are temporarily unavailable.</p>
-              </div>
-            ) : associatedPublications.length > 0 ? (
-              <div className="publication-list">
-                {associatedPublications.map((paper) => (
-                  <PublicationCard key={paper.slug} paper={paper} />
-                ))}
-              </div>
-            ) : (
-              <div className="empty-state">
-                <p>No associated public publications are currently available.</p>
-              </div>
-            )}
-          </section>
-        )}
       </div>
     </article>
   )
