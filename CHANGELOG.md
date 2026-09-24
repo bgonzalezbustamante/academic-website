@@ -71,6 +71,8 @@
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
 - Project Research outputs now combine associated public publications and the public `conference_presentations[]` contract; conference presentations reuse the Conferences Overview table.
 - Reordered project detail content so Research outputs follows About the project and Funding is always the final section.
+- Moved project visuals, including the TERGAP map, below the About the project section and above Research outputs / Funding.
+- Improved project-image sharpness by separating card and detail rendering expectations: detail images now use a full-width responsive hint, optimized non-PNG assets can use quality 90, and PNG figures/logos are served losslessly to avoid compression artefacts.
 - Restored two project cards per row on wider screens.
 - Added a TERGAP-specific world coverage map on the TERGAP detail page, using a compact 47-country snapshot derived from `tergap-dashboard` and displaying its generation timestamp.
 - Reused the TERGAP dashboard ERC logo as the TERGAP funder image on Home/Projects cards and in the Funding block when no Dashboard funder-image filename is configured.
