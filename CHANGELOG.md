@@ -49,10 +49,15 @@
 - Added RPC-backed `/projects` and `/project/[slug]` routes with Featured projects, canonical project URLs, years, status, funder presentation, optional local project/funder imagery and associated Public publications.
 - Added an RPC-backed `/conferences` page using presentation-specific ordered authors while deliberately excluding private notes and Dashboard paper relationships.
 - Added Projects and Conferences to standalone navigation.
-- Added a homepage Featured projects carousel immediately after Featured publications, ordered by later project end year first and using configured funder imagery before project imagery.
+- Presented Featured publications and Featured projects as two-card-per-row grids on wider screens; Featured projects remain ordered by later project end year first and use configured funder imagery before project imagery.
 - Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
 - Reordered the homepage to Academic profile → DORA / CRediT → Featured publications → Featured projects → Activity over time → Roadmap.
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
+- Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
+- Added Publications filters for Year and Publication index.
+- Updated the Publications introduction to “Papers ordered from the most recent publication onwards.”
+- Removed the separator between the Academic profile and DORA / CRediT cards.
+- Updated the current-year Roadmap heading to “Presentations during [year]” and visually distinguished past presentations from upcoming ones.
 - Moved publication Key highlights below the Abstract on publication-detail pages.
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
 - Project Research outputs now combine associated public publications and the public `conference_presentations[]` contract; conference presentations reuse the Conferences Overview table.
