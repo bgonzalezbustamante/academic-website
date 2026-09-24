@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
 import ProjectCardVisual from '@/components/project-card-visual'
-import TergapProjectMap from '@/components/tergap-project-map'
 import type { PublicProject } from '@/types/public'
 
 type Props = {
@@ -38,11 +37,13 @@ export default function ProjectCard({
   const projectImage = project.project_image_filename
     ? `/projects/${project.slug}/${project.project_image_filename}`
     : null
-  const funderImage = project.funder_image_filename
-    ? `/funders/${project.funder_image_filename}`
-    : null
   const isTergap =
     project.slug === 'terrorist-group-adaptation'
+  const funderImage = project.funder_image_filename
+    ? `/funders/${project.funder_image_filename}`
+    : isTergap
+      ? '/funders/erc-logo.png'
+      : null
 
   return (
     <article
@@ -52,21 +53,11 @@ export default function ProjectCard({
           : 'project-card'
       }
     >
-      <div
-        className={
-          isTergap
-            ? 'project-card-visual project-card-map-visual'
-            : 'project-card-visual'
-        }
-      >
-        {isTergap ? (
-          <TergapProjectMap compact />
-        ) : (
-          <ProjectCardVisual
-            funderImage={funderImage}
-            projectImage={projectImage}
-          />
-        )}
+      <div className="project-card-visual" aria-hidden="true">
+        <ProjectCardVisual
+          funderImage={funderImage}
+          projectImage={projectImage}
+        />
       </div>
 
       <div className="project-card-content">
