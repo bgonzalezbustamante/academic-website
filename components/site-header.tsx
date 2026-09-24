@@ -5,6 +5,8 @@ import InstitutionStrip from '@/components/institution-strip'
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/publications', label: 'Publications' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/conferences', label: 'Conferences' },
 ]
 
 export default function SiteHeader() {
