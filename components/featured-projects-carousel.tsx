@@ -53,6 +53,7 @@ export default function FeaturedProjectsCarousel({
       <div
         ref={trackRef}
         className="featured-projects-track"
+        role="region"
         tabIndex={0}
         aria-label="Featured projects"
       >
