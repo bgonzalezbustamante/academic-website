@@ -5,7 +5,7 @@ function nullableString(value: unknown) {
   return value == null ? null : String(value)
 }
 
-function normalizeConferencePresentation(
+export function normalizeConferencePresentation(
   row: Record<string, unknown>
 ): PublicConferencePresentation {
   return {
