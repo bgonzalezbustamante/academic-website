@@ -56,8 +56,11 @@
 - Moved publication Key highlights below the Abstract on publication-detail pages.
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
 - Restored two project cards per row on wider screens.
-- Added a TERGAP-specific world coverage map in place of the normal project image, using a compact 47-country snapshot derived from `tergap-dashboard` and displaying its generation timestamp.
-- Reworked `/conferences` into a dashboard-style view for presentations from 2020 onwards: geographic map first, then KPI cards for presentations, countries and co-authorship, followed by a compact presentation table.
+- Added a TERGAP-specific world coverage map on the TERGAP detail page, using a compact 47-country snapshot derived from `tergap-dashboard` and displaying its generation timestamp.
+- Reused the TERGAP dashboard ERC logo as the TERGAP funder image on Home/Projects cards and in the Funding block when no Dashboard funder-image filename is configured.
+- Strengthened map contrast with distinct warm neutral no-data geography and Oxford blue/aqua coverage tones; Conference hover uses Oxford coral.
+- Reworked `/conferences` into a dashboard-style view headed by “Conference and public presentations”: KPI cards first, then the geographic map, followed by a compact presentation table.
+- Removed the Conference Type column and added client-side pagination at 10 presentation rows per page.
 - Added the same reusable Oxford-styled world-map system for TERGAP and Conferences using `react-simple-maps`, `world-atlas` and ISO-country conversion.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
