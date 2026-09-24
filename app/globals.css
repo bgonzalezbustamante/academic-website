@@ -899,6 +899,24 @@ h4 {
   font-style: italic;
 }
 
+.research-markdown-inline-math {
+  color: var(--oxford-blue);
+  font-family: var(--font-noto-serif), Georgia, serif;
+  font-style: italic;
+}
+
+.research-markdown-math-block {
+  margin: 0;
+  overflow-x: auto;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.45rem;
+  background: var(--oxford-off-white);
+  padding: 0.75rem 0.9rem;
+  color: var(--oxford-blue);
+  font-family: var(--font-noto-serif), Georgia, serif;
+  font-style: italic;
+}
+
 .research-markdown-inline-code {
   border-radius: 0.25rem;
   background: var(--oxford-shell);
