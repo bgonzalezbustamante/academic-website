@@ -85,6 +85,10 @@ function getFill(
     return empty
   }
 
+  if (maximum === 1) {
+    return shades[Math.floor(shades.length / 2)]
+  }
+
   const scaled = Math.log1p(value) / Math.log1p(maximum)
   const index = Math.min(
     shades.length - 1,
