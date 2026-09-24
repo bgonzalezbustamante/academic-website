@@ -84,13 +84,13 @@ export default async function ConferencesPage() {
       ): country is WorldMapCountry => Boolean(country)
     )
 
-  const coauthored = presentations.filter(
-    (presentation) => presentation.authors.length > 1
+  const singleAuthor = presentations.filter(
+    (presentation) => presentation.authors.length === 1
   ).length
 
-  const coauthorshipPercentage =
+  const singleAuthorPercentage =
     presentations.length > 0
-      ? (coauthored / presentations.length) * 100
+      ? (singleAuthor / presentations.length) * 100
       : 0
 
   return (
@@ -153,9 +153,9 @@ export default async function ConferencesPage() {
                   />
                 </div>
                 <div>
-                  <p>Co-authorship</p>
+                  <p>Single author</p>
                   <strong>
-                    {coauthorshipPercentage.toFixed(1)}%
+                    {singleAuthorPercentage.toFixed(1)}%
                   </strong>
                 </div>
               </article>
