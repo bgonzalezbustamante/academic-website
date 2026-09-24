@@ -64,12 +64,13 @@ const MAP_PALETTES: Record<
   },
   conference: {
     shades: [
-      '#bfecef',
-      '#79d5db',
+      '#d9f3f5',
+      '#8cdde2',
       '#00AAB4',
-      '#397d9c',
-      '#31556f',
+      '#5e829f',
       '#002147',
+      '#f3a09b',
+      '#FE615A',
     ],
     empty: '#e8eaed',
     hover: '#FE615A',
