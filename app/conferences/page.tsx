@@ -1,5 +1,4 @@
 import {
-  faArrowUpRightFromSquare,
   faEarthEurope,
   faMicrophoneLines,
   faUserGroup,
@@ -10,6 +9,7 @@ import type { Metadata } from 'next'
 import AcademicWorldMap, {
   type WorldMapCountry,
 } from '@/components/academic-world-map'
+import ConferenceOverviewTable from '@/components/conference-overview-table'
 import { listPublicConferencePresentations } from '@/lib/conferences'
 import {
   countryNameToIso3,
@@ -27,17 +27,6 @@ export const metadata: Metadata = {
 }
 
 export const revalidate = 300
-
-function formatPresentationDate(value: string | null) {
-  if (!value) return 'Undated'
-
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${value}T00:00:00Z`))
-}
 
 function from2020(
   presentation: PublicConferencePresentation
@@ -111,7 +100,7 @@ export default async function ConferencesPage() {
           <p className="eyebrow">Academic presentations</p>
           <h1>Conferences</h1>
           <p className="page-lead">
-            Conference presentations from 2020 onwards.
+            Conference and public presentations.
           </p>
         </div>
 
@@ -125,22 +114,6 @@ export default async function ConferencesPage() {
           </div>
         ) : (
           <>
-            <section className="conference-map-section">
-              <div className="section-heading compact-heading">
-                <div>
-                  <p className="eyebrow">Geographic coverage</p>
-                  <h2>Presentation map</h2>
-                </div>
-              </div>
-
-              <AcademicWorldMap
-                countries={mapCountries}
-                ariaLabel="World map showing conference presentations by country from 2020 onwards"
-                valueLabel="presentations"
-                singularValueLabel="presentation"
-              />
-            </section>
-
             <section className="conference-stats-grid" aria-label="Conference summary">
               <article className="conference-stat-card">
                 <div className="conference-stat-icon">
@@ -188,6 +161,23 @@ export default async function ConferencesPage() {
               </article>
             </section>
 
+            <section className="conference-map-section">
+              <div className="section-heading compact-heading">
+                <div>
+                  <p className="eyebrow">Geographic coverage</p>
+                  <h2>Presentation map</h2>
+                </div>
+              </div>
+
+              <AcademicWorldMap
+                countries={mapCountries}
+                ariaLabel="World map showing conference presentations by country from 2020 onwards"
+                valueLabel="presentations"
+                singularValueLabel="presentation"
+                palette="conference"
+              />
+            </section>
+
             <section className="conference-overview-section">
               <div className="section-heading compact-heading">
                 <div>
@@ -196,80 +186,9 @@ export default async function ConferencesPage() {
                 </div>
               </div>
 
-              <div className="conference-table-wrap">
-                <table className="conference-table">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Event</th>
-                      <th>Presentation</th>
-                      <th>Location</th>
-                      <th>Authors</th>
-                      <th>Type</th>
-                      <th>
-                        <span className="sr-only">External link</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {presentations.map((presentation, index) => (
-                      <tr
-                        key={[
-                          presentation.event_name,
-                          presentation.presentation_date ?? 'undated',
-                          presentation.presentation_title ?? 'untitled',
-                          index,
-                        ].join('-')}
-                      >
-                        <td className="conference-date-cell">
-                          {formatPresentationDate(
-                            presentation.presentation_date
-                          )}
-                        </td>
-                        <td>
-                          <strong>
-                            {presentation.event_short_name ||
-                              presentation.event_name}
-                          </strong>
-                          <span className="conference-event-full">
-                            {presentation.event_name}
-                          </span>
-                        </td>
-                        <td>
-                          {presentation.presentation_title ?? '—'}
-                        </td>
-                        <td>{presentation.location ?? '—'}</td>
-                        <td>
-                          {presentation.authors.length > 0
-                            ? presentation.authors.join(', ')
-                            : '—'}
-                        </td>
-                        <td>
-                          {presentation.presentation_type ?? '—'}
-                        </td>
-                        <td>
-                          {presentation.url ? (
-                            <a
-                              className="conference-table-link"
-                              href={presentation.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              aria-label={`Open external link for ${presentation.event_short_name || presentation.event_name}`}
-                            >
-                              <FontAwesomeIcon
-                                icon={faArrowUpRightFromSquare}
-                                aria-hidden="true"
-                              />
-                            </a>
-                          ) : (
-                            <span aria-hidden="true">—</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <ConferenceOverviewTable
+                presentations={presentations}
+              />
             </section>
           </>
         )}
