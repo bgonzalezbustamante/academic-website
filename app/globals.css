@@ -134,6 +134,12 @@ main {
   height: 31px;
   object-fit: contain;
   filter: grayscale(1) contrast(1.05);
+  transition: filter 160ms ease;
+}
+
+.institution-mark:hover .institution-logo-image,
+.institution-strip:focus-visible .institution-logo-image {
+  filter: grayscale(0) contrast(1);
 }
 
 .nav-list {
@@ -269,9 +275,14 @@ h4 {
   object-fit: contain;
   filter: grayscale(1) contrast(1.05);
   opacity: 0.88;
+  transition:
+    filter 160ms ease,
+    opacity 160ms ease;
 }
 
-.position-logo-link:hover .position-logo-image {
+.position-logo-link:hover .position-logo-image,
+.position-logo-link:focus-visible .position-logo-image {
+  filter: grayscale(0) contrast(1);
   opacity: 1;
 }
 
@@ -597,6 +608,16 @@ h4 {
 
 .publication-citation em {
   color: var(--oxford-blue);
+}
+
+.publication-citation .citation-bold {
+  color: var(--oxford-coral);
+  font-weight: 700;
+}
+
+.publication-stats-grid {
+  margin-top: 1.35rem;
+  margin-bottom: 0.9rem;
 }
 
 
@@ -978,6 +999,10 @@ h4 {
   position: absolute;
   left: 50%;
   width: 148px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   border: 1px solid rgba(0, 33, 71, 0.12);
   border-radius: 0.45rem;
   background: var(--paper);
@@ -1016,6 +1041,20 @@ h4 {
 
 .roadmap-item-upcoming .roadmap-label {
   border-color: rgba(254, 97, 90, 0.35);
+}
+
+.roadmap-status-icon {
+  width: 0.72rem;
+  height: 0.72rem;
+  flex: 0 0 0.72rem;
+}
+
+.roadmap-item-past .roadmap-status-icon {
+  color: var(--oxford-blue);
+}
+
+.roadmap-item-upcoming .roadmap-status-icon {
+  color: var(--oxford-coral);
 }
 
 /* Shared world maps */
