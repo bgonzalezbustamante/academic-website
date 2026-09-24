@@ -5,6 +5,7 @@ import type { PublicConferencePresentation } from '@/types/public'
 type Props = {
   presentations: PublicConferencePresentation[]
   year: number
+  currentDate: string
 }
 
 function formatAccessibleDate(value: string) {
@@ -19,6 +20,7 @@ function formatAccessibleDate(value: string) {
 export default function PresentationRoadmap({
   presentations,
   year,
+  currentDate,
 }: Props) {
   const ordered = presentations
     .filter((presentation) =>
@@ -37,8 +39,8 @@ export default function PresentationRoadmap({
       <div className="site-shell">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Current year</p>
-            <h2>Roadmap</h2>
+            <p className="eyebrow">Roadmap</p>
+            <h2>Presentations during {year}</h2>
           </div>
           <Link className="section-link" href="/conferences">
             View all
@@ -61,17 +63,23 @@ export default function PresentationRoadmap({
                 const shortName =
                   presentation.event_short_name ||
                   presentation.event_name
+                const isPast = date < currentDate
+
+                const positionClass =
+                  index % 2 === 0
+                    ? 'roadmap-item-upper'
+                    : 'roadmap-item-lower'
 
                 return (
                   <li
-                    className={
-                      index % 2 === 0
-                        ? 'roadmap-item roadmap-item-upper'
-                        : 'roadmap-item roadmap-item-lower'
-                    }
+                    className={[
+                      'roadmap-item',
+                      positionClass,
+                      isPast ? 'roadmap-item-past' : 'roadmap-item-upcoming',
+                    ].join(' ')}
                     key={`${date}-${shortName}-${index}`}
                     title={`${shortName} — ${formatAccessibleDate(date)}`}
-                    aria-label={`${shortName}, ${formatAccessibleDate(date)}`}
+                    aria-label={`${shortName}, ${formatAccessibleDate(date)}${isPast ? ', past presentation' : ', upcoming presentation'}`}
                   >
                     <span className="roadmap-label">{shortName}</span>
                     <span className="roadmap-node" aria-hidden="true" />
