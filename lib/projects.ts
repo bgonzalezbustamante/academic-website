@@ -21,6 +21,7 @@ function normalizeProject(
     title: String(row.title ?? ''),
     abstract: String(row.abstract ?? ''),
     funder: String(row.funder ?? ''),
+    funder_note: nullableString(row.funder_note),
     url: nullableString(row.url),
     start_year: nullableYear(row.start_year),
     end_year: nullableYear(row.end_year),
