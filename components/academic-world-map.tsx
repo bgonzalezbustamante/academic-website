@@ -22,6 +22,7 @@ type Props = {
   countries: WorldMapCountry[]
   ariaLabel: string
   valueLabel: string
+  singularValueLabel?: string
   compact?: boolean
   updatedAt?: string | null
 }
@@ -83,6 +84,7 @@ export default function AcademicWorldMap({
   countries,
   ariaLabel,
   valueLabel,
+  singularValueLabel,
   compact = false,
   updatedAt = null,
 }: Props) {
@@ -104,6 +106,15 @@ export default function AcademicWorldMap({
 
   const [hovered, setHovered] =
     useState<HoveredCountry | null>(null)
+
+  function formatValue(value: number) {
+    const label =
+      value === 1 && singularValueLabel
+        ? singularValueLabel
+        : valueLabel
+
+    return `${value.toLocaleString('en-GB')} ${label}`
+  }
 
   return (
     <div
@@ -156,7 +167,7 @@ export default function AcademicWorldMap({
                     tabIndex={datum && !compact ? 0 : -1}
                     aria-label={
                       datum && !compact
-                        ? `${datum.label}: ${datum.value.toLocaleString('en-GB')} ${valueLabel}`
+                        ? `${datum.label}: ${formatValue(datum.value)}`
                         : undefined
                     }
                     onMouseEnter={() =>
@@ -188,7 +199,7 @@ export default function AcademicWorldMap({
             <span>
               {hovered.value == null
                 ? 'No records'
-                : `${hovered.value.toLocaleString('en-GB')} ${valueLabel}`}
+                : formatValue(hovered.value)}
             </span>
           </div>
         )}
