@@ -45,7 +45,11 @@ export default function PresentationRoadmap({
         <div className="section-heading">
           <div>
             <p className="eyebrow">Roadmap</p>
-            <h2>Presentations during {year}</h2>
+            <h2>Conferences</h2>
+            <p className="section-intro">
+              Public presentations at conferences, workshops, and seminars
+              during {year}.
+            </p>
           </div>
           <Link className="section-link" href="/conferences">
             View all
@@ -75,6 +79,11 @@ export default function PresentationRoadmap({
                     ? 'roadmap-item-upper'
                     : 'roadmap-item-lower'
 
+                const accessibleLocation =
+                  presentation.location
+                    ? `, ${presentation.location}`
+                    : ''
+
                 return (
                   <li
                     className={[
@@ -83,16 +92,24 @@ export default function PresentationRoadmap({
                       isPast ? 'roadmap-item-past' : 'roadmap-item-upcoming',
                     ].join(' ')}
                     key={`${date}-${shortName}-${index}`}
-                    title={`${shortName} — ${formatAccessibleDate(date)}`}
-                    aria-label={`${shortName}, ${formatAccessibleDate(date)}${isPast ? ', past presentation' : ', upcoming presentation'}`}
+                    title={`${shortName} — ${formatAccessibleDate(date)}${accessibleLocation}`}
+                    aria-label={`${shortName}, ${formatAccessibleDate(date)}${accessibleLocation}${isPast ? ', past presentation' : ', upcoming presentation'}`}
                   >
                     <span className="roadmap-label">
-                      <FontAwesomeIcon
-                        className="roadmap-status-icon"
-                        icon={isPast ? faCircleCheck : faCalendarDays}
-                        aria-hidden="true"
-                      />
-                      <span>{shortName}</span>
+                      <span className="roadmap-label-main">
+                        <FontAwesomeIcon
+                          className="roadmap-status-icon"
+                          icon={isPast ? faCircleCheck : faCalendarDays}
+                          aria-hidden="true"
+                        />
+                        <span>{shortName}</span>
+                      </span>
+
+                      {presentation.location && (
+                        <span className="roadmap-label-location">
+                          {presentation.location}
+                        </span>
+                      )}
                     </span>
                     <span className="roadmap-node" aria-hidden="true" />
                   </li>
