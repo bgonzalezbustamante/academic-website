@@ -5,6 +5,7 @@ import AcademicLinks from '@/components/academic-links'
 import ExternalInlineLink from '@/components/external-inline-link'
 import PositionList from '@/components/position-list'
 import PublicationCard from '@/components/publication-card'
+import ResearchPracticeCards from '@/components/research-practice-cards'
 import PublicWorkAnalyticsSection from '@/components/public-work-analytics'
 import { siteProfile } from '@/content/site'
 import { listPublicPapers } from '@/lib/publications'
@@ -164,6 +165,8 @@ export default async function HomePage() {
           )}
         </div>
       </section>
+
+      <ResearchPracticeCards />
 
       {workAnalytics ? (
         <PublicWorkAnalyticsSection
