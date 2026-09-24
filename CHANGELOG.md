@@ -67,6 +67,7 @@
 - Changed Roadmap event labels to two lines: status icon + short event name on the first line, with the presentation location in smaller text below.
 - Moved publication Key highlights below the Abstract on publication-detail pages.
 - Key highlight text now supports safe Markdown rendering for headings, bold/italic emphasis, lists, links, inline/fenced code and blockquotes without executing raw HTML.
+- Publication and project abstracts now use the same safe Markdown renderer as Key highlights, replacing the earlier project-only bold-text helper with one shared research-text pipeline.
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
 - Project Research outputs now combine associated public publications and the public `conference_presentations[]` contract; conference presentations reuse the Conferences Overview table.
 - Reordered project detail content so Research outputs follows About the project and Funding is always the final section.
