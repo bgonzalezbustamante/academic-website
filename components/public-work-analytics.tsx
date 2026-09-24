@@ -231,11 +231,10 @@ export default function PublicWorkAnalytics({
               />
             </div>
             <div>
-              <p>Average working hours per working day</p>
+              <p>Working Hours per day</p>
               <strong>
-                {formatDuration(
-                  analytics.average_net_minutes_per_working_day
-                )}
+                {(analytics.average_net_minutes_per_working_day / 60).toFixed(1)}h
+                <span> on average</span>
               </strong>
             </div>
           </article>
@@ -251,6 +250,7 @@ export default function PublicWorkAnalytics({
               <p>Coffee per working day</p>
               <strong>
                 {analytics.average_coffees_per_working_day.toFixed(1)}
+                <span> on average</span>
               </strong>
             </div>
           </article>
