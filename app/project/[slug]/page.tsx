@@ -11,6 +11,7 @@ import {
   formatProjectStatus,
   formatProjectYears,
 } from '@/components/project-card'
+import ProjectCardVisual from '@/components/project-card-visual'
 import PublicationCard from '@/components/publication-card'
 import ResilientLocalImage from '@/components/resilient-local-image'
 import { listPublicPapers } from '@/lib/publications'
@@ -98,25 +99,23 @@ export default async function ProjectPage({ params }: Props) {
           )}
         </div>
 
-        {projectImage ? (
-          <div className="project-detail-image">
-            <ResilientLocalImage
-              src={projectImage}
-              alt=""
-              width={1200}
-              height={700}
-              sizes="(max-width: 900px) 100vw, 850px"
-              priority
+        <div
+          className={
+            projectImage
+              ? 'project-detail-image'
+              : 'project-detail-image project-detail-image-fallback'
+          }
+          aria-hidden="true"
+        >
+          {projectImage ? (
+            <ProjectCardVisual
+              funderImage={null}
+              projectImage={projectImage}
             />
-          </div>
-        ) : (
-          <div
-            className="project-detail-image project-detail-image-fallback"
-            aria-hidden="true"
-          >
+          ) : (
             <FontAwesomeIcon icon={faDiagramProject} />
-          </div>
-        )}
+          )}
+        </div>
 
         <section className="project-detail-section">
           <h2>About the project</h2>
