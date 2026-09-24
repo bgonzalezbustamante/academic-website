@@ -153,9 +153,9 @@ export default function AcademicWorldMap({
                     }
                     stroke="#ffffff"
                     strokeWidth={0.55}
-                    tabIndex={datum ? 0 : -1}
+                    tabIndex={datum && !compact ? 0 : -1}
                     aria-label={
-                      datum
+                      datum && !compact
                         ? `${datum.label}: ${datum.value.toLocaleString('en-GB')} ${valueLabel}`
                         : undefined
                     }
