@@ -189,7 +189,7 @@ h4 {
   background:
     linear-gradient(135deg, rgba(0, 33, 71, 0.055), transparent 45%),
     var(--paper);
-  padding: clamp(2.4rem, 6vw, 4.5rem) 0;
+  padding: clamp(1.8rem, 4vw, 3rem) 0;
 }
 
 .profile-grid {
@@ -353,25 +353,21 @@ h4 {
 .interest-list {
   display: grid;
   gap: 0.3rem;
-  list-style: none;
   margin: 0;
-  padding: 0;
+  padding-left: 1rem;
+  list-style-type: square;
 }
 
 .interest-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   color: var(--oxford-charcoal);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.78rem;
   line-height: 1.4;
 }
 
-.interest-icon {
-  width: 0.72rem;
-  min-width: 0.72rem;
+.interest-list li::marker {
   color: var(--oxford-coral);
+  font-size: 0.9em;
 }
 
 .academic-links {
@@ -462,6 +458,11 @@ h4 {
 .section,
 .page-section {
   padding: clamp(2.75rem, 6vw, 4.75rem) 0;
+}
+
+#publications.section,
+.activity-section.section {
+  padding: clamp(1.9rem, 4vw, 3rem) 0;
 }
 
 .section-heading {
@@ -721,6 +722,13 @@ h4 {
   font-family: var(--font-noto-serif), Georgia, serif;
   font-size: 1.35rem;
   font-weight: 700;
+}
+
+.analytics-stat-card strong span {
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 500;
 }
 
 .activity-card {
