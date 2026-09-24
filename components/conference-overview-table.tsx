@@ -1,5 +1,7 @@
 'use client'
 
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState } from 'react'
 
 import type { PublicConferencePresentation } from '@/types/public'
@@ -81,7 +83,27 @@ export default function ConferenceOverviewTable({
                   </span>
                 </td>
                 <td>
-                  {presentation.presentation_title ?? '—'}
+                  {presentation.presentation_title ? (
+                    presentation.url ? (
+                      <a
+                        className="conference-presentation-title-link"
+                        href={presentation.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span>{presentation.presentation_title}</span>
+                        <FontAwesomeIcon
+                          className="inline-external-icon"
+                          icon={faArrowUpRightFromSquare}
+                          aria-hidden="true"
+                        />
+                      </a>
+                    ) : (
+                      presentation.presentation_title
+                    )
+                  ) : (
+                    '—'
+                  )}
                 </td>
                 <td>{presentation.location ?? '—'}</td>
                 <td>
