@@ -233,7 +233,9 @@ export default function PublicWorkAnalytics({
             <div>
               <p>Working Hours per day</p>
               <strong>
-                {(analytics.average_net_minutes_per_working_day / 60).toFixed(1)}h
+                {formatDuration(
+                  analytics.average_net_minutes_per_working_day
+                )}
                 <span> on average</span>
               </strong>
             </div>
