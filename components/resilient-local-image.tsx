@@ -3,9 +3,14 @@
 import Image, { type ImageProps } from 'next/image'
 import { useState } from 'react'
 
-type Props = Omit<ImageProps, 'onError'>
+type Props = Omit<ImageProps, 'alt' | 'onError'> & {
+  alt: string
+}
 
-export default function ResilientLocalImage(props: Props) {
+export default function ResilientLocalImage({
+  alt,
+  ...props
+}: Props) {
   const [failed, setFailed] = useState(false)
 
   if (failed) return null
@@ -13,6 +18,7 @@ export default function ResilientLocalImage(props: Props) {
   return (
     <Image
       {...props}
+      alt={alt}
       onError={() => setFailed(true)}
     />
   )
