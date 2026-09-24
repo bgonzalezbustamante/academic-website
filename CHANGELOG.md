@@ -55,11 +55,11 @@
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
 - Added Publications filters for Year and Publication index.
-- Added Publications KPI cards for total papers, distinct journals and co-authorship percentage, using only the public publication list.
+- Added Publications KPI cards for total papers, distinct journals and single-author percentage, using only the public publication list.
 - Extended citation rendering to support Markdown bold (`**text**`) and display bold citation emphasis in Oxford coral.
 - Added small status icons to the homepage Roadmap: a completed-state icon for past presentations and a calendar icon for forthcoming presentations.
 - Institutional logos remain monochrome at rest and transition to their original colour on hover; position-logo links also support the colour treatment on keyboard focus.
-- Restored Oxford coral to the Conference map's actual data scale rather than using coral only as a hover colour.
+- Kept the Conference map data scale in Oxford aqua/blue tones and reserved Oxford coral for the hover state.
 - Updated the Publications introduction to “Papers ordered from the most recent publication onwards.”
 - Removed the separator between the Academic profile and DORA / CRediT cards.
 - Updated the current-year Roadmap heading to “Presentations during [year]” and visually distinguished past presentations from upcoming ones.
@@ -70,8 +70,9 @@
 - Restored two project cards per row on wider screens.
 - Added a TERGAP-specific world coverage map on the TERGAP detail page, using a compact 47-country snapshot derived from `tergap-dashboard` and displaying its generation timestamp.
 - Reused the TERGAP dashboard ERC logo as the TERGAP funder image on Home/Projects cards and in the Funding block when no Dashboard funder-image filename is configured.
-- Matched the TERGAP detail map to the original dashboard: map canvas `#eef0f7`, grey not-collected countries `#e8eaed`, original six-step scale from `#e7eaf4` to `#001158`, and teal hover `#007679`. Conferences uses the same canvas/grey no-data treatment while retaining an Oxford aqua/blue/coral scale.
+- Matched the TERGAP detail map to the original dashboard: map canvas `#eef0f7`, grey not-collected countries `#e8eaed`, original six-step scale from `#e7eaf4` to `#001158`, and teal hover `#007679`. Conferences uses the same canvas/grey no-data treatment with an Oxford aqua/blue scale and Oxford coral hover.
 - Reworked `/conferences` into a dashboard-style view headed by “Conference and public presentations”: KPI cards first, then the geographic map, followed by a compact presentation table.
+- Changed the Publications and Conferences authorship KPI from co-authorship percentage to single-author percentage.
 - Removed the Conference Type column and added client-side pagination at 10 presentation rows per page.
 - Added the same reusable Oxford-styled world-map system for TERGAP and Conferences using `react-simple-maps`, `world-atlas` and ISO-country conversion.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
@@ -88,6 +89,8 @@
 
 - Established v6.0.0-rc.1 "Swift Harbour" as the first release identity in the new repository.
 - Added structured public release-note data and a dedicated Release Notes page following the Research Dashboard release model.
+- Condensed the public Release Notes into a plain-language capability summary while retaining implementation-level detail in this CHANGELOG.
+- Added direct links from Release Notes to this repository's v6 CHANGELOG and, afterwards, the legacy academic-kickstart CHANGELOG.
 - Added the current release identity to the site footer.
 - Updated the package version to `6.0.0-rc.1`.
 
