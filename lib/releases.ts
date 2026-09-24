@@ -36,8 +36,11 @@ export const releases: ReleaseNote[] = [
         items: [
           'Added a Next.js App Router and TypeScript foundation for a distinct public academic website.',
           'Added responsive site navigation, footer, homepage, publication listing and stable publication detail routes.',
-          'Replaced the development-oriented homepage architecture panel with a visitor-facing academic profile showing dual appointments and research interests.',
-          'Introduced a restrained academic design system drawing on the visual language used across related projects without reproducing the Research Dashboard interface.',
+          'Replaced the development-oriented homepage architecture panel with a visitor-facing academic profile showing three main appointments and research interests.',
+          'Aligned the visual system with Research Dashboard using Roboto, Noto Serif, Oxford blue and neutral card surfaces, while adding OCPSG coral and teal as restrained accent colours.',
+          'Reduced the homepage title scale and introduced compact Dashboard-style profile and affiliation cards.',
+          'Replaced the BGB header mark with a three-affiliation strip, using the carried-forward OCPSG SVG and temporary monochrome Leiden/UDP wordmark fallbacks until the supplied source assets are available.',
+          'Added Font Awesome and Academicons for institutional, scholarly and publication-resource links.',
           'Added public-safe page error handling without falling back to private Dashboard data.',
         ],
       },
