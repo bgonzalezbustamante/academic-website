@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
-import PublicationCard from '@/components/publication-card'
-import { listPublicPapers } from '@/lib/publications'
+import PublicationBrowser from '@/components/publication-browser'
+import { getPublicPaper, listPublicPapers } from '@/lib/publications'
 import type { PublicPaper } from '@/types/public'
 
 export const metadata: Metadata = {
@@ -25,14 +25,31 @@ export default async function PublicationsPage() {
     available = false
   }
 
+  const papersWithCitation = await Promise.all(
+    papers.map(async (paper) => {
+      try {
+        const detail = await getPublicPaper(paper.slug)
+
+        return {
+          ...paper,
+          citation: detail?.citation ?? null,
+        }
+      } catch {
+        return {
+          ...paper,
+          citation: null,
+        }
+      }
+    })
+  )
+
   return (
     <section className="page-section">
       <div className="site-shell narrow-shell">
         <p className="eyebrow">Research output</p>
         <h1>Publications</h1>
         <p className="page-lead">
-          Papers explicitly published through the Research Dashboard public
-          contract, ordered from the most recent publication onwards.
+          Papers ordered from the most recent publication onwards.
         </p>
 
         {!available ? (
@@ -44,11 +61,7 @@ export default async function PublicationsPage() {
             <p>No public papers are currently available.</p>
           </div>
         ) : (
-          <div className="publication-list">
-            {papers.map((paper) => (
-              <PublicationCard key={paper.slug} paper={paper} />
-            ))}
-          </div>
+          <PublicationBrowser papers={papersWithCitation} />
         )}
       </div>
     </section>
