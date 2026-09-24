@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
 import ProjectCardVisual from '@/components/project-card-visual'
-import ResilientLocalImage from '@/components/resilient-local-image'
 import type { PublicProject } from '@/types/public'
 
 type Props = {
@@ -77,18 +76,7 @@ export default function ProjectCard({
         </h2>
 
         {project.funder && (
-          <div className="project-funder">
-            {funderImage && (
-              <ResilientLocalImage
-                src={funderImage}
-                alt=""
-                width={72}
-                height={40}
-                sizes="72px"
-              />
-            )}
-            <span>{project.funder}</span>
-          </div>
+          <p className="project-funder">{project.funder}</p>
         )}
 
         <div className="project-card-links">
