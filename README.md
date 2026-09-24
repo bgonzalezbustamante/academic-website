@@ -36,8 +36,8 @@ The current foundation includes:
 - stable publication detail routes with optional local-static Key highlights
 - standalone Projects listing and `/project/[slug]` detail routes
 - homepage Featured projects carousel ordered by latest end year, using funder imagery first
-- TERGAP project maps derived from a compact snapshot of the public TERGAP dashboard metrics, including the source update timestamp
-- standalone Conferences dashboard with presentation geography, summary indicators and a compact presentation table
+- TERGAP detail-page map derived from a compact snapshot of the public TERGAP dashboard metrics, including the source update timestamp; Home/Projects cards use the ERC funder logo
+- standalone Conferences dashboard with KPI cards, presentation geography and a compact 10-row paginated presentation table
 - current-year two-sided presentation Roadmap using public event short names
 - current-year public Activity over time heatmap
 - current-year average working time and coffee summary cards
@@ -81,7 +81,7 @@ The TERGAP project map uses the same `react-simple-maps` / `world-atlas` approac
 - the collection window;
 - country name, ISO-3 code and complete-article count.
 
-When the TERGAP dashboard metrics are refreshed, this small snapshot should be regenerated from its public `public/data/dashboard_metrics.json`.
+When the TERGAP dashboard metrics are refreshed, this small snapshot should be regenerated from its public `public/data/dashboard_metrics.json`. A short local exporter can be run from the TERGAP repository and write directly to `../academic-website/public/data/tergap-map.json`.
 
 ### Local checks
 
