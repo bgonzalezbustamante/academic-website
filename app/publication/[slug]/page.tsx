@@ -75,7 +75,6 @@ export default async function PublicationPage({ params }: Props) {
         </div>
 
         <PublicationLinks paper={paper} />
-        <PublicationKeyHighlight paper={paper} />
 
         {paper.abstract && (
           <section className="abstract-section">
@@ -83,6 +82,8 @@ export default async function PublicationPage({ params }: Props) {
             <p>{paper.abstract}</p>
           </section>
         )}
+
+        <PublicationKeyHighlight paper={paper} />
       </div>
     </article>
   )
