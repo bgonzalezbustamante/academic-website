@@ -1,5 +1,6 @@
 import type { PublicPaperDetail } from '@/types/public'
 
+import KeyHighlightMarkdownEnhancer from '@/components/key-highlight-markdown-enhancer'
 import ResilientLocalImage from '@/components/resilient-local-image'
 
 type Props = {
@@ -27,7 +28,12 @@ export default function PublicationKeyHighlight({ paper }: Props) {
       <h2>Key highlight</h2>
 
       {text && (
-        <p className="key-highlight-text">{text}</p>
+        <>
+          <p className="key-highlight-text key-highlight-markdown-source">
+            {text}
+          </p>
+          <KeyHighlightMarkdownEnhancer />
+        </>
       )}
 
       {imagePath && (
