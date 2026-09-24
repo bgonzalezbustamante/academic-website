@@ -59,16 +59,19 @@ export const releases: ReleaseNote[] = [
           'Tightened the homepage vertical rhythm between the profile, featured publications and public activity sections.',
           'Added paired DORA signer and Pro CRediT research-practice cards between featured publications and public activity.',
           'Added a British-English DORA statement page using a local official signatory badge and migrated the legacy CRediT Contributor Roles Taxonomy page with all fourteen badges, omitting the former Training Data Lab cross-reference.',
-          'Documented the minimal future contract extension required for optional publication Key highlight text and imagery without implementing it in the public repository.',
+          'Integrated detail-only publication Key highlights from the public paper detail RPC, using local static assets and supplied accessibility text without enlarging the publication-list contract.',
+          'Added standalone Projects listing/detail routes backed only by public project RPCs, including Featured state, years, canonical URLs, local project/funder imagery and associated Public publication slugs.',
+          'Added a standalone Conferences page backed only by the public conference RPC, preserving presentation-specific author order while excluding private notes and linked-paper metadata.',
+          'Kept the homepage sequence unchanged: Featured publications, DORA / CRediT, then Activity over time.',
         ],
       },
       {
         title: 'Local development',
         items: [
           'Added local lint and TypeScript validation commands.',
-          'Added a publishable-key public-contract check for publication listing, slug lookup and aggregate work analytics.',
+          'Expanded the publishable-key public-contract check across publication listing/detail highlights, project listing/detail, conferences and aggregate work analytics, including explicit private-field boundary assertions.',
           'Standardised local and deployment runtimes on Node.js 22 or later for compatibility with the current Supabase JavaScript stack.',
-          'Defined the intended information architecture while keeping full profile, projects, teaching and contact content deferred to Phase 6.',
+          'Extended the standalone information architecture with Projects and Conferences while keeping the remaining full-profile, teaching/service and CV work deferred.',
         ],
       },
       {
