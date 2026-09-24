@@ -129,7 +129,7 @@ function appendInline(
       const math =
         document.createElement('span')
       math.className =
-        'font-serif italic text-oxford-blue'
+        'research-markdown-inline-math'
       math.textContent =
         formatMathSource(
           token.startsWith('$')
@@ -360,7 +360,7 @@ function buildRichText(
       const math =
         document.createElement('div')
       math.className =
-        'overflow-x-auto rounded-md border border-oxford-stone bg-oxford-off-white px-4 py-3 font-serif italic text-oxford-blue'
+        'research-markdown-math-block'
       math.textContent =
         formatMathSource(
           mathLines.join(' ')
