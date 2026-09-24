@@ -18,6 +18,8 @@ export type WorldMapCountry = {
   value: number
 }
 
+type MapPalette = 'tergap' | 'conference'
+
 type Props = {
   countries: WorldMapCountry[]
   ariaLabel: string
@@ -25,6 +27,7 @@ type Props = {
   singularValueLabel?: string
   compact?: boolean
   updatedAt?: string | null
+  palette?: MapPalette
 }
 
 type HoveredCountry = {
@@ -34,14 +37,35 @@ type HoveredCountry = {
 
 const WORLD_MAP = worldMap as unknown as GeographyData
 
-const MAP_SHADES = [
-  '#e8edf3',
-  '#cfdae6',
-  '#a9bfd3',
-  '#7d9fbd',
-  '#477598',
-  '#002147',
-]
+const MAP_PALETTES: Record<
+  MapPalette,
+  { shades: string[]; empty: string; hover: string }
+> = {
+  tergap: {
+    shades: [
+      '#d5e1ed',
+      '#afc2d4',
+      '#809db9',
+      '#557b9c',
+      '#315a7d',
+      '#002147',
+    ],
+    empty: '#f4f0e9',
+    hover: '#00AAB4',
+  },
+  conference: {
+    shades: [
+      '#d9f3f5',
+      '#9fdee2',
+      '#55c5cc',
+      '#00AAB4',
+      '#456d91',
+      '#002147',
+    ],
+    empty: '#f6eee9',
+    hover: '#FE615A',
+  },
+}
 
 function numericIdToIso3(value: string | number | undefined) {
   if (value === undefined) return undefined
@@ -51,21 +75,26 @@ function numericIdToIso3(value: string | number | undefined) {
   )
 }
 
-function getFill(value: number, maximum: number) {
+function getFill(
+  value: number,
+  maximum: number,
+  shades: string[],
+  empty: string
+) {
   if (value <= 0 || maximum <= 0) {
-    return '#e7e9ec'
+    return empty
   }
 
   const scaled = Math.log1p(value) / Math.log1p(maximum)
   const index = Math.min(
-    MAP_SHADES.length - 1,
+    shades.length - 1,
     Math.max(
       0,
-      Math.ceil(scaled * MAP_SHADES.length) - 1
+      Math.ceil(scaled * shades.length) - 1
     )
   )
 
-  return MAP_SHADES[index]
+  return shades[index]
 }
 
 function formatUpdated(value: string) {
@@ -87,6 +116,7 @@ export default function AcademicWorldMap({
   singularValueLabel,
   compact = false,
   updatedAt = null,
+  palette = 'tergap',
 }: Props) {
   const byIso3 = useMemo(
     () =>
@@ -106,6 +136,8 @@ export default function AcademicWorldMap({
 
   const [hovered, setHovered] =
     useState<HoveredCountry | null>(null)
+
+  const mapPalette = MAP_PALETTES[palette]
 
   function formatValue(value: number) {
     const label =
@@ -156,14 +188,16 @@ export default function AcademicWorldMap({
                     fill={
                       hovered?.label === hoverValue.label &&
                       datum
-                        ? '#FE615A'
+                        ? mapPalette.hover
                         : getFill(
                             datum?.value ?? 0,
-                            maximum
+                            maximum,
+                            mapPalette.shades,
+                            mapPalette.empty
                           )
                     }
                     stroke="#ffffff"
-                    strokeWidth={0.55}
+                    strokeWidth={0.6}
                     tabIndex={datum && !compact ? 0 : -1}
                     aria-label={
                       datum && !compact
@@ -180,12 +214,7 @@ export default function AcademicWorldMap({
                       setHovered(hoverValue)
                     }
                     onBlur={() => setHovered(null)}
-                    style={{
-                      cursor: datum
-                        ? 'default'
-                        : 'default',
-                      outline: 'none',
-                    }}
+                    style={{ outline: 'none' }}
                   />
                 )
               })
@@ -209,7 +238,7 @@ export default function AcademicWorldMap({
         <div className="world-map-legend">
           <span>Fewer</span>
           <span className="world-map-shades" aria-hidden="true">
-            {MAP_SHADES.map((shade) => (
+            {mapPalette.shades.map((shade) => (
               <span
                 key={shade}
                 style={{ backgroundColor: shade }}
