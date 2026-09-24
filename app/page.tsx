@@ -179,6 +179,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <ResearchPracticeCards />
+
       <section className="section" id="publications">
         <div className="site-shell">
           <div className="section-heading">
@@ -237,31 +239,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {conferencesAvailable ? (
-        <PresentationRoadmap
-          presentations={presentations}
-          year={currentYear}
-        />
-      ) : (
-        <section className="section roadmap-section" id="roadmap">
-          <div className="site-shell">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">Current year</p>
-                <h2>Roadmap</h2>
-              </div>
-              <Link className="section-link" href="/conferences">
-                View all
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-            <div className="empty-state">
-              <p>Presentation roadmap is temporarily unavailable.</p>
-            </div>
-          </div>
-        </section>
-      )}
-
       {workAnalytics ? (
         <PublicWorkAnalyticsSection
           analytics={workAnalytics}
@@ -287,7 +264,30 @@ export default async function HomePage() {
         </section>
       )}
 
-      <ResearchPracticeCards />
+      {conferencesAvailable ? (
+        <PresentationRoadmap
+          presentations={presentations}
+          year={currentYear}
+        />
+      ) : (
+        <section className="section roadmap-section" id="roadmap">
+          <div className="site-shell">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Current year</p>
+                <h2>Roadmap</h2>
+              </div>
+              <Link className="section-link" href="/conferences">
+                View all
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="empty-state">
+              <p>Presentation roadmap is temporarily unavailable.</p>
+            </div>
+          </div>
+        </section>
+      )}
     </>
   )
 }
