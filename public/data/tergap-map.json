@@ -1,0 +1,245 @@
+{
+  "source_repository": "bgonzalezbustamante/tergap-dashboard",
+  "generated_at": "2026-09-22T07:42:15Z",
+  "collection_window": {
+    "from_year": 2011,
+    "to_year": 2025
+  },
+  "countries": [
+    {
+      "country": "Algeria",
+      "iso3": "DZA",
+      "complete_articles": 111656
+    },
+    {
+      "country": "Angola",
+      "iso3": "AGO",
+      "complete_articles": 104609
+    },
+    {
+      "country": "Benin",
+      "iso3": "BEN",
+      "complete_articles": 89661
+    },
+    {
+      "country": "Botswana",
+      "iso3": "BWA",
+      "complete_articles": 95199
+    },
+    {
+      "country": "Burkina Faso",
+      "iso3": "BFA",
+      "complete_articles": 113424
+    },
+    {
+      "country": "Burundi",
+      "iso3": "BDI",
+      "complete_articles": 33251
+    },
+    {
+      "country": "Cabo Verde",
+      "iso3": "CPV",
+      "complete_articles": 35339
+    },
+    {
+      "country": "Cameroon",
+      "iso3": "CMR",
+      "complete_articles": 318401
+    },
+    {
+      "country": "Central African Republic",
+      "iso3": "CAF",
+      "complete_articles": 28664
+    },
+    {
+      "country": "Chad",
+      "iso3": "TCD",
+      "complete_articles": 62881
+    },
+    {
+      "country": "Comoros",
+      "iso3": "COM",
+      "complete_articles": 16263
+    },
+    {
+      "country": "Côte d'Ivoire",
+      "iso3": "CIV",
+      "complete_articles": 101899
+    },
+    {
+      "country": "Djibouti",
+      "iso3": "DJI",
+      "complete_articles": 23331
+    },
+    {
+      "country": "Egypt",
+      "iso3": "EGY",
+      "complete_articles": 995293
+    },
+    {
+      "country": "Equatorial Guinea",
+      "iso3": "GNQ",
+      "complete_articles": 27637
+    },
+    {
+      "country": "Eritrea",
+      "iso3": "ERI",
+      "complete_articles": 31141
+    },
+    {
+      "country": "Eswatini",
+      "iso3": "SWZ",
+      "complete_articles": 29587
+    },
+    {
+      "country": "Ethiopia",
+      "iso3": "ETH",
+      "complete_articles": 231591
+    },
+    {
+      "country": "Gabon",
+      "iso3": "GAB",
+      "complete_articles": 30693
+    },
+    {
+      "country": "Ghana",
+      "iso3": "GHA",
+      "complete_articles": 392074
+    },
+    {
+      "country": "Guinea",
+      "iso3": "GIN",
+      "complete_articles": 52311
+    },
+    {
+      "country": "Guinea-Bissau",
+      "iso3": "GNB",
+      "complete_articles": 18398
+    },
+    {
+      "country": "Kenya",
+      "iso3": "KEN",
+      "complete_articles": 483804
+    },
+    {
+      "country": "Lesotho",
+      "iso3": "LSO",
+      "complete_articles": 34779
+    },
+    {
+      "country": "Liberia",
+      "iso3": "LBR",
+      "complete_articles": 49939
+    },
+    {
+      "country": "Libya",
+      "iso3": "LBY",
+      "complete_articles": 140290
+    },
+    {
+      "country": "Madagascar",
+      "iso3": "MDG",
+      "complete_articles": 60845
+    },
+    {
+      "country": "Malawi",
+      "iso3": "MWI",
+      "complete_articles": 77194
+    },
+    {
+      "country": "Mali",
+      "iso3": "MLI",
+      "complete_articles": 168064
+    },
+    {
+      "country": "Mauritania",
+      "iso3": "MRT",
+      "complete_articles": 48355
+    },
+    {
+      "country": "Mauritius",
+      "iso3": "MUS",
+      "complete_articles": 135482
+    },
+    {
+      "country": "Morocco",
+      "iso3": "MAR",
+      "complete_articles": 397008
+    },
+    {
+      "country": "Mozambique",
+      "iso3": "MOZ",
+      "complete_articles": 90961
+    },
+    {
+      "country": "Namibia",
+      "iso3": "NAM",
+      "complete_articles": 126680
+    },
+    {
+      "country": "Niger",
+      "iso3": "NER",
+      "complete_articles": 75812
+    },
+    {
+      "country": "Rwanda",
+      "iso3": "RWA",
+      "complete_articles": 183072
+    },
+    {
+      "country": "Senegal",
+      "iso3": "SEN",
+      "complete_articles": 120028
+    },
+    {
+      "country": "Seychelles",
+      "iso3": "SYC",
+      "complete_articles": 35056
+    },
+    {
+      "country": "Sierra Leone",
+      "iso3": "SLE",
+      "complete_articles": 61214
+    },
+    {
+      "country": "Somalia",
+      "iso3": "SOM",
+      "complete_articles": 104471
+    },
+    {
+      "country": "South Africa",
+      "iso3": "ZAF",
+      "complete_articles": 1666769
+    },
+    {
+      "country": "Tanzania",
+      "iso3": "TZA",
+      "complete_articles": 165443
+    },
+    {
+      "country": "The Gambia",
+      "iso3": "GMB",
+      "complete_articles": 34728
+    },
+    {
+      "country": "Togo",
+      "iso3": "TGO",
+      "complete_articles": 41181
+    },
+    {
+      "country": "Uganda",
+      "iso3": "UGA",
+      "complete_articles": 249389
+    },
+    {
+      "country": "Zambia",
+      "iso3": "ZMB",
+      "complete_articles": 126947
+    },
+    {
+      "country": "Zimbabwe",
+      "iso3": "ZWE",
+      "complete_articles": 246813
+    }
+  ]
+}
