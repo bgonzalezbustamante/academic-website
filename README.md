@@ -14,6 +14,9 @@ The website consumes only the explicit anonymous-safe Supabase RPC contracts:
 
 - `list_public_papers()`
 - `get_public_paper(text)`
+- `list_public_projects()`
+- `get_public_project(text)`
+- `list_public_conference_presentations()`
 - `get_public_work_analytics(year)`
 
 It must not query Research Dashboard tables directly or use a service-role key.
@@ -30,7 +33,9 @@ The current foundation includes:
 - global header/footer and responsive layout
 - RPC-only Supabase client
 - public publication listing
-- stable publication detail routes
+- stable publication detail routes with optional local-static Key highlights
+- standalone Projects listing and `/project/[slug]` detail routes
+- standalone Conferences page using presentation-specific public authors
 - current-year public Activity over time heatmap
 - current-year average working time and coffee summary cards
 - DORA signatory card and `/dora` responsible-research-assessment statement
@@ -73,7 +78,7 @@ Run linting and TypeScript validation:
 npm run check
 ```
 
-Validate the three public Supabase contracts using the publishable key in `.env.local`:
+Validate the complete public Supabase contract surface using the publishable key in `.env.local`:
 
 ```bash
 npm run check:public-contract
@@ -81,10 +86,13 @@ npm run check:public-contract
 
 The contract check:
 
-- verifies `list_public_papers()`;
-- resolves one listed slug through `get_public_paper(text)` when at least one paper is Public;
-- accepts zero public papers as a valid curated state;
-- validates the shape of `get_public_work_analytics(year)`;
+- verifies `list_public_papers()` and keeps Key highlight fields detail-only;
+- resolves a listed publication through `get_public_paper(text)`;
+- verifies `list_public_projects()` and `get_public_project(text)`;
+- confirms project publication slugs resolve only to papers returned by the public publication list;
+- verifies `list_public_conference_presentations()`, including ordered presentation authors and the absence of private notes/paper IDs;
+- validates `get_public_work_analytics(year)`;
+- accepts empty curated publication/project/conference datasets;
 - never queries internal Research Dashboard tables.
 
 Before a milestone merge or deployment:
