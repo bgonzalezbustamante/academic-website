@@ -61,14 +61,14 @@ export default function PublicationBrowser({ papers }: Props) {
     [papers]
   )
 
-  const coauthorshipPercentage = useMemo(() => {
+  const singleAuthorPercentage = useMemo(() => {
     if (papers.length === 0) return 0
 
-    const coauthored = papers.filter(
-      (paper) => paper.authors.length > 1
+    const singleAuthor = papers.filter(
+      (paper) => paper.authors.length === 1
     ).length
 
-    return (coauthored / papers.length) * 100
+    return (singleAuthor / papers.length) * 100
   }, [papers])
 
   const filtered = useMemo(
@@ -119,8 +119,8 @@ export default function PublicationBrowser({ papers }: Props) {
             <FontAwesomeIcon icon={faUserGroup} aria-hidden="true" />
           </div>
           <div>
-            <p>Co-authorship</p>
-            <strong>{coauthorshipPercentage.toFixed(1)}%</strong>
+            <p>Single author</p>
+            <strong>{singleAuthorPercentage.toFixed(1)}%</strong>
           </div>
         </article>
       </section>
