@@ -16,6 +16,51 @@ const PUBLIC_PAPER_FIELDS = [
   'publication_index',
 ]
 
+const PAPER_HIGHLIGHT_FIELDS = [
+  'highlight_text',
+  'highlight_image_filename',
+  'highlight_image_alt',
+  'highlight_image_caption',
+]
+
+const PUBLIC_PROJECT_FIELDS = [
+  'slug',
+  'short_title',
+  'title',
+  'abstract',
+  'funder',
+  'url',
+  'start_year',
+  'end_year',
+  'status',
+  'featured',
+  'project_image_filename',
+  'funder_image_filename',
+  'publication_slugs',
+]
+
+const PUBLIC_CONFERENCE_FIELDS = [
+  'event_name',
+  'location',
+  'presentation_date',
+  'presentation_title',
+  'authors',
+  'presentation_type',
+  'url',
+]
+
+const PRIVATE_FIELDS = [
+  'id',
+  'owner_id',
+  'paper_id',
+  'paper_ids',
+  'notes',
+  'activity_label_id',
+  'activity_label_ids',
+  'work_session_id',
+  'tracked_minutes',
+]
+
 function fail(message) {
   throw new Error(message)
 }
@@ -40,15 +85,87 @@ function requireEnvironment() {
   return { url, publishableKey }
 }
 
-function assertPaperShape(paper) {
-  for (const field of PUBLIC_PAPER_FIELDS) {
-    if (!(field in paper)) {
-      fail(`Public paper payload is missing field: ${field}`)
+function assertFields(record, fields, contract) {
+  for (const field of fields) {
+    if (!(field in record)) {
+      fail(`${contract} payload is missing field: ${field}`)
     }
   }
+}
+
+function assertPrivateFieldsAbsent(record, contract) {
+  for (const field of PRIVATE_FIELDS) {
+    if (field in record) {
+      fail(`${contract} unexpectedly exposes private field: ${field}`)
+    }
+  }
+}
+
+function assertPaperShape(paper, { detail = false } = {}) {
+  assertFields(paper, PUBLIC_PAPER_FIELDS, 'Public paper')
+  assertPrivateFieldsAbsent(paper, 'Public paper')
 
   if (!Array.isArray(paper.authors)) {
     fail('Public paper authors must be an array.')
+  }
+
+  if (detail) {
+    assertFields(
+      paper,
+      PAPER_HIGHLIGHT_FIELDS,
+      'Public paper detail'
+    )
+  } else {
+    for (const field of PAPER_HIGHLIGHT_FIELDS) {
+      if (field in paper) {
+        fail(
+          `list_public_papers() unexpectedly exposes detail-only field: ${field}`
+        )
+      }
+    }
+  }
+}
+
+function assertProjectShape(project) {
+  assertFields(project, PUBLIC_PROJECT_FIELDS, 'Public project')
+  assertPrivateFieldsAbsent(project, 'Public project')
+
+  if (!Array.isArray(project.publication_slugs)) {
+    fail('Public project publication_slugs must be an array.')
+  }
+
+  if (
+    project.start_year != null &&
+    !Number.isInteger(project.start_year)
+  ) {
+    fail('Public project start_year must be an integer or null.')
+  }
+
+  if (
+    project.end_year != null &&
+    !Number.isInteger(project.end_year)
+  ) {
+    fail('Public project end_year must be an integer or null.')
+  }
+
+  if (typeof project.featured !== 'boolean') {
+    fail('Public project featured must be boolean.')
+  }
+}
+
+function assertConferenceShape(presentation) {
+  assertFields(
+    presentation,
+    PUBLIC_CONFERENCE_FIELDS,
+    'Public conference presentation'
+  )
+  assertPrivateFieldsAbsent(
+    presentation,
+    'Public conference presentation'
+  )
+
+  if (!Array.isArray(presentation.authors)) {
+    fail('Conference presentation authors must be an array.')
   }
 }
 
@@ -85,6 +202,15 @@ function assertAnalyticsShape(payload, year) {
   }
 }
 
+function currentAmsterdamYear() {
+  return Number(
+    new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Amsterdam',
+      year: 'numeric',
+    }).format(new Date())
+  )
+}
+
 async function main() {
   const { url, publishableKey } = requireEnvironment()
   const supabase = createClient(url, publishableKey, {
@@ -112,6 +238,10 @@ async function main() {
   for (const paper of papers) {
     assertPaperShape(paper)
   }
+
+  const publicPaperSlugs = new Set(
+    papers.map((paper) => paper.slug)
+  )
 
   console.log(
     `✓ list_public_papers(): ${papers.length} public paper(s)`
@@ -142,13 +272,110 @@ async function main() {
       )
     }
 
-    assertPaperShape(detail)
-    console.log('✓ get_public_paper(text): listed slug resolved')
+    assertPaperShape(detail, { detail: true })
+    console.log(
+      '✓ get_public_paper(text): listed slug resolved with detail-only highlight fields'
+    )
   } else {
     console.log(
       '✓ get_public_paper(text): skipped because zero public papers is a valid curated state'
     )
   }
+
+  const projectsResult = await supabase.rpc('list_public_projects')
+
+  if (projectsResult.error) {
+    fail(
+      `list_public_projects() failed: ${projectsResult.error.message}`
+    )
+  }
+
+  const projects = projectsResult.data ?? []
+
+  if (!Array.isArray(projects)) {
+    fail('list_public_projects() did not return an array.')
+  }
+
+  for (const project of projects) {
+    assertProjectShape(project)
+
+    for (const paperSlug of project.publication_slugs) {
+      if (!publicPaperSlugs.has(paperSlug)) {
+        fail(
+          `Public project ${project.slug} references a paper slug not returned by list_public_papers(): ${paperSlug}`
+        )
+      }
+    }
+  }
+
+  console.log(
+    `✓ list_public_projects(): ${projects.length} public project(s)`
+  )
+
+  if (projects.length > 0) {
+    const firstProjectSlug = projects[0]?.slug
+
+    if (
+      typeof firstProjectSlug !== 'string' ||
+      !firstProjectSlug
+    ) {
+      fail('First public project has no usable slug.')
+    }
+
+    const projectDetailResult = await supabase.rpc(
+      'get_public_project',
+      { p_slug: firstProjectSlug }
+    )
+
+    if (projectDetailResult.error) {
+      fail(
+        `get_public_project(text) failed: ${projectDetailResult.error.message}`
+      )
+    }
+
+    const projectDetail = projectDetailResult.data?.[0]
+
+    if (!projectDetail) {
+      fail(
+        'get_public_project(text) returned no row for a listed public slug.'
+      )
+    }
+
+    assertProjectShape(projectDetail)
+    console.log(
+      '✓ get_public_project(text): listed slug resolved'
+    )
+  } else {
+    console.log(
+      '✓ get_public_project(text): skipped because zero public projects is a valid curated state'
+    )
+  }
+
+  const conferenceResult = await supabase.rpc(
+    'list_public_conference_presentations'
+  )
+
+  if (conferenceResult.error) {
+    fail(
+      `list_public_conference_presentations() failed: ${conferenceResult.error.message}`
+    )
+  }
+
+  const presentations = conferenceResult.data ?? []
+
+  if (!Array.isArray(presentations)) {
+    fail(
+      'list_public_conference_presentations() did not return an array.'
+    )
+  }
+
+  for (const presentation of presentations) {
+    assertConferenceShape(presentation)
+  }
+
+  console.log(
+    `✓ list_public_conference_presentations(): ${presentations.length} public presentation(s); private notes/paper IDs absent`
+  )
 
   const configuredYear = Number.parseInt(
     process.env.PUBLIC_ANALYTICS_YEAR ?? '',
@@ -156,7 +383,7 @@ async function main() {
   )
   const year = Number.isFinite(configuredYear)
     ? configuredYear
-    : new Date().getUTCFullYear()
+    : currentAmsterdamYear()
 
   const analyticsResult = await supabase.rpc(
     'get_public_work_analytics',
