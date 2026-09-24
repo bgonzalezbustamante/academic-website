@@ -77,11 +77,13 @@ export default async function ProjectPage({ params }: Props) {
   const projectImage = project.project_image_filename
     ? `/projects/${project.slug}/${project.project_image_filename}`
     : null
-  const funderImage = project.funder_image_filename
-    ? `/funders/${project.funder_image_filename}`
-    : null
   const isTergap =
     project.slug === 'terrorist-group-adaptation'
+  const funderImage = project.funder_image_filename
+    ? `/funders/${project.funder_image_filename}`
+    : isTergap
+      ? '/funders/erc-logo.png'
+      : null
 
   return (
     <article className="page-section">
