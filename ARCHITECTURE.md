@@ -33,8 +33,9 @@ Aggregate work analytics are rendered on the homepage for the current Europe/Ams
 
 ### Publication Key highlights
 
-Key highlights are deliberately detail-only presentation metadata. `list_public_papers()` remains the compact canonical publication listing and does not expose them. `get_public_paper(text)` additionally provides:
+Citation and Key highlights are deliberately detail-only presentation metadata. `list_public_papers()` remains the compact canonical publication listing and does not expose them. The Publications page resolves each already-public slug through `get_public_paper(text)` to obtain the owner-entered citation without querying Dashboard tables. `get_public_paper(text)` additionally provides:
 
+- `citation`
 - `highlight_text`
 - `highlight_image_filename`
 - `highlight_image_alt`
@@ -47,7 +48,7 @@ When configured, the publication detail route resolves the image only from the a
 → /publication-highlights/<paper-slug>/<filename>
 ```
 
-The site never derives a Supabase Storage URL for these assets. The supplied alt text is used when an image filename exists, captions remain optional, and an entirely empty highlight configuration renders nothing.
+The site never derives a Supabase Storage URL for these assets. The supplied alt text is used when an image filename exists, captions remain optional, and an entirely empty highlight configuration renders nothing. On `/publications`, the citation replaces the separate visible title/authors/venue presentation while the year/index/Featured tags and resource links remain. Year and Publication index filters are client-side filters over the already-public list metadata.
 
 ### Projects and Conferences
 
@@ -83,7 +84,7 @@ The planned public structure is:
 ├── academic profile / research interests
 ├── DORA / CRediT research-practice cards
 ├── featured publications
-├── featured projects carousel
+├── featured projects
 ├── Activity over time
 ├── current-year presentation Roadmap
 └── contact / external links
