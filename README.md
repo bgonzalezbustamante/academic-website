@@ -35,7 +35,9 @@ The current foundation includes:
 - public publication listing
 - stable publication detail routes with optional local-static Key highlights
 - standalone Projects listing and `/project/[slug]` detail routes
+- homepage Featured projects carousel ordered by latest end year, using funder imagery first
 - standalone Conferences page using presentation-specific public authors
+- current-year two-sided presentation Roadmap using public event short names
 - current-year public Activity over time heatmap
 - current-year average working time and coffee summary cards
 - DORA signatory card and `/dora` responsible-research-assessment statement
@@ -88,9 +90,9 @@ The contract check:
 
 - verifies `list_public_papers()` and keeps Key highlight fields detail-only;
 - resolves a listed publication through `get_public_paper(text)`;
-- verifies `list_public_projects()` and `get_public_project(text)`;
+- verifies `list_public_projects()` and `get_public_project(text)`, including `funder_note`;
 - confirms project publication slugs resolve only to papers returned by the public publication list;
-- verifies `list_public_conference_presentations()`, including ordered presentation authors and the absence of private notes/paper IDs;
+- verifies `list_public_conference_presentations()`, including required `event_short_name`, ordered presentation authors and the absence of private notes/paper IDs;
 - validates `get_public_work_analytics(year)`;
 - accepts empty curated publication/project/conference datasets;
 - never queries internal Research Dashboard tables.
