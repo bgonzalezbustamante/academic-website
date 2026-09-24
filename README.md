@@ -33,7 +33,7 @@ The current foundation includes:
 - global header/footer and responsive layout
 - RPC-only Supabase client
 - public publication listing
-- stable publication detail routes with optional local-static Key highlights
+- stable publication detail routes with optional local-static Key highlights and safe Markdown-formatted highlight text
 - citation-based Publications listing enriched only through `get_public_paper(slug)`, with client-side year and Publication index filters
 - standalone Projects listing and `/project/[slug]` detail routes, including Research outputs with associated publications and public conference presentations
 - homepage Featured publications and Featured projects shown in two-column grids on wider screens; Featured projects remain ordered by latest end year and use funder imagery first
