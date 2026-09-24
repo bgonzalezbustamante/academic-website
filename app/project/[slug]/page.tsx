@@ -11,7 +11,6 @@ import {
   formatProjectStatus,
   formatProjectYears,
 } from '@/components/project-card'
-import ProjectCardVisual from '@/components/project-card-visual'
 import PublicationCard from '@/components/publication-card'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 import ResilientLocalImage from '@/components/resilient-local-image'
@@ -78,6 +77,8 @@ export default async function ProjectPage({ params }: Props) {
   const projectImage = project.project_image_filename
     ? `/projects/${project.slug}/${project.project_image_filename}`
     : null
+  const projectImageIsLossless =
+    projectImage?.toLowerCase().endsWith('.png') ?? false
   const isTergap =
     project.slug === 'terrorist-group-adaptation'
   const funderImage = project.funder_image_filename
@@ -105,6 +106,13 @@ export default async function ProjectPage({ params }: Props) {
           )}
         </div>
 
+        <section className="project-detail-section">
+          <h2>About the project</h2>
+          <p className="project-abstract research-markdown-source">
+            {project.abstract}
+          </p>
+        </section>
+
         {isTergap ? (
           <div className="project-detail-image project-detail-map">
             <TergapProjectMap />
@@ -116,25 +124,25 @@ export default async function ProjectPage({ params }: Props) {
                 ? 'project-detail-image'
                 : 'project-detail-image project-detail-image-fallback'
             }
-            aria-hidden="true"
           >
             {projectImage ? (
-              <ProjectCardVisual
-                funderImage={null}
-                projectImage={projectImage}
+              <ResilientLocalImage
+                src={projectImage}
+                alt={`${project.short_title || project.title} project visual`}
+                width={1800}
+                height={1100}
+                sizes="(max-width: 932px) calc(100vw - 2rem), 900px"
+                quality={projectImageIsLossless ? undefined : 90}
+                unoptimized={projectImageIsLossless}
               />
             ) : (
-              <FontAwesomeIcon icon={faDiagramProject} />
+              <FontAwesomeIcon
+                icon={faDiagramProject}
+                aria-hidden="true"
+              />
             )}
           </div>
         )}
-
-        <section className="project-detail-section">
-          <h2>About the project</h2>
-          <p className="project-abstract research-markdown-source">
-            {project.abstract}
-          </p>
-        </section>
 
         {(project.publication_slugs.length > 0 ||
           project.conference_presentations.length > 0) && (
