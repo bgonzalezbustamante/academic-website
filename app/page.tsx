@@ -9,14 +9,15 @@ export const revalidate = 300
 
 export default async function HomePage() {
   let featured: PublicPaper[] = []
-  let publicationStatus = 'Connected to the curated Research Dashboard publication contract.'
+  let publicationsAvailable = true
 
   try {
     const papers = await listPublicPapers()
-    featured = papers.filter((paper) => paper.featured).slice(0, 3)
+    featured = papers
+      .filter((paper) => paper.featured)
+      .slice(0, 3)
   } catch {
-    publicationStatus =
-      'Public publication data will appear when the deployment environment is connected to Supabase.'
+    publicationsAvailable = false
   }
 
   return (
@@ -24,28 +25,57 @@ export default async function HomePage() {
       <section className="hero">
         <div className="site-shell hero-grid">
           <div>
-            <p className="eyebrow">Academic website · Next.js foundation</p>
+            <p className="eyebrow">Academic profile</p>
             <h1>{siteProfile.name}</h1>
-            <p className="hero-role">{siteProfile.role} · {siteProfile.affiliation}</p>
+
+            <div className="appointment-list">
+              <p>
+                <strong>{siteProfile.primaryRole}</strong>
+                <span>{siteProfile.primaryAffiliation}</span>
+              </p>
+              <p>
+                <strong>{siteProfile.secondaryRole}</strong>
+                <span>{siteProfile.secondaryAffiliation}</span>
+              </p>
+            </div>
+
             <p className="hero-copy">{siteProfile.intro}</p>
+
             <div className="hero-actions">
-              <Link className="button primary" href="/publications">Publications</Link>
-              <a className="button secondary" href={siteProfile.links.orcid} target="_blank" rel="noreferrer">ORCID</a>
+              <Link className="button primary" href="/publications">
+                Publications
+              </Link>
+              <a
+                className="button secondary"
+                href={siteProfile.links.orcid}
+                target="_blank"
+                rel="noreferrer"
+              >
+                ORCID
+              </a>
+              <a
+                className="button secondary"
+                href={siteProfile.links.scholar}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Google Scholar
+              </a>
             </div>
           </div>
-          <aside className="architecture-card">
-            <span className="kicker">Phase 4</span>
-            <h2>Public by contract</h2>
-            <p>
-              This replacement site reads publication data only from anonymous-safe
-              Supabase RPCs maintained by Research Dashboard. Internal research and
-              account data are outside this application boundary.
-            </p>
+
+          <aside className="profile-card">
+            <p className="kicker">Research interests</p>
+            <ul className="interest-list">
+              {siteProfile.researchAreas.map((area) => (
+                <li key={area}>{area}</li>
+              ))}
+            </ul>
           </aside>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="publications">
         <div className="site-shell">
           <div className="section-heading">
             <div>
@@ -57,12 +87,17 @@ export default async function HomePage() {
 
           {featured.length > 0 ? (
             <div className="publication-list">
-              {featured.map((paper) => <PublicationCard key={paper.slug} paper={paper} />)}
+              {featured.map((paper) => (
+                <PublicationCard key={paper.slug} paper={paper} />
+              ))}
             </div>
           ) : (
             <div className="empty-state">
-              <p>{publicationStatus}</p>
-              <p>No legacy publication records are imported in Phase 4.</p>
+              <p>
+                {publicationsAvailable
+                  ? 'No featured publications are currently available.'
+                  : 'Publications are temporarily unavailable.'}
+              </p>
             </div>
           )}
         </div>
