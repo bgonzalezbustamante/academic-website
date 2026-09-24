@@ -293,7 +293,11 @@ export default async function HomePage() {
             <div className="section-heading">
               <div>
                 <p className="eyebrow">Roadmap</p>
-                <h2>Presentations during {currentYear}</h2>
+                <h2>Conferences</h2>
+                <p className="section-intro">
+                  Public presentations at conferences, workshops, and seminars
+                  during {currentYear}.
+                </p>
               </div>
               <Link className="section-link" href="/conferences">
                 View all
