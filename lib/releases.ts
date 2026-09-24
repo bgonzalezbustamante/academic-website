@@ -68,7 +68,7 @@ export const releases: ReleaseNote[] = [
           'Restyled publication and project classification/status metadata as compact tags.',
           'Moved publication Key highlights below Abstract and extended project Funding with the public funder note and configured funder logo.',
           'Restored two project cards per row on wider screens, kept the TERGAP world-coverage map on the TERGAP detail page, and reused the ERC funder logo on TERGAP Home/Projects cards.',
-          'Strengthened TERGAP and Conference map contrast with Oxford blue/aqua coverage tones, warm neutral no-data geography and coral Conference hover states.',
+          'Fixed TERGAP and Conference map contrast by separating warm-cream no-data geography from saturated Oxford aqua/blue coverage, and added explicit no-data legend keys.',
           'Reworked Conferences into a public dashboard headed by Conference and public presentations, with KPI cards above the map and a 10-row paginated presentation table without the Type column.',
         ],
       },
