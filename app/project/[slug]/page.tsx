@@ -14,6 +14,7 @@ import {
 import ProjectCardVisual from '@/components/project-card-visual'
 import PublicationCard from '@/components/publication-card'
 import ResilientLocalImage from '@/components/resilient-local-image'
+import TergapProjectMap from '@/components/tergap-project-map'
 import { listPublicPapers } from '@/lib/publications'
 import { getPublicProject } from '@/lib/projects'
 import type { PublicPaper } from '@/types/public'
@@ -79,6 +80,8 @@ export default async function ProjectPage({ params }: Props) {
   const funderImage = project.funder_image_filename
     ? `/funders/${project.funder_image_filename}`
     : null
+  const isTergap =
+    project.slug === 'terrorist-group-adaptation'
 
   return (
     <article className="page-section">
@@ -99,23 +102,29 @@ export default async function ProjectPage({ params }: Props) {
           )}
         </div>
 
-        <div
-          className={
-            projectImage
-              ? 'project-detail-image'
-              : 'project-detail-image project-detail-image-fallback'
-          }
-          aria-hidden="true"
-        >
-          {projectImage ? (
-            <ProjectCardVisual
-              funderImage={null}
-              projectImage={projectImage}
-            />
-          ) : (
-            <FontAwesomeIcon icon={faDiagramProject} />
-          )}
-        </div>
+        {isTergap ? (
+          <div className="project-detail-image project-detail-map">
+            <TergapProjectMap />
+          </div>
+        ) : (
+          <div
+            className={
+              projectImage
+                ? 'project-detail-image'
+                : 'project-detail-image project-detail-image-fallback'
+            }
+            aria-hidden="true"
+          >
+            {projectImage ? (
+              <ProjectCardVisual
+                funderImage={null}
+                projectImage={projectImage}
+              />
+            ) : (
+              <FontAwesomeIcon icon={faDiagramProject} />
+            )}
+          </div>
+        )}
 
         <section className="project-detail-section">
           <h2>About the project</h2>
