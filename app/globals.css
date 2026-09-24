@@ -185,7 +185,7 @@ h4 {
 /* Homepage profile */
 
 .hero-section {
-  border-bottom: 1px solid rgba(217, 216, 214, 0.8);
+  border-bottom: 0;
   background:
     linear-gradient(135deg, rgba(0, 33, 71, 0.055), transparent 45%),
     var(--paper);
@@ -514,9 +514,99 @@ h4 {
 
 /* Publications */
 
+
+.publication-filters {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.75fr) minmax(190px, 1fr) auto 1fr;
+  gap: 0.7rem;
+  align-items: end;
+  margin-bottom: 1rem;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.65rem;
+  background: var(--paper);
+  padding: 0.9rem 1rem;
+}
+
+.publication-filters label {
+  display: grid;
+  gap: 0.32rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.publication-filters select {
+  min-height: 36px;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.42rem;
+  background: var(--paper);
+  padding: 0.4rem 2rem 0.4rem 0.6rem;
+  color: var(--oxford-charcoal);
+  font-size: 0.78rem;
+}
+
+.publication-filters select:focus-visible,
+.publication-filter-reset:focus-visible {
+  outline: 2px solid var(--oxford-coral);
+  outline-offset: 2px;
+}
+
+.publication-filter-reset {
+  min-height: 36px;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 999px;
+  background: var(--paper);
+  padding: 0.4rem 0.75rem;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.publication-filter-reset:hover {
+  border-color: rgba(254, 97, 90, 0.55);
+  background: var(--oxford-blue-wash);
+  color: var(--oxford-coral);
+}
+
+.publication-filter-count {
+  justify-self: end;
+  margin: 0 0 0.45rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.72rem;
+}
+
+.publication-citation {
+  margin: 0.75rem 0 0;
+  color: var(--oxford-charcoal);
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+.publication-citation a {
+  color: var(--oxford-charcoal);
+  text-decoration: none;
+}
+
+.publication-citation a:hover {
+  color: var(--oxford-blue);
+}
+
+.publication-citation em {
+  color: var(--oxford-blue);
+}
+
+
 .publication-list {
   display: grid;
   gap: 0.8rem;
+}
+
+.featured-publication-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .publication-card {
@@ -908,6 +998,24 @@ h4 {
 
 .roadmap-item-lower .roadmap-label {
   top: calc(50% + 18px);
+}
+
+.roadmap-item-past .roadmap-node {
+  background: var(--oxford-blue);
+}
+
+.roadmap-item-past .roadmap-label {
+  border-color: rgba(0, 33, 71, 0.22);
+  background: var(--oxford-blue-wash);
+  color: var(--oxford-ash);
+}
+
+.roadmap-item-upcoming .roadmap-node {
+  background: var(--oxford-coral);
+}
+
+.roadmap-item-upcoming .roadmap-label {
+  border-color: rgba(254, 97, 90, 0.35);
 }
 
 /* Shared world maps */
@@ -2171,8 +2279,18 @@ h4 {
     padding-top: 0.12rem;
   }
 
+  .featured-publication-grid,
   .project-grid {
     grid-template-columns: 1fr;
+  }
+
+  .publication-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .publication-filter-count {
+    justify-self: start;
+    margin-bottom: 0;
   }
 
   .conference-stats-grid {
@@ -2271,6 +2389,10 @@ h4 {
   .section-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .publication-filters {
+    grid-template-columns: 1fr;
   }
 
   .project-card {
