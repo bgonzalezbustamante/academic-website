@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import FormattedText from '@/components/formatted-text'
-import ProjectCard, {
+import {
   formatProjectStatus,
   formatProjectYears,
 } from '@/components/project-card'
@@ -190,4 +190,3 @@ export default async function ProjectPage({ params }: Props) {
   )
 }
 
-void ProjectCard
