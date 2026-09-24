@@ -61,8 +61,10 @@
 - Institutional logos remain monochrome at rest and transition to their original colour on hover; position-logo links also support the colour treatment on keyboard focus.
 - Kept the Conference map data scale in Oxford aqua/blue tones and reserved Oxford coral for the hover state.
 - Updated the Publications introduction to “Papers ordered from the most recent publication onwards.”
+- Aligned the Publications page width with Projects and Conferences by using the full site shell instead of the narrower content shell.
 - Removed the separator between the Academic profile and DORA / CRediT cards.
-- Updated the current-year Roadmap heading to “Presentations during [year]” and visually distinguished past presentations from upcoming ones.
+- Updated the current-year Roadmap heading to “Conferences”, added the contextual line “Public presentations at conferences, workshops, and seminars during [year].”, and retained the past/upcoming visual distinction.
+- Changed Roadmap event labels to two lines: status icon + short event name on the first line, with the presentation location in smaller text below.
 - Moved publication Key highlights below the Abstract on publication-detail pages.
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
 - Project Research outputs now combine associated public publications and the public `conference_presentations[]` contract; conference presentations reuse the Conferences Overview table.
