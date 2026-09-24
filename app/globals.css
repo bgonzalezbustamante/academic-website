@@ -658,6 +658,229 @@ h4 {
 }
 
 
+
+/* Research practice */
+
+.practice-section {
+  padding: 0 0 clamp(1.8rem, 3.5vw, 2.7rem);
+}
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.practice-card {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(118px, 0.7fr) minmax(0, 1.5fr);
+  gap: 1.1rem;
+  align-items: center;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.65rem;
+  background: var(--paper);
+  padding: 1.1rem;
+  color: var(--oxford-charcoal);
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 33, 71, 0.025);
+}
+
+.practice-card:hover {
+  border-color: rgba(254, 97, 90, 0.55);
+  background: rgba(237, 242, 247, 0.6);
+  color: var(--oxford-charcoal);
+}
+
+.practice-badge {
+  min-height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: var(--oxford-blue-wash);
+  padding: 0.8rem;
+}
+
+.dora-card-badge img {
+  width: min(100%, 170px);
+  height: auto;
+  object-fit: contain;
+}
+
+.credit-card-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 46px);
+  gap: 0.4rem;
+}
+
+.credit-card-badges img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.practice-copy .eyebrow {
+  margin-bottom: 0.35rem;
+}
+
+.practice-copy h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.practice-copy > p:not(.eyebrow) {
+  margin: 0.5rem 0 0;
+  color: var(--oxford-ash);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.practice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin-top: 0.7rem;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.practice-link svg {
+  width: 0.68rem;
+  color: var(--oxford-coral);
+}
+
+.practice-card:hover .practice-link {
+  color: var(--oxford-coral);
+}
+
+.practice-page {
+  color: var(--oxford-charcoal);
+}
+
+.practice-page-badge {
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.65rem;
+  background: var(--paper);
+  padding: 1rem 1.15rem;
+  box-shadow: 0 4px 14px rgba(0, 33, 71, 0.025);
+}
+
+.dora-page-badge img {
+  display: block;
+  width: min(100%, 360px);
+  height: auto;
+  object-fit: contain;
+}
+
+.practice-prose {
+  margin-top: 1.7rem;
+}
+
+.practice-prose p,
+.practice-principles {
+  font-size: 0.96rem;
+  line-height: 1.8;
+}
+
+.practice-prose p {
+  margin: 0;
+}
+
+.practice-prose p + p {
+  margin-top: 1rem;
+}
+
+.practice-prose h2 {
+  margin: 2rem 0 0.8rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.practice-principles {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.practice-principles li + li {
+  margin-top: 0.55rem;
+}
+
+.practice-principles li::marker {
+  color: var(--oxford-coral);
+}
+
+.practice-source {
+  margin-top: 1.4rem !important;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.78rem !important;
+}
+
+.credit-table-wrap {
+  margin-top: 1.6rem;
+  overflow-x: auto;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.65rem;
+  background: var(--paper);
+}
+
+.credit-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.credit-table th,
+.credit-table td {
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid var(--oxford-stone);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.credit-table thead th {
+  background: var(--oxford-blue-wash);
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.credit-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.credit-table td:first-child {
+  width: 86px;
+  text-align: center;
+}
+
+.credit-table td:nth-child(2) {
+  width: 190px;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.86rem;
+}
+
+.credit-table td:nth-child(3) {
+  color: var(--oxford-charcoal);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.credit-table img {
+  display: block;
+  margin-inline: auto;
+}
+
 /* Public work analytics */
 
 .activity-section {
@@ -1090,6 +1313,10 @@ h4 {
     padding-top: 0.12rem;
   }
 
+  .practice-grid {
+    grid-template-columns: 1fr;
+  }
+
   .analytics-summary-grid {
     grid-template-columns: 1fr;
   }
@@ -1152,6 +1379,25 @@ h4 {
   .section-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .practice-card {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 0.85rem;
+  }
+
+  .practice-badge {
+    min-height: 92px;
+    padding: 0.55rem;
+  }
+
+  .credit-card-badges {
+    grid-template-columns: repeat(2, 38px);
+  }
+
+  .credit-card-badges img {
+    width: 38px;
+    height: 38px;
   }
 
   .release-heading {
