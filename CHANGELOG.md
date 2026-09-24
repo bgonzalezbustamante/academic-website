@@ -19,8 +19,20 @@
 
 - Added a Next.js App Router and TypeScript foundation with a distinct public academic-site design.
 - Added responsive global navigation, footer, homepage, publication listing and stable publication-detail routes.
+- Replaced the initial developer-facing homepage architecture card with a public academic profile presentation covering dual appointments and research interests.
+- Refined the responsive site shell for smaller screens.
 - Added an RPC-only Supabase client for explicitly curated public paper data.
+- Confirmed that zero Public papers is a valid current state of `list_public_papers()` and designed the site to handle that state without private-data fallback.
 - Reserved the aggregate public work-analytics contract for the later analytics phase without exposing additional Dashboard data.
+- Added a public-safe application error boundary that does not reveal internal Dashboard information.
+
+`local development and validation`
+
+- Added `npm run typecheck` and `npm run check` for local TypeScript and lint validation.
+- Added `npm run check:public-contract` to validate the three public RPCs using only the Supabase publishable key.
+- Added payload-shape validation for public papers and aggregate work analytics while accepting an empty curated publication list.
+- Declared Node.js 20.9 or later as the supported runtime for the Next.js 16 application.
+- Documented the local-first workflow and target information architecture in the README and architecture notes.
 
 `release management`
 
