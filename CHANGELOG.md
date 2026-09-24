@@ -55,6 +55,11 @@
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
 - Added Publications filters for Year and Publication index.
+- Added Publications KPI cards for total papers, distinct journals and co-authorship percentage, using only the public publication list.
+- Extended citation rendering to support Markdown bold (`**text**`) and display bold citation emphasis in Oxford coral.
+- Added small status icons to the homepage Roadmap: a completed-state icon for past presentations and a calendar icon for forthcoming presentations.
+- Institutional logos remain monochrome at rest and transition to their original colour on hover; position-logo links also support the colour treatment on keyboard focus.
+- Restored Oxford coral to the Conference map's actual data scale rather than using coral only as a hover colour.
 - Updated the Publications introduction to “Papers ordered from the most recent publication onwards.”
 - Removed the separator between the Academic profile and DORA / CRediT cards.
 - Updated the current-year Roadmap heading to “Presentations during [year]” and visually distinguished past presentations from upcoming ones.
