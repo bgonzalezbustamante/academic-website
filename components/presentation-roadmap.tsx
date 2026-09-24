@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import type { PublicConferencePresentation } from '@/types/public'
 
 type Props = {
@@ -38,6 +40,10 @@ export default function PresentationRoadmap({
             <p className="eyebrow">Current year</p>
             <h2>Roadmap</h2>
           </div>
+          <Link className="section-link" href="/conferences">
+            View all
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
 
         {ordered.length === 0 ? (
