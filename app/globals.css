@@ -923,9 +923,7 @@ h4 {
   overflow: hidden;
   border: 1px solid var(--oxford-stone);
   border-radius: 0.65rem;
-  background:
-    linear-gradient(145deg, rgba(0, 33, 71, 0.04), transparent 60%),
-    var(--oxford-blue-wash);
+  background: transparent;
 }
 
 .world-map-frame svg {
@@ -1247,6 +1245,21 @@ h4 {
 
 .project-abstract p + p {
   margin-top: 0.9rem;
+}
+
+.project-output-group {
+  margin-top: 1.35rem;
+}
+
+.project-output-group + .project-output-group {
+  margin-top: 1.7rem;
+}
+
+.project-output-group h3 {
+  margin: 0 0 0.8rem;
+  color: var(--oxford-blue);
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .project-funding-section {
