@@ -16,6 +16,39 @@ Academic Website (public/read-only)
 
 The public application uses the Supabase publishable key only. It has no service-role credentials and no table-level data access in application code.
 
+## Public contracts
+
+The site is allowed to call only:
+
+- `list_public_papers()`
+- `get_public_paper(text)`
+- `get_public_work_analytics(year)`
+
+The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
+
+Aggregate work analytics are available but remain unrendered until Phase 7.
+
+## Information architecture
+
+The current Hugo/Wowchemy homepage combines profile, publications/preprints, projects/resources and contact information. The replacement preserves that conceptual structure without reproducing Wowchemy's widget system.
+
+The planned public structure is:
+
+```text
+/
+├── academic profile / research interests
+├── featured research
+├── projects and resources          (Phase 6)
+└── contact / external links        (Phase 6)
+
+/publications
+└── /publication/[slug]
+
+/release-notes
+```
+
+A separate Preprints route is not required at the architecture level. Public research outputs can be presented from the same canonical publication contract and grouped later according to curated metadata if the final content design calls for it.
+
 ## Immediate data sources
 
 ### Research Dashboard public contracts
@@ -33,23 +66,28 @@ Available now:
 - Dataverse/dataset URL
 - featured state
 - publication index
-- aggregate work analytics (not rendered until Phase 7)
+- aggregate work analytics
 
 ### Legacy academic website
 
 Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart):
 
 - long-form biography
-- appointments/positions
+- detailed appointments/positions
 - education
-- research interests
-- project/resource cards
+- projects/resource cards
 - teaching/service
 - contact presentation
 - CV asset/link
 - historic publication corpus not yet present in Research Dashboard
 
 These should not be copied into a new database or CMS in this repository.
+
+## Local validation
+
+The repository includes `scripts/check-public-contract.mjs` so the public RPC boundary can be tested locally with the same Supabase publishable key used by the website.
+
+The check deliberately calls public RPCs only. It provides a reproducible way to verify integration without creating Netlify builds.
 
 ## Development and deployment
 
