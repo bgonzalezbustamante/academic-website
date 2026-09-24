@@ -16,7 +16,8 @@ const PUBLIC_PAPER_FIELDS = [
   'publication_index',
 ]
 
-const PAPER_HIGHLIGHT_FIELDS = [
+const PAPER_DETAIL_ONLY_FIELDS = [
+  'citation',
   'highlight_text',
   'highlight_image_filename',
   'highlight_image_alt',
@@ -115,11 +116,11 @@ function assertPaperShape(paper, { detail = false } = {}) {
   if (detail) {
     assertFields(
       paper,
-      PAPER_HIGHLIGHT_FIELDS,
+      PAPER_DETAIL_ONLY_FIELDS,
       'Public paper detail'
     )
   } else {
-    for (const field of PAPER_HIGHLIGHT_FIELDS) {
+    for (const field of PAPER_DETAIL_ONLY_FIELDS) {
       if (field in paper) {
         fail(
           `list_public_papers() unexpectedly exposes detail-only field: ${field}`
@@ -292,7 +293,7 @@ async function main() {
 
     assertPaperShape(detail, { detail: true })
     console.log(
-      '✓ get_public_paper(text): listed slug resolved with detail-only highlight fields'
+      '✓ get_public_paper(text): listed slug resolved with detail-only citation/highlight fields'
     )
   } else {
     console.log(
