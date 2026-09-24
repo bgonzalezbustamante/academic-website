@@ -38,6 +38,7 @@ const PUBLIC_PROJECT_FIELDS = [
   'project_image_filename',
   'funder_image_filename',
   'publication_slugs',
+  'conference_presentations',
 ]
 
 const PUBLIC_CONFERENCE_FIELDS = [
@@ -134,6 +135,14 @@ function assertProjectShape(project) {
 
   if (!Array.isArray(project.publication_slugs)) {
     fail('Public project publication_slugs must be an array.')
+  }
+
+  if (!Array.isArray(project.conference_presentations)) {
+    fail('Public project conference_presentations must be an array.')
+  }
+
+  for (const presentation of project.conference_presentations) {
+    assertConferenceShape(presentation)
   }
 
   if (
