@@ -24,7 +24,9 @@ The current foundation includes:
 
 - Next.js App Router + TypeScript
 - distinct academic-site design system inspired by the existing projects' Oxford palette
-- public-facing academic profile hero with dual appointments and research interests
+- portrait-led public academic profile with three current positions, research interests and the revised biography
+- supplied Leiden University, Universidad Diego Portales and OCPSG institutional branding, with a Leiden-prioritised favicon
+- compact public contact information in the footer
 - global header/footer and responsive layout
 - RPC-only Supabase client
 - public publication listing
