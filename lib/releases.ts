@@ -67,8 +67,9 @@ export const releases: ReleaseNote[] = [
           'Reordered the homepage to Academic profile, DORA / CRediT, Featured publications, Featured projects, Activity over time, then Roadmap.',
           'Restyled publication and project classification/status metadata as compact tags.',
           'Moved publication Key highlights below Abstract and extended project Funding with the public funder note and configured funder logo.',
-          'Restored two project cards per row on wider screens and added a TERGAP-specific world coverage map sourced from a compact public tergap-dashboard snapshot with its update timestamp.',
-          'Reworked Conferences into a public dashboard for presentations from 2020 onwards, with a geographic map, presentation/country/co-authorship KPIs and a compact presentation table.',
+          'Restored two project cards per row on wider screens, kept the TERGAP world-coverage map on the TERGAP detail page, and reused the ERC funder logo on TERGAP Home/Projects cards.',
+          'Strengthened TERGAP and Conference map contrast with Oxford blue/aqua coverage tones, warm neutral no-data geography and coral Conference hover states.',
+          'Reworked Conferences into a public dashboard headed by Conference and public presentations, with KPI cards above the map and a 10-row paginated presentation table without the Type column.',
         ],
       },
       {
