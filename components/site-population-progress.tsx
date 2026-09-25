@@ -27,6 +27,31 @@ function percentage(value: number, total: number) {
   return Math.min(100, Math.round((value / total) * 100))
 }
 
+function yearsInRange(
+  startYear: number | null,
+  endYear: number | null
+) {
+  if (startYear == null && endYear == null) {
+    return []
+  }
+
+  const start = Math.max(
+    START_YEAR,
+    startYear ?? endYear ?? START_YEAR
+  )
+  const end = Math.min(
+    END_YEAR,
+    endYear ?? startYear ?? END_YEAR
+  )
+
+  if (end < start) return []
+
+  return Array.from(
+    { length: end - start + 1 },
+    (_, index) => start + index
+  )
+}
+
 function publicationYears(papers: PublicPaper[]) {
   return new Set(
     papers
@@ -48,16 +73,35 @@ function conferenceYears(
   presentations: PublicConferencePresentation[]
 ) {
   return new Set(
-    presentations
-      .map((presentation) =>
-        Number(presentation.start_date.slice(0, 4))
+    presentations.flatMap((presentation) => {
+      const startYear = Number(
+        presentation.start_date.slice(0, 4)
       )
-      .filter(
-        (year) =>
-          Number.isInteger(year) &&
-          year >= START_YEAR &&
-          year <= END_YEAR
+      const endYear = Number(
+        presentation.end_date.slice(0, 4)
       )
+
+      return yearsInRange(
+        Number.isInteger(startYear) ? startYear : null,
+        Number.isInteger(endYear) ? endYear : null
+      )
+    })
+  )
+}
+
+function projectYears(projects: PublicProject[]) {
+  return new Set(
+    projects.flatMap((project) =>
+      yearsInRange(project.start_year, project.end_year)
+    )
+  )
+}
+
+function teachingYears(teaching: PublicTeachingItem[]) {
+  return new Set(
+    teaching.flatMap((item) =>
+      yearsInRange(item.start_year, item.end_year)
+    )
   )
 }
 
@@ -138,8 +182,14 @@ export default function SitePopulationProgress({
   teaching,
 }: Props) {
   const paperYears = papers ? publicationYears(papers) : null
+  const projectCoverageYears = projects
+    ? projectYears(projects)
+    : null
   const presentationYears = presentations
     ? conferenceYears(presentations)
+    : null
+  const teachingCoverageYears = teaching
+    ? teachingYears(teaching)
     : null
   const teachingTimes = teaching
     ? teaching.reduce(
@@ -151,11 +201,11 @@ export default function SitePopulationProgress({
   const metrics: Metric[] = [
     {
       label: 'Publications',
-      value: paperYears
-        ? percentage(paperYears.size, YEARS.length)
+      value: papers
+        ? percentage(papers.length, 61)
         : null,
-      detail: paperYears
-        ? `${paperYears.size} of ${YEARS.length} years covered`
+      detail: papers
+        ? `${papers.length} of 61 publications (intended to ingest)`
         : '',
       coveredYears: paperYears ?? undefined,
     },
@@ -167,14 +217,15 @@ export default function SitePopulationProgress({
       detail: projects
         ? `${projects.length} of 14 projects (intended to ingest)`
         : '',
+      coveredYears: projectCoverageYears ?? undefined,
     },
     {
       label: 'Conferences',
-      value: presentationYears
-        ? percentage(presentationYears.size, YEARS.length)
+      value: presentations
+        ? percentage(presentations.length, 137)
         : null,
-      detail: presentationYears
-        ? `${presentationYears.size} of ${YEARS.length} years covered`
+      detail: presentations
+        ? `${presentations.length} of 137 conferences (intended to ingest)`
         : '',
       coveredYears: presentationYears ?? undefined,
     },
@@ -188,6 +239,7 @@ export default function SitePopulationProgress({
         teachingTimes !== null
           ? `${teachingTimes} of 35 times taught (intended to ingest)`
           : '',
+      coveredYears: teachingCoverageYears ?? undefined,
     },
   ]
 
