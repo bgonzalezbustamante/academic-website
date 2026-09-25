@@ -1607,6 +1607,7 @@ h4 {
   min-width: 0;
   display: grid;
   grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  grid-template-areas: 'visual content';
   overflow: hidden;
   border: 1px solid var(--oxford-stone);
   border-radius: 0.65rem;
@@ -1614,7 +1615,13 @@ h4 {
   box-shadow: 0 4px 14px rgba(0, 33, 71, 0.025);
 }
 
+.teaching-card-image-right {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-areas: 'content visual';
+}
+
 .teaching-card-visual {
+  grid-area: visual;
   min-height: 180px;
   display: flex;
   align-items: center;
@@ -1641,6 +1648,7 @@ h4 {
 }
 
 .teaching-card-content {
+  grid-area: content;
   min-width: 0;
   padding: clamp(1.2rem, 2.8vw, 1.7rem);
 }
@@ -1722,6 +1730,10 @@ h4 {
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.67rem;
   font-weight: 600;
+}
+
+.teaching-pagination {
+  margin-top: 1rem;
 }
 
 /* Conferences */
@@ -2604,6 +2616,13 @@ h4 {
   .project-grid,
   .teaching-card {
     grid-template-columns: 1fr;
+  }
+
+  .teaching-card,
+  .teaching-card-image-right {
+    grid-template-areas:
+      'visual'
+      'content';
   }
 
   .teaching-card-visual {
