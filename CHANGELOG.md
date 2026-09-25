@@ -62,6 +62,7 @@
 - Added the local `/public/teaching/<course_image_filename>` asset convention with a teaching-icon fallback for missing files.
 - Extended public-contract validation to cover Teaching Portfolio arrays/counts/years and reject private teaching IDs, activity-label relationships, tracked hours and session counts.
 - Presented Featured publications and Featured projects as two-card-per-row grids on wider screens; Featured projects remain ordered by later project end year first and use configured funder imagery before project imagery.
+- Standardised project ordering across Home and Projects using one shared rule: later `end_year` first, then later `start_year`, then title alphabetically. The Projects page applies this order before separating Featured and Other projects.
 - Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
 - Reordered the homepage to Academic profile → DORA / CRediT → Featured publications → Featured projects → Activity over time → Roadmap.
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
