@@ -70,7 +70,7 @@ export default async function HomePage() {
     papers = await listPublicPapers()
     featuredPapers = papers
       .filter((paper) => paper.featured)
-      .slice(0, 3)
+      .slice(0, 4)
   } catch {
     publicationsAvailable = false
   }
