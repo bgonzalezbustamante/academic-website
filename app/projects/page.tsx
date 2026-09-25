@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 
 import ProjectCard from '@/components/project-card'
-import { listPublicProjects } from '@/lib/projects'
+import {
+  listPublicProjects,
+  orderPublicProjects,
+} from '@/lib/projects'
 import type { PublicProject } from '@/types/public'
 
 export const metadata: Metadata = {
@@ -25,8 +28,13 @@ export default async function ProjectsPage() {
     available = false
   }
 
-  const featured = projects.filter((project) => project.featured)
-  const remaining = projects.filter((project) => !project.featured)
+  const orderedProjects = orderPublicProjects(projects)
+  const featured = orderedProjects.filter(
+    (project) => project.featured
+  )
+  const remaining = orderedProjects.filter(
+    (project) => !project.featured
+  )
 
   return (
     <section className="page-section">
