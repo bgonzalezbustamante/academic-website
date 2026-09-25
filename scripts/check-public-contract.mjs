@@ -428,6 +428,30 @@ async function main() {
     )
   }
 
+  const teachingResult = await supabase.rpc(
+    'list_public_teaching'
+  )
+
+  if (teachingResult.error) {
+    fail(
+      `list_public_teaching() failed: ${teachingResult.error.message}`
+    )
+  }
+
+  const teaching = teachingResult.data ?? []
+
+  if (!Array.isArray(teaching)) {
+    fail('list_public_teaching() did not return an array.')
+  }
+
+  for (const item of teaching) {
+    assertTeachingShape(item)
+  }
+
+  console.log(
+    `✓ list_public_teaching(): ${teaching.length} public teaching item(s); private activity/session metadata absent`
+  )
+
   const conferenceResult = await supabase.rpc(
     'list_public_conference_presentations'
   )
