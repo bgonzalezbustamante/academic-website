@@ -335,35 +335,6 @@ h4 {
   color: var(--oxford-blue);
 }
 
-.bio-degree-logo-link {
-  width: 27px;
-  height: 27px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.3rem;
-  overflow: hidden;
-  vertical-align: -0.45rem;
-  text-decoration: none;
-}
-
-.bio-degree-logo-image {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  filter: grayscale(1) contrast(1.05);
-  opacity: 0.88;
-  transition:
-    filter 160ms ease,
-    opacity 160ms ease;
-}
-
-.bio-degree-logo-link:hover .bio-degree-logo-image,
-.bio-degree-logo-link:focus-visible .bio-degree-logo-image {
-  filter: grayscale(0) contrast(1);
-  opacity: 1;
-}
-
 .bio-degree-highlight {
   color: var(--oxford-coral);
   font-weight: 700;
