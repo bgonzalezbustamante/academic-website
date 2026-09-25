@@ -156,6 +156,7 @@ export default async function HomePage() {
                     alt=""
                     width={26}
                     height={26}
+                    unoptimized
                   />
                 </a>{' '}
                 <strong className="bio-degree-highlight">
