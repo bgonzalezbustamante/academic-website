@@ -28,22 +28,13 @@ export const metadata: Metadata = {
 
 export const revalidate = 300
 
-function from2020(
-  presentation: PublicConferencePresentation
-) {
-  return Boolean(
-    presentation.start_date >= '2020-01-01'
-  )
-}
-
 export default async function ConferencesPage() {
   let presentations: PublicConferencePresentation[] = []
   let available = true
 
   try {
-    presentations = (
+    presentations =
       await listPublicConferencePresentations()
-    ).filter(from2020)
   } catch {
     available = false
   }
@@ -171,7 +162,7 @@ export default async function ConferencesPage() {
 
               <AcademicWorldMap
                 countries={mapCountries}
-                ariaLabel="World map showing conference presentations by country from 2020 onwards"
+                ariaLabel="World map showing conference presentations by country"
                 valueLabel="presentations"
                 singularValueLabel="presentation"
                 palette="conference"
