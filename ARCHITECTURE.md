@@ -25,6 +25,7 @@ The site is allowed to call only:
 - `list_public_projects()`
 - `get_public_project(text)`
 - `list_public_conference_presentations()`
+- `list_public_teaching()`
 - `get_public_work_analytics(year)`
 
 The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
@@ -63,6 +64,19 @@ Project images and funder logos are local static assets:
 
 Conferences are supplied exclusively through `list_public_conference_presentations()`. The standalone Conferences dashboard derives its country count from the final `City, Country` location segment, computes co-authorship from the supplied ordered `authors[]`, presents KPI cards before an Oxford blue/coral/aqua map, and uses a compact 10-row paginated presentation table while preserving the RPC's descending-date record order. The homepage Roadmap filters presentations to the current Europe/Amsterdam year, orders them chronologically by `presentation_date`, and uses only `event_short_name` as its visible timeline label. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
 
+### Teaching Portfolio
+
+Teaching is supplied exclusively through `list_public_teaching()`. The public website consumes only the course name, institution, summary, period/current state, `levels[]`, cumulative times taught, cumulative student count and optional course-image filename. The RPC may also expose an optional slug for contract stability, but the academic website does not use it for navigation: Teaching cards are deliberately self-contained and there is no `/teaching/[slug]` route.
+
+Teaching activity-label relationships, tracked teaching hours, session counts, owner metadata and internal IDs remain private and are neither requested nor inferred by the academic website. Course imagery follows the local static convention:
+
+```text
+/public/teaching/<course_image_filename>
+→ /teaching/<course_image_filename>
+```
+
+If a configured local course image is absent, the card falls back to a teaching icon rather than attempting to derive an asset from Research Dashboard.
+
 ### TERGAP geographic snapshot
 
 TERGAP geographic coverage is sourced from the separate public [tergap-dashboard](https://github.com/bgonzalezbustamante/tergap-dashboard), not from Research Dashboard. The academic website stores a compact derived snapshot at:
@@ -96,6 +110,8 @@ The planned public structure is:
 └── /project/[slug]
 
 /conferences
+
+/teaching
 
 /dora
 /credit
@@ -141,6 +157,7 @@ Available now:
 - public projects with canonical URL, years, status, Featured state, funder note and static asset filenames
 - associated publication slugs restricted to independently Public papers
 - conference presentations with public short event names and presentation-specific ordered authors
+- public Teaching Portfolio cards with institution, summary, years/current state, multiple levels, cumulative times taught/students and a local course-image filename
 
 ### Legacy academic website
 
@@ -148,7 +165,7 @@ Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustam
 
 - education detail beyond the current short biography
 - legacy project/resource material not yet represented by a Public Research Dashboard project record
-- teaching/service detail
+- service detail
 - CV asset/link
 - historic publication corpus not yet present in Research Dashboard
 
