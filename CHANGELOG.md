@@ -64,13 +64,13 @@
 - Presented Featured publications and Featured projects as two-card-per-row grids on wider screens; Featured projects remain ordered by later project end year first and use configured funder imagery before project imagery.
 - Standardised project ordering across Home and Projects using one shared rule: later `end_year` first, then later `start_year`, then title alphabetically. The Projects page applies this order before separating Featured and Other projects.
 - Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
-- Wrapped the homepage Roadmap into chronological rows of at most five presentations. The upper/lower label rhythm continues across row boundaries, and a partial final row draws its timeline only between its populated nodes.
+- Wrapped the homepage Roadmap into chronological rows of at most five presentations. The upper/lower label rhythm continues across row boundaries, a partial final row draws its timeline only between its populated nodes, and each completed row now connects continuously to the first node of the next row with a right-edge return path.
 - Reordered the homepage to Academic profile → DORA / CRediT → Featured publications → Featured projects → Activity over time → Roadmap.
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
 - Added Publications filters for Year and Publication index.
 - Replaced the dynamically alphabetised Publication Index filter with a fixed seven-category Publication Index taxonomy in this order: WoS-SSCI, Scopus, WoS-ESCI, Book chapter, SciELO/Latindex, Working paper, Preprint.
-- Added Publications KPI cards for total papers, distinct journals and single-author percentage, using only the public publication list.
+- Added Publications KPI cards for total papers, distinct journals and first-author percentage, with first authorship defined by Bastián González-Bustamante appearing first in the ordered public `authors[]` array.
 - Extended citation rendering to support Markdown bold (`**text**`) and display bold citation emphasis in Oxford coral.
 - Added small status icons to the homepage Roadmap: a completed-state icon for past presentations and a calendar icon for forthcoming presentations.
 - Institutional logos remain monochrome at rest and transition to their original colour on hover; position-logo links also support the colour treatment on keyboard focus.
@@ -93,10 +93,11 @@
 - Reused the TERGAP dashboard ERC logo as the TERGAP funder image on Home/Projects cards and in the Funding block when no Dashboard funder-image filename is configured.
 - Matched the TERGAP detail map to the original dashboard: map canvas `#eef0f7`, grey not-collected countries `#e8eaed`, original six-step scale from `#e7eaf4` to `#001158`, and teal hover `#007679`. Conferences uses the same canvas/grey no-data treatment with an Oxford aqua/blue scale and Oxford coral hover.
 - Reworked `/conferences` into a dashboard-style view headed by “Conference and public presentations”: KPI cards first, then the geographic map, followed by a compact presentation table.
-- Changed the Publications and Conferences authorship KPI from co-authorship percentage to single-author percentage.
+- Refined the third KPI cards: Publications now reports first-author percentage, while Conferences reports the percentage of public presentations classified as `Keynote`.
 - Removed the Conference Type column and added client-side pagination at 10 presentation rows per page.
 - Removed the optional external-link column from conference presentation tables so rows without URLs no longer show a trailing dash; the shared change applies both to the Conferences overview and project Research outputs.
 - Conference presentation titles now become external links when a public URL is available, using the same small coral external-arrow treatment as biography links.
+- Keynote presentations are marked with a small coral star immediately after the presentation title, with a compact legend below the shared conference table; the same marker therefore appears in project Research-output tables.
 - Added the same reusable Oxford-styled world-map system for TERGAP and Conferences using `react-simple-maps`, `world-atlas` and ISO-country conversion.
 - Added a public-safe application error boundary that does not reveal internal Dashboard information.
 
