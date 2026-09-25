@@ -60,12 +60,19 @@ const PUBLIC_CONFERENCE_FIELDS = [
   'event_name',
   'event_short_name',
   'location',
-  'presentation_date',
+  'start_date',
+  'end_date',
   'presentation_title',
   'authors',
   'presentation_type',
   'url',
 ]
+
+const PUBLIC_CONFERENCE_TYPES = new Set([
+  'Conference paper',
+  'Keynote',
+  'Workshop',
+])
 
 const PRIVATE_FIELDS = [
   'id',
@@ -241,8 +248,45 @@ function assertConferenceShape(presentation) {
     fail('Conference presentation event_short_name must be non-empty.')
   }
 
+  if (
+    typeof presentation.start_date !== 'string' ||
+    !presentation.start_date
+  ) {
+    fail('Conference presentation start_date must be a non-empty string.')
+  }
+
+  if (
+    typeof presentation.end_date !== 'string' ||
+    !presentation.end_date
+  ) {
+    fail('Conference presentation end_date must be a non-empty string.')
+  }
+
+  if (presentation.end_date < presentation.start_date) {
+    fail('Conference presentation end_date must not precede start_date.')
+  }
+
+  if (
+    !PUBLIC_CONFERENCE_TYPES.has(
+      presentation.presentation_type
+    )
+  ) {
+    fail(
+      'Conference presentation presentation_type must be Conference paper, Keynote, or Workshop.'
+    )
+  }
+
   if (!Array.isArray(presentation.authors)) {
     fail('Conference presentation authors must be an array.')
+  }
+
+  if (
+    'presentation_date' in presentation &&
+    presentation.presentation_date !== presentation.start_date
+  ) {
+    fail(
+      'Deprecated conference presentation presentation_date must equal start_date when present.'
+    )
   }
 }
 
