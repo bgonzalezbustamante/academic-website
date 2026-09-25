@@ -54,6 +54,8 @@
 - Added Teaching KPI cards for cumulative Teaching occurrences (sum of `times_taught`), distinct Institutions and cumulative Students.
 - Calibrated the Teaching card visual to a maximum 320 px desktop column and matched the responsive Next.js `sizes` hint to the actual rendered width.
 - Teaching card imagery now follows the Project funder/logo treatment: images remain centred and fully visible with `object-fit: contain`, are capped at 190 px wide / 120 px high, and sit inside the same 180 px Oxford-blue-wash visual area used by Project cards.
+- The Teaching Portfolio alternates course-image placement by overall item order (left, right, left, right, …) while retaining image-above-content cards on mobile.
+- Added client-side Teaching pagination at five portfolio items per page; the left/right sequence continues across page boundaries rather than restarting on each page.
 - Updated the Teaching introduction to “Courses taught and supervision across undergraduate, postgraduate, and doctoral programmes.” and renamed the Teaching KPI label to “Teaching/Supervision”.
 - Added the local `/public/teaching/<course_image_filename>` asset convention with a teaching-icon fallback for missing files.
 - Extended public-contract validation to cover Teaching Portfolio arrays/counts/years and reject private teaching IDs, activity-label relationships, tracked hours and session counts.
