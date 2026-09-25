@@ -152,7 +152,7 @@ export default async function HomePage() {
                 >
                   <Image
                     className="bio-degree-logo-image"
-                    src="/institutions/oxford-degree.png"
+                    src="/branding/oxford.webp"
                     alt=""
                     width={26}
                     height={26}
