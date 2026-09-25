@@ -51,6 +51,8 @@
 - Added Projects and Conferences to standalone navigation.
 - Added a top-level `/teaching` Teaching Portfolio after Conferences in primary navigation, backed exclusively by `list_public_teaching()`.
 - Added one self-contained Teaching card per row with course image/fallback, current/period/level tags, course name, institution, summary, cumulative times taught and cumulative student count; no Teaching detail routes or card links are created.
+- Added Teaching KPI cards for cumulative Teaching occurrences (sum of `times_taught`), distinct Institutions and cumulative Students.
+- Calibrated the Teaching card visual to a maximum 320 px desktop column and matched the responsive Next.js `sizes` hint to the actual rendered width.
 - Added the local `/public/teaching/<course_image_filename>` asset convention with a teaching-icon fallback for missing files.
 - Extended public-contract validation to cover Teaching Portfolio arrays/counts/years and reject private teaching IDs, activity-label relationships, tracked hours and session counts.
 - Presented Featured publications and Featured projects as two-card-per-row grids on wider screens; Featured projects remain ordered by later project end year first and use configured funder imagery before project imagery.
