@@ -32,8 +32,7 @@ function from2020(
   presentation: PublicConferencePresentation
 ) {
   return Boolean(
-    presentation.presentation_date &&
-    presentation.presentation_date >= '2020-01-01'
+    presentation.start_date >= '2020-01-01'
   )
 }
 
@@ -86,8 +85,7 @@ export default async function ConferencesPage() {
 
   const keynoteCount = presentations.filter(
     (presentation) =>
-      presentation.presentation_type?.trim().toLowerCase() ===
-      'keynote'
+      presentation.presentation_type === 'Keynote'
   ).length
 
   const keynotePercentage =
