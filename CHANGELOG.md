@@ -49,6 +49,10 @@
 - Added RPC-backed `/projects` and `/project/[slug]` routes with Featured projects, canonical project URLs, years, status, funder presentation, optional local project/funder imagery and associated Public publications.
 - Added an RPC-backed `/conferences` page using presentation-specific ordered authors while deliberately excluding private notes and Dashboard paper relationships.
 - Added Projects and Conferences to standalone navigation.
+- Added a top-level `/teaching` Teaching Portfolio after Conferences in primary navigation, backed exclusively by `list_public_teaching()`.
+- Added one self-contained Teaching card per row with course image/fallback, current/period/level tags, course name, institution, summary, cumulative times taught and cumulative student count; no Teaching detail routes or card links are created.
+- Added the local `/public/teaching/<course_image_filename>` asset convention with a teaching-icon fallback for missing files.
+- Extended public-contract validation to cover Teaching Portfolio arrays/counts/years and reject private teaching IDs, activity-label relationships, tracked hours and session counts.
 - Presented Featured publications and Featured projects as two-card-per-row grids on wider screens; Featured projects remain ordered by later project end year first and use configured funder imagery before project imagery.
 - Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
 - Reordered the homepage to Academic profile → DORA / CRediT → Featured publications → Featured projects → Activity over time → Roadmap.
