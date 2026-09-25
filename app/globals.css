@@ -1040,10 +1040,15 @@ h4 {
   padding: 0.25rem 0 0.55rem;
 }
 
+.roadmap-rows {
+  min-width: 850px;
+  display: grid;
+  gap: 1rem;
+}
+
 .roadmap-timeline {
   position: relative;
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
   min-height: 164px;
   display: flex;
   align-items: stretch;
@@ -1056,8 +1061,8 @@ h4 {
   content: '';
   position: absolute;
   top: 50%;
-  right: 0;
-  left: 0;
+  right: calc(50% / var(--roadmap-row-count));
+  left: calc(50% / var(--roadmap-row-count));
   height: 2px;
   background: var(--oxford-stone);
   transform: translateY(-50%);
@@ -1065,8 +1070,8 @@ h4 {
 
 .roadmap-item {
   position: relative;
-  min-width: 170px;
-  flex: 1 0 170px;
+  min-width: 0;
+  flex: 1 1 0;
 }
 
 .roadmap-node {
@@ -2756,11 +2761,6 @@ h4 {
 
   .featured-project-slide {
     flex-basis: calc(100vw - 2rem);
-  }
-
-  .roadmap-item {
-    min-width: 145px;
-    flex-basis: 145px;
   }
 
   .roadmap-label {
