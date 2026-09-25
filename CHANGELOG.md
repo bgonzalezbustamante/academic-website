@@ -58,6 +58,7 @@
 - Added client-side Teaching pagination at five portfolio items per page; the left/right sequence continues across page boundaries rather than restarting on each page.
 - Updated the Teaching introduction to “Courses taught and supervision across undergraduate, postgraduate, and doctoral programmes.” and renamed the Teaching KPI label to “Teaching/Supervision”.
 - Expanded the Teaching introductory text to use the full site-shell width rather than the shared narrow page-lead constraint.
+- Standardised the introductory lead width across Publications, Projects, Conferences and Teaching so all four top-level portfolio/dashboard pages use the full site-shell width while longer-form/detail prose retains its narrower reading measure.
 - Added the local `/public/teaching/<course_image_filename>` asset convention with a teaching-icon fallback for missing files.
 - Extended public-contract validation to cover Teaching Portfolio arrays/counts/years and reject private teaching IDs, activity-label relationships, tracked hours and session counts.
 - Presented Featured publications and Featured projects as two-card-per-row grids on wider screens; Featured projects remain ordered by later project end year first and use configured funder imagery before project imagery.
