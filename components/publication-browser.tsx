@@ -16,6 +16,16 @@ type Props = {
   papers: CitationPaper[]
 }
 
+const PUBLICATION_INDEX_ORDER = [
+  'WoS-SSCI',
+  'Scopus',
+  'WoS-ESCI',
+  'Book chapter',
+  'SciELO/Latindex',
+  'Working paper',
+  'Preprint',
+] as const
+
 function yearForPaper(paper: CitationPaper) {
   return paper.publication_date
     ? paper.publication_date.slice(0, 4)
@@ -36,18 +46,6 @@ export default function PublicationBrowser({ papers }: Props) {
         if (b === 'Forthcoming') return 1
         return Number(b) - Number(a)
       }),
-    [papers]
-  )
-
-  const publicationIndexes = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          papers
-            .map((paper) => paper.publication_index)
-            .filter((value): value is string => Boolean(value))
-        )
-      ).sort((a, b) => a.localeCompare(b)),
     [papers]
   )
 
@@ -150,7 +148,7 @@ export default function PublicationBrowser({ papers }: Props) {
             }
           >
             <option value="all">All indexes</option>
-            {publicationIndexes.map((value) => (
+            {PUBLICATION_INDEX_ORDER.map((value) => (
               <option value={value} key={value}>
                 {value}
               </option>
