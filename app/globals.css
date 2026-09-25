@@ -1590,7 +1590,11 @@ h4 {
 /* Teaching */
 
 .teaching-page-heading {
-  max-width: 760px;
+  max-width: none;
+}
+
+.teaching-page-heading .page-lead {
+  max-width: none;
 }
 
 .teaching-stats-grid {
