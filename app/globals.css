@@ -195,7 +195,7 @@ h4 {
   background:
     linear-gradient(135deg, rgba(0, 33, 71, 0.055), transparent 45%),
     var(--paper);
-  padding: clamp(1.8rem, 4vw, 3rem) 0;
+  padding: clamp(1.8rem, 4vw, 3rem) 0 clamp(0.9rem, 2vw, 1.25rem);
 }
 
 .profile-grid {
@@ -2201,9 +2201,9 @@ h4 {
 /* Research practice */
 
 .practice-section {
-  border-bottom: 1px solid rgba(217, 216, 214, 0.78);
+  border-bottom: 0;
   background: var(--paper);
-  padding: clamp(1.6rem, 3.2vw, 2.35rem) 0;
+  padding: clamp(0.85rem, 1.8vw, 1.15rem) 0 clamp(1.3rem, 2.8vw, 2rem);
 }
 
 .practice-grid {
