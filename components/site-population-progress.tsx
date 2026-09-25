@@ -215,10 +215,10 @@ export default function SitePopulationProgress({
     {
       label: 'Projects',
       value: projects
-        ? percentage(projects.length, 14)
+        ? percentage(projects.length, 15)
         : null,
       detail: projects
-        ? `${projects.length} of 14 projects (intended to ingest)`
+        ? `${projects.length} of 15 projects (intended to ingest)`
         : '',
       coveredYears: projectCoverageYears ?? undefined,
     },
