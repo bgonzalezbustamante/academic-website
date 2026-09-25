@@ -72,14 +72,25 @@ export default function PresentationRoadmap({
             <div className="roadmap-rows">
               {rows.map((row, rowIndex) => {
                 const nextRow = rows[rowIndex + 1]
+                const isReversed = rowIndex % 2 === 1
+                const currentEndPosition = isReversed
+                  ? `${50 / row.length}%`
+                  : `${100 - 50 / row.length}%`
                 const nextFirstPosition = nextRow
-                  ? `${50 / nextRow.length}%`
+                  ? rowIndex % 2 === 0
+                    ? `${100 - 50 / nextRow.length}%`
+                    : `${50 / nextRow.length}%`
                   : null
 
                 return (
                   <div className="roadmap-row-block" key={rowIndex}>
                     <ol
-                      className="roadmap-timeline"
+                      className={[
+                        'roadmap-timeline',
+                        isReversed ? 'roadmap-timeline-reverse' : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
                       aria-label={`Conference presentation roadmap for ${year}, row ${rowIndex + 1}`}
                       start={rowIndex * 5 + 1}
                       style={
@@ -150,9 +161,16 @@ export default function PresentationRoadmap({
 
                     {nextFirstPosition && (
                       <span
-                        className="roadmap-row-connector"
+                        className={[
+                          'roadmap-row-connector',
+                          rowIndex % 2 === 0
+                            ? 'roadmap-row-connector-right'
+                            : 'roadmap-row-connector-left',
+                        ].join(' ')}
                         style={
                           {
+                            '--roadmap-current-end-position':
+                              currentEndPosition,
                             '--roadmap-next-first-position':
                               nextFirstPosition,
                           } as CSSProperties
