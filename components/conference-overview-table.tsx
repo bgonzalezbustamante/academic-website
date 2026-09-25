@@ -1,6 +1,9 @@
 'use client'
 
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowUpRightFromSquare,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState } from 'react'
 
@@ -11,6 +14,15 @@ type Props = {
 }
 
 const PAGE_SIZE = 10
+
+function isKeynotePresentation(
+  presentation: PublicConferencePresentation
+) {
+  return (
+    presentation.presentation_type?.trim().toLowerCase() ===
+    'keynote'
+  )
+}
 
 function formatPresentationDate(value: string | null) {
   if (!value) return 'Undated'
@@ -44,6 +56,8 @@ export default function ConferenceOverviewTable({
     page * PAGE_SIZE,
     presentations.length
   )
+
+  const hasKeynote = presentations.some(isKeynotePresentation)
 
   return (
     <>
@@ -92,6 +106,13 @@ export default function ConferenceOverviewTable({
                         rel="noreferrer"
                       >
                         <span>{presentation.presentation_title}</span>
+                        {isKeynotePresentation(presentation) && (
+                          <FontAwesomeIcon
+                            className="conference-keynote-icon"
+                            icon={faStar}
+                            aria-hidden="true"
+                          />
+                        )}
                         <FontAwesomeIcon
                           className="inline-external-icon"
                           icon={faArrowUpRightFromSquare}
@@ -99,7 +120,16 @@ export default function ConferenceOverviewTable({
                         />
                       </a>
                     ) : (
-                      presentation.presentation_title
+                      <span className="conference-presentation-title-static">
+                        <span>{presentation.presentation_title}</span>
+                        {isKeynotePresentation(presentation) && (
+                          <FontAwesomeIcon
+                            className="conference-keynote-icon"
+                            icon={faStar}
+                            aria-hidden="true"
+                          />
+                        )}
+                      </span>
                     )
                   ) : (
                     '—'
@@ -116,6 +146,17 @@ export default function ConferenceOverviewTable({
           </tbody>
         </table>
       </div>
+
+      {hasKeynote && (
+        <p className="conference-table-note">
+          <FontAwesomeIcon
+            className="conference-keynote-icon"
+            icon={faStar}
+            aria-hidden="true"
+          />
+          <span>Keynote presentation</span>
+        </p>
+      )}
 
       {totalPages > 1 && (
         <nav
