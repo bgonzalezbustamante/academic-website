@@ -100,7 +100,10 @@ function projectYears(projects: PublicProject[]) {
 function teachingYears(teaching: PublicTeachingItem[]) {
   return new Set(
     teaching.flatMap((item) =>
-      yearsInRange(item.start_year, item.end_year)
+      yearsInRange(
+        item.start_year,
+        item.is_current ? END_YEAR : item.end_year
+      )
     )
   )
 }
