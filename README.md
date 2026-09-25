@@ -39,8 +39,8 @@ The current foundation includes:
 - standalone `/teaching` Teaching Portfolio with one self-contained card per public course, sourced only from `list_public_teaching()`
 - homepage Featured publications and Featured projects shown in two-column grids on wider screens; Featured projects remain ordered by latest end year and use funder imagery first
 - TERGAP detail-page map derived from a compact snapshot of the public TERGAP dashboard metrics, matching the TERGAP dashboard map canvas/no-data treatment and original colour scale; Home/Projects cards use the ERC funder logo
-- standalone Conferences dashboard with KPI cards, presentation geography and a compact 10-row paginated presentation table
-- current-year two-sided presentation Roadmap using public event short names
+- standalone Conferences dashboard with KPI cards including Keynote share, presentation geography and a compact 10-row paginated table with Keynote markers
+- current-year two-sided presentation Roadmap using public event short names, wrapped into connected rows of five
 - current-year public Activity over time heatmap
 - current-year average working time and coffee summary cards
 - DORA signatory card and `/dora` responsible-research-assessment statement
