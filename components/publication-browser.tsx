@@ -11,6 +11,7 @@ import { useMemo, useState } from 'react'
 import PublicationCitationCard, {
   type CitationPaper,
 } from '@/components/publication-citation-card'
+import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 
 type Props = {
   papers: CitationPaper[]
@@ -254,6 +255,8 @@ export default function PublicationBrowser({ papers }: Props) {
           <p>No publications match the selected filters.</p>
         </div>
       )}
+
+      <ResearchMarkdownEnhancer />
     </>
   )
 }
