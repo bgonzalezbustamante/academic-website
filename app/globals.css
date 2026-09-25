@@ -1046,8 +1046,52 @@ h4 {
   gap: 1rem;
 }
 
+.roadmap-row-block {
+  position: relative;
+}
+
+.roadmap-row-connector {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: calc(100% + 1rem);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.roadmap-row-connector-top,
+.roadmap-row-connector-bottom,
+.roadmap-row-connector-side {
+  position: absolute;
+  display: block;
+  background: var(--oxford-stone);
+}
+
+.roadmap-row-connector-top {
+  top: 0;
+  right: 0;
+  left: 90%;
+  height: 2px;
+}
+
+.roadmap-row-connector-side {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+}
+
+.roadmap-row-connector-bottom {
+  right: 0;
+  bottom: 0;
+  left: var(--roadmap-next-first-position);
+  height: 2px;
+}
+
 .roadmap-timeline {
   position: relative;
+  z-index: 1;
   width: 100%;
   min-height: 164px;
   display: flex;
@@ -1875,7 +1919,10 @@ h4 {
   line-height: 1.4;
 }
 
-.conference-presentation-title-link {
+.conference-presentation-title-link,
+.conference-presentation-title-static {
+  display: inline-flex;
+  align-items: baseline;
   color: var(--oxford-charcoal);
   text-decoration: none;
 }
@@ -1887,6 +1934,28 @@ h4 {
 
 .conference-presentation-title-link .inline-external-icon {
   flex: 0 0 auto;
+}
+
+.conference-keynote-icon {
+  width: 0.58rem;
+  height: 0.58rem;
+  flex: 0 0 auto;
+  margin-left: 0.32rem;
+  color: var(--oxford-coral);
+}
+
+.conference-table-note {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  margin: 0.55rem 0 0;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.68rem;
+}
+
+.conference-table-note .conference-keynote-icon {
+  margin-left: 0;
 }
 
 .conference-table-link {
