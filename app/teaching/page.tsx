@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 
-import TeachingCard from '@/components/teaching-card'
+import TeachingPortfolioList from '@/components/teaching-portfolio-list'
 import { listPublicTeaching } from '@/lib/teaching'
 import type { PublicTeachingItem } from '@/types/public'
 
@@ -118,22 +118,7 @@ export default async function TeachingPage() {
               </article>
             </section>
 
-            <div className="teaching-list">
-              {teaching.map((item, index) => (
-                <TeachingCard
-                  key={
-                    item.name +
-                    '-' +
-                    item.institution +
-                    '-' +
-                    (item.start_year ?? 'undated') +
-                    '-' +
-                    index
-                  }
-                  item={item}
-                />
-              ))}
-            </div>
+            <TeachingPortfolioList teaching={teaching} />
           </>
         )}
       </div>
