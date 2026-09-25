@@ -54,8 +54,8 @@ export default async function TeachingPage() {
           <p className="eyebrow">Teaching portfolio</p>
           <h1>Teaching</h1>
           <p className="page-lead">
-            Courses taught across undergraduate, postgraduate, and doctoral
-            programmes.
+            Courses taught and supervision across undergraduate, postgraduate,
+            and doctoral programmes.
           </p>
         </div>
 
@@ -81,7 +81,7 @@ export default async function TeachingPage() {
                   />
                 </div>
                 <div>
-                  <p>Teaching</p>
+                  <p>Teaching/Supervision</p>
                   <strong>
                     {teachingCount.toLocaleString('en-GB')}
                   </strong>
