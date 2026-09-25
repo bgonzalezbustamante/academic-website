@@ -39,40 +39,43 @@ export default async function ConferencesPage() {
     available = false
   }
 
-  const countryCounts = new Map<string, number>()
+  const countryCounts = new Map<
+    string,
+    { label: string; value: number }
+  >()
+  let virtualPresentationCount = 0
 
   for (const presentation of presentations) {
-    const country = extractCountryFromLocation(
-      presentation.location
-    )
+    const location = presentation.location?.trim()
+
+    if (location?.toLowerCase() === 'virtual') {
+      virtualPresentationCount += 1
+      continue
+    }
+
+    const country = extractCountryFromLocation(location ?? null)
 
     if (!country) continue
 
-    countryCounts.set(
-      country,
-      (countryCounts.get(country) ?? 0) + 1
-    )
+    const iso3 = countryNameToIso3(country)
+
+    if (!iso3) continue
+
+    const current = countryCounts.get(iso3)
+
+    countryCounts.set(iso3, {
+      label: current?.label ?? country,
+      value: (current?.value ?? 0) + 1,
+    })
   }
 
   const mapCountries: WorldMapCountry[] = Array.from(
     countryCounts.entries()
-  )
-    .map(([country, value]) => {
-      const iso3 = countryNameToIso3(country)
-
-      return iso3
-        ? {
-            iso3,
-            label: country,
-            value,
-          }
-        : null
-    })
-    .filter(
-      (
-        country
-      ): country is WorldMapCountry => Boolean(country)
-    )
+  ).map(([iso3, { label, value }]) => ({
+    iso3,
+    label,
+    value,
+  }))
 
   const keynoteCount = presentations.filter(
     (presentation) =>
@@ -133,6 +136,14 @@ export default async function ConferencesPage() {
                   <strong>
                     {countryCounts.size.toLocaleString('en-GB')}
                   </strong>
+                  {virtualPresentationCount > 0 && (
+                    <span className="conference-stat-note">
+                      {virtualPresentationCount.toLocaleString('en-GB')}{' '}
+                      virtual {virtualPresentationCount === 1
+                        ? 'conference/workshop'
+                        : 'conferences/workshops'}
+                    </span>
+                  )}
                 </div>
               </article>
 
