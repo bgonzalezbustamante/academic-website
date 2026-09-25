@@ -1,7 +1,7 @@
 import {
   faEarthEurope,
   faMicrophoneLines,
-  faUserGroup,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
@@ -84,13 +84,15 @@ export default async function ConferencesPage() {
       ): country is WorldMapCountry => Boolean(country)
     )
 
-  const singleAuthor = presentations.filter(
-    (presentation) => presentation.authors.length === 1
+  const keynoteCount = presentations.filter(
+    (presentation) =>
+      presentation.presentation_type?.trim().toLowerCase() ===
+      'keynote'
   ).length
 
-  const singleAuthorPercentage =
+  const keynotePercentage =
     presentations.length > 0
-      ? (singleAuthor / presentations.length) * 100
+      ? (keynoteCount / presentations.length) * 100
       : 0
 
   return (
@@ -148,14 +150,14 @@ export default async function ConferencesPage() {
               <article className="conference-stat-card">
                 <div className="conference-stat-icon">
                   <FontAwesomeIcon
-                    icon={faUserGroup}
+                    icon={faStar}
                     aria-hidden="true"
                   />
                 </div>
                 <div>
-                  <p>Single author</p>
+                  <p>Keynote</p>
                   <strong>
-                    {singleAuthorPercentage.toFixed(1)}%
+                    {keynotePercentage.toFixed(1)}%
                   </strong>
                 </div>
               </article>
