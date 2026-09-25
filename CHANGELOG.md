@@ -64,6 +64,7 @@
 - Presented Featured publications and Featured projects as two-card-per-row grids on wider screens; Featured projects remain ordered by later project end year first and use configured funder imagery before project imagery.
 - Standardised project ordering across Home and Projects using one shared rule: later `end_year` first, then later `start_year`, then title alphabetically. The Projects page applies this order before separating Featured and Other projects.
 - Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
+- Wrapped the homepage Roadmap into chronological rows of at most five presentations. The upper/lower label rhythm continues across row boundaries, and a partial final row draws its timeline only between its populated nodes.
 - Reordered the homepage to Academic profile → DORA / CRediT → Featured publications → Featured projects → Activity over time → Roadmap.
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
