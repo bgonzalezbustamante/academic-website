@@ -12,7 +12,10 @@ import ResearchPracticeCards from '@/components/research-practice-cards'
 import { siteProfile } from '@/content/site'
 import { listPublicConferencePresentations } from '@/lib/conferences'
 import { listPublicPapers } from '@/lib/publications'
-import { listPublicProjects } from '@/lib/projects'
+import {
+  listPublicProjects,
+  orderPublicProjects,
+} from '@/lib/projects'
 import { getPublicWorkAnalytics } from '@/lib/work-analytics'
 import type {
   PublicConferencePresentation,
@@ -43,26 +46,6 @@ function getCurrentAmsterdamDateParts() {
   }
 }
 
-function orderFeaturedProjects(projects: PublicProject[]) {
-  return [...projects]
-    .filter((project) => project.featured)
-    .sort((a, b) => {
-      const endDifference =
-        (b.end_year ?? Number.NEGATIVE_INFINITY) -
-        (a.end_year ?? Number.NEGATIVE_INFINITY)
-
-      if (endDifference !== 0) return endDifference
-
-      const startDifference =
-        (b.start_year ?? Number.NEGATIVE_INFINITY) -
-        (a.start_year ?? Number.NEGATIVE_INFINITY)
-
-      if (startDifference !== 0) return startDifference
-
-      return a.title.localeCompare(b.title)
-    })
-}
-
 export default async function HomePage() {
   let featuredPapers: PublicPaper[] = []
   let featuredProjects: PublicProject[] = []
@@ -87,7 +70,9 @@ export default async function HomePage() {
 
   try {
     const projects = await listPublicProjects()
-    featuredProjects = orderFeaturedProjects(projects)
+    featuredProjects = orderPublicProjects(
+      projects.filter((project) => project.featured)
+    )
   } catch {
     projectsAvailable = false
   }
