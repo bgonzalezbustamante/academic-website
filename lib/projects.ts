@@ -13,6 +13,26 @@ function nullableYear(value: unknown) {
   return Number.isInteger(year) ? year : null
 }
 
+export function orderPublicProjects(
+  projects: PublicProject[]
+): PublicProject[] {
+  return [...projects].sort((a, b) => {
+    const endDifference =
+      (b.end_year ?? Number.NEGATIVE_INFINITY) -
+      (a.end_year ?? Number.NEGATIVE_INFINITY)
+
+    if (endDifference !== 0) return endDifference
+
+    const startDifference =
+      (b.start_year ?? Number.NEGATIVE_INFINITY) -
+      (a.start_year ?? Number.NEGATIVE_INFINITY)
+
+    if (startDifference !== 0) return startDifference
+
+    return a.title.localeCompare(b.title)
+  })
+}
+
 function normalizeProject(
   row: Record<string, unknown>
 ): PublicProject {
