@@ -112,6 +112,10 @@ export default function PresentationRoadmap({
                           presentation.location
                             ? `, ${presentation.location}`
                             : ''
+                        const dateLocation =
+                          presentation.location
+                            ? `${dateRange}, ${presentation.location}`
+                            : dateRange
 
                         return (
                           <li
@@ -123,7 +127,6 @@ export default function PresentationRoadmap({
                                 : 'roadmap-item-upcoming',
                             ].join(' ')}
                             key={`${presentation.start_date}-${presentation.end_date}-${shortName}-${index}`}
-                            title={`${shortName} — ${dateRange}${accessibleLocation}`}
                             aria-label={`${shortName}, ${dateRange}${accessibleLocation}${isFinished ? ', finished presentation' : ', upcoming or ongoing presentation'}`}
                           >
                             <span className="roadmap-label">
@@ -140,11 +143,9 @@ export default function PresentationRoadmap({
                                 <span>{shortName}</span>
                               </span>
 
-                              {presentation.location && (
-                                <span className="roadmap-label-location">
-                                  {presentation.location}
-                                </span>
-                              )}
+                              <span className="roadmap-label-location">
+                                {dateLocation}
+                              </span>
                             </span>
                             <span
                               className="roadmap-node"
