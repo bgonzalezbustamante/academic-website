@@ -141,8 +141,27 @@ export default async function HomePage() {
 
             <div className="bio-copy">
               <p>
-                Based in the Netherlands, I hold a DPhil (PhD) in Politics
-                from the University of Oxford. My work bridges the fields of
+                Based in the Netherlands, I hold a{' '}
+                <a
+                  className="bio-degree-logo-link"
+                  href="https://www.ox.ac.uk/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="University of Oxford"
+                  title="University of Oxford"
+                >
+                  <Image
+                    className="bio-degree-logo-image"
+                    src="/institutions/oxford-degree.png"
+                    alt=""
+                    width={26}
+                    height={26}
+                  />
+                </a>{' '}
+                <strong className="bio-degree-highlight">
+                  DPhil (PhD) in Politics from the University of Oxford
+                </strong>
+                . My work bridges the fields of
                 comparative politics, government and computational social
                 science. I build large-scale text-as-data pipelines, deploy AI
                 and machine learning models, and apply causal inference
