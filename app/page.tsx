@@ -142,9 +142,9 @@ export default async function HomePage() {
             <div className="bio-copy">
               <p>
                 Based in the Netherlands, I hold a{' '}
-                <strong className="bio-degree-highlight">
+                <ExternalInlineLink href="https://www.ox.ac.uk/">
                   DPhil (PhD) in Politics from the University of Oxford
-                </strong>
+                </ExternalInlineLink>
                 . My work bridges the fields of
                 comparative politics, government and computational social
                 science. I build large-scale text-as-data pipelines, deploy AI
