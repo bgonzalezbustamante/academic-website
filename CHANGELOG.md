@@ -65,6 +65,7 @@
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
 - Added Publications filters for Year and Publication index.
+- Replaced the dynamically alphabetised Publication Index filter with a fixed seven-category Publication Index taxonomy in this order: WoS-SSCI, Scopus, WoS-ESCI, Book chapter, SciELO/Latindex, Working paper, Preprint.
 - Added Publications KPI cards for total papers, distinct journals and single-author percentage, using only the public publication list.
 - Extended citation rendering to support Markdown bold (`**text**`) and display bold citation emphasis in Oxford coral.
 - Added small status icons to the homepage Roadmap: a completed-state icon for past presentations and a calendar icon for forthcoming presentations.
