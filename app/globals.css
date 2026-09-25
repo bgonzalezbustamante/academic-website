@@ -1593,6 +1593,11 @@ h4 {
   max-width: 760px;
 }
 
+.teaching-stats-grid {
+  margin-top: 1.35rem;
+  margin-bottom: 1rem;
+}
+
 .teaching-list {
   display: grid;
   gap: 1rem;
@@ -1601,7 +1606,7 @@ h4 {
 .teaching-card {
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.55fr);
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
   overflow: hidden;
   border: 1px solid var(--oxford-stone);
   border-radius: 0.65rem;
@@ -1610,7 +1615,7 @@ h4 {
 }
 
 .teaching-card-visual {
-  min-height: 230px;
+  min-height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
