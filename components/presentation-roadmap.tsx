@@ -70,78 +70,103 @@ export default function PresentationRoadmap({
         ) : (
           <div className="roadmap-scroll">
             <div className="roadmap-rows">
-              {rows.map((row, rowIndex) => (
-                <ol
-                  className="roadmap-timeline"
-                  aria-label={`Conference presentation roadmap for ${year}, row ${rowIndex + 1}`}
-                  start={rowIndex * 5 + 1}
-                  style={
-                    {
-                      '--roadmap-row-count': row.length,
-                    } as CSSProperties
-                  }
-                  key={rowIndex}
-                >
-                  {row.map((presentation, rowItemIndex) => {
-                    const index = rowIndex * 5 + rowItemIndex
-                    const date = presentation.presentation_date!
-                    const shortName =
-                      presentation.event_short_name ||
-                      presentation.event_name
-                    const isPast = date < currentDate
+              {rows.map((row, rowIndex) => {
+                const nextRow = rows[rowIndex + 1]
+                const nextFirstPosition = nextRow
+                  ? `${50 / nextRow.length}%`
+                  : null
 
-                    const positionClass =
-                      index % 2 === 0
-                        ? 'roadmap-item-upper'
-                        : 'roadmap-item-lower'
+                return (
+                  <div className="roadmap-row-block" key={rowIndex}>
+                    <ol
+                      className="roadmap-timeline"
+                      aria-label={`Conference presentation roadmap for ${year}, row ${rowIndex + 1}`}
+                      start={rowIndex * 5 + 1}
+                      style={
+                        {
+                          '--roadmap-row-count': row.length,
+                        } as CSSProperties
+                      }
+                    >
+                      {row.map((presentation, rowItemIndex) => {
+                        const index = rowIndex * 5 + rowItemIndex
+                        const date = presentation.presentation_date!
+                        const shortName =
+                          presentation.event_short_name ||
+                          presentation.event_name
+                        const isPast = date < currentDate
 
-                    const accessibleLocation =
-                      presentation.location
-                        ? `, ${presentation.location}`
-                        : ''
+                        const positionClass =
+                          index % 2 === 0
+                            ? 'roadmap-item-upper'
+                            : 'roadmap-item-lower'
 
-                    return (
-                      <li
-                        className={[
-                          'roadmap-item',
-                          positionClass,
-                          isPast
-                            ? 'roadmap-item-past'
-                            : 'roadmap-item-upcoming',
-                        ].join(' ')}
-                        key={`${date}-${shortName}-${index}`}
-                        title={`${shortName} — ${formatAccessibleDate(date)}${accessibleLocation}`}
-                        aria-label={`${shortName}, ${formatAccessibleDate(date)}${accessibleLocation}${isPast ? ', past presentation' : ', upcoming presentation'}`}
-                      >
-                        <span className="roadmap-label">
-                          <span className="roadmap-label-main">
-                            <FontAwesomeIcon
-                              className="roadmap-status-icon"
-                              icon={
-                                isPast
-                                  ? faCircleCheck
-                                  : faCalendarDays
-                              }
+                        const accessibleLocation =
+                          presentation.location
+                            ? `, ${presentation.location}`
+                            : ''
+
+                        return (
+                          <li
+                            className={[
+                              'roadmap-item',
+                              positionClass,
+                              isPast
+                                ? 'roadmap-item-past'
+                                : 'roadmap-item-upcoming',
+                            ].join(' ')}
+                            key={`${date}-${shortName}-${index}`}
+                            title={`${shortName} — ${formatAccessibleDate(date)}${accessibleLocation}`}
+                            aria-label={`${shortName}, ${formatAccessibleDate(date)}${accessibleLocation}${isPast ? ', past presentation' : ', upcoming presentation'}`}
+                          >
+                            <span className="roadmap-label">
+                              <span className="roadmap-label-main">
+                                <FontAwesomeIcon
+                                  className="roadmap-status-icon"
+                                  icon={
+                                    isPast
+                                      ? faCircleCheck
+                                      : faCalendarDays
+                                  }
+                                  aria-hidden="true"
+                                />
+                                <span>{shortName}</span>
+                              </span>
+
+                              {presentation.location && (
+                                <span className="roadmap-label-location">
+                                  {presentation.location}
+                                </span>
+                              )}
+                            </span>
+                            <span
+                              className="roadmap-node"
                               aria-hidden="true"
                             />
-                            <span>{shortName}</span>
-                          </span>
+                          </li>
+                        )
+                      })}
+                    </ol>
 
-                          {presentation.location && (
-                            <span className="roadmap-label-location">
-                              {presentation.location}
-                            </span>
-                          )}
-                        </span>
-                        <span
-                          className="roadmap-node"
-                          aria-hidden="true"
-                        />
-                      </li>
-                    )
-                  })}
-                </ol>
-              ))}
+                    {nextFirstPosition && (
+                      <span
+                        className="roadmap-row-connector"
+                        style={
+                          {
+                            '--roadmap-next-first-position':
+                              nextFirstPosition,
+                          } as CSSProperties
+                        }
+                        aria-hidden="true"
+                      >
+                        <span className="roadmap-row-connector-top" />
+                        <span className="roadmap-row-connector-side" />
+                        <span className="roadmap-row-connector-bottom" />
+                      </span>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
         )}
