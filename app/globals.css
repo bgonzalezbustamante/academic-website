@@ -335,11 +335,6 @@ h4 {
   color: var(--oxford-blue);
 }
 
-.bio-degree-highlight {
-  color: var(--oxford-coral);
-  font-weight: 700;
-}
-
 .bio-copy a {
   color: var(--oxford-blue);
   text-decoration-color: var(--oxford-coral);
