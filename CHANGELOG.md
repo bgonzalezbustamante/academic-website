@@ -25,6 +25,7 @@
 - Added Font Awesome 7 and Academicons for academic profiles, external links and publication resources.
 - Restored the profile portrait from `academic-kickstart` and prioritised the supplied Leiden seal as the site favicon.
 - Added the revised two-paragraph academic biography with consistent external-link arrows for the ECPR Political Methodology Steering Committee, TERGAP, COST Action CA22150 and the Enlace-Inserción UDP project.
+- Linked the DPhil (PhD) in Politics degree reference directly to the University of Oxford using the same external-link treatment as other biography links.
 - Added compact public email and Leiden University Wijnhaven address information to the footer, with a Creative Commons mark beside the year and name.
 - Renamed the research-interest panel to `Main Interests` and restored compact coral square bullets.
 - Removed the redundant Publications button below the biography.
@@ -65,10 +66,16 @@
 - Standardised project ordering across Home and Projects using one shared rule: later `end_year` first, then later `start_year`, then title alphabetically. The Projects page applies this order before separating Featured and Other projects.
 - Added a current-year horizontal two-sided Roadmap after Featured projects, using only public `event_short_name` labels ordered chronologically by presentation date.
 - Wrapped the homepage Roadmap into chronological rows of at most five presentations. The upper/lower label rhythm continues across row boundaries, a partial final row draws its timeline only between its populated nodes, and each completed row now connects continuously to the first node of the next row with a right-edge return path.
-- Reordered the homepage to Academic profile → DORA / CRediT → Featured publications → Featured projects → Activity over time → Roadmap.
+- Corrected the Roadmap into a continuous snake layout so the fifth presentation connects to the sixth, with alternating row direction and continuous edge connectors across subsequent rows.
+- Migrated Roadmap chronology to conference `start_date`/`end_date` ranges: ordering uses `start_date`, completed/upcoming state uses `end_date`, and labels now show the formatted date or date range together with location instead of a redundant hover tooltip.
+- Reordered the homepage to Academic profile → DORA / CRediT → Population in progress → Featured publications → Featured projects → Activity over time → Roadmap.
+- Added a Dashboard-backed `Population in progress` card below DORA / CRediT, normalising ingestion progress to percentages for Publications (61 intended records), Projects (15), Conferences (137), and Teaching/Supervision (35 times taught), with 2012–2026 year-coverage strips for all four domains.
+- Increased the homepage Featured publications cap from three to four.
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
 - Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
 - Added Publications filters for Year and Publication index.
+- Added publication-card abstracts to the Publications browser between the citation and resource links, rendered through the shared safe Markdown pipeline in a compact text style.
+- Added client-side Publications pagination at ten records per page, applied after filters and reset to page 1 whenever filters change.
 - Replaced the dynamically alphabetised Publication Index filter with a fixed seven-category Publication Index taxonomy in this order: WoS-SSCI, Scopus, WoS-ESCI, Book chapter, SciELO/Latindex, Working paper, Preprint.
 - Added Publications KPI cards for total papers, distinct journals and first-author percentage, with first authorship defined by Bastián González-Bustamante appearing first in the ordered public `authors[]` array.
 - Extended citation rendering to support Markdown bold (`**text**`) and display bold citation emphasis in Oxford coral.
@@ -95,6 +102,9 @@
 - Reworked `/conferences` into a dashboard-style view headed by “Conference and public presentations”: KPI cards first, then the geographic map, followed by a compact presentation table.
 - Refined the third KPI cards: Publications now reports first-author percentage, while Conferences reports the percentage of public presentations classified as `Keynote`.
 - Removed the Conference Type column and added client-side pagination at 10 presentation rows per page.
+- Replaced single conference presentation dates with required public `start_date` and `end_date` fields and constrained `presentation_type` to Conference paper, Keynote or Workshop; the transitional `presentation_date = start_date` alias is treated as deprecated by new website code.
+- Removed the former 2020 cutoff so the Conferences page, KPIs and map use the complete public presentation record.
+- Updated the Countries KPI to count only locations that resolve to valid countries; presentations with location `Virtual` are excluded from the country total/map and reported separately as a small virtual conferences/workshops note.
 - Removed the optional external-link column from conference presentation tables so rows without URLs no longer show a trailing dash; the shared change applies both to the Conferences overview and project Research outputs.
 - Conference presentation titles now become external links when a public URL is available, using the same small coral external-arrow treatment as biography links.
 - Keynote presentations are marked with a small coral star immediately after the presentation title, with a compact legend below the shared conference table; the same marker therefore appears in project Research-output tables.
@@ -104,6 +114,7 @@
 `local development and validation`
 
 - Added `npm run typecheck` and `npm run check` for local TypeScript and lint validation.
+- Added the npm lockfile to the new repository and accepted the current Next.js-generated TypeScript include for `.next/dev/types/**/*.ts` to keep local and future deployment installs reproducible.
 - Expanded `npm run check:public-contract` to validate Publications/detail highlights, Projects/detail, Conferences and aggregate work analytics using only the Supabase publishable key.
 - Added boundary checks ensuring Key highlights remain detail-only, project publication slugs resolve only to Public papers, and conference notes/owner/paper IDs are absent.
 - Standardised the application on Node.js 22 or later because the current Supabase JavaScript stack has ended Node 20 support and uses native WebSocket support available in Node 22+.
