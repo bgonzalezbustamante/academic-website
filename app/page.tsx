@@ -142,23 +142,6 @@ export default async function HomePage() {
             <div className="bio-copy">
               <p>
                 Based in the Netherlands, I hold a{' '}
-                <a
-                  className="bio-degree-logo-link"
-                  href="https://www.ox.ac.uk/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="University of Oxford"
-                  title="University of Oxford"
-                >
-                  <Image
-                    className="bio-degree-logo-image"
-                    src="/branding/oxford.webp"
-                    alt=""
-                    width={26}
-                    height={26}
-                    unoptimized
-                  />
-                </a>{' '}
                 <strong className="bio-degree-highlight">
                   DPhil (PhD) in Politics from the University of Oxford
                 </strong>
