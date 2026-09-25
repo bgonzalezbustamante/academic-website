@@ -3,7 +3,7 @@
 import {
   faBookOpen,
   faFileLines,
-  faUserGroup,
+  faUserPen,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState } from 'react'
@@ -25,6 +25,8 @@ const PUBLICATION_INDEX_ORDER = [
   'Working paper',
   'Preprint',
 ] as const
+
+const PROFILE_AUTHOR_NAME = 'Bastián González-Bustamante'
 
 function yearForPaper(paper: CitationPaper) {
   return paper.publication_date
@@ -59,14 +61,15 @@ export default function PublicationBrowser({ papers }: Props) {
     [papers]
   )
 
-  const singleAuthorPercentage = useMemo(() => {
+  const firstAuthorPercentage = useMemo(() => {
     if (papers.length === 0) return 0
 
-    const singleAuthor = papers.filter(
-      (paper) => paper.authors.length === 1
+    const firstAuthor = papers.filter(
+      (paper) =>
+        paper.authors[0]?.trim() === PROFILE_AUTHOR_NAME
     ).length
 
-    return (singleAuthor / papers.length) * 100
+    return (firstAuthor / papers.length) * 100
   }, [papers])
 
   const filtered = useMemo(
@@ -114,11 +117,11 @@ export default function PublicationBrowser({ papers }: Props) {
 
         <article className="conference-stat-card">
           <div className="conference-stat-icon">
-            <FontAwesomeIcon icon={faUserGroup} aria-hidden="true" />
+            <FontAwesomeIcon icon={faUserPen} aria-hidden="true" />
           </div>
           <div>
-            <p>Single author</p>
-            <strong>{singleAuthorPercentage.toFixed(1)}%</strong>
+            <p>First author</p>
+            <strong>{firstAuthorPercentage.toFixed(1)}%</strong>
           </div>
         </article>
       </section>
