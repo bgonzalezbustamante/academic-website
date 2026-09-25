@@ -36,6 +36,7 @@ The current foundation includes:
 - stable publication detail routes with safe Markdown-formatted abstracts, optional local-static Key highlights and safe Markdown-formatted highlight text
 - citation-based Publications listing enriched only through `get_public_paper(slug)`, with client-side year and Publication index filters
 - standalone Projects listing and `/project/[slug]` detail routes with safe Markdown-formatted project abstracts, including Research outputs with associated publications and public conference presentations
+- standalone `/teaching` Teaching Portfolio with one self-contained card per public course, sourced only from `list_public_teaching()`
 - homepage Featured publications and Featured projects shown in two-column grids on wider screens; Featured projects remain ordered by latest end year and use funder imagery first
 - TERGAP detail-page map derived from a compact snapshot of the public TERGAP dashboard metrics, matching the TERGAP dashboard map canvas/no-data treatment and original colour scale; Home/Projects cards use the ERC funder logo
 - standalone Conferences dashboard with KPI cards, presentation geography and a compact 10-row paginated presentation table
@@ -105,6 +106,7 @@ The contract check:
 - verifies `list_public_projects()` and `get_public_project(text)`, including `funder_note`;
 - confirms project publication slugs resolve only to papers returned by the public publication list;
 - verifies `list_public_conference_presentations()`, including required `event_short_name`, ordered presentation authors and the absence of private notes/paper IDs;
+- verifies `list_public_teaching()`, including multi-level `levels[]`, period/current state, teaching/student counts, course image filename and the absence of private activity/session metadata;
 - validates `get_public_work_analytics(year)`;
 - accepts empty curated publication/project/conference datasets;
 - never queries internal Research Dashboard tables.

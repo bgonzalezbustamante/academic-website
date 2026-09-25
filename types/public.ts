@@ -62,3 +62,17 @@ export type PublicWorkAnalytics = {
   average_coffees_per_working_day: number
   days: PublicWorkDay[]
 }
+
+
+export type PublicTeachingItem = {
+  name: string
+  institution: string
+  summary: string
+  start_year: number | null
+  end_year: number | null
+  is_current: boolean
+  levels: string[]
+  times_taught: number
+  student_count: number
+  course_image_filename: string | null
+}

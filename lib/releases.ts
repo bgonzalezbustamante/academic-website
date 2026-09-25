@@ -28,6 +28,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Introduced the new portrait-led academic profile, current appointments, research interests, institutional branding and responsible-research statements for DORA and CRediT.',
           'Added a clearer homepage for featured publications and projects, yearly work activity and the current presentation roadmap.',
+          'Added a public Teaching Portfolio for current and previous courses, teaching levels and cumulative teaching indicators.',
         ],
       },
       {
