@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 
+import ExternalInlineLink from '@/components/external-inline-link'
 import type {
   PublicConferencePresentation,
   PublicPaper,
@@ -161,14 +162,14 @@ export default function SitePopulationProgress({
     {
       label: 'Projects',
       value: projects
-        ? percentage(projects.length, 13)
+        ? percentage(projects.length, 14)
         : null,
       detail: projects
-        ? `${projects.length} of 13 projects`
+        ? `${projects.length} of 14 projects (intended to ingest)`
         : '',
     },
     {
-      label: 'Conference presentations',
+      label: 'Conferences',
       value: presentationYears
         ? percentage(presentationYears.size, YEARS.length)
         : null,
@@ -178,14 +179,14 @@ export default function SitePopulationProgress({
       coveredYears: presentationYears ?? undefined,
     },
     {
-      label: 'Teaching',
+      label: 'Teaching/Supervision',
       value:
         teachingTimes !== null
           ? percentage(teachingTimes, 35)
           : null,
       detail:
         teachingTimes !== null
-          ? `${teachingTimes} of 35 times taught`
+          ? `${teachingTimes} of 35 times taught (intended to ingest)`
           : '',
     },
   ]
@@ -205,9 +206,12 @@ export default function SitePopulationProgress({
               </h2>
             </div>
             <p>
-              This new site is connected to my Research Dashboard. I am
-              progressively populating the public record, so these indicators
-              provide an approximate snapshot of current coverage.
+              This new site is connected to my{' '}
+              <ExternalInlineLink href="https://github.com/bgonzalezbustamante/research-dashboard">
+                Research Dashboard
+              </ExternalInlineLink>
+              . I am progressively populating the public record, so these
+              indicators provide an approximate snapshot of current coverage.
             </p>
           </div>
 
