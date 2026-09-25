@@ -616,10 +616,31 @@ h4 {
 }
 
 .publication-card-abstract {
-  margin: 0.65rem 0 0;
+  margin-top: 0.65rem;
+  color: var(--oxford-ash);
+}
+
+.publication-card-abstract > .research-markdown-rendered {
+  gap: 0.45rem;
+  margin-top: 0;
   color: var(--oxford-ash);
   font-size: 0.78rem;
   line-height: 1.55;
+}
+
+.publication-card-abstract .research-markdown-heading {
+  margin-top: 0.2rem;
+  font-size: 0.84rem;
+}
+
+.publication-card-abstract .research-markdown-list {
+  padding-left: 1.05rem;
+}
+
+.publication-card-abstract .research-markdown-code-block,
+.publication-card-abstract .research-markdown-math-block {
+  padding: 0.55rem 0.65rem;
+  font-size: 0.76rem;
 }
 
 .publication-stats-grid {
