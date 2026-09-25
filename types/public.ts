@@ -22,6 +22,11 @@ export type PublicPaperDetail = PublicPaper & {
   highlight_image_caption: string | null
 }
 
+export type ConferencePresentationType =
+  | 'Conference paper'
+  | 'Keynote'
+  | 'Workshop'
+
 export type PublicProject = {
   slug: string
   short_title: string
@@ -44,10 +49,13 @@ export type PublicConferencePresentation = {
   event_name: string
   event_short_name: string
   location: string | null
-  presentation_date: string | null
+  start_date: string
+  end_date: string
+  /** @deprecated Transitional Dashboard alias for start_date. */
+  presentation_date?: string | null
   presentation_title: string | null
   authors: string[]
-  presentation_type: string | null
+  presentation_type: ConferencePresentationType
   url: string | null
 }
 
