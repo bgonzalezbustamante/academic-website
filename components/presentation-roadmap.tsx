@@ -6,21 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import type { CSSProperties } from 'react'
 
+import { formatConferenceDateRange } from '@/lib/conference-dates'
 import type { PublicConferencePresentation } from '@/types/public'
 
 type Props = {
   presentations: PublicConferencePresentation[]
   year: number
   currentDate: string
-}
-
-function formatAccessibleDate(value: string) {
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${value}T00:00:00Z`))
 }
 
 export default function PresentationRoadmap({
@@ -30,14 +22,12 @@ export default function PresentationRoadmap({
 }: Props) {
   const ordered = presentations
     .filter((presentation) =>
-      presentation.presentation_date?.startsWith(
-        String(year)
-      )
+      presentation.start_date.startsWith(String(year))
     )
-    .sort((a, b) =>
-      (a.presentation_date ?? '').localeCompare(
-        b.presentation_date ?? ''
-      )
+    .sort(
+      (a, b) =>
+        a.start_date.localeCompare(b.start_date) ||
+        a.end_date.localeCompare(b.end_date)
     )
 
   const rows = Array.from(
@@ -101,11 +91,17 @@ export default function PresentationRoadmap({
                     >
                       {row.map((presentation, rowItemIndex) => {
                         const index = rowIndex * 5 + rowItemIndex
-                        const date = presentation.presentation_date!
                         const shortName =
                           presentation.event_short_name ||
                           presentation.event_name
-                        const isPast = date < currentDate
+                        const dateRange =
+                          formatConferenceDateRange(
+                            presentation.start_date,
+                            presentation.end_date,
+                            'long'
+                          )
+                        const isFinished =
+                          presentation.end_date < currentDate
 
                         const positionClass =
                           index % 2 === 0
@@ -122,20 +118,20 @@ export default function PresentationRoadmap({
                             className={[
                               'roadmap-item',
                               positionClass,
-                              isPast
+                              isFinished
                                 ? 'roadmap-item-past'
                                 : 'roadmap-item-upcoming',
                             ].join(' ')}
-                            key={`${date}-${shortName}-${index}`}
-                            title={`${shortName} — ${formatAccessibleDate(date)}${accessibleLocation}`}
-                            aria-label={`${shortName}, ${formatAccessibleDate(date)}${accessibleLocation}${isPast ? ', past presentation' : ', upcoming presentation'}`}
+                            key={`${presentation.start_date}-${presentation.end_date}-${shortName}-${index}`}
+                            title={`${shortName} — ${dateRange}${accessibleLocation}`}
+                            aria-label={`${shortName}, ${dateRange}${accessibleLocation}${isFinished ? ', finished presentation' : ', upcoming or ongoing presentation'}`}
                           >
                             <span className="roadmap-label">
                               <span className="roadmap-label-main">
                                 <FontAwesomeIcon
                                   className="roadmap-status-icon"
                                   icon={
-                                    isPast
+                                    isFinished
                                       ? faCircleCheck
                                       : faCalendarDays
                                   }
