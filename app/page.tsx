@@ -9,6 +9,7 @@ import PublicWorkAnalyticsSection from '@/components/public-work-analytics'
 import ProjectCard from '@/components/project-card'
 import PublicationCard from '@/components/publication-card'
 import ResearchPracticeCards from '@/components/research-practice-cards'
+import SitePopulationProgress from '@/components/site-population-progress'
 import { siteProfile } from '@/content/site'
 import { listPublicConferencePresentations } from '@/lib/conferences'
 import { listPublicPapers } from '@/lib/publications'
@@ -16,11 +17,13 @@ import {
   listPublicProjects,
   orderPublicProjects,
 } from '@/lib/projects'
+import { listPublicTeaching } from '@/lib/teaching'
 import { getPublicWorkAnalytics } from '@/lib/work-analytics'
 import type {
   PublicConferencePresentation,
   PublicPaper,
   PublicProject,
+  PublicTeachingItem,
   PublicWorkAnalytics,
 } from '@/types/public'
 
@@ -47,20 +50,24 @@ function getCurrentAmsterdamDateParts() {
 }
 
 export default async function HomePage() {
+  let papers: PublicPaper[] = []
+  let projects: PublicProject[] = []
   let featuredPapers: PublicPaper[] = []
   let featuredProjects: PublicProject[] = []
   let presentations: PublicConferencePresentation[] = []
+  let teaching: PublicTeachingItem[] = []
   let workAnalytics: PublicWorkAnalytics | null = null
 
   let publicationsAvailable = true
   let projectsAvailable = true
   let conferencesAvailable = true
+  let teachingAvailable = true
 
   const currentAmsterdam = getCurrentAmsterdamDateParts()
   const currentYear = currentAmsterdam.year
 
   try {
-    const papers = await listPublicPapers()
+    papers = await listPublicPapers()
     featuredPapers = papers
       .filter((paper) => paper.featured)
       .slice(0, 3)
@@ -69,7 +76,7 @@ export default async function HomePage() {
   }
 
   try {
-    const projects = await listPublicProjects()
+    projects = await listPublicProjects()
     featuredProjects = orderPublicProjects(
       projects.filter((project) => project.featured)
     )
@@ -81,6 +88,12 @@ export default async function HomePage() {
     presentations = await listPublicConferencePresentations()
   } catch {
     conferencesAvailable = false
+  }
+
+  try {
+    teaching = await listPublicTeaching()
+  } catch {
+    teachingAvailable = false
   }
 
   try {
@@ -172,6 +185,13 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <SitePopulationProgress
+        papers={publicationsAvailable ? papers : null}
+        projects={projectsAvailable ? projects : null}
+        presentations={conferencesAvailable ? presentations : null}
+        teaching={teachingAvailable ? teaching : null}
+      />
 
       <ResearchPracticeCards />
 
