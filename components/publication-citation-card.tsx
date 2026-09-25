@@ -72,9 +72,11 @@ export default function PublicationCitationCard({
       </p>
 
       {paper.abstract && (
-        <p className="publication-card-abstract">
-          {paper.abstract}
-        </p>
+        <div className="publication-card-abstract">
+          <p className="research-markdown-source">
+            {paper.abstract}
+          </p>
+        </div>
       )}
 
       <PublicationLinks paper={paper} />
