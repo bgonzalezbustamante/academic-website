@@ -32,7 +32,7 @@ export default function TeachingCardVisual({
       alt=""
       width={960}
       height={600}
-      sizes="(max-width: 760px) 100vw, 320px"
+      sizes="(max-width: 760px) calc(100vw - 2rem), 320px"
       quality={isLossless ? undefined : 90}
       unoptimized={isLossless}
       onError={() => setFailed(true)}
