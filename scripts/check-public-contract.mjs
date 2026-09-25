@@ -42,6 +42,20 @@ const PUBLIC_PROJECT_FIELDS = [
   'conference_presentations',
 ]
 
+const PUBLIC_TEACHING_FIELDS = [
+  'slug',
+  'name',
+  'institution',
+  'summary',
+  'start_year',
+  'end_year',
+  'is_current',
+  'levels',
+  'times_taught',
+  'student_count',
+  'course_image_filename',
+]
+
 const PUBLIC_CONFERENCE_FIELDS = [
   'event_name',
   'event_short_name',
@@ -63,6 +77,9 @@ const PRIVATE_FIELDS = [
   'activity_label_ids',
   'work_session_id',
   'tracked_minutes',
+  'tracked_hours',
+  'session_count',
+  'teaching_id',
 ]
 
 function fail(message) {
@@ -162,6 +179,47 @@ function assertProjectShape(project) {
 
   if (typeof project.featured !== 'boolean') {
     fail('Public project featured must be boolean.')
+  }
+}
+
+function assertTeachingShape(item) {
+  assertFields(item, PUBLIC_TEACHING_FIELDS, 'Public teaching item')
+  assertPrivateFieldsAbsent(item, 'Public teaching item')
+
+  if (!Array.isArray(item.levels)) {
+    fail('Public teaching levels must be an array.')
+  }
+
+  if (
+    item.start_year != null &&
+    !Number.isInteger(item.start_year)
+  ) {
+    fail('Public teaching start_year must be an integer or null.')
+  }
+
+  if (
+    item.end_year != null &&
+    !Number.isInteger(item.end_year)
+  ) {
+    fail('Public teaching end_year must be an integer or null.')
+  }
+
+  if (typeof item.is_current !== 'boolean') {
+    fail('Public teaching is_current must be boolean.')
+  }
+
+  if (
+    !Number.isInteger(item.times_taught) ||
+    item.times_taught < 0
+  ) {
+    fail('Public teaching times_taught must be a non-negative integer.')
+  }
+
+  if (
+    !Number.isInteger(item.student_count) ||
+    item.student_count < 0
+  ) {
+    fail('Public teaching student_count must be a non-negative integer.')
   }
 }
 
