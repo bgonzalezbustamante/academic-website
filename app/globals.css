@@ -1070,23 +1070,46 @@ h4 {
 
 .roadmap-row-connector-top {
   top: 0;
-  right: 0;
-  left: 90%;
   height: 2px;
 }
 
 .roadmap-row-connector-side {
   top: 0;
-  right: 0;
   bottom: 0;
   width: 2px;
 }
 
 .roadmap-row-connector-bottom {
-  right: 0;
   bottom: 0;
-  left: var(--roadmap-next-first-position);
   height: 2px;
+}
+
+.roadmap-row-connector-right .roadmap-row-connector-top {
+  right: 0;
+  left: var(--roadmap-current-end-position);
+}
+
+.roadmap-row-connector-right .roadmap-row-connector-side {
+  right: 0;
+}
+
+.roadmap-row-connector-right .roadmap-row-connector-bottom {
+  right: 0;
+  left: var(--roadmap-next-first-position);
+}
+
+.roadmap-row-connector-left .roadmap-row-connector-top {
+  right: var(--roadmap-current-end-position);
+  left: 0;
+}
+
+.roadmap-row-connector-left .roadmap-row-connector-side {
+  left: 0;
+}
+
+.roadmap-row-connector-left .roadmap-row-connector-bottom {
+  right: var(--roadmap-next-first-position);
+  left: 0;
 }
 
 .roadmap-timeline {
@@ -1099,6 +1122,10 @@ h4 {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.roadmap-timeline-reverse {
+  flex-direction: row-reverse;
 }
 
 .roadmap-timeline::before {
