@@ -1621,7 +1621,7 @@ h4 {
   justify-content: center;
   overflow: hidden;
   background:
-    linear-gradient(145deg, rgba(0, 33, 71, 0.065), transparent 65%),
+    linear-gradient(145deg, rgba(0, 33, 71, 0.08), transparent 65%),
     var(--oxford-blue-wash);
 }
 
@@ -1629,12 +1629,12 @@ h4 {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .teaching-fallback-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 2.2rem;
+  height: 2.2rem;
   color: var(--oxford-coral);
   opacity: 0.9;
 }
