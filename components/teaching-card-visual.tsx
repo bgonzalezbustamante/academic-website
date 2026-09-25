@@ -30,8 +30,8 @@ export default function TeachingCardVisual({
       className="teaching-card-image"
       src={src}
       alt=""
-      width={960}
-      height={600}
+      width={720}
+      height={440}
       sizes="(max-width: 760px) calc(100vw - 2rem), 320px"
       quality={isLossless ? undefined : 90}
       unoptimized={isLossless}
