@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState } from 'react'
 
+import { formatConferenceDateRange } from '@/lib/conference-dates'
 import type { PublicConferencePresentation } from '@/types/public'
 
 type Props = {
@@ -18,46 +19,44 @@ const PAGE_SIZE = 10
 function isKeynotePresentation(
   presentation: PublicConferencePresentation
 ) {
-  return (
-    presentation.presentation_type?.trim().toLowerCase() ===
-    'keynote'
-  )
-}
-
-function formatPresentationDate(value: string | null) {
-  if (!value) return 'Undated'
-
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${value}T00:00:00Z`))
+  return presentation.presentation_type === 'Keynote'
 }
 
 export default function ConferenceOverviewTable({
   presentations,
 }: Props) {
   const [page, setPage] = useState(1)
+  const orderedPresentations = useMemo(
+    () =>
+      [...presentations].sort(
+        (a, b) =>
+          b.start_date.localeCompare(a.start_date) ||
+          b.end_date.localeCompare(a.end_date)
+      ),
+    [presentations]
+  )
+
   const totalPages = Math.max(
     1,
-    Math.ceil(presentations.length / PAGE_SIZE)
+    Math.ceil(orderedPresentations.length / PAGE_SIZE)
   )
 
   const visible = useMemo(() => {
     const start = (page - 1) * PAGE_SIZE
-    return presentations.slice(start, start + PAGE_SIZE)
-  }, [page, presentations])
+    return orderedPresentations.slice(start, start + PAGE_SIZE)
+  }, [page, orderedPresentations])
 
-  const start = presentations.length === 0
+  const start = orderedPresentations.length === 0
     ? 0
     : (page - 1) * PAGE_SIZE + 1
   const end = Math.min(
     page * PAGE_SIZE,
-    presentations.length
+    orderedPresentations.length
   )
 
-  const hasKeynote = presentations.some(isKeynotePresentation)
+  const hasKeynote = orderedPresentations.some(
+    isKeynotePresentation
+  )
 
   return (
     <>
@@ -77,14 +76,16 @@ export default function ConferenceOverviewTable({
               <tr
                 key={[
                   presentation.event_name,
-                  presentation.presentation_date ?? 'undated',
+                  presentation.start_date,
+                  presentation.end_date,
                   presentation.presentation_title ?? 'untitled',
                   (page - 1) * PAGE_SIZE + index,
                 ].join('-')}
               >
                 <td className="conference-date-cell">
-                  {formatPresentationDate(
-                    presentation.presentation_date
+                  {formatConferenceDateRange(
+                    presentation.start_date,
+                    presentation.end_date
                   )}
                 </td>
                 <td>
@@ -164,7 +165,7 @@ export default function ConferenceOverviewTable({
           aria-label="Conference overview pagination"
         >
           <p>
-            Showing {start}–{end} of {presentations.length}
+            Showing {start}–{end} of {orderedPresentations.length}
           </p>
 
           <div className="conference-pagination-controls">
