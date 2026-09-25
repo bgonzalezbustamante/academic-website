@@ -46,11 +46,13 @@ export default async function PublicationsPage() {
   return (
     <section className="page-section">
       <div className="site-shell">
-        <p className="eyebrow">Research output</p>
-        <h1>Publications</h1>
-        <p className="page-lead">
-          Papers ordered from the most recent publication onwards.
-        </p>
+        <div className="publications-page-heading">
+          <p className="eyebrow">Research output</p>
+          <h1>Publications</h1>
+          <p className="page-lead">
+            Papers ordered from the most recent publication onwards.
+          </p>
+        </div>
 
         {!available ? (
           <div className="empty-state">
