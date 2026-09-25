@@ -186,14 +186,14 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <ResearchPracticeCards />
+
       <SitePopulationProgress
         papers={publicationsAvailable ? papers : null}
         projects={projectsAvailable ? projects : null}
         presentations={conferencesAvailable ? presentations : null}
         teaching={teachingAvailable ? teaching : null}
       />
-
-      <ResearchPracticeCards />
 
       <section className="section" id="publications">
         <div className="site-shell">
