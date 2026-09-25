@@ -37,13 +37,21 @@ function formatLevel(level: string) {
 
 export default function TeachingCard({
   item,
+  imageSide = 'left',
 }: {
   item: PublicTeachingItem
+  imageSide?: 'left' | 'right'
 }) {
   const period = formatTeachingPeriod(item)
 
   return (
-    <article className="teaching-card">
+    <article
+      className={
+        imageSide === 'right'
+          ? 'teaching-card teaching-card-image-right'
+          : 'teaching-card'
+      }
+    >
       <div className="teaching-card-visual" aria-hidden="true">
         <TeachingCardVisual
           filename={item.course_image_filename}
