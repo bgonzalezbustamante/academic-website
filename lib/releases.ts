@@ -27,22 +27,22 @@ export const releases: ReleaseNote[] = [
         title: 'Academic profile',
         items: [
           'Introduced the new portrait-led academic profile, current appointments, research interests, institutional branding and responsible-research statements for DORA and CRediT.',
-          'Added a clearer homepage for featured publications and projects, yearly work activity and the current presentation roadmap.',
+          'Added a clearer homepage for featured publications and projects, yearly work activity, the current presentation roadmap, and a live population-progress snapshot connected to Research Dashboard.',
           'Added a public Teaching Portfolio for current and previous courses, teaching levels and cumulative teaching indicators.',
         ],
       },
       {
         title: 'Research outputs',
         items: [
-          'Added public Publications with citation-based records, filters, summary indicators, publication details and optional Key highlights.',
+          'Added public Publications with citation-based records, compact Markdown abstracts, filters, summary indicators, pagination, publication details and optional Key highlights.',
           'Added public Projects with funding information, associated publications and conference presentations, including the TERGAP geographic-coverage view.',
-          'Added a Conferences dashboard with presentation indicators, geographic coverage and a paginated presentation record.',
+          'Added a Conferences dashboard with presentation indicators, multi-day date ranges, geographic coverage, virtual-presentation reporting and a paginated presentation record.',
         ],
       },
       {
         title: 'Public data and analytics',
         items: [
-          'Connected the site to Research Dashboard only through deliberately public, anonymous-safe contracts rather than private application tables.',
+          'Connected the site to Research Dashboard only through deliberately public, anonymous-safe contracts rather than private application tables, including live progress indicators for the ongoing website population.',
           'Added aggregate yearly work analytics while keeping individual work sessions and private research-management data outside the public website.',
         ],
       },
