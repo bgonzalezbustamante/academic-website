@@ -309,10 +309,6 @@ export default async function HomePage() {
                   conferences, workshops, and seminars.
                 </p>
               </div>
-              <Link className="section-link" href="/conferences">
-                View all
-                <span aria-hidden="true">→</span>
-              </Link>
             </div>
             <div className="empty-state">
               <p>Recent presentation information is temporarily unavailable.</p>
