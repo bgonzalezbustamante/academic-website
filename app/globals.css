@@ -1071,14 +1071,16 @@ h4 {
 }
 
 .roadmap-full-note {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.4rem;
   margin: 0.45rem 0 0;
   color: var(--oxford-ash);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.68rem;
   line-height: 1.4;
+  text-align: right;
 }
 
 .roadmap-full-note svg {
