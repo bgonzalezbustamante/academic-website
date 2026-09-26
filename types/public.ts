@@ -10,6 +10,8 @@ export type PublicPaper = {
   preprint_url: string | null
   github_url: string | null
   dataset_url: string | null
+  project_url: string | null
+  si_file_url: string | null
   featured: boolean
   publication_index: string | null
 }
