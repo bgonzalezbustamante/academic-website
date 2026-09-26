@@ -1,6 +1,7 @@
 import {
   faCalendarDays,
   faCircleCheck,
+  faRoute,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
@@ -112,6 +113,15 @@ export default function PresentationRoadmap({
             </p>
             <h2>{heading}</h2>
             <p className="section-intro">{description}</p>
+            {isCompact && (
+              <p className="roadmap-full-note">
+                <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
+                <span>
+                  The full current-year roadmap is available in the{' '}
+                  <Link href="/conferences">Conferences section</Link>.
+                </span>
+              </p>
+            )}
           </div>
 
           {isCompact && (
