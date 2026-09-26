@@ -294,17 +294,18 @@ export default async function HomePage() {
           presentations={presentations}
           year={currentYear}
           currentDate={currentAmsterdam.date}
+          variant="compact"
         />
       ) : (
         <section className="section roadmap-section" id="roadmap">
           <div className="site-shell">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">Roadmap</p>
-                <h2>Conferences</h2>
+                <p className="eyebrow">Conferences</p>
+                <h2>Latest &amp; forthcoming presentations</h2>
                 <p className="section-intro">
-                  Public presentations at conferences, workshops, and seminars
-                  during {currentYear}.
+                  The five most recent and forthcoming public presentations at
+                  conferences, workshops, and seminars.
                 </p>
               </div>
               <Link className="section-link" href="/conferences">
@@ -313,7 +314,7 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="empty-state">
-              <p>Presentation roadmap is temporarily unavailable.</p>
+              <p>Recent presentation information is temporarily unavailable.</p>
             </div>
           </div>
         </section>
