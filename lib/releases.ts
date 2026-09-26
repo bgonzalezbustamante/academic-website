@@ -27,7 +27,7 @@ export const releases: ReleaseNote[] = [
         title: 'Academic profile',
         items: [
           'Introduced the new portrait-led academic profile, current appointments, research interests, institutional branding and responsible-research statements for DORA and CRediT.',
-          'Added a clearer homepage for featured publications and projects, yearly work activity, the current presentation roadmap, and a live population-progress snapshot connected to Research Dashboard.',
+          'Added a clearer homepage for featured publications and projects, yearly work activity, a compact five-presentation recent/forthcoming timeline, and a live population-progress snapshot connected to Research Dashboard.',
           'Added a public Teaching Portfolio for current and previous courses, teaching levels and cumulative teaching indicators.',
         ],
       },
@@ -36,7 +36,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Added public Publications with citation-based records, compact Markdown abstracts, filters, summary indicators, pagination, publication details, Project/SI File resource links and optional Key highlights.',
           'Added public Projects with funding information, associated publications and conference presentations, including the TERGAP geographic-coverage view.',
-          'Added a Conferences dashboard with presentation indicators, multi-day date ranges, geographic coverage, virtual-presentation reporting and a paginated presentation record.',
+          'Added a Conferences dashboard with a full current-year presentation roadmap, all-years geographic coverage, presentation indicators, multi-day date ranges, virtual-presentation reporting and a paginated presentation record.',
         ],
       },
       {
