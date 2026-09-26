@@ -71,7 +71,7 @@
 - Moved the full current-year multi-row Roadmap from Home to the Conferences page after the presentation Overview.
 - Replaced the homepage Roadmap with a single-row five-presentation timeline that prioritises ongoing/forthcoming presentations and backfills with the most recently completed presentations when necessary; a compact route-icon note links visitors to the full roadmap in Conferences.
 - Kept the three presentation/country/keynote KPI cards at the top of the Conferences dashboard and retained the geographic section title `Presentation map`.
-- Reordered the homepage to Academic profile → DORA / CRediT → Population in progress → Featured publications → Featured projects → Activity over time → Roadmap.
+- Reordered the homepage to Academic profile → DORA / CRediT → Population in progress → Featured publications → Featured projects → compact presentation timeline → Activity over time.
 - Added a Dashboard-backed `Population in progress` card below DORA / CRediT, normalising ingestion progress to percentages for Publications (61 intended records), Projects (15), Conferences (137), and Teaching/Supervision (35 times taught), with 2012–2026 year-coverage strips for all four domains.
 - Increased the homepage Featured publications cap from three to four.
 - Restyled publication year/index/Featured metadata and project status/period/Featured metadata as compact tags.
