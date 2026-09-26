@@ -32,6 +32,11 @@ export default function PublicationLinks({ paper }: Props) {
       icon: <FontAwesomeIcon icon={faFileLines} aria-hidden="true" />,
     },
     {
+      label: 'Project',
+      href: paper.project_url,
+      icon: <FontAwesomeIcon icon={faDiagramProject} aria-hidden="true" />,
+    },
+    {
       label: 'Code',
       href: paper.github_url,
       icon: <FontAwesomeIcon icon={faGithub} aria-hidden="true" />,
@@ -40,11 +45,6 @@ export default function PublicationLinks({ paper }: Props) {
       label: 'Dataset',
       href: paper.dataset_url,
       icon: <FontAwesomeIcon icon={faDatabase} aria-hidden="true" />,
-    },
-    {
-      label: 'Project',
-      href: paper.project_url,
-      icon: <FontAwesomeIcon icon={faDiagramProject} aria-hidden="true" />,
     },
     {
       label: 'SI File',
