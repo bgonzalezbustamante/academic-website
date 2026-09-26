@@ -34,7 +34,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Research outputs',
         items: [
-          'Added public Publications with citation-based records, compact Markdown abstracts, filters, summary indicators, pagination, publication details and optional Key highlights.',
+          'Added public Publications with citation-based records, compact Markdown abstracts, filters, summary indicators, pagination, publication details, Project/SI File resource links and optional Key highlights.',
           'Added public Projects with funding information, associated publications and conference presentations, including the TERGAP geographic-coverage view.',
           'Added a Conferences dashboard with presentation indicators, multi-day date ranges, geographic coverage, virtual-presentation reporting and a paginated presentation record.',
         ],
