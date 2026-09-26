@@ -12,6 +12,8 @@ const PUBLIC_PAPER_FIELDS = [
   'preprint_url',
   'github_url',
   'dataset_url',
+  'project_url',
+  'si_file_url',
   'featured',
   'publication_index',
 ]
