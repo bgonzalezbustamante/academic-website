@@ -131,78 +131,71 @@ export default async function ConferencesPage() {
           </div>
         ) : (
           <>
-            <PresentationRoadmap
-              presentations={presentations}
-              year={currentAmsterdam.year}
-              currentDate={currentAmsterdam.date}
-              embedded
-            />
+            <section
+              className="conference-stats-grid"
+              aria-label="Conference summary"
+            >
+              <article className="conference-stat-card">
+                <div className="conference-stat-icon">
+                  <FontAwesomeIcon
+                    icon={faMicrophoneLines}
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <p>Presentations</p>
+                  <strong>
+                    {presentations.length.toLocaleString('en-GB')}
+                  </strong>
+                </div>
+              </article>
+
+              <article className="conference-stat-card">
+                <div className="conference-stat-icon">
+                  <FontAwesomeIcon
+                    icon={faEarthEurope}
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <p>Countries</p>
+                  <strong>
+                    {countryCounts.size.toLocaleString('en-GB')}
+                  </strong>
+                  {virtualPresentationCount > 0 && (
+                    <span className="conference-stat-note">
+                      {virtualPresentationCount.toLocaleString('en-GB')}{' '}
+                      virtual {virtualPresentationCount === 1
+                        ? 'conference/workshop'
+                        : 'conferences/workshops'}
+                    </span>
+                  )}
+                </div>
+              </article>
+
+              <article className="conference-stat-card">
+                <div className="conference-stat-icon">
+                  <FontAwesomeIcon
+                    icon={faStar}
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <p>Keynote</p>
+                  <strong>
+                    {keynotePercentage.toFixed(1)}%
+                  </strong>
+                </div>
+              </article>
+            </section>
 
             <section className="conference-map-section">
               <div className="section-heading compact-heading">
                 <div>
                   <p className="eyebrow">Geographic coverage</p>
-                  <h2>Presentation map: all years</h2>
+                  <h2>Presentation map</h2>
                 </div>
               </div>
-
-              <section
-                className="conference-stats-grid"
-                aria-label="Conference summary"
-              >
-                <article className="conference-stat-card">
-                  <div className="conference-stat-icon">
-                    <FontAwesomeIcon
-                      icon={faMicrophoneLines}
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div>
-                    <p>Presentations</p>
-                    <strong>
-                      {presentations.length.toLocaleString('en-GB')}
-                    </strong>
-                  </div>
-                </article>
-
-                <article className="conference-stat-card">
-                  <div className="conference-stat-icon">
-                    <FontAwesomeIcon
-                      icon={faEarthEurope}
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div>
-                    <p>Countries</p>
-                    <strong>
-                      {countryCounts.size.toLocaleString('en-GB')}
-                    </strong>
-                    {virtualPresentationCount > 0 && (
-                      <span className="conference-stat-note">
-                        {virtualPresentationCount.toLocaleString('en-GB')}{' '}
-                        virtual {virtualPresentationCount === 1
-                          ? 'conference/workshop'
-                          : 'conferences/workshops'}
-                      </span>
-                    )}
-                  </div>
-                </article>
-
-                <article className="conference-stat-card">
-                  <div className="conference-stat-icon">
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div>
-                    <p>Keynote</p>
-                    <strong>
-                      {keynotePercentage.toFixed(1)}%
-                    </strong>
-                  </div>
-                </article>
-              </section>
 
               <AcademicWorldMap
                 countries={mapCountries}
@@ -226,6 +219,13 @@ export default async function ConferencesPage() {
                 presentations={presentations}
               />
             </section>
+
+            <PresentationRoadmap
+              presentations={presentations}
+              year={currentAmsterdam.year}
+              currentDate={currentAmsterdam.date}
+              embedded
+            />
           </>
         )}
       </div>
