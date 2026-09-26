@@ -10,6 +10,7 @@ import AcademicWorldMap, {
   type WorldMapCountry,
 } from '@/components/academic-world-map'
 import ConferenceOverviewTable from '@/components/conference-overview-table'
+import PresentationRoadmap from '@/components/presentation-roadmap'
 import { listPublicConferencePresentations } from '@/lib/conferences'
 import {
   countryNameToIso3,
@@ -27,6 +28,26 @@ export const metadata: Metadata = {
 }
 
 export const revalidate = 300
+
+function getCurrentAmsterdamDateParts() {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Amsterdam',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date())
+
+  const value = Object.fromEntries(
+    parts
+      .filter((part) => part.type !== 'literal')
+      .map((part) => [part.type, part.value])
+  )
+
+  return {
+    year: Number(value.year),
+    date: `${value.year}-${value.month}-${value.day}`,
+  }
+}
 
 export default async function ConferencesPage() {
   let presentations: PublicConferencePresentation[] = []
@@ -87,6 +108,8 @@ export default async function ConferencesPage() {
       ? (keynoteCount / presentations.length) * 100
       : 0
 
+  const currentAmsterdam = getCurrentAmsterdamDateParts()
+
   return (
     <section className="page-section">
       <div className="site-shell conference-dashboard">
@@ -108,72 +131,82 @@ export default async function ConferencesPage() {
           </div>
         ) : (
           <>
-            <section className="conference-stats-grid" aria-label="Conference summary">
-              <article className="conference-stat-card">
-                <div className="conference-stat-icon">
-                  <FontAwesomeIcon
-                    icon={faMicrophoneLines}
-                    aria-hidden="true"
-                  />
-                </div>
-                <div>
-                  <p>Presentations</p>
-                  <strong>
-                    {presentations.length.toLocaleString('en-GB')}
-                  </strong>
-                </div>
-              </article>
-
-              <article className="conference-stat-card">
-                <div className="conference-stat-icon">
-                  <FontAwesomeIcon
-                    icon={faEarthEurope}
-                    aria-hidden="true"
-                  />
-                </div>
-                <div>
-                  <p>Countries</p>
-                  <strong>
-                    {countryCounts.size.toLocaleString('en-GB')}
-                  </strong>
-                  {virtualPresentationCount > 0 && (
-                    <span className="conference-stat-note">
-                      {virtualPresentationCount.toLocaleString('en-GB')}{' '}
-                      virtual {virtualPresentationCount === 1
-                        ? 'conference/workshop'
-                        : 'conferences/workshops'}
-                    </span>
-                  )}
-                </div>
-              </article>
-
-              <article className="conference-stat-card">
-                <div className="conference-stat-icon">
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    aria-hidden="true"
-                  />
-                </div>
-                <div>
-                  <p>Keynote</p>
-                  <strong>
-                    {keynotePercentage.toFixed(1)}%
-                  </strong>
-                </div>
-              </article>
-            </section>
+            <PresentationRoadmap
+              presentations={presentations}
+              year={currentAmsterdam.year}
+              currentDate={currentAmsterdam.date}
+              embedded
+            />
 
             <section className="conference-map-section">
               <div className="section-heading compact-heading">
                 <div>
                   <p className="eyebrow">Geographic coverage</p>
-                  <h2>Presentation map</h2>
+                  <h2>Presentation map: all years</h2>
                 </div>
               </div>
 
+              <section
+                className="conference-stats-grid"
+                aria-label="Conference summary"
+              >
+                <article className="conference-stat-card">
+                  <div className="conference-stat-icon">
+                    <FontAwesomeIcon
+                      icon={faMicrophoneLines}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div>
+                    <p>Presentations</p>
+                    <strong>
+                      {presentations.length.toLocaleString('en-GB')}
+                    </strong>
+                  </div>
+                </article>
+
+                <article className="conference-stat-card">
+                  <div className="conference-stat-icon">
+                    <FontAwesomeIcon
+                      icon={faEarthEurope}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div>
+                    <p>Countries</p>
+                    <strong>
+                      {countryCounts.size.toLocaleString('en-GB')}
+                    </strong>
+                    {virtualPresentationCount > 0 && (
+                      <span className="conference-stat-note">
+                        {virtualPresentationCount.toLocaleString('en-GB')}{' '}
+                        virtual {virtualPresentationCount === 1
+                          ? 'conference/workshop'
+                          : 'conferences/workshops'}
+                      </span>
+                    )}
+                  </div>
+                </article>
+
+                <article className="conference-stat-card">
+                  <div className="conference-stat-icon">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div>
+                    <p>Keynote</p>
+                    <strong>
+                      {keynotePercentage.toFixed(1)}%
+                    </strong>
+                  </div>
+                </article>
+              </section>
+
               <AcademicWorldMap
                 countries={mapCountries}
-                ariaLabel="World map showing conference presentations by country"
+                ariaLabel="World map showing conference presentations by country across all years"
                 valueLabel="presentations"
                 singularValueLabel="presentation"
                 palette="conference"
