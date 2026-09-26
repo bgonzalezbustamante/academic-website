@@ -1070,6 +1070,33 @@ h4 {
   grid-template-rows: 1fr;
 }
 
+.roadmap-full-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.45rem 0 0;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.roadmap-full-note svg {
+  width: 0.7rem;
+  flex: 0 0 0.7rem;
+  color: var(--oxford-coral);
+}
+
+.roadmap-full-note a {
+  color: var(--oxford-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.roadmap-full-note a:hover {
+  color: var(--oxford-coral);
+}
+
 .roadmap-scroll {
   overflow-x: auto;
   overscroll-behavior-inline: contain;
@@ -1872,9 +1899,6 @@ h4 {
   margin-top: 1rem;
 }
 
-.conference-map-section .conference-stats-grid {
-  margin-bottom: 1rem;
-}
 
 .conference-stat-card {
   display: flex;
