@@ -264,6 +264,37 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {conferencesAvailable ? (
+        <PresentationRoadmap
+          presentations={presentations}
+          year={currentYear}
+          currentDate={currentAmsterdam.date}
+          variant="compact"
+        />
+      ) : (
+        <section className="section roadmap-section" id="roadmap">
+          <div className="site-shell">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Conferences</p>
+                <h2>Latest/forthcoming presentations</h2>
+                <p className="section-intro">
+                  The five most recent/forthcoming public presentations at
+                  conferences, workshops, and seminars.
+                </p>
+              </div>
+              <Link className="section-link" href="/conferences">
+                View all
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="empty-state">
+              <p>Recent presentation information is temporarily unavailable.</p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {workAnalytics ? (
         <PublicWorkAnalyticsSection
           analytics={workAnalytics}
@@ -284,37 +315,6 @@ export default async function HomePage() {
               <p>
                 Public work analytics are temporarily unavailable.
               </p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {conferencesAvailable ? (
-        <PresentationRoadmap
-          presentations={presentations}
-          year={currentYear}
-          currentDate={currentAmsterdam.date}
-          variant="compact"
-        />
-      ) : (
-        <section className="section roadmap-section" id="roadmap">
-          <div className="site-shell">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">Conferences</p>
-                <h2>Latest &amp; forthcoming presentations</h2>
-                <p className="section-intro">
-                  The five most recent and forthcoming public presentations at
-                  conferences, workshops, and seminars.
-                </p>
-              </div>
-              <Link className="section-link" href="/conferences">
-                View all
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-            <div className="empty-state">
-              <p>Recent presentation information is temporarily unavailable.</p>
             </div>
           </div>
         </section>
