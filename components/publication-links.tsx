@@ -2,7 +2,9 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
   faBookOpen,
   faDatabase,
+  faDiagramProject,
   faFileLines,
+  faPaperclip,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -38,6 +40,16 @@ export default function PublicationLinks({ paper }: Props) {
       label: 'Dataset',
       href: paper.dataset_url,
       icon: <FontAwesomeIcon icon={faDatabase} aria-hidden="true" />,
+    },
+    {
+      label: 'Project',
+      href: paper.project_url,
+      icon: <FontAwesomeIcon icon={faDiagramProject} aria-hidden="true" />,
+    },
+    {
+      label: 'SI File',
+      href: paper.si_file_url,
+      icon: <FontAwesomeIcon icon={faPaperclip} aria-hidden="true" />,
     },
   ]
 
