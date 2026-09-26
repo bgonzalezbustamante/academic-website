@@ -86,7 +86,7 @@ export default function PresentationRoadmap({
       )
 
   const heading = isCompact
-    ? 'Latest & forthcoming presentations'
+    ? 'Latest/forthcoming presentations'
     : 'Presentation roadmap'
 
   const description = isCompact
