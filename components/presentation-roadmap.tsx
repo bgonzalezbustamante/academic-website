@@ -115,12 +115,6 @@ export default function PresentationRoadmap({
             <p className="section-intro">{description}</p>
           </div>
 
-          {isCompact && (
-            <Link className="section-link" href="/conferences">
-              View all
-              <span aria-hidden="true">→</span>
-            </Link>
-          )}
         </div>
 
         {ordered.length === 0 ? (
