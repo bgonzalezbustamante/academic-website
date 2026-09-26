@@ -264,6 +264,32 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {workAnalytics ? (
+        <PublicWorkAnalyticsSection
+          analytics={workAnalytics}
+        />
+      ) : (
+        <section
+          className="section activity-section"
+          id="activity"
+        >
+          <div className="site-shell">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">Current year</p>
+                <h2>Activity over time</h2>
+              </div>
+            </div>
+            <div className="empty-state">
+              <p>
+                Public work analytics are temporarily unavailable.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+
       {conferencesAvailable ? (
         <PresentationRoadmap
           presentations={presentations}
@@ -290,31 +316,6 @@ export default async function HomePage() {
             </div>
             <div className="empty-state">
               <p>Recent presentation information is temporarily unavailable.</p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {workAnalytics ? (
-        <PublicWorkAnalyticsSection
-          analytics={workAnalytics}
-        />
-      ) : (
-        <section
-          className="section activity-section"
-          id="activity"
-        >
-          <div className="site-shell">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">Current year</p>
-                <h2>Activity over time</h2>
-              </div>
-            </div>
-            <div className="empty-state">
-              <p>
-                Public work analytics are temporarily unavailable.
-              </p>
             </div>
           </div>
         </section>
