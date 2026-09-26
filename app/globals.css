@@ -1062,6 +1062,14 @@ h4 {
   background: var(--oxford-off-white);
 }
 
+.roadmap-section-embedded.section {
+  padding: clamp(1.4rem, 3vw, 2rem) 0;
+}
+
+.roadmap-section-compact .roadmap-rows {
+  grid-template-rows: 1fr;
+}
+
 .roadmap-scroll {
   overflow-x: auto;
   overscroll-behavior-inline: contain;
@@ -1862,6 +1870,10 @@ h4 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.8rem;
   margin-top: 1rem;
+}
+
+.conference-map-section .conference-stats-grid {
+  margin-bottom: 1rem;
 }
 
 .conference-stat-card {
