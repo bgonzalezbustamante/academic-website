@@ -90,7 +90,7 @@ export default function PresentationRoadmap({
     : 'Presentation roadmap'
 
   const description = isCompact
-    ? 'The five most recent and forthcoming public presentations at conferences, workshops, and seminars.'
+    ? 'The five most recent/forthcoming public presentations at conferences, workshops, and seminars.'
     : `Public presentations at conferences, workshops, and seminars during ${year}.`
 
   return (
@@ -113,15 +113,6 @@ export default function PresentationRoadmap({
             </p>
             <h2>{heading}</h2>
             <p className="section-intro">{description}</p>
-            {isCompact && (
-              <p className="roadmap-full-note">
-                <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
-                <span>
-                  The full current-year roadmap is available in the{' '}
-                  <Link href="/conferences">Conferences section</Link>.
-                </span>
-              </p>
-            )}
           </div>
 
           {isCompact && (
@@ -271,6 +262,16 @@ export default function PresentationRoadmap({
               })}
             </div>
           </div>
+        )}
+
+        {isCompact && ordered.length > 0 && (
+          <p className="roadmap-full-note">
+            <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
+            <span>
+              The full current-year roadmap is available in{' '}
+              <Link href="/conferences">Conferences</Link>.
+            </span>
+          </p>
         )}
       </RoadmapShell>
     </section>
