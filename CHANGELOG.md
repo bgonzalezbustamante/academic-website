@@ -68,6 +68,9 @@
 - Wrapped the homepage Roadmap into chronological rows of at most five presentations. The upper/lower label rhythm continues across row boundaries, a partial final row draws its timeline only between its populated nodes, and each completed row now connects continuously to the first node of the next row with a right-edge return path.
 - Corrected the Roadmap into a continuous snake layout so the fifth presentation connects to the sixth, with alternating row direction and continuous edge connectors across subsequent rows.
 - Migrated Roadmap chronology to conference `start_date`/`end_date` ranges: ordering uses `start_date`, completed/upcoming state uses `end_date`, and labels now show the formatted date or date range together with location instead of a redundant hover tooltip.
+- Moved the full current-year multi-row Roadmap from Home to the Conferences page directly below the page heading.
+- Replaced the homepage Roadmap with a single-row five-presentation timeline that prioritises ongoing/forthcoming presentations and backfills with the most recently completed presentations when necessary.
+- Reorganised the Conferences dashboard so the all-period geographic section is titled `Presentation map: all years`, with the three presentation/country/keynote KPI cards positioned between that heading and the map.
 - Reordered the homepage to Academic profile → DORA / CRediT → Population in progress → Featured publications → Featured projects → Activity over time → Roadmap.
 - Added a Dashboard-backed `Population in progress` card below DORA / CRediT, normalising ingestion progress to percentages for Publications (61 intended records), Projects (15), Conferences (137), and Teaching/Supervision (35 times taught), with 2012–2026 year-coverage strips for all four domains.
 - Increased the homepage Featured publications cap from three to four.
