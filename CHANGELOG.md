@@ -75,6 +75,7 @@
 - Added a citation-based Publications listing using the detail-only public citation field, while retaining tags above and resource links below.
 - Added Publications filters for Year and Publication index.
 - Added publication-card abstracts to the Publications browser between the citation and resource links, rendered through the shared safe Markdown pipeline in a compact text style.
+- Extended the public paper contract with nullable `project_url` and `si_file_url` fields in both list and detail RPCs, and exposed them as Project and SI File resource links on publication cards and detail pages.
 - Added client-side Publications pagination at ten records per page, applied after filters and reset to page 1 whenever filters change.
 - Replaced the dynamically alphabetised Publication Index filter with a fixed seven-category Publication Index taxonomy in this order: WoS-SSCI, Scopus, WoS-ESCI, Book chapter, SciELO/Latindex, Working paper, Preprint.
 - Added Publications KPI cards for total papers, distinct journals and first-author percentage, with first authorship defined by Bastián González-Bustamante appearing first in the ordered public `authors[]` array.
