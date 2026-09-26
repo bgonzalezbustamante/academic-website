@@ -23,6 +23,8 @@ function normalizePaper(row: Record<string, unknown>): PublicPaper {
     preprint_url: nullableString(row.preprint_url),
     github_url: nullableString(row.github_url),
     dataset_url: nullableString(row.dataset_url),
+    project_url: nullableString(row.project_url),
+    si_file_url: nullableString(row.si_file_url),
     featured: row.featured === true,
     publication_index: nullableString(row.publication_index),
   }
