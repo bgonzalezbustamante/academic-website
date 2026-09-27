@@ -884,6 +884,7 @@ h4 {
 
 .publication-detail-meta .publication-language-flag {
   width: 1.1rem;
+  transform: translateY(-1px);
 }
 
 .key-highlight-section {
