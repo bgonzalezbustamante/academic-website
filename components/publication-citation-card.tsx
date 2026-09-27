@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import PublicationLanguageFlag from '@/components/publication-language-flag'
 import PublicationLinks from '@/components/publication-links'
 import type { PublicPaper } from '@/types/public'
 
@@ -53,6 +54,9 @@ export default function PublicationCitationCard({
           <span className="metadata-tag">
             {paper.publication_index}
           </span>
+        )}
+        {paper.language && (
+          <PublicationLanguageFlag language={paper.language} />
         )}
         {paper.featured && (
           <span className="metadata-tag metadata-tag-accent">
