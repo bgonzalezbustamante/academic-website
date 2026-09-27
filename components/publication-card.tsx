@@ -22,11 +22,11 @@ export default function PublicationCard({ paper }: Props) {
         {paper.publication_index && (
           <span className="metadata-tag">{paper.publication_index}</span>
         )}
-        {paper.language && (
-          <PublicationLanguageFlag language={paper.language} />
-        )}
         {paper.featured && (
           <span className="metadata-tag metadata-tag-accent">Featured</span>
+        )}
+        {paper.language && (
+          <PublicationLanguageFlag language={paper.language} />
         )}
       </div>
       <h2>
