@@ -842,6 +842,7 @@ h4 {
 .publication-detail-meta {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.45rem 0.85rem;
   margin-top: 0.6rem;
   color: var(--oxford-ash);
@@ -849,10 +850,18 @@ h4 {
   font-size: 0.77rem;
 }
 
-.publication-detail-meta span + span::before {
+.publication-detail-meta > span + span::before {
   content: '·';
   margin-right: 0.85rem;
   color: var(--oxford-coral);
+}
+
+.publication-detail-meta .publication-language {
+  min-height: 0;
+}
+
+.publication-detail-meta .publication-language-flag {
+  width: 1.1rem;
 }
 
 .key-highlight-section {
