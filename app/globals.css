@@ -689,6 +689,17 @@ h4 {
   font-family: var(--font-roboto), Arial, sans-serif;
 }
 
+.publication-meta {
+  align-items: center;
+}
+
+.publication-meta .publication-language {
+  align-self: center;
+  height: 24px;
+  min-height: 24px;
+  line-height: 0;
+}
+
 .metadata-tag {
   display: inline-flex;
   align-items: center;
