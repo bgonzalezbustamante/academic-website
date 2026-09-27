@@ -856,12 +856,11 @@ h4 {
 }
 
 .publication-detail-meta > span + span::before {
-  content: '';
-  width: 0.32rem;
-  height: 0.32rem;
-  flex: 0 0 0.32rem;
+  content: '•';
   margin-right: 0.85rem;
-  background: var(--oxford-coral);
+  color: var(--oxford-blue);
+  font-size: 1.15em;
+  line-height: 1;
 }
 
 .publication-detail-meta .publication-language {
