@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import PublicationKeyHighlight from '@/components/publication-key-highlight'
+import PublicationLanguageFlag from '@/components/publication-language-flag'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 import PublicationLinks from '@/components/publication-links'
 import { getPublicPaper } from '@/lib/publications'
@@ -72,6 +73,9 @@ export default async function PublicationPage({ params }: Props) {
           )}
           {paper.publication_index && (
             <span>{paper.publication_index}</span>
+          )}
+          {paper.language && (
+            <PublicationLanguageFlag language={paper.language} />
           )}
         </div>
 
