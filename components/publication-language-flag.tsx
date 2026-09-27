@@ -1,13 +1,13 @@
 import type { PublicPaperLanguage } from '@/types/public'
 
-const LANGUAGE_FLAGS: Record<PublicPaperLanguage, string> = {
-  English: '🇬🇧',
-  Spanish: '🇪🇸',
-  Portuguese: '🇵🇹',
-  Dutch: '🇳🇱',
-  German: '🇩🇪',
-  French: '🇫🇷',
-  Italian: '🇮🇹',
+const LANGUAGE_FLAG_CODES: Record<PublicPaperLanguage, string> = {
+  English: 'gb',
+  Spanish: 'es',
+  Portuguese: 'pt',
+  Dutch: 'nl',
+  German: 'de',
+  French: 'fr',
+  Italian: 'it',
 }
 
 export default function PublicationLanguageFlag({
@@ -15,14 +15,22 @@ export default function PublicationLanguageFlag({
 }: {
   language: PublicPaperLanguage
 }) {
+  const countryCode = LANGUAGE_FLAG_CODES[language]
+
   return (
     <span
-      className="publication-language-flag"
+      className="publication-language"
       role="img"
       aria-label={`${language} publication`}
       title={language}
     >
-      {LANGUAGE_FLAGS[language]}
+      <span
+        className="publication-language-flag"
+        style={{
+          backgroundImage: `url(/flags/${countryCode}.svg)`,
+        }}
+        aria-hidden="true"
+      />
     </span>
   )
 }
