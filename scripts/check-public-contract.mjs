@@ -16,7 +16,18 @@ const PUBLIC_PAPER_FIELDS = [
   'si_file_url',
   'featured',
   'publication_index',
+  'language',
 ]
+
+const PUBLIC_PAPER_LANGUAGES = new Set([
+  'English',
+  'Spanish',
+  'Portuguese',
+  'Dutch',
+  'German',
+  'French',
+  'Italian',
+])
 
 const PAPER_DETAIL_ONLY_FIELDS = [
   'citation',
@@ -137,6 +148,15 @@ function assertPaperShape(paper, { detail = false } = {}) {
 
   if (!Array.isArray(paper.authors)) {
     fail('Public paper authors must be an array.')
+  }
+
+  if (
+    paper.language != null &&
+    !PUBLIC_PAPER_LANGUAGES.has(paper.language)
+  ) {
+    fail(
+      'Public paper language must be null or one of English, Spanish, Portuguese, Dutch, German, French, or Italian.'
+    )
   }
 
   if (detail) {
