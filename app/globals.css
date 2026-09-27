@@ -850,10 +850,18 @@ h4 {
   font-size: 0.77rem;
 }
 
+.publication-detail-meta > span {
+  display: inline-flex;
+  align-items: center;
+}
+
 .publication-detail-meta > span + span::before {
-  content: '•';
+  content: '';
+  width: 0.32rem;
+  height: 0.32rem;
+  flex: 0 0 0.32rem;
   margin-right: 0.85rem;
-  color: var(--oxford-blue);
+  background: var(--oxford-coral);
 }
 
 .publication-detail-meta .publication-language {
