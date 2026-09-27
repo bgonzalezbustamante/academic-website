@@ -2,10 +2,30 @@ import { createPublicSupabaseClient } from '@/lib/supabase/public'
 import type {
   PublicPaper,
   PublicPaperDetail,
+  PublicPaperLanguage,
 } from '@/types/public'
 
 function nullableString(value: unknown) {
   return value == null ? null : String(value)
+}
+
+const PUBLIC_PAPER_LANGUAGES = new Set<PublicPaperLanguage>([
+  'English',
+  'Spanish',
+  'Portuguese',
+  'Dutch',
+  'German',
+  'French',
+  'Italian',
+])
+
+function normalizePaperLanguage(
+  value: unknown
+): PublicPaperLanguage | null {
+  if (value == null) return null
+
+  const language = String(value) as PublicPaperLanguage
+  return PUBLIC_PAPER_LANGUAGES.has(language) ? language : null
 }
 
 function normalizePaper(row: Record<string, unknown>): PublicPaper {
@@ -27,6 +47,7 @@ function normalizePaper(row: Record<string, unknown>): PublicPaper {
     si_file_url: nullableString(row.si_file_url),
     featured: row.featured === true,
     publication_index: nullableString(row.publication_index),
+    language: normalizePaperLanguage(row.language),
   }
 }
 
