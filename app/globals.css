@@ -2366,6 +2366,97 @@ h4 {
   font-size: 0.56rem;
 }
 
+.population-readiness {
+  margin-top: 0.95rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(0, 33, 71, 0.09);
+}
+
+.population-readiness-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.population-readiness-heading h3 {
+  margin: 0;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.population-readiness-heading strong {
+  color: var(--oxford-blue);
+  font-family: var(--font-noto-serif), Georgia, serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.population-readiness-track {
+  position: relative;
+  height: 4px;
+  margin-top: 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 33, 71, 0.1);
+}
+
+.population-readiness-fill {
+  display: block;
+  width: var(--population-readiness);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--oxford-blue);
+}
+
+.population-readiness-marker {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: var(--population-readiness-threshold);
+  width: 2px;
+  border-radius: 999px;
+  background: var(--oxford-coral);
+  transform: translateX(-1px);
+}
+
+.population-readiness-scale {
+  position: relative;
+  min-height: 1.1rem;
+  margin-top: 0.18rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.58rem;
+  line-height: 1.3;
+}
+
+.population-readiness-scale span {
+  position: absolute;
+  left: var(--population-readiness-threshold);
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.population-readiness-note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.32rem;
+  margin: 0.18rem 0 0;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.61rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.population-readiness-note svg {
+  width: 0.65rem;
+  flex: 0 0 0.65rem;
+  color: var(--oxford-blue);
+}
+
 /* Research practice */
 
 .practice-section {
