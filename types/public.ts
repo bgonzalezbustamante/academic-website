@@ -14,6 +14,7 @@ export type PublicPaper = {
   si_file_url: string | null
   featured: boolean
   publication_index: string | null
+  language: string | null
 }
 
 export type PublicPaperDetail = PublicPaper & {
