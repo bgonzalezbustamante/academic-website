@@ -27,6 +27,7 @@ function normalizePaper(row: Record<string, unknown>): PublicPaper {
     si_file_url: nullableString(row.si_file_url),
     featured: row.featured === true,
     publication_index: nullableString(row.publication_index),
+    language: nullableString(row.language),
   }
 }
 
