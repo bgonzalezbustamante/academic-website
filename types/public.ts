@@ -1,3 +1,12 @@
+export type PublicPaperLanguage =
+  | 'English'
+  | 'Spanish'
+  | 'Portuguese'
+  | 'Dutch'
+  | 'German'
+  | 'French'
+  | 'Italian'
+
 export type PublicPaper = {
   slug: string
   title: string
@@ -14,6 +23,7 @@ export type PublicPaper = {
   si_file_url: string | null
   featured: boolean
   publication_index: string | null
+  language: PublicPaperLanguage | null
 }
 
 export type PublicPaperDetail = PublicPaper & {
