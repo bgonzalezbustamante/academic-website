@@ -700,6 +700,10 @@ h4 {
   line-height: 0;
 }
 
+.publication-meta .publication-language-flag {
+  transform: translateY(-1px);
+}
+
 .metadata-tag {
   display: inline-flex;
   align-items: center;
