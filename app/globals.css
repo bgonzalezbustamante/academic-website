@@ -851,7 +851,7 @@ h4 {
 }
 
 .publication-detail-meta > span + span::before {
-  content: '·';
+  content: '•';
   margin-right: 0.85rem;
   color: var(--oxford-blue);
 }
