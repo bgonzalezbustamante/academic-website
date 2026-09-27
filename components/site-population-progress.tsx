@@ -1,3 +1,5 @@
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { CSSProperties } from 'react'
 
 import ExternalInlineLink from '@/components/external-inline-link'
@@ -17,6 +19,13 @@ type Props = {
 
 const START_YEAR = 2012
 const END_YEAR = 2026
+const READINESS_THRESHOLD = 55
+const READINESS_WEIGHTS = {
+  publications: 0.35,
+  projects: 0.3,
+  teaching: 0.2,
+  conferences: 0.15,
+} as const
 const YEARS = Array.from(
   { length: END_YEAR - START_YEAR + 1 },
   (_, index) => START_YEAR + index
@@ -201,6 +210,26 @@ export default function SitePopulationProgress({
       )
     : null
 
+  const readinessAvailable =
+    papers !== null &&
+    projects !== null &&
+    presentations !== null &&
+    teachingTimes !== null
+
+  const siteReadiness = readinessAvailable
+    ? Math.round(
+        100 *
+          (Math.min(1, papers.length / 61) *
+            READINESS_WEIGHTS.publications +
+            Math.min(1, projects.length / 15) *
+              READINESS_WEIGHTS.projects +
+            Math.min(1, teachingTimes / 35) *
+              READINESS_WEIGHTS.teaching +
+            Math.min(1, presentations.length / 137) *
+              READINESS_WEIGHTS.conferences)
+      )
+    : null
+
   const metrics: Metric[] = [
     {
       label: 'Publications',
@@ -277,6 +306,66 @@ export default function SitePopulationProgress({
                 metric={metric}
               />
             ))}
+          </div>
+
+          <div className="population-readiness">
+            <div className="population-readiness-heading">
+              <h3>Site population readiness</h3>
+              <strong>
+                {siteReadiness !== null ? `${siteReadiness}%` : '—'}
+              </strong>
+            </div>
+
+            <div
+              className="population-readiness-track"
+              role="progressbar"
+              aria-label="Weighted site population readiness"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={siteReadiness ?? undefined}
+            >
+              <span
+                className="population-readiness-fill"
+                style={
+                  {
+                    '--population-readiness':
+                      siteReadiness !== null
+                        ? `${siteReadiness}%`
+                        : '0%',
+                  } as CSSProperties
+                }
+              />
+              <span
+                className="population-readiness-marker"
+                style={
+                  {
+                    '--population-readiness-threshold':
+                      `${READINESS_THRESHOLD}%`,
+                  } as CSSProperties
+                }
+                aria-hidden="true"
+              />
+            </div>
+
+            <div
+              className="population-readiness-scale"
+              style={
+                {
+                  '--population-readiness-threshold':
+                    `${READINESS_THRESHOLD}%`,
+                } as CSSProperties
+              }
+            >
+              <span>{READINESS_THRESHOLD}% launch threshold</span>
+            </div>
+
+            <p className="population-readiness-note">
+              <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
+              <span>
+                Weighted indicator: categories contribute differently to the
+                overall readiness score.
+              </span>
+            </p>
           </div>
         </div>
       </div>
