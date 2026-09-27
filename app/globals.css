@@ -705,14 +705,21 @@ h4 {
   text-transform: uppercase;
 }
 
-.publication-language-flag {
+.publication-language {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   min-height: 24px;
-  padding-inline: 0.12rem;
-  font-size: 1rem;
-  line-height: 1;
+}
+
+.publication-language-flag {
+  display: inline-block;
+  width: 1.25rem;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(0, 33, 71, 0.16);
+  border-radius: 0.12rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .metadata-tag-accent {
