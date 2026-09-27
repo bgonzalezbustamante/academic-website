@@ -853,7 +853,7 @@ h4 {
 .publication-detail-meta > span + span::before {
   content: '·';
   margin-right: 0.85rem;
-  color: var(--oxford-coral);
+  color: var(--oxford-blue);
 }
 
 .publication-detail-meta .publication-language {
