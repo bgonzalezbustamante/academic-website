@@ -5,6 +5,10 @@ import PublicationKeyHighlight from '@/components/publication-key-highlight'
 import PublicationLanguageFlag from '@/components/publication-language-flag'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 import PublicationLinks from '@/components/publication-links'
+import {
+  formatPublicationMonthYear,
+  isForthcomingPublicationDate,
+} from '@/lib/publication-dates'
 import { getPublicPaper } from '@/lib/publications'
 
 type Props = {
@@ -42,6 +46,12 @@ export default async function PublicationPage({ params }: Props) {
 
   if (!paper) notFound()
 
+  const publicationMonthYear =
+    formatPublicationMonthYear(paper.publication_date)
+  const forthcoming = isForthcomingPublicationDate(
+    paper.publication_date
+  )
+
   return (
     <article className="page-section">
       <div className="site-shell narrow-shell publication-detail">
@@ -59,16 +69,13 @@ export default async function PublicationPage({ params }: Props) {
         )}
 
         <div className="publication-detail-meta">
-          {paper.publication_date && (
+          {(paper.publication_date || forthcoming) && (
             <span>
-              Published{' '}
-              {new Intl.DateTimeFormat('en-GB', {
-                year: 'numeric',
-                month: 'long',
-                timeZone: 'UTC',
-              }).format(
-                new Date(`${paper.publication_date}T00:00:00Z`)
-              )}
+              {forthcoming
+                ? publicationMonthYear
+                  ? `Forthcoming · ${publicationMonthYear}`
+                  : 'Forthcoming'
+                : `Published ${publicationMonthYear}`}
             </span>
           )}
           {paper.publication_index && (
