@@ -5,7 +5,6 @@ import type {
   PublicTeachingItem,
 } from '@/types/public'
 
-export const POPULATION_START_YEAR = 2012
 export const POPULATION_END_YEAR = 2026
 
 export const POPULATION_TARGETS = {
@@ -15,13 +14,38 @@ export const POPULATION_TARGETS = {
   teaching: 35,
 } as const
 
-export const POPULATION_YEARS = Array.from(
-  {
-    length:
-      POPULATION_END_YEAR - POPULATION_START_YEAR + 1,
+export type PopulationDomain = keyof typeof POPULATION_TARGETS
+
+export const POPULATION_PERIODS: Record<
+  PopulationDomain,
+  { startYear: number; endYear: number }
+> = {
+  publications: {
+    startYear: 2012,
+    endYear: POPULATION_END_YEAR,
   },
-  (_, index) => POPULATION_START_YEAR + index
-)
+  projects: {
+    startYear: 2019,
+    endYear: POPULATION_END_YEAR,
+  },
+  conferences: {
+    startYear: 2012,
+    endYear: POPULATION_END_YEAR,
+  },
+  teaching: {
+    startYear: 2013,
+    endYear: POPULATION_END_YEAR,
+  },
+}
+
+export function populationYears(domain: PopulationDomain) {
+  const { startYear, endYear } = POPULATION_PERIODS[domain]
+
+  return Array.from(
+    { length: endYear - startYear + 1 },
+    (_, index) => startYear + index
+  )
+}
 
 export function populationPercentage(
   value: number,
@@ -37,19 +61,21 @@ export function populationPercentage(
 
 function yearsInRange(
   startYear: number | null,
-  endYear: number | null
+  endYear: number | null,
+  domain: PopulationDomain
 ) {
   if (startYear == null && endYear == null) {
     return []
   }
 
+  const period = POPULATION_PERIODS[domain]
   const start = Math.max(
-    POPULATION_START_YEAR,
-    startYear ?? endYear ?? POPULATION_START_YEAR
+    period.startYear,
+    startYear ?? endYear ?? period.startYear
   )
   const end = Math.min(
-    POPULATION_END_YEAR,
-    endYear ?? startYear ?? POPULATION_END_YEAR
+    period.endYear,
+    endYear ?? startYear ?? period.endYear
   )
 
   if (end < start) return []
@@ -63,6 +89,8 @@ function yearsInRange(
 export function publicationPopulationYears(
   papers: PublicPaper[]
 ) {
+  const period = POPULATION_PERIODS.publications
+
   return new Set(
     papers
       .map((paper) =>
@@ -73,8 +101,8 @@ export function publicationPopulationYears(
       .filter(
         (year) =>
           Number.isInteger(year) &&
-          year >= POPULATION_START_YEAR &&
-          year <= POPULATION_END_YEAR
+          year >= period.startYear &&
+          year <= period.endYear
       )
   )
 }
@@ -93,7 +121,8 @@ export function conferencePopulationYears(
 
       return yearsInRange(
         Number.isInteger(startYear) ? startYear : null,
-        Number.isInteger(endYear) ? endYear : null
+        Number.isInteger(endYear) ? endYear : null,
+        'conferences'
       )
     })
   )
@@ -104,7 +133,11 @@ export function projectPopulationYears(
 ) {
   return new Set(
     projects.flatMap((project) =>
-      yearsInRange(project.start_year, project.end_year)
+      yearsInRange(
+        project.start_year,
+        project.end_year,
+        'projects'
+      )
     )
   )
 }
@@ -117,8 +150,9 @@ export function teachingPopulationYears(
       yearsInRange(
         item.start_year,
         item.is_current
-          ? POPULATION_END_YEAR
-          : item.end_year
+          ? POPULATION_PERIODS.teaching.endYear
+          : item.end_year,
+        'teaching'
       )
     )
   )
