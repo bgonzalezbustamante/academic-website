@@ -1821,6 +1821,25 @@ h4 {
   font-weight: 600;
 }
 
+.project-outputs-note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  margin: 0.75rem 0 0;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.64rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.project-outputs-note svg {
+  width: 0.65rem;
+  flex: 0 0 0.65rem;
+  color: var(--oxford-blue);
+}
+
 .project-funding-section {
   display: flex;
   align-items: center;
