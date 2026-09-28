@@ -8,10 +8,7 @@ import type { Metadata } from 'next'
 
 import SectionPopulationProgress from '@/components/section-population-progress'
 import TeachingPortfolioList from '@/components/teaching-portfolio-list'
-import {
-  POPULATION_TARGETS,
-  teachingPopulationYears,
-} from '@/lib/site-population'
+import { teachingPopulationYears } from '@/lib/site-population'
 import { listPublicTeaching } from '@/lib/teaching'
 import type { PublicTeachingItem } from '@/types/public'
 
@@ -64,9 +61,9 @@ export default async function TeachingPage() {
         </div>
 
         <SectionPopulationProgress
+          domain="teaching"
           label="Teaching/Supervision"
           value={available ? teachingCount : null}
-          total={POPULATION_TARGETS.teaching}
           unit="times taught"
           coveredYears={
             available
