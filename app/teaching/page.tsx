@@ -6,7 +6,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 
+import SectionPopulationProgress from '@/components/section-population-progress'
 import TeachingPortfolioList from '@/components/teaching-portfolio-list'
+import {
+  POPULATION_TARGETS,
+  teachingPopulationYears,
+} from '@/lib/site-population'
 import { listPublicTeaching } from '@/lib/teaching'
 import type { PublicTeachingItem } from '@/types/public'
 
@@ -57,6 +62,18 @@ export default async function TeachingPage() {
             Courses taught and supervision across undergraduate, postgraduate, and doctoral programmes.
           </p>
         </div>
+
+        <SectionPopulationProgress
+          label="Teaching/Supervision"
+          value={available ? teachingCount : null}
+          total={POPULATION_TARGETS.teaching}
+          unit="times taught"
+          coveredYears={
+            available
+              ? teachingPopulationYears(teaching)
+              : null
+          }
+        />
 
         {!available ? (
           <div className="empty-state">
