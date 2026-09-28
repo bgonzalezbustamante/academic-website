@@ -1,5 +1,6 @@
 import {
   faArrowUpRightFromSquare,
+  faCircleInfo,
   faDiagramProject,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -181,6 +182,14 @@ export default async function ProjectPage({ params }: Props) {
                 />
               </div>
             )}
+
+            <p className="project-outputs-note">
+              <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
+              <span>
+                These are the project&apos;s research outputs in which I am
+                involved; the project may have additional outputs.
+              </span>
+            </p>
           </section>
         )}
 
