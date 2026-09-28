@@ -11,6 +11,7 @@ import { useMemo, useState } from 'react'
 import PublicationCitationCard, {
   type CitationPaper,
 } from '@/components/publication-citation-card'
+import { firstAuthorPercentage } from '@/lib/authorship'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 
 type Props = {
@@ -27,7 +28,6 @@ const PUBLICATION_INDEX_ORDER = [
   'Preprint',
 ] as const
 
-const PROFILE_AUTHOR_NAME = 'Bastián González-Bustamante'
 const PAGE_SIZE = 10
 
 function yearForPaper(paper: CitationPaper) {
@@ -64,16 +64,10 @@ export default function PublicationBrowser({ papers }: Props) {
     [papers]
   )
 
-  const firstAuthorPercentage = useMemo(() => {
-    if (papers.length === 0) return 0
-
-    const firstAuthor = papers.filter(
-      (paper) =>
-        paper.authors[0]?.trim() === PROFILE_AUTHOR_NAME
-    ).length
-
-    return (firstAuthor / papers.length) * 100
-  }, [papers])
+  const firstAuthorShare = useMemo(
+    () => firstAuthorPercentage(papers),
+    [papers]
+  )
 
   const filtered = useMemo(
     () =>
@@ -139,7 +133,7 @@ export default function PublicationBrowser({ papers }: Props) {
           </div>
           <div>
             <p>First author</p>
-            <strong>{firstAuthorPercentage.toFixed(1)}%</strong>
+            <strong>{firstAuthorShare.toFixed(1)}%</strong>
           </div>
         </article>
       </section>
