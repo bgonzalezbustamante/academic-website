@@ -4,12 +4,12 @@ import type { CSSProperties } from 'react'
 
 import ExternalInlineLink from '@/components/external-inline-link'
 import {
-  POPULATION_END_YEAR,
-  POPULATION_START_YEAR,
+  POPULATION_PERIODS,
   POPULATION_TARGETS,
-  POPULATION_YEARS,
+  type PopulationDomain,
   conferencePopulationYears,
   populationPercentage,
+  populationYears,
   projectPopulationYears,
   publicationPopulationYears,
   teachingPopulationYears,
@@ -37,6 +37,7 @@ const READINESS_WEIGHTS = {
 } as const
 
 type Metric = {
+  domain: PopulationDomain
   label: string
   value: number | null
   detail: string
@@ -78,30 +79,38 @@ function CoverageMetric({ metric }: { metric: Metric }) {
         {available ? metric.detail : 'Public data temporarily unavailable'}
       </p>
 
-      {metric.coveredYears && (
-        <figure className="population-year-figure">
-          <div
-            className="population-year-strip"
-            aria-label={`Yearly coverage from ${POPULATION_START_YEAR} to ${POPULATION_END_YEAR}`}
-          >
-            {POPULATION_YEARS.map((year) => (
-              <span
-                key={year}
-                className={
-                  metric.coveredYears?.has(year)
-                    ? 'population-year-cell population-year-cell-covered'
-                    : 'population-year-cell'
-                }
-                aria-label={`${year}: ${metric.coveredYears?.has(year) ? 'covered' : 'not yet covered'}`}
-              />
-            ))}
-          </div>
-          <figcaption>
-            <span>{POPULATION_START_YEAR}</span>
-            <span>{POPULATION_END_YEAR}</span>
-          </figcaption>
-        </figure>
-      )}
+      {metric.coveredYears && (() => {
+        const period = POPULATION_PERIODS[metric.domain]
+        const years = populationYears(metric.domain)
+
+        return (
+          <figure className="population-year-figure">
+            <div
+              className="population-year-strip"
+              style={{
+                gridTemplateColumns: `repeat(${years.length}, minmax(0, 1fr))`,
+              }}
+              aria-label={`Yearly coverage from ${period.startYear} to ${period.endYear}`}
+            >
+              {years.map((year) => (
+                <span
+                  key={year}
+                  className={
+                    metric.coveredYears?.has(year)
+                      ? 'population-year-cell population-year-cell-covered'
+                      : 'population-year-cell'
+                  }
+                  aria-label={`${year}: ${metric.coveredYears?.has(year) ? 'covered' : 'not yet covered'}`}
+                />
+              ))}
+            </div>
+            <figcaption>
+              <span>{period.startYear}</span>
+              <span>{period.endYear}</span>
+            </figcaption>
+          </figure>
+        )
+      })()}
     </div>
   )
 }
@@ -151,6 +160,7 @@ export default function SitePopulationProgress({
 
   const metrics: Metric[] = [
     {
+      domain: 'publications',
       label: 'Publications',
       value: papers
         ? populationPercentage(papers.length, POPULATION_TARGETS.publications)
@@ -161,6 +171,7 @@ export default function SitePopulationProgress({
       coveredYears: paperYears ?? undefined,
     },
     {
+      domain: 'projects',
       label: 'Projects',
       value: projects
         ? populationPercentage(projects.length, POPULATION_TARGETS.projects)
@@ -171,6 +182,7 @@ export default function SitePopulationProgress({
       coveredYears: projectCoverageYears ?? undefined,
     },
     {
+      domain: 'conferences',
       label: 'Conferences',
       value: presentations
         ? populationPercentage(presentations.length, POPULATION_TARGETS.conferences)
@@ -181,6 +193,7 @@ export default function SitePopulationProgress({
       coveredYears: presentationYears ?? undefined,
     },
     {
+      domain: 'teaching',
       label: 'Teaching/Supervision',
       value:
         teachingTimes !== null
