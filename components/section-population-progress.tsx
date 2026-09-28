@@ -1,28 +1,34 @@
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { CSSProperties } from 'react'
 
 import {
-  POPULATION_END_YEAR,
-  POPULATION_START_YEAR,
-  POPULATION_YEARS,
+  POPULATION_PERIODS,
+  POPULATION_TARGETS,
+  type PopulationDomain,
   populationPercentage,
+  populationYears,
 } from '@/lib/site-population'
 
 type Props = {
+  domain: PopulationDomain
   label: string
   value: number | null
-  total: number
   unit: string
   coveredYears?: Set<number> | null
 }
 
 export default function SectionPopulationProgress({
+  domain,
   label,
   value,
-  total,
   unit,
   coveredYears,
 }: Props) {
   const available = value !== null
+  const total = POPULATION_TARGETS[domain]
+  const period = POPULATION_PERIODS[domain]
+  const years = populationYears(domain)
   const progress = available
     ? populationPercentage(value, total)
     : 0
@@ -66,16 +72,19 @@ export default function SectionPopulationProgress({
             : 'Public data temporarily unavailable'}
         </span>
         <span>
-          {POPULATION_START_YEAR}–{POPULATION_END_YEAR}
+          {period.startYear}–{period.endYear}
         </span>
       </div>
 
       {coveredYears && (
         <div
           className="section-population-year-strip"
-          aria-label={`Yearly coverage from ${POPULATION_START_YEAR} to ${POPULATION_END_YEAR}`}
+          style={{
+            gridTemplateColumns: `repeat(${years.length}, minmax(0, 1fr))`,
+          }}
+          aria-label={`Yearly coverage from ${period.startYear} to ${period.endYear}`}
         >
-          {POPULATION_YEARS.map((year) => (
+          {years.map((year) => (
             <span
               key={year}
               className={
@@ -88,6 +97,13 @@ export default function SectionPopulationProgress({
           ))}
         </div>
       )}
+
+      <p className="section-population-note">
+        <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
+        <span>
+          This is my new site, and I am still populating this section.
+        </span>
+      </p>
     </section>
   )
 }
