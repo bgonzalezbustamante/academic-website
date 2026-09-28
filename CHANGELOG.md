@@ -23,7 +23,7 @@
 - Added a third main position: Research Leader, Oxford Computational Political Science Group, with external institutional links for Leiden University, Universidad Diego Portales and OCPSG.
 - Replaced the BGB header mark with a three-affiliation home link using the supplied Leiden University, Universidad Diego Portales and OCPSG logo assets in a consistent monochrome treatment.
 - Added Font Awesome 7 and Academicons for academic profiles, external links and publication resources.
-- Restored the profile portrait from `academic-kickstart` and prioritised the supplied Leiden seal as the site favicon.
+- Restored the profile portrait from `academic-kickstart` and prioritised the supplied Leiden seal as the site favicon. The portrait is now discovered from the single JPG/JPEG/PNG source file in `public/profile`, with a content-hashed generated asset so replacements and format changes invalidate image caches automatically.
 - Added the revised two-paragraph academic biography with consistent external-link arrows for the ECPR Political Methodology Steering Committee, TERGAP, COST Action CA22150 and the Enlace-Inserción UDP project.
 - Linked the DPhil (PhD) in Politics degree reference directly to the University of Oxford using the same external-link treatment as other biography links.
 - Added compact public email and Leiden University Wijnhaven address information to the footer, with a Creative Commons mark beside the year and name.
