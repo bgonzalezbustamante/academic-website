@@ -1,10 +1,15 @@
 import type { Metadata } from 'next'
 
 import ProjectCard from '@/components/project-card'
+import SectionPopulationProgress from '@/components/section-population-progress'
 import {
   listPublicProjects,
   orderPublicProjects,
 } from '@/lib/projects'
+import {
+  POPULATION_TARGETS,
+  projectPopulationYears,
+} from '@/lib/site-population'
 import type { PublicProject } from '@/types/public'
 
 export const metadata: Metadata = {
@@ -47,6 +52,18 @@ export default async function ProjectsPage() {
             public research outputs.
           </p>
         </div>
+
+        <SectionPopulationProgress
+          label="Projects"
+          value={available ? projects.length : null}
+          total={POPULATION_TARGETS.projects}
+          unit="projects"
+          coveredYears={
+            available
+              ? projectPopulationYears(projects)
+              : null
+          }
+        />
 
         {!available ? (
           <div className="empty-state">
