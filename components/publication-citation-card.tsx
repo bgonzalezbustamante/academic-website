@@ -2,14 +2,11 @@ import Link from 'next/link'
 
 import PublicationLanguageFlag from '@/components/publication-language-flag'
 import PublicationLinks from '@/components/publication-links'
+import { publicationYearLabel } from '@/lib/publication-dates'
 import type { PublicPaper } from '@/types/public'
 
 export type CitationPaper = PublicPaper & {
   citation: string | null
-}
-
-function publicationYear(date: string | null) {
-  return date ? date.slice(0, 4) : 'Forthcoming'
 }
 
 function renderCitation(citation: string) {
@@ -48,7 +45,7 @@ export default function PublicationCitationCard({
     <article className="publication-card publication-citation-card">
       <div className="metadata-tags publication-meta">
         <span className="metadata-tag">
-          {publicationYear(paper.publication_date)}
+          {publicationYearLabel(paper.publication_date)}
         </span>
         {paper.publication_index && (
           <span className="metadata-tag">
