@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 
 import PublicationBrowser from '@/components/publication-browser'
+import SectionPopulationProgress from '@/components/section-population-progress'
 import { getPublicPaper, listPublicPapers } from '@/lib/publications'
+import {
+  POPULATION_TARGETS,
+  publicationPopulationYears,
+} from '@/lib/site-population'
 import type { PublicPaper } from '@/types/public'
 
 export const metadata: Metadata = {
@@ -53,6 +58,18 @@ export default async function PublicationsPage() {
             Papers ordered from the most recent publication onwards.
           </p>
         </div>
+
+        <SectionPopulationProgress
+          label="Publications"
+          value={available ? papers.length : null}
+          total={POPULATION_TARGETS.publications}
+          unit="publications"
+          coveredYears={
+            available
+              ? publicationPopulationYears(papers)
+              : null
+          }
+        />
 
         {!available ? (
           <div className="empty-state">
