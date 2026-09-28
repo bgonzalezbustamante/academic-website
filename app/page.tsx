@@ -116,8 +116,10 @@ export default async function HomePage() {
                 className="profile-portrait"
                 src={profilePortrait.src}
                 alt={siteProfile.name}
-                width={240}
-                height={240}
+                width={660}
+                height={660}
+                sizes="220px"
+                quality={95}
                 priority
               />
             </div>
