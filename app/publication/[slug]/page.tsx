@@ -48,6 +48,8 @@ export default async function PublicationPage({ params }: Props) {
 
   const publicationMonthYear =
     formatPublicationMonthYear(paper.publication_date)
+  const publicationYear =
+    paper.publication_date?.slice(0, 4) ?? null
   const forthcoming = isForthcomingPublicationDate(
     paper.publication_date
   )
@@ -72,8 +74,8 @@ export default async function PublicationPage({ params }: Props) {
           {(paper.publication_date || forthcoming) && (
             <span>
               {forthcoming
-                ? publicationMonthYear
-                  ? `Forthcoming · ${publicationMonthYear}`
+                ? publicationYear
+                  ? `Forthcoming · ${publicationYear}`
                   : 'Forthcoming'
                 : `Published ${publicationMonthYear}`}
             </span>
