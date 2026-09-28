@@ -1,7 +1,7 @@
 import {
   faEarthEurope,
   faMicrophoneLines,
-  faStar,
+  faUserPen,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
@@ -11,6 +11,7 @@ import AcademicWorldMap, {
 } from '@/components/academic-world-map'
 import ConferenceOverviewTable from '@/components/conference-overview-table'
 import PresentationRoadmap from '@/components/presentation-roadmap'
+import { firstAuthorPercentage } from '@/lib/authorship'
 import { listPublicConferencePresentations } from '@/lib/conferences'
 import {
   countryNameToIso3,
@@ -98,15 +99,7 @@ export default async function ConferencesPage() {
     value,
   }))
 
-  const keynoteCount = presentations.filter(
-    (presentation) =>
-      presentation.presentation_type === 'Keynote'
-  ).length
-
-  const keynotePercentage =
-    presentations.length > 0
-      ? (keynoteCount / presentations.length) * 100
-      : 0
+  const firstAuthorShare = firstAuthorPercentage(presentations)
 
   const currentAmsterdam = getCurrentAmsterdamDateParts()
 
@@ -176,14 +169,14 @@ export default async function ConferencesPage() {
               <article className="conference-stat-card">
                 <div className="conference-stat-icon">
                   <FontAwesomeIcon
-                    icon={faStar}
+                    icon={faUserPen}
                     aria-hidden="true"
                   />
                 </div>
                 <div>
-                  <p>Keynote</p>
+                  <p>First author</p>
                   <strong>
-                    {keynotePercentage.toFixed(1)}%
+                    {firstAuthorShare.toFixed(1)}%
                   </strong>
                 </div>
               </article>
