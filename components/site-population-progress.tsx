@@ -4,8 +4,8 @@ import type { CSSProperties } from 'react'
 
 import ExternalInlineLink from '@/components/external-inline-link'
 import {
-  POPULATION_POPULATION_END_YEAR,
-  POPULATION_POPULATION_START_YEAR,
+  POPULATION_END_YEAR,
+  POPULATION_START_YEAR,
   POPULATION_TARGETS,
   POPULATION_YEARS,
   conferencePopulationYears,
