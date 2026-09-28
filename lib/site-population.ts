@@ -8,7 +8,7 @@ import type {
 export const POPULATION_END_YEAR = 2026
 
 export const POPULATION_TARGETS = {
-  publications: 61,
+  publications: 62,
   projects: 15,
   conferences: 138,
   teaching: 35,
