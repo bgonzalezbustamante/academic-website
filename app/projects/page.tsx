@@ -6,10 +6,7 @@ import {
   listPublicProjects,
   orderPublicProjects,
 } from '@/lib/projects'
-import {
-  POPULATION_TARGETS,
-  projectPopulationYears,
-} from '@/lib/site-population'
+import { projectPopulationYears } from '@/lib/site-population'
 import type { PublicProject } from '@/types/public'
 
 export const metadata: Metadata = {
@@ -54,9 +51,9 @@ export default async function ProjectsPage() {
         </div>
 
         <SectionPopulationProgress
+          domain="projects"
           label="Projects"
           value={available ? projects.length : null}
-          total={POPULATION_TARGETS.projects}
           unit="projects"
           coveredYears={
             available
