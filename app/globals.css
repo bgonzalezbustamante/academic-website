@@ -526,8 +526,8 @@ h4 {
 /* Section population progress */
 
 .section-population-progress {
-  margin: -1.2rem 0 1.45rem;
-  padding: 0.65rem 0 0.15rem;
+  margin: 0 0 1.45rem;
+  padding: 0 0 0.15rem;
 }
 
 .section-population-heading {
@@ -1877,11 +1877,19 @@ h4 {
   max-width: none;
 }
 
+.publications-page-heading,
+.projects-page-heading,
+.conference-dashboard-heading,
+.teaching-page-heading {
+  margin-bottom: 0.65rem;
+}
+
 .publications-page-heading .page-lead,
 .projects-page-heading .page-lead,
 .conference-dashboard-heading .page-lead,
 .teaching-page-heading .page-lead {
   max-width: none;
+  margin-bottom: 0;
 }
 
 .teaching-stats-grid {
