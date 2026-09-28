@@ -11,8 +11,13 @@ import AcademicWorldMap, {
 } from '@/components/academic-world-map'
 import ConferenceOverviewTable from '@/components/conference-overview-table'
 import PresentationRoadmap from '@/components/presentation-roadmap'
+import SectionPopulationProgress from '@/components/section-population-progress'
 import { firstAuthorPercentage } from '@/lib/authorship'
 import { listPublicConferencePresentations } from '@/lib/conferences'
+import {
+  POPULATION_TARGETS,
+  conferencePopulationYears,
+} from '@/lib/site-population'
 import {
   countryNameToIso3,
   extractCountryFromLocation,
@@ -113,6 +118,18 @@ export default async function ConferencesPage() {
             Conference and public presentations.
           </p>
         </div>
+
+        <SectionPopulationProgress
+          label="Conferences"
+          value={available ? presentations.length : null}
+          total={POPULATION_TARGETS.conferences}
+          unit="conferences"
+          coveredYears={
+            available
+              ? conferencePopulationYears(presentations)
+              : null
+          }
+        />
 
         {!available ? (
           <div className="empty-state">
