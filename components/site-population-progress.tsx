@@ -36,6 +36,12 @@ const READINESS_WEIGHTS = {
   conferences: 0.15,
 } as const
 
+const POPULATION_GRID_YEARS = Math.max(
+  ...Object.values(POPULATION_PERIODS).map(
+    ({ startYear, endYear }) => endYear - startYear + 1
+  )
+)
+
 type Metric = {
   domain: PopulationDomain
   label: string
@@ -82,16 +88,28 @@ function CoverageMetric({ metric }: { metric: Metric }) {
       {metric.coveredYears && (() => {
         const period = POPULATION_PERIODS[metric.domain]
         const years = populationYears(metric.domain)
+        const leadingYearSlots =
+          POPULATION_GRID_YEARS - years.length
+        const yearGridStyle = {
+          gridTemplateColumns: `repeat(${POPULATION_GRID_YEARS}, minmax(0, 1fr))`,
+        }
 
         return (
           <figure className="population-year-figure">
             <div
               className="population-year-strip"
-              style={{
-                gridTemplateColumns: `repeat(${years.length}, minmax(0, 1fr))`,
-              }}
+              style={yearGridStyle}
               aria-label={`Yearly coverage from ${period.startYear} to ${period.endYear}`}
             >
+              {leadingYearSlots > 0 && (
+                <span
+                  className="population-year-spacer"
+                  style={{
+                    gridColumn: `span ${leadingYearSlots}`,
+                  }}
+                  aria-hidden="true"
+                />
+              )}
               {years.map((year) => (
                 <span
                   key={year}
@@ -104,9 +122,22 @@ function CoverageMetric({ metric }: { metric: Metric }) {
                 />
               ))}
             </div>
-            <figcaption>
-              <span>{period.startYear}</span>
-              <span>{period.endYear}</span>
+            <figcaption style={yearGridStyle}>
+              <span
+                style={{
+                  gridColumn: leadingYearSlots + 1,
+                }}
+              >
+                {period.startYear}
+              </span>
+              <span
+                style={{
+                  gridColumn: POPULATION_GRID_YEARS,
+                  justifySelf: 'end',
+                }}
+              >
+                {period.endYear}
+              </span>
             </figcaption>
           </figure>
         )
