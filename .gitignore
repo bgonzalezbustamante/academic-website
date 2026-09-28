@@ -12,6 +12,9 @@
 .env*
 !.env.example
 
+# generated portrait cache
+/public/profile/generated/
+
 # misc
 .DS_Store
 *.pem
