@@ -96,7 +96,7 @@
 - Key highlight text now supports safe Markdown rendering for headings, bold/italic emphasis, lists, links, inline/fenced code and blockquotes without executing raw HTML.
 - Publication and project abstracts now use the same safe Markdown renderer as Key highlights, replacing the earlier project-only bold-text helper with one shared research-text pipeline.
 - Extended Project Funding presentation with the configured funder logo and public `funder_note`.
-- Project Research outputs now combine associated public publications and the public `conference_presentations[]` contract; conference presentations reuse the Conferences Overview table.
+- Project Research outputs now combine associated public publications and the public `conference_presentations[]` contract; conference presentations reuse the Conferences Overview table. A compact note clarifies that the section shows project outputs in which I am involved and may therefore not represent the project's complete output record.
 - Reordered project detail content so Research outputs follows About the project and Funding is always the final section.
 - Moved project visuals, including the TERGAP map, below the About the project section and above Research outputs / Funding.
 - Improved project-image sharpness by separating card and detail rendering expectations: detail images now use a full-width responsive hint, optimized non-PNG assets can use quality 90, and PNG figures/logos are served losslessly to avoid compression artefacts.
