@@ -10,6 +10,7 @@ import ProjectCard from '@/components/project-card'
 import PublicationCard from '@/components/publication-card'
 import ResearchPracticeCards from '@/components/research-practice-cards'
 import SitePopulationProgress from '@/components/site-population-progress'
+import { profilePortrait } from '@/content/profile-portrait.generated'
 import { siteProfile } from '@/content/site'
 import { listPublicConferencePresentations } from '@/lib/conferences'
 import { listPublicPapers } from '@/lib/publications'
@@ -113,7 +114,7 @@ export default async function HomePage() {
             <div className="portrait-frame">
               <Image
                 className="profile-portrait"
-                src={siteProfile.portrait}
+                src={profilePortrait.src}
                 alt={siteProfile.name}
                 width={240}
                 height={240}
