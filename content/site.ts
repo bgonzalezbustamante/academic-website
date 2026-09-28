@@ -1,6 +1,5 @@
 export const siteProfile = {
   name: 'Bastián González-Bustamante',
-  portrait: '/profile/avatar.jpg',
   positions: [
     {
       role: 'Post-doctoral Researcher in Computational Social Science',
