@@ -12,6 +12,7 @@ import PublicationCitationCard, {
   type CitationPaper,
 } from '@/components/publication-citation-card'
 import { firstAuthorPercentage } from '@/lib/authorship'
+import { publicationYearLabel } from '@/lib/publication-dates'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 
 type Props = {
@@ -29,12 +30,6 @@ const PUBLICATION_INDEX_ORDER = [
 ] as const
 
 const PAGE_SIZE = 10
-
-function yearForPaper(paper: CitationPaper) {
-  return paper.publication_date
-    ? paper.publication_date.slice(0, 4)
-    : 'Forthcoming'
-}
 
 export default function PublicationBrowser({ papers }: Props) {
   const [year, setYear] = useState('all')
@@ -73,7 +68,7 @@ export default function PublicationBrowser({ papers }: Props) {
     () =>
       papers.filter((paper) => {
         const matchesYear =
-          year === 'all' || yearForPaper(paper) === year
+          year === 'all' || publicationYearLabel(paper) === year
         const matchesIndex =
           publicationIndex === 'all' ||
           paper.publication_index === publicationIndex
