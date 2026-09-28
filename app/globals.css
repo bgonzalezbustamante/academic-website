@@ -523,6 +523,79 @@ h4 {
   line-height: 1.75;
 }
 
+/* Section population progress */
+
+.section-population-progress {
+  margin: -0.75rem 0 1.45rem;
+  padding: 0.65rem 0 0.15rem;
+}
+
+.section-population-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--font-roboto), Arial, sans-serif;
+}
+
+.section-population-heading span {
+  color: var(--oxford-blue);
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.section-population-heading strong {
+  color: var(--oxford-blue);
+  font-family: var(--font-noto-serif), Georgia, serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.section-population-track {
+  height: 4px;
+  overflow: hidden;
+  margin-top: 0.42rem;
+  border-radius: 999px;
+  background: rgba(0, 33, 71, 0.09);
+}
+
+.section-population-fill {
+  display: block;
+  width: var(--section-population-progress);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--oxford-blue);
+}
+
+.section-population-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.3rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.59rem;
+  line-height: 1.35;
+}
+
+.section-population-year-strip {
+  display: grid;
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+  gap: 2px;
+  margin-top: 0.32rem;
+}
+
+.section-population-year-cell {
+  display: block;
+  min-height: 6px;
+  border-radius: 1px;
+  background: rgba(0, 33, 71, 0.08);
+}
+
+.section-population-year-cell-covered {
+  background: rgba(0, 170, 180, 0.7);
+}
+
 /* Publications */
 
 
@@ -3240,6 +3313,12 @@ h4 {
   .section-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .section-population-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.12rem;
   }
 
   .publication-filters {
