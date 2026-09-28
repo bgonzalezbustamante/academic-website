@@ -2,5 +2,5 @@
 // Keep exactly one JPG, JPEG, or PNG source image in public/profile.
 
 export const profilePortrait = {
-  src: '/profile/generated/portrait-381c3fbd8bf2.jpg',
+  src: '/profile/generated/portrait-9175d26f12ad.png',
 } as const
