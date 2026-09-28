@@ -40,7 +40,7 @@ export default function PublicationBrowser({ papers }: Props) {
   const years = useMemo(
     () =>
       Array.from(
-        new Set(papers.map(yearForPaper))
+        new Set(papers.map((paper) => publicationYearLabel(paper.publication_date)))
       ).sort((a, b) => {
         if (a === 'Forthcoming') return -1
         if (b === 'Forthcoming') return 1
@@ -68,7 +68,7 @@ export default function PublicationBrowser({ papers }: Props) {
     () =>
       papers.filter((paper) => {
         const matchesYear =
-          year === 'all' || publicationYearLabel(paper) === year
+          year === 'all' || publicationYearLabel(paper.publication_date) === year
         const matchesIndex =
           publicationIndex === 'all' ||
           paper.publication_index === publicationIndex
