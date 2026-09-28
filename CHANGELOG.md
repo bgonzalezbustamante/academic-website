@@ -23,7 +23,7 @@
 - Added a third main position: Research Leader, Oxford Computational Political Science Group, with external institutional links for Leiden University, Universidad Diego Portales and OCPSG.
 - Replaced the BGB header mark with a three-affiliation home link using the supplied Leiden University, Universidad Diego Portales and OCPSG logo assets in a consistent monochrome treatment.
 - Added Font Awesome 7 and Academicons for academic profiles, external links and publication resources.
-- Restored the profile portrait from `academic-kickstart` and prioritised the supplied Leiden seal as the site favicon. The portrait is now discovered from the single JPG/JPEG/PNG source file in `public/profile`, with a content-hashed generated asset so replacements and format changes invalidate image caches automatically.
+- Restored the profile portrait from `academic-kickstart` and prioritised the supplied Leiden seal as the site favicon. The portrait is now discovered from the single JPG/JPEG/PNG source file in `public/profile`, with a content-hashed generated asset so replacements and format changes invalidate image caches automatically. The homepage requests a high-density 660px source at quality 95 for the 220px rendered portrait to improve sharpness on high-DPI displays.
 - Added the revised two-paragraph academic biography with consistent external-link arrows for the ECPR Political Methodology Steering Committee, TERGAP, COST Action CA22150 and the Enlace-Inserción UDP project.
 - Linked the DPhil (PhD) in Politics degree reference directly to the University of Oxford using the same external-link treatment as other biography links.
 - Added compact public email and Leiden University Wijnhaven address information to the footer, with a Creative Commons mark beside the year and name.
@@ -70,7 +70,7 @@
 - Migrated Roadmap chronology to conference `start_date`/`end_date` ranges: ordering uses `start_date`, completed/upcoming state uses `end_date`, and labels now show the formatted date or date range together with location instead of a redundant hover tooltip.
 - Moved the full current-year multi-row Roadmap from Home to the Conferences page after the presentation Overview.
 - Replaced the homepage Roadmap with a single-row five-presentation timeline that prioritises ongoing/forthcoming presentations and backfills with the most recently completed presentations when necessary; a compact route-icon note links visitors to the full roadmap in Conferences.
-- Kept the three presentation/country/keynote KPI cards at the top of the Conferences dashboard and retained the geographic section title `Presentation map`.
+- Kept the three presentation/country/first-author KPI cards at the top of the Conferences dashboard and retained the geographic section title `Presentation map`.
 - Reordered the homepage to Academic profile → DORA / CRediT → Population in progress → Featured publications → Featured projects → Activity over time → compact presentation timeline; the timeline uses its bottom-right Conferences note as the sole navigation cue rather than a separate `View all` link.
 - Added a Dashboard-backed `Population in progress` card below DORA / CRediT, normalising ingestion progress to percentages for Publications (61 intended records), Projects (15), Conferences (137), and Teaching/Supervision (35 times taught), with 2012–2026 year-coverage strips for all four domains. A subtle weighted `Site population readiness` indicator now summarises overall progress and marks the 55% launch threshold without exposing the weighting formula in the public interface.
 - Increased the homepage Featured publications cap from three to four.
@@ -105,7 +105,7 @@
 - Reused the TERGAP dashboard ERC logo as the TERGAP funder image on Home/Projects cards and in the Funding block when no Dashboard funder-image filename is configured.
 - Matched the TERGAP detail map to the original dashboard: map canvas `#eef0f7`, grey not-collected countries `#e8eaed`, original six-step scale from `#e7eaf4` to `#001158`, and teal hover `#007679`. Conferences uses the same canvas/grey no-data treatment with an Oxford aqua/blue scale and Oxford coral hover.
 - Reworked `/conferences` into a dashboard-style view headed by “Conference and public presentations”: KPI cards first, then the geographic map, followed by a compact presentation table.
-- Refined the third KPI cards: Publications now reports first-author percentage, while Conferences reports the percentage of public presentations classified as `Keynote`.
+- Standardised the third KPI across Publications and Conferences as first-author percentage, defined by Bastián González-Bustamante appearing first in the ordered public `authors[]` array.
 - Removed the Conference Type column and added client-side pagination at 10 presentation rows per page.
 - Replaced single conference presentation dates with required public `start_date` and `end_date` fields and constrained `presentation_type` to Conference paper, Keynote or Workshop; the transitional `presentation_date = start_date` alias is treated as deprecated by new website code.
 - Removed the former 2020 cutoff so the Conferences page, KPIs and map use the complete public presentation record.
