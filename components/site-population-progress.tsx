@@ -3,6 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { CSSProperties } from 'react'
 
 import ExternalInlineLink from '@/components/external-inline-link'
+import {
+  POPULATION_POPULATION_END_YEAR,
+  POPULATION_POPULATION_START_YEAR,
+  POPULATION_TARGETS,
+  POPULATION_YEARS,
+  conferencePopulationYears,
+  populationPercentage,
+  projectPopulationYears,
+  publicationPopulationYears,
+  teachingPopulationYears,
+} from '@/lib/site-population'
 import type {
   PublicConferencePresentation,
   PublicPaper,
@@ -17,8 +28,6 @@ type Props = {
   teaching: PublicTeachingItem[] | null
 }
 
-const START_YEAR = 2012
-const END_YEAR = 2026
 const READINESS_THRESHOLD = 55
 const READINESS_WEIGHTS = {
   publications: 0.35,
@@ -26,96 +35,6 @@ const READINESS_WEIGHTS = {
   teaching: 0.2,
   conferences: 0.15,
 } as const
-const YEARS = Array.from(
-  { length: END_YEAR - START_YEAR + 1 },
-  (_, index) => START_YEAR + index
-)
-
-function percentage(value: number, total: number) {
-  if (total <= 0) return 0
-  return Math.min(100, Math.round((value / total) * 100))
-}
-
-function yearsInRange(
-  startYear: number | null,
-  endYear: number | null
-) {
-  if (startYear == null && endYear == null) {
-    return []
-  }
-
-  const start = Math.max(
-    START_YEAR,
-    startYear ?? endYear ?? START_YEAR
-  )
-  const end = Math.min(
-    END_YEAR,
-    endYear ?? startYear ?? END_YEAR
-  )
-
-  if (end < start) return []
-
-  return Array.from(
-    { length: end - start + 1 },
-    (_, index) => start + index
-  )
-}
-
-function publicationYears(papers: PublicPaper[]) {
-  return new Set(
-    papers
-      .map((paper) =>
-        paper.publication_date
-          ? Number(paper.publication_date.slice(0, 4))
-          : Number.NaN
-      )
-      .filter(
-        (year) =>
-          Number.isInteger(year) &&
-          year >= START_YEAR &&
-          year <= END_YEAR
-      )
-  )
-}
-
-function conferenceYears(
-  presentations: PublicConferencePresentation[]
-) {
-  return new Set(
-    presentations.flatMap((presentation) => {
-      const startYear = Number(
-        presentation.start_date.slice(0, 4)
-      )
-      const endYear = Number(
-        presentation.end_date.slice(0, 4)
-      )
-
-      return yearsInRange(
-        Number.isInteger(startYear) ? startYear : null,
-        Number.isInteger(endYear) ? endYear : null
-      )
-    })
-  )
-}
-
-function projectYears(projects: PublicProject[]) {
-  return new Set(
-    projects.flatMap((project) =>
-      yearsInRange(project.start_year, project.end_year)
-    )
-  )
-}
-
-function teachingYears(teaching: PublicTeachingItem[]) {
-  return new Set(
-    teaching.flatMap((item) =>
-      yearsInRange(
-        item.start_year,
-        item.is_current ? END_YEAR : item.end_year
-      )
-    )
-  )
-}
 
 type Metric = {
   label: string
@@ -163,9 +82,9 @@ function CoverageMetric({ metric }: { metric: Metric }) {
         <figure className="population-year-figure">
           <div
             className="population-year-strip"
-            aria-label={`Yearly coverage from ${START_YEAR} to ${END_YEAR}`}
+            aria-label={`Yearly coverage from ${POPULATION_START_YEAR} to ${POPULATION_END_YEAR}`}
           >
-            {YEARS.map((year) => (
+            {POPULATION_YEARS.map((year) => (
               <span
                 key={year}
                 className={
@@ -178,8 +97,8 @@ function CoverageMetric({ metric }: { metric: Metric }) {
             ))}
           </div>
           <figcaption>
-            <span>{START_YEAR}</span>
-            <span>{END_YEAR}</span>
+            <span>{POPULATION_START_YEAR}</span>
+            <span>{POPULATION_END_YEAR}</span>
           </figcaption>
         </figure>
       )}
@@ -193,15 +112,15 @@ export default function SitePopulationProgress({
   presentations,
   teaching,
 }: Props) {
-  const paperYears = papers ? publicationYears(papers) : null
+  const paperYears = papers ? publicationPopulationYears(papers) : null
   const projectCoverageYears = projects
-    ? projectYears(projects)
+    ? projectPopulationYears(projects)
     : null
   const presentationYears = presentations
-    ? conferenceYears(presentations)
+    ? conferencePopulationYears(presentations)
     : null
   const teachingCoverageYears = teaching
-    ? teachingYears(teaching)
+    ? teachingPopulationYears(teaching)
     : null
   const teachingTimes = teaching
     ? teaching.reduce(
@@ -219,13 +138,13 @@ export default function SitePopulationProgress({
   const siteReadiness = readinessAvailable
     ? Math.round(
         100 *
-          (Math.min(1, papers.length / 61) *
+          (Math.min(1, papers.length / POPULATION_TARGETS.publications) *
             READINESS_WEIGHTS.publications +
-            Math.min(1, projects.length / 15) *
+            Math.min(1, projects.length / POPULATION_TARGETS.projects) *
               READINESS_WEIGHTS.projects +
-            Math.min(1, teachingTimes / 35) *
+            Math.min(1, teachingTimes / POPULATION_TARGETS.teaching) *
               READINESS_WEIGHTS.teaching +
-            Math.min(1, presentations.length / 137) *
+            Math.min(1, presentations.length / POPULATION_TARGETS.conferences) *
               READINESS_WEIGHTS.conferences)
       )
     : null
@@ -234,30 +153,30 @@ export default function SitePopulationProgress({
     {
       label: 'Publications',
       value: papers
-        ? percentage(papers.length, 61)
+        ? populationPercentage(papers.length, POPULATION_TARGETS.publications)
         : null,
       detail: papers
-        ? `${papers.length} of 61 publications (intended to ingest)`
+        ? `${papers.length} of ${POPULATION_TARGETS.publications} publications (intended to ingest)`
         : '',
       coveredYears: paperYears ?? undefined,
     },
     {
       label: 'Projects',
       value: projects
-        ? percentage(projects.length, 15)
+        ? populationPercentage(projects.length, POPULATION_TARGETS.projects)
         : null,
       detail: projects
-        ? `${projects.length} of 15 projects (intended to ingest)`
+        ? `${projects.length} of ${POPULATION_TARGETS.projects} projects (intended to ingest)`
         : '',
       coveredYears: projectCoverageYears ?? undefined,
     },
     {
       label: 'Conferences',
       value: presentations
-        ? percentage(presentations.length, 137)
+        ? populationPercentage(presentations.length, POPULATION_TARGETS.conferences)
         : null,
       detail: presentations
-        ? `${presentations.length} of 137 conferences (intended to ingest)`
+        ? `${presentations.length} of ${POPULATION_TARGETS.conferences} conferences (intended to ingest)`
         : '',
       coveredYears: presentationYears ?? undefined,
     },
@@ -265,11 +184,11 @@ export default function SitePopulationProgress({
       label: 'Teaching/Supervision',
       value:
         teachingTimes !== null
-          ? percentage(teachingTimes, 35)
+          ? populationPercentage(teachingTimes, POPULATION_TARGETS.teaching)
           : null,
       detail:
         teachingTimes !== null
-          ? `${teachingTimes} of 35 times taught (intended to ingest)`
+          ? `${teachingTimes} of ${POPULATION_TARGETS.teaching} times taught (intended to ingest)`
           : '',
       coveredYears: teachingCoverageYears ?? undefined,
     },
