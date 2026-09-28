@@ -6,11 +6,15 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "profile:sync": "node scripts/sync-profile-portrait.mjs",
+    "predev": "npm run profile:sync",
     "dev": "next dev",
+    "prebuild": "npm run profile:sync",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "precheck": "npm run profile:sync",
     "check": "npm run lint && npm run typecheck",
     "check:public-contract": "node --env-file=.env.local scripts/check-public-contract.mjs"
   },
