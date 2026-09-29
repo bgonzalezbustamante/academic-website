@@ -413,6 +413,18 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const distance = Math.max(Math.hypot(dx, dy), 1)
       const profileEdge =
         edge.source === profileId || edge.target === profileId
+      const sourceCluster = clusterByNode.get(edge.source)
+      const targetCluster = clusterByNode.get(edge.target)
+      const crossCommunityEdge =
+        !profileEdge &&
+        sourceCluster &&
+        targetCluster &&
+        sourceCluster !== targetCluster
+
+      if (crossCommunityEdge) {
+        continue
+      }
+
       const weightFactor = Math.max(1, edge.weight)
       const targetLength = profileEdge
         ? Math.max(
@@ -667,7 +679,8 @@ export default function CoauthorshipNetwork({ graph }: Props) {
           Co-author
         </span>
         <span>Node size = publications in network</span>
-        <span>More joint publications = thicker, shorter links</span>
+        <span>Edge width = joint publications</span>
+        <span>Frequent profile collaborators = closer to centre</span>
         <span>Layout separates weighted collaborator communities</span>
       </div>
     </div>
