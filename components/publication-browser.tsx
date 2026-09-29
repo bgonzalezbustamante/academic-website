@@ -117,7 +117,7 @@ export default function PublicationBrowser({ papers }: Props) {
             <FontAwesomeIcon icon={faBookOpen} aria-hidden="true" />
           </div>
           <div>
-            <p>Journals</p>
+            <p>Journals/Venues</p>
             <strong>{journalCount.toLocaleString('en-GB')}</strong>
           </div>
         </article>
