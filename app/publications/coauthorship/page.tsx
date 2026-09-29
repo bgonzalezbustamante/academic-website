@@ -85,12 +85,14 @@ export default async function CoauthorshipPage() {
                 publications. For ties to the central profile, repeated
                 co-authorship also reduces distance, so frequent collaborators
                 tend to appear closer to the centre. Weighted collaborator
-                communities are estimated without the central profile links
-                and used only to organise the layout. Ties that bridge
-                different communities remain visible but do not reduce the
-                spacing between those groups. Community-level spacing keeps
-                their overall footprints apart, while node-level collision
-                constraints reduce residual node and label overlap.
+                communities are estimated from the collaborator-only graph
+                using weighted modularity and are used only to organise the
+                layout. This helps dense groups remain distinct even when
+                one or a few co-authorship ties bridge them. Those bridge
+                ties remain visible but do not reduce the spacing between
+                communities. Community-level spacing keeps their overall
+                footprints apart, while node-level collision constraints
+                reduce residual node and label overlap.
               </span>
             </p>
           </>
