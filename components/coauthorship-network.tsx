@@ -34,8 +34,8 @@ type LayoutResult = {
   clusterByNode: Map<string, ClusterLayout>
 }
 
-const WIDTH = 1440
-const HEIGHT = 1000
+const WIDTH = 1240
+const HEIGHT = 860
 const CENTRE_X = WIDTH / 2
 const CENTRE_Y = HEIGHT / 2
 
@@ -152,14 +152,14 @@ function clusterLayouts(
   const clusters = collaboratorClusters(graph, profileId)
 
   return clusters.map((nodeIds, index): ClusterLayout => {
-    const ring = Math.floor(index / 6)
-    const ringStart = ring * 6
+    const ring = Math.floor(index / 7)
+    const ringStart = ring * 7
     const ringCount = Math.min(
-      6,
+      7,
       clusters.length - ringStart
     )
     const localIndex = index - ringStart
-    const radius = Math.min(440, 320 + ring * 120)
+    const radius = Math.min(390, 280 + ring * 95)
     const angle =
       (localIndex / Math.max(ringCount, 1)) * Math.PI * 2 -
       Math.PI / 2 +
@@ -213,34 +213,44 @@ function resolveNodeOverlaps(
             [a.id, b.id].sort().join('::')
           ) ?? 0
         const connected = pairWeight > 0
+        const profileConnected =
+          connected &&
+          (a.id === profileId || b.id === profileId)
         const clusterA = clusterByNode.get(a.id)
         const clusterB = clusterByNode.get(b.id)
         const differentClusters =
           clusterA &&
           clusterB &&
           clusterA !== clusterB
-        const safetyGap = connected
+        const safetyGap = profileConnected
           ? Math.max(
-              4,
-              13 - Math.min(9, (pairWeight - 1) * 3)
+              5,
+              14 - Math.min(9, (pairWeight - 1) * 2.5)
             )
-          : differentClusters
-            ? 54
-            : 30
-        const labelAllowance = connected
+          : connected
+            ? 14
+            : differentClusters
+              ? 42
+              : 30
+        const labelAllowance = profileConnected
           ? Math.min(
               8,
               Math.max(a.name.length, b.name.length) * 0.11
             )
-          : differentClusters
+          : connected
             ? Math.min(
-                52,
-                Math.max(a.name.length, b.name.length) * 0.62
+                14,
+                Math.max(a.name.length, b.name.length) * 0.18
               )
-            : Math.min(
-                36,
-                Math.max(a.name.length, b.name.length) * 0.46
-              )
+            : differentClusters
+              ? Math.min(
+                  42,
+                  Math.max(a.name.length, b.name.length) * 0.52
+                )
+              : Math.min(
+                  34,
+                  Math.max(a.name.length, b.name.length) * 0.44
+                )
         const minimumDistance =
           nodeRadius(a) +
           nodeRadius(b) +
@@ -319,7 +329,7 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const localRadius =
         cluster.nodeIds.length === 1
           ? 0
-          : 22 + Math.min(34, cluster.nodeIds.length * 4)
+          : 28 + Math.min(40, cluster.nodeIds.length * 4.5)
 
       positions.set(nodeId, {
         x: cluster.x + Math.cos(angle) * localRadius,
@@ -353,9 +363,9 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
           clusterA &&
           clusterB &&
           clusterA !== clusterB
-        const repulsionMultiplier = differentClusters ? 5 : 0.9
+        const repulsionMultiplier = differentClusters ? 3.1 : 1
         const force =
-          (6000 / distanceSquared) *
+          (5750 / distanceSquared) *
           cooling *
           repulsionMultiplier
         const fx = (dx / distance) * force
@@ -406,24 +416,17 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const weightFactor = Math.max(1, edge.weight)
       const targetLength = profileEdge
         ? Math.max(
-            68,
-            230 /
+            74,
+            225 /
               Math.pow(
-                1 + 1.2 * (weightFactor - 1),
-                1
+                1 + 0.95 * (weightFactor - 1),
+                0.9
               )
           )
-        : Math.max(
-            24,
-            102 /
-              Math.pow(
-                1 + 1.65 * (weightFactor - 1),
-                1.1
-              )
-          )
+        : 98
       const strength = profileEdge
-        ? 0.0024 + Math.min(edge.weight, 10) * 0.00075
-        : 0.006 + Math.min(edge.weight, 10) * 0.0013
+        ? 0.0024 + Math.min(edge.weight, 10) * 0.0007
+        : 0.0054 + Math.min(edge.weight, 6) * 0.00035
       const spring =
         (distance - targetLength) * strength * cooling
       const fx = (dx / distance) * spring
@@ -447,10 +450,10 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const cluster = clusterByNode.get(node.id)
       if (!point || !cluster) continue
 
-      point.vx += (cluster.x - point.x) * 0.018 * cooling
-      point.vy += (cluster.y - point.y) * 0.018 * cooling
-      point.vx += (CENTRE_X - point.x) * 0.00005
-      point.vy += (CENTRE_Y - point.y) * 0.00005
+      point.vx += (cluster.x - point.x) * 0.0135 * cooling
+      point.vy += (cluster.y - point.y) * 0.0135 * cooling
+      point.vx += (CENTRE_X - point.x) * 0.0001
+      point.vy += (CENTRE_Y - point.y) * 0.0001
       point.vx *= 0.82
       point.vy *= 0.82
       point.x = Math.min(
