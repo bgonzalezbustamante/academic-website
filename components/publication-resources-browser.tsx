@@ -1,5 +1,6 @@
 'use client'
 
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
   faDatabase,
@@ -27,6 +28,13 @@ type ResourceType =
   | 'preprint'
   | 'project'
 
+type ResourceLink = {
+  type: Exclude<ResourceType, 'all'>
+  label: string
+  href: string
+  icon: IconDefinition
+}
+
 const RESOURCE_OPTIONS: Array<{
   value: ResourceType
   label: string
@@ -39,8 +47,10 @@ const RESOURCE_OPTIONS: Array<{
   { value: 'project', label: 'Projects' },
 ]
 
-function resourcesForPaper(paper: PublicPaper) {
-  return [
+function resourcesForPaper(
+  paper: PublicPaper
+): ResourceLink[] {
+  const candidates = [
     {
       type: 'code' as const,
       label: 'Code',
@@ -71,11 +81,12 @@ function resourcesForPaper(paper: PublicPaper) {
       href: paper.project_url,
       icon: faDiagramProject,
     },
-  ].filter(
-    (
-      resource
-    ): resource is typeof resource & { href: string } =>
-      Boolean(resource.href)
+  ]
+
+  return candidates.flatMap((resource) =>
+    resource.href
+      ? [{ ...resource, href: resource.href }]
+      : []
   )
 }
 
