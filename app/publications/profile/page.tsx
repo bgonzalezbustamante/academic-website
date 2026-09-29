@@ -1,5 +1,6 @@
 import {
   faArrowLeft,
+  faShareNodes,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
@@ -50,6 +51,10 @@ export default async function PublicationProfilePage() {
           <Link href="/publications">
             <FontAwesomeIcon icon={faArrowLeft} aria-hidden="true" />
             Publications
+          </Link>
+          <Link href="/publications/coauthorship">
+            <FontAwesomeIcon icon={faShareNodes} aria-hidden="true" />
+            Co-authorship network
           </Link>
         </div>
 
