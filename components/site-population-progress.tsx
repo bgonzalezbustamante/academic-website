@@ -325,7 +325,7 @@ export default function SitePopulationProgress({
             <p className="population-readiness-note">
               <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
               <span>
-                Weighted indicator: categories contribute differently to the
+                Weighted indicator: categories contribute 35/30/15/20 to the
                 overall readiness score.
               </span>
             </p>
