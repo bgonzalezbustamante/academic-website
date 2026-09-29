@@ -72,8 +72,11 @@ export default async function CoauthorshipPage() {
             <CoauthorshipNetwork graph={graph} />
 
             <p className="coauthorship-method-note">
-              <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
               <span>
+                <FontAwesomeIcon
+                  icon={faCircleInfo}
+                  aria-hidden="true"
+                />
                 Publications with more than{' '}
                 {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. The
                 network then includes every author and co-authorship
@@ -82,7 +85,7 @@ export default async function CoauthorshipPage() {
                 communities are detected after removing the central profile
                 links and are spatially separated to make collaboration
                 clusters easier to distinguish. A final collision pass
-                enforces minimum spacing between node circles.
+                enforces additional node and label-aware spacing.
               </span>
             </p>
           </>
