@@ -1,6 +1,6 @@
 {
   "source_repository": "bgonzalezbustamante/tergap-dashboard",
-  "generated_at": "2026-09-22T07:42:15Z",
+  "generated_at": "2026-09-29T10:00:19Z",
   "collection_window": {
     "from_year": 2011,
     "to_year": 2025
@@ -182,6 +182,11 @@
       "complete_articles": 75812
     },
     {
+      "country": "Nigeria",
+      "iso3": "NGA",
+      "complete_articles": 1509826
+    },
+    {
       "country": "Rwanda",
       "iso3": "RWA",
       "complete_articles": 183072
@@ -210,6 +215,11 @@
       "country": "South Africa",
       "iso3": "ZAF",
       "complete_articles": 1666769
+    },
+    {
+      "country": "South Sudan",
+      "iso3": "SSD",
+      "complete_articles": 70707
     },
     {
       "country": "Tanzania",
