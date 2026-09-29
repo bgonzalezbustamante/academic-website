@@ -2,6 +2,7 @@
 
 import {
   faBookOpen,
+  faChartColumn,
   faFileLines,
   faShareNodes,
   faUserPen,
@@ -186,13 +187,28 @@ export default function PublicationBrowser({ papers }: Props) {
           </button>
         )}
 
-        <Link
-          className="publication-network-link"
-          href="/publications/coauthorship"
-        >
-          <FontAwesomeIcon icon={faShareNodes} aria-hidden="true" />
-          Co-authorship network
-        </Link>
+        <div className="publication-filter-links">
+          <Link
+            className="publication-filter-link"
+            href="/publications/profile"
+          >
+            <FontAwesomeIcon
+              icon={faChartColumn}
+              aria-hidden="true"
+            />
+            Publication profile
+          </Link>
+          <Link
+            className="publication-filter-link"
+            href="/publications/coauthorship"
+          >
+            <FontAwesomeIcon
+              icon={faShareNodes}
+              aria-hidden="true"
+            />
+            Co-authorship network
+          </Link>
+        </div>
       </div>
 
       {filtered.length > 0 ? (
