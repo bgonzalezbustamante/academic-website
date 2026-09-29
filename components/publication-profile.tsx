@@ -1,6 +1,7 @@
 import {
   faCalendarDays,
   faChartColumn,
+  faCircleInfo,
   faQuoteRight,
   faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
@@ -9,6 +10,7 @@ import Link from 'next/link'
 
 import PublicationLanguageFlag from '@/components/publication-language-flag'
 import type {
+  ProfileAverage,
   ProfileCitationPaper,
   ProfileCount,
   PublicationProfile as PublicationProfileData,
@@ -24,7 +26,6 @@ const GOOGLE_SCHOLAR_PROFILE =
 
 function formatDate(date: string) {
   return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
     month: 'short',
     year: 'numeric',
     timeZone: 'UTC',
@@ -63,6 +64,41 @@ function HorizontalBars({
             />
           </div>
           <strong>{item.count}</strong>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function AverageBars({
+  items,
+}: {
+  items: ProfileAverage[]
+}) {
+  const max = Math.max(...items.map((item) => item.value), 1)
+
+  return (
+    <div className="publication-profile-horizontal-bars">
+      {items.map((item) => (
+        <div
+          className="publication-profile-horizontal-row"
+          key={item.label}
+          title={`Average based on ${item.sampleSize} ${item.sampleSize === 1 ? 'paper' : 'papers'} with a Google Scholar snapshot`}
+        >
+          <div className="publication-profile-horizontal-label">
+            <span>{item.label}</span>
+          </div>
+          <div className="publication-profile-horizontal-track">
+            <span
+              style={{
+                width: `${Math.max(
+                  5,
+                  (item.value / max) * 100
+                )}%`,
+              }}
+            />
+          </div>
+          <strong>{item.value.toFixed(1)}</strong>
         </div>
       ))}
     </div>
@@ -164,6 +200,26 @@ export default function PublicationProfile({
         </article>
       </section>
 
+      {profile.collaborationExclusion && (
+        <p className="publication-profile-exclusion-note">
+          <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
+          <span>
+            Distinct co-authors and Authors per paper exclude{' '}
+            <Link
+              href={`/publication/${profile.collaborationExclusion.slug}`}
+            >
+              {profile.collaborationExclusion.title}
+            </Link>
+            , an unusually large collaboration with{' '}
+            {profile.collaborationExclusion.authorCount.toLocaleString(
+              'en-GB'
+            )}{' '}
+            authors that would dominate these two collaboration
+            summaries.
+          </span>
+        </p>
+      )}
+
       <section className="publication-profile-panel">
         <div className="publication-profile-section-heading">
           <div>
@@ -258,14 +314,21 @@ export default function PublicationProfile({
         <section className="publication-profile-panel">
           <div className="publication-profile-section-heading">
             <div>
-              <p className="kicker">Composition</p>
-              <h2>Languages</h2>
+              <p className="kicker">Impact snapshot</p>
+              <h2>Average citations per index</h2>
             </div>
+            <p>
+              Mean latest Google Scholar citations among papers
+              with a stored snapshot in each index.
+            </p>
           </div>
-          <HorizontalBars
-            items={profile.languages}
-            languageFlags
-          />
+          {profile.averageCitationsByIndex.length > 0 ? (
+            <AverageBars items={profile.averageCitationsByIndex} />
+          ) : (
+            <p className="publication-profile-empty">
+              No indexed citation snapshots are available yet.
+            </p>
+          )}
         </section>
       </div>
 
@@ -277,7 +340,7 @@ export default function PublicationProfile({
               <h2>Authorship structure</h2>
             </div>
             <p>
-              {profile.firstAuthorShare.toFixed(1)}% first-authored.
+              {profile.firstAuthorShare.toFixed(1)}% first-authored
             </p>
           </div>
           <HorizontalBars items={profile.authorshipStructure} />
@@ -286,18 +349,14 @@ export default function PublicationProfile({
         <section className="publication-profile-panel">
           <div className="publication-profile-section-heading">
             <div>
-              <p className="kicker">Publishing</p>
-              <h2>Recurrent venues</h2>
+              <p className="kicker">Composition</p>
+              <h2>Languages</h2>
             </div>
-            <p>Venues represented by at least two public papers.</p>
           </div>
-          {profile.recurrentVenues.length > 0 ? (
-            <HorizontalBars items={profile.recurrentVenues} />
-          ) : (
-            <p className="publication-profile-empty">
-              No recurrent venues are represented yet.
-            </p>
-          )}
+          <HorizontalBars
+            items={profile.languages}
+            languageFlags
+          />
         </section>
       </div>
     </>
