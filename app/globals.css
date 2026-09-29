@@ -857,7 +857,7 @@ h4 {
   background: var(--oxford-blue);
 }
 
-.publication-profile-year-column:last-child .publication-profile-year-track span {
+.publication-profile-year-column-forthcoming .publication-profile-year-track span {
   background: var(--oxford-coral);
 }
 
