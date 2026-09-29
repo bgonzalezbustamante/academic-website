@@ -19,55 +19,156 @@ type Point = {
   vy: number
 }
 
+type ClusterLayout = {
+  nodeIds: string[]
+  x: number
+  y: number
+}
+
+type LayoutResult = {
+  positions: Map<string, Point>
+  clusterByNode: Map<string, ClusterLayout>
+}
+
 const WIDTH = 960
 const HEIGHT = 620
 const CENTRE_X = WIDTH / 2
 const CENTRE_Y = HEIGHT / 2
 
 function nodeRadius(node: CoauthorshipNode) {
-  if (node.isProfile) return 17
+  if (node.isProfile) return 20
 
-  return 8 + Math.min(8, node.publicationCount * 1.25)
+  return 10 + Math.min(10, node.publicationCount * 1.4)
 }
 
 function edgeKey(edge: CoauthorshipEdge) {
   return [edge.source, edge.target].sort().join('::')
 }
 
-function layoutGraph(graph: CoauthorshipGraph) {
-  const positions = new Map<string, Point>()
-  const collaborators = graph.nodes.filter((node) => !node.isProfile)
+function collaboratorClusters(
+  graph: CoauthorshipGraph,
+  profileId: string | undefined
+) {
+  const collaborators = graph.nodes
+    .filter((node) => node.id !== profileId)
+    .map((node) => node.id)
+  const adjacency = new Map<string, Set<string>>(
+    collaborators.map((id) => [id, new Set<string>()])
+  )
 
-  positions.set(
-    graph.nodes.find((node) => node.isProfile)?.id ?? '',
-    {
+  for (const edge of graph.edges) {
+    if (
+      edge.source === profileId ||
+      edge.target === profileId
+    ) {
+      continue
+    }
+
+    adjacency.get(edge.source)?.add(edge.target)
+    adjacency.get(edge.target)?.add(edge.source)
+  }
+
+  const visited = new Set<string>()
+  const clusters: string[][] = []
+
+  for (const id of collaborators.sort((a, b) => a.localeCompare(b))) {
+    if (visited.has(id)) continue
+
+    const stack = [id]
+    const cluster: string[] = []
+    visited.add(id)
+
+    while (stack.length > 0) {
+      const current = stack.pop()
+      if (!current) continue
+
+      cluster.push(current)
+
+      for (const neighbour of adjacency.get(current) ?? []) {
+        if (visited.has(neighbour)) continue
+        visited.add(neighbour)
+        stack.push(neighbour)
+      }
+    }
+
+    clusters.push(cluster.sort((a, b) => a.localeCompare(b)))
+  }
+
+  return clusters.sort(
+    (a, b) =>
+      b.length - a.length ||
+      (a[0] ?? '').localeCompare(b[0] ?? '')
+  )
+}
+
+function clusterLayouts(
+  graph: CoauthorshipGraph,
+  profileId: string | undefined
+) {
+  const clusters = collaboratorClusters(graph, profileId)
+
+  return clusters.map((nodeIds, index): ClusterLayout => {
+    const ring = Math.floor(index / 8)
+    const ringStart = ring * 8
+    const ringCount = Math.min(
+      8,
+      clusters.length - ringStart
+    )
+    const localIndex = index - ringStart
+    const radius = Math.min(255, 190 + ring * 62)
+    const angle =
+      (localIndex / Math.max(ringCount, 1)) * Math.PI * 2 -
+      Math.PI / 2 +
+      (ring % 2) * (Math.PI / 8)
+
+    return {
+      nodeIds,
+      x: CENTRE_X + Math.cos(angle) * radius,
+      y: CENTRE_Y + Math.sin(angle) * radius,
+    }
+  })
+}
+
+function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
+  const positions = new Map<string, Point>()
+  const profileId = graph.nodes.find((node) => node.isProfile)?.id
+  const clusters = clusterLayouts(graph, profileId)
+  const clusterByNode = new Map<string, ClusterLayout>()
+
+  if (profileId) {
+    positions.set(profileId, {
       x: CENTRE_X,
       y: CENTRE_Y,
       vx: 0,
       vy: 0,
-    }
-  )
-
-  collaborators.forEach((node, index) => {
-    const angle =
-      (index / Math.max(collaborators.length, 1)) *
-        Math.PI *
-        2 -
-      Math.PI / 2
-    const ring = 205 + (index % 3) * 28
-
-    positions.set(node.id, {
-      x: CENTRE_X + Math.cos(angle) * ring,
-      y: CENTRE_Y + Math.sin(angle) * ring,
-      vx: 0,
-      vy: 0,
     })
-  })
+  }
 
-  const profileId = graph.nodes.find((node) => node.isProfile)?.id
+  for (const cluster of clusters) {
+    cluster.nodeIds.forEach((nodeId, index) => {
+      clusterByNode.set(nodeId, cluster)
 
-  for (let iteration = 0; iteration < 260; iteration += 1) {
-    const cooling = 1 - iteration / 300
+      const angle =
+        (index / Math.max(cluster.nodeIds.length, 1)) *
+          Math.PI *
+          2 -
+        Math.PI / 2
+      const localRadius =
+        cluster.nodeIds.length === 1
+          ? 0
+          : 34 + Math.min(48, cluster.nodeIds.length * 5)
+
+      positions.set(nodeId, {
+        x: cluster.x + Math.cos(angle) * localRadius,
+        y: cluster.y + Math.sin(angle) * localRadius,
+        vx: 0,
+        vy: 0,
+      })
+    })
+  }
+
+  for (let iteration = 0; iteration < 360; iteration += 1) {
+    const cooling = Math.max(0.12, 1 - iteration / 390)
 
     for (let i = 0; i < graph.nodes.length; i += 1) {
       const a = graph.nodes[i]
@@ -81,9 +182,9 @@ function layoutGraph(graph: CoauthorshipGraph) {
 
         const dx = pb.x - pa.x || 0.01
         const dy = pb.y - pa.y || 0.01
-        const distanceSquared = Math.max(dx * dx + dy * dy, 900)
+        const distanceSquared = Math.max(dx * dx + dy * dy, 625)
         const distance = Math.sqrt(distanceSquared)
-        const force = (3600 / distanceSquared) * cooling
+        const force = (5200 / distanceSquared) * cooling
         const fx = (dx / distance) * force
         const fy = (dy / distance) * force
 
@@ -96,6 +197,26 @@ function layoutGraph(graph: CoauthorshipGraph) {
           pb.vx += fx
           pb.vy += fy
         }
+
+        const minimumDistance =
+          nodeRadius(a) + nodeRadius(b) + 10
+
+        if (distance < minimumDistance) {
+          const collision =
+            (minimumDistance - distance) * 0.045 * cooling
+          const cfx = (dx / distance) * collision
+          const cfy = (dy / distance) * collision
+
+          if (a.id !== profileId) {
+            pa.vx -= cfx
+            pa.vy -= cfy
+          }
+
+          if (b.id !== profileId) {
+            pb.vx += cfx
+            pb.vy += cfy
+          }
+        }
       }
     }
 
@@ -107,14 +228,14 @@ function layoutGraph(graph: CoauthorshipGraph) {
       const dx = target.x - source.x
       const dy = target.y - source.y
       const distance = Math.max(Math.hypot(dx, dy), 1)
-      const targetLength =
+      const profileEdge =
         edge.source === profileId || edge.target === profileId
-          ? 190
-          : 135
+      const targetLength = profileEdge ? 205 : 88
+      const strength = profileEdge
+        ? 0.0016
+        : 0.0048 + Math.min(edge.weight, 5) * 0.0007
       const spring =
-        (distance - targetLength) *
-        (0.0028 + Math.min(edge.weight, 5) * 0.0005) *
-        cooling
+        (distance - targetLength) * strength * cooling
       const fx = (dx / distance) * spring
       const fy = (dy / distance) * spring
 
@@ -133,24 +254,30 @@ function layoutGraph(graph: CoauthorshipGraph) {
       if (node.id === profileId) continue
 
       const point = positions.get(node.id)
-      if (!point) continue
+      const cluster = clusterByNode.get(node.id)
+      if (!point || !cluster) continue
 
-      point.vx += (CENTRE_X - point.x) * 0.0008
-      point.vy += (CENTRE_Y - point.y) * 0.0008
-      point.vx *= 0.84
-      point.vy *= 0.84
+      point.vx += (cluster.x - point.x) * 0.007 * cooling
+      point.vy += (cluster.y - point.y) * 0.007 * cooling
+      point.vx += (CENTRE_X - point.x) * 0.0002
+      point.vy += (CENTRE_Y - point.y) * 0.0002
+      point.vx *= 0.82
+      point.vy *= 0.82
       point.x = Math.min(
-        WIDTH - 115,
-        Math.max(115, point.x + point.vx)
+        WIDTH - 125,
+        Math.max(125, point.x + point.vx)
       )
       point.y = Math.min(
-        HEIGHT - 55,
-        Math.max(55, point.y + point.vy)
+        HEIGHT - 60,
+        Math.max(60, point.y + point.vy)
       )
     }
   }
 
-  return positions
+  return {
+    positions,
+    clusterByNode,
+  }
 }
 
 function connectedNodes(
@@ -177,7 +304,7 @@ export default function CoauthorshipNetwork({ graph }: Props) {
     null
   )
 
-  const positions = useMemo(() => layoutGraph(graph), [graph])
+  const layout = useMemo(() => layoutGraph(graph), [graph])
   const connected = useMemo(
     () => connectedNodes(graph, hoveredNode),
     [graph, hoveredNode]
@@ -204,8 +331,8 @@ export default function CoauthorshipNetwork({ graph }: Props) {
       >
         <g className="coauthorship-edges">
           {graph.edges.map((edge) => {
-            const source = positions.get(edge.source)
-            const target = positions.get(edge.target)
+            const source = layout.positions.get(edge.source)
+            const target = layout.positions.get(edge.target)
             if (!source || !target) return null
 
             const key = edgeKey(edge)
@@ -248,17 +375,20 @@ export default function CoauthorshipNetwork({ graph }: Props) {
 
         <g className="coauthorship-nodes">
           {graph.nodes.map((node) => {
-            const point = positions.get(node.id)
+            const point = layout.positions.get(node.id)
             if (!point) return null
 
             const dimmed =
               hoveredNode !== null && !connected.has(node.id)
-            const anchor = point.x >= CENTRE_X ? 'start' : 'end'
+            const cluster = layout.clusterByNode.get(node.id)
+            const anchorCentreX = cluster?.x ?? CENTRE_X
+            const anchor =
+              point.x >= anchorCentreX ? 'start' : 'end'
             const labelX =
               point.x +
               (anchor === 'start'
-                ? nodeRadius(node) + 7
-                : -(nodeRadius(node) + 7))
+                ? nodeRadius(node) + 8
+                : -(nodeRadius(node) + 8))
 
             return (
               <g
@@ -311,6 +441,7 @@ export default function CoauthorshipNetwork({ graph }: Props) {
         </span>
         <span>Node size = publications in network</span>
         <span>Edge width = joint publications</span>
+        <span>Layout separates collaborator clusters</span>
       </div>
     </div>
   )
