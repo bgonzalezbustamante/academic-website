@@ -24,6 +24,8 @@ export type PublicPaper = {
   featured: boolean
   publication_index: string | null
   language: PublicPaperLanguage | null
+  google_scholar_citations: number | null
+  google_scholar_citations_captured_on: string | null
 }
 
 export type PublicPaperDetail = PublicPaper & {
