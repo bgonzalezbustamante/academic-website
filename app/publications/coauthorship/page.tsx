@@ -93,8 +93,9 @@ export default async function CoauthorshipPage() {
                 {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. The
                 network then includes every author and co-authorship
                 relationship appearing in the remaining publications on
-                this website. For layout only, collaborator-only connected
-                components are spatially separated to make collaboration
+                this website. For layout only, weighted collaborator
+                communities are detected after removing the central profile
+                links and are spatially separated to make collaboration
                 clusters easier to distinguish.
               </span>
             </p>
