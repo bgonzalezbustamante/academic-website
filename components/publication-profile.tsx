@@ -359,20 +359,7 @@ export default function PublicationProfile({
         </section>
       </div>
 
-      <div className="publication-profile-three-column">
-        <section className="publication-profile-panel">
-          <div className="publication-profile-section-heading">
-            <div>
-              <p className="kicker">Collaboration</p>
-              <h2>Authorship structure</h2>
-            </div>
-            <p>
-              {profile.firstAuthorShare.toFixed(1)}% first-authored
-            </p>
-          </div>
-          <HorizontalBars items={profile.authorshipStructure} />
-        </section>
-
+      <div className="publication-profile-two-column">
         <section className="publication-profile-panel">
           <div className="publication-profile-section-heading">
             <div>
@@ -408,6 +395,46 @@ export default function PublicationProfile({
           ) : (
             <p className="publication-profile-empty">
               No language citation snapshots are available yet.
+            </p>
+          )}
+        </section>
+      </div>
+
+      <div className="publication-profile-two-column">
+        <section className="publication-profile-panel">
+          <div className="publication-profile-section-heading">
+            <div>
+              <p className="kicker">Collaboration</p>
+              <h2>Authorship structure</h2>
+            </div>
+            <p>
+              {profile.firstAuthorShare.toFixed(1)}% first-authored
+            </p>
+          </div>
+          <HorizontalBars items={profile.authorshipStructure} />
+        </section>
+
+        <section className="publication-profile-panel">
+          <div className="publication-profile-section-heading">
+            <div>
+              <p className="kicker">Impact snapshot</p>
+              <h2>Average citations per authorship</h2>
+            </div>
+            <p className="publication-profile-scholar-label">
+              <i className="ai ai-google-scholar" aria-hidden="true" />
+              <span>
+                Mean latest Google Scholar citations by authorship
+                group
+              </span>
+            </p>
+          </div>
+          {profile.averageCitationsByAuthorship.length > 0 ? (
+            <AverageBars
+              items={profile.averageCitationsByAuthorship}
+            />
+          ) : (
+            <p className="publication-profile-empty">
+              No authorship citation snapshots are available yet.
             </p>
           )}
         </section>
