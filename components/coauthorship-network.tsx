@@ -27,7 +27,7 @@ const CENTRE_Y = HEIGHT / 2
 function nodeRadius(node: CoauthorshipNode) {
   if (node.isProfile) return 17
 
-  return 8 + Math.min(8, node.publicationsWithProfile * 1.25)
+  return 8 + Math.min(8, node.publicationCount * 1.25)
 }
 
 function edgeKey(edge: CoauthorshipEdge) {
@@ -187,7 +187,8 @@ export default function CoauthorshipNetwork({ graph }: Props) {
     return (
       <div className="empty-state">
         <p>
-          No co-authors currently meet the two-publication inclusion threshold.
+          No co-authorship relationships are available after excluding
+          publications with more than five authors.
         </p>
       </div>
     )
@@ -280,14 +281,10 @@ export default function CoauthorshipNetwork({ graph }: Props) {
                   r={nodeRadius(node)}
                 >
                   <title>
-                    {node.name}: {node.publicationsWithProfile}{' '}
-                    {node.isProfile
-                      ? node.publicationsWithProfile === 1
-                        ? 'publication in the public corpus'
-                        : 'publications in the public corpus'
-                      : node.publicationsWithProfile === 1
-                        ? 'publication with Bastián González-Bustamante'
-                        : 'publications with Bastián González-Bustamante'}
+                    {node.name}: {node.publicationCount}{' '}
+                    {node.publicationCount === 1
+                      ? 'publication in the displayed network'
+                      : 'publications in the displayed network'}
                   </title>
                 </circle>
                 <text
@@ -310,9 +307,9 @@ export default function CoauthorshipNetwork({ graph }: Props) {
         </span>
         <span>
           <i className="coauthorship-legend-node" />
-          Repeated co-author
+          Co-author
         </span>
-        <span>Node size = publications with me</span>
+        <span>Node size = publications in network</span>
         <span>Edge width = joint publications</span>
       </div>
     </div>
