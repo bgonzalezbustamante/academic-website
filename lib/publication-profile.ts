@@ -66,6 +66,7 @@ export type PublicationProfile = {
   languages: ProfileCount[]
   authorshipStructure: ProfileCount[]
   averageCitationsByIndex: ProfileAverage[]
+  averageCitationsByLanguage: ProfileAverage[]
   collaborationExclusion: CollaborationExclusion | null
   topCitedPapers: ProfileCitationPaper[]
 }
@@ -296,6 +297,57 @@ export function buildPublicationProfile(
       : []),
   ]
 
+  const citationLanguageStats = new Map<
+    string,
+    { total: number; count: number }
+  >()
+
+  for (const paper of papers) {
+    if (paper.google_scholar_citations === null) continue
+
+    const label = paper.language ?? 'Unspecified'
+    const current = citationLanguageStats.get(label) ?? {
+      total: 0,
+      count: 0,
+    }
+
+    current.total += paper.google_scholar_citations
+    current.count += 1
+    citationLanguageStats.set(label, current)
+  }
+
+  const averageCitationsByLanguage = [
+    ...LANGUAGE_ORDER.map((label) => {
+      const stats = citationLanguageStats.get(label)
+
+      return stats
+        ? {
+            label,
+            value: stats.total / stats.count,
+            sampleSize: stats.count,
+          }
+        : null
+    }).filter(
+      (item): item is {
+        label: PublicPaperLanguage
+        value: number
+        sampleSize: number
+      } => item !== null
+    ),
+    ...(citationLanguageStats.get('Unspecified')
+      ? [
+          {
+            label: 'Unspecified',
+            value:
+              citationLanguageStats.get('Unspecified')!.total /
+              citationLanguageStats.get('Unspecified')!.count,
+            sampleSize:
+              citationLanguageStats.get('Unspecified')!.count,
+          },
+        ]
+      : []),
+  ]
+
   return {
     totalGoogleScholarCitations,
     citationCoverage: citationPapers.length,
@@ -314,6 +366,7 @@ export function buildPublicationProfile(
     languages,
     authorshipStructure,
     averageCitationsByIndex,
+    averageCitationsByLanguage,
     collaborationExclusion: collaborationOutlier
       ? {
           slug: collaborationOutlier.slug,
