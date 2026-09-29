@@ -34,8 +34,8 @@ type LayoutResult = {
   clusterByNode: Map<string, ClusterLayout>
 }
 
-const WIDTH = 1080
-const HEIGHT = 740
+const WIDTH = 1200
+const HEIGHT = 820
 const CENTRE_X = WIDTH / 2
 const CENTRE_Y = HEIGHT / 2
 
@@ -159,7 +159,7 @@ function clusterLayouts(
       clusters.length - ringStart
     )
     const localIndex = index - ringStart
-    const radius = Math.min(300, 215 + ring * 72)
+    const radius = Math.min(365, 255 + ring * 95)
     const angle =
       (localIndex / Math.max(ringCount, 1)) * Math.PI * 2 -
       Math.PI / 2 +
@@ -213,16 +213,16 @@ function resolveNodeOverlaps(
           ) ?? 0
         const connected = pairWeight > 0
         const safetyGap = connected
-          ? Math.max(8, 16 - Math.min(8, (pairWeight - 1) * 2))
-          : 26
+          ? Math.max(6, 15 - Math.min(9, (pairWeight - 1) * 2.25))
+          : 32
         const labelAllowance = connected
           ? Math.min(
-              12,
-              Math.max(a.name.length, b.name.length) * 0.16
+              10,
+              Math.max(a.name.length, b.name.length) * 0.14
             )
           : Math.min(
-              32,
-              Math.max(a.name.length, b.name.length) * 0.42
+              38,
+              Math.max(a.name.length, b.name.length) * 0.48
             )
         const minimumDistance =
           nodeRadius(a) +
@@ -330,7 +330,17 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
         const dy = pb.y - pa.y || 0.01
         const distanceSquared = Math.max(dx * dx + dy * dy, 625)
         const distance = Math.sqrt(distanceSquared)
-        const force = (5200 / distanceSquared) * cooling
+        const clusterA = clusterByNode.get(a.id)
+        const clusterB = clusterByNode.get(b.id)
+        const differentClusters =
+          clusterA &&
+          clusterB &&
+          clusterA !== clusterB
+        const repulsionMultiplier = differentClusters ? 2.25 : 1
+        const force =
+          (5600 / distanceSquared) *
+          cooling *
+          repulsionMultiplier
         const fx = (dx / distance) * force
         const fy = (dy / distance) * force
 
@@ -379,24 +389,24 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const weightFactor = Math.max(1, edge.weight)
       const targetLength = profileEdge
         ? Math.max(
-            110,
+            88,
             230 /
               Math.pow(
-                1 + 0.4 * (weightFactor - 1),
-                0.62
+                1 + 0.72 * (weightFactor - 1),
+                0.82
               )
           )
         : Math.max(
-            46,
+            34,
             102 /
               Math.pow(
-                1 + 0.58 * (weightFactor - 1),
-                0.72
+                1 + 0.95 * (weightFactor - 1),
+                0.88
               )
           )
       const strength = profileEdge
-        ? 0.002 + Math.min(edge.weight, 8) * 0.00035
-        : 0.0052 + Math.min(edge.weight, 8) * 0.00085
+        ? 0.0022 + Math.min(edge.weight, 10) * 0.0005
+        : 0.0055 + Math.min(edge.weight, 10) * 0.001
       const spring =
         (distance - targetLength) * strength * cooling
       const fx = (dx / distance) * spring
@@ -420,8 +430,8 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const cluster = clusterByNode.get(node.id)
       if (!point || !cluster) continue
 
-      point.vx += (cluster.x - point.x) * 0.007 * cooling
-      point.vy += (cluster.y - point.y) * 0.007 * cooling
+      point.vx += (cluster.x - point.x) * 0.0105 * cooling
+      point.vy += (cluster.y - point.y) * 0.0105 * cooling
       point.vx += (CENTRE_X - point.x) * 0.0002
       point.vy += (CENTRE_Y - point.y) * 0.0002
       point.vx *= 0.82
