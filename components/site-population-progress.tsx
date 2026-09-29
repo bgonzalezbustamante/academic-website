@@ -28,7 +28,7 @@ type Props = {
   teaching: PublicTeachingItem[] | null
 }
 
-const READINESS_THRESHOLD = 55
+const READINESS_THRESHOLD = 60
 const READINESS_WEIGHTS = {
   publications: 0.35,
   projects: 0.3,
