@@ -1,6 +1,10 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import {
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from 'react'
 
 import type {
   CoauthorshipEdge,
@@ -34,6 +38,16 @@ const WIDTH = 1000
 const HEIGHT = 680
 const CENTRE_X = WIDTH / 2
 const CENTRE_Y = HEIGHT / 2
+
+const subscribeToHydration = () => () => {}
+
+function useHydrated() {
+  return useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false
+  )
+}
 
 function nodeRadius(node: CoauthorshipNode) {
   if (node.isProfile) return 20
@@ -415,8 +429,15 @@ export default function CoauthorshipNetwork({ graph }: Props) {
   const [hoveredEdge, setHoveredEdge] = useState<string | null>(
     null
   )
+  const hydrated = useHydrated()
 
-  const layout = useMemo(() => layoutGraph(graph), [graph])
+  const layout = useMemo(
+    () =>
+      hydrated && graph.nodes.length > 1
+        ? layoutGraph(graph)
+        : null,
+    [graph, hydrated]
+  )
   const connected = useMemo(
     () => connectedNodes(graph, hoveredNode),
     [graph, hoveredNode]
@@ -429,6 +450,18 @@ export default function CoauthorshipNetwork({ graph }: Props) {
           No co-authorship relationships are available after excluding
           publications with more than five authors.
         </p>
+      </div>
+    )
+  }
+
+  if (!layout) {
+    return (
+      <div className="coauthorship-network-frame">
+        <svg
+          className="coauthorship-network"
+          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+          aria-hidden="true"
+        />
       </div>
     )
   }
