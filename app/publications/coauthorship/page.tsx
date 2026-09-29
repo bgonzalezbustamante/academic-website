@@ -37,10 +37,6 @@ export default async function CoauthorshipPage() {
   }
 
   const graph = buildCoauthorshipGraph(papers)
-  const collaborators = graph.nodes.filter(
-    (node) => !node.isProfile
-  ).length
-
   return (
     <section className="page-section">
       <div className="site-shell">
@@ -58,24 +54,13 @@ export default async function CoauthorshipPage() {
             Publications
           </Link>
 
-          <div className="coauthorship-toolbar-meta">
-            <Link href="/publications/profile">
-              <FontAwesomeIcon
-                icon={faChartColumn}
-                aria-hidden="true"
-              />
-              Publication profile
-            </Link>
-
-            {available && (
-              <p>
-                {collaborators}{' '}
-                {collaborators === 1 ? 'co-author' : 'co-authors'} ·{' '}
-                {graph.edges.length}{' '}
-                {graph.edges.length === 1 ? 'link' : 'links'}
-              </p>
-            )}
-          </div>
+          <Link href="/publications/profile">
+            <FontAwesomeIcon
+              icon={faChartColumn}
+              aria-hidden="true"
+            />
+            Publication profile
+          </Link>
         </div>
 
         {!available ? (
@@ -96,7 +81,8 @@ export default async function CoauthorshipPage() {
                 this website. For layout only, weighted collaborator
                 communities are detected after removing the central profile
                 links and are spatially separated to make collaboration
-                clusters easier to distinguish.
+                clusters easier to distinguish. A final collision pass
+                enforces minimum spacing between node circles.
               </span>
             </p>
           </>
