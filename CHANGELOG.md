@@ -47,7 +47,7 @@
 - Added the official horizontal DORA signatory badge as a local public asset.
 - Migrated the legacy `/credit` Contributor Roles Taxonomy page, including all fourteen CRediT badges, while dropping the former Training Data Lab cross-reference.
 - Integrated detail-only publication Key highlights from `get_public_paper(slug)`, with optional text, local static images, supplied alt text and restrained captions under `/public/publication-highlights/<paper-slug>/`.
-- Added RPC-backed `/projects` and `/project/[slug]` routes with Featured projects, canonical project URLs, years, status, funder presentation, optional local project/funder imagery and associated Public publications.
+- Added RPC-backed `/projects` and `/project/[slug]` routes with Featured projects, canonical project URLs, years, status, funder presentation, optional local project/funder imagery and associated Public publications. Publication-detail pages now reverse the same public `publication_slugs` relationship and show associated project cards at the bottom; multiple project associations are supported.
 - Added an RPC-backed `/conferences` page using presentation-specific ordered authors while deliberately excluding private notes and Dashboard paper relationships.
 - Added Projects and Conferences to standalone navigation.
 - Added a top-level `/teaching` Teaching Portfolio after Conferences in primary navigation, backed exclusively by `list_public_teaching()`.
