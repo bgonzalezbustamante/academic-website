@@ -9,7 +9,7 @@ import Link from 'next/link'
 import CoauthorshipNetwork from '@/components/coauthorship-network'
 import {
   buildCoauthorshipGraph,
-  COAUTHORSHIP_MIN_PUBLICATIONS,
+  COAUTHORSHIP_MAX_AUTHORS,
 } from '@/lib/coauthorship'
 import { listPublicPapers } from '@/lib/publications'
 import type { PublicPaper } from '@/types/public'
@@ -78,11 +78,11 @@ export default async function CoauthorshipPage() {
             <p className="coauthorship-method-note">
               <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
               <span>
-                Co-authors are included after appearing on at least{' '}
-                {COAUTHORSHIP_MIN_PUBLICATIONS} publications with me.
-                Links then represent all co-authorship relationships among
-                the resulting set of authors, based only on publications
-                included on this website.
+                Publications with more than{' '}
+                {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. The
+                network then includes every author and co-authorship
+                relationship appearing in the remaining publications on
+                this website.
               </span>
             </p>
           </>
