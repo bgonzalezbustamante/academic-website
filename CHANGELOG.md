@@ -87,7 +87,7 @@
 - Added small status icons to the homepage Roadmap: a completed-state icon for past presentations and a calendar icon for forthcoming presentations.
 - Institutional logos remain monochrome at rest and transition to their original colour on hover; position-logo links also support the colour treatment on keyboard focus.
 - Kept the Conference map data scale in Oxford aqua/blue tones and reserved Oxford coral for the hover state.
-- Updated the Publications introduction to “Here are my peer-reviewed articles, book chapters, working papers, and occasional preprints.”
+- Updated the Publications introduction to “Peer-reviewed articles, book chapters, working papers, and occasional preprints.”
 - Aligned the Publications page width with Projects and Conferences by using the full site shell instead of the narrower content shell.
 - Removed the separator between the Academic profile and DORA / CRediT cards.
 - Updated the current-year Roadmap heading to “Conferences”, added the contextual line “Public presentations at conferences, workshops, and seminars during [year].”, and retained the past/upcoming visual distinction.
