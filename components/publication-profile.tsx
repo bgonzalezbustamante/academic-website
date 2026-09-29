@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
+import ExternalInlineLink from '@/components/external-inline-link'
 import PublicationLanguageFlag from '@/components/publication-language-flag'
 import type {
   ProfileAverage,
@@ -178,14 +179,30 @@ export default function PublicationProfile({
         <article>
           <FontAwesomeIcon icon={faUserGroup} aria-hidden="true" />
           <div>
-            <p>Distinct co-authors</p>
+            <p className="publication-profile-kpi-label">
+              Distinct co-authors
+              {profile.collaborationExclusion && (
+                <FontAwesomeIcon
+                  icon={faCircleInfo}
+                  aria-label="Excludes one unusually large collaboration"
+                />
+              )}
+            </p>
             <strong>{profile.distinctCoauthors}</strong>
           </div>
         </article>
         <article>
           <FontAwesomeIcon icon={faChartColumn} aria-hidden="true" />
           <div>
-            <p>Authors per paper</p>
+            <p className="publication-profile-kpi-label">
+              Authors per paper
+              {profile.collaborationExclusion && (
+                <FontAwesomeIcon
+                  icon={faCircleInfo}
+                  aria-label="Excludes one unusually large collaboration"
+                />
+              )}
+            </p>
             <strong>
               {profile.averageAuthorsPerPaper.toFixed(1)}
             </strong>
@@ -204,7 +221,7 @@ export default function PublicationProfile({
         <p className="publication-profile-exclusion-note">
           <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
           <span>
-            Distinct co-authors and Authors per paper exclude{' '}
+            Exclude{' '}
             <Link
               href={`/publication/${profile.collaborationExclusion.slug}`}
             >
@@ -226,10 +243,6 @@ export default function PublicationProfile({
             <p className="kicker">Trajectory</p>
             <h2>Publications over time</h2>
           </div>
-          <p>
-            Forthcoming papers are shown separately from dated
-            published output.
-          </p>
         </div>
 
         <div
@@ -273,7 +286,7 @@ export default function PublicationProfile({
           </div>
           <p>
             Ten most-cited public papers by latest stored Google
-            Scholar snapshot.
+            Scholar snapshot
           </p>
         </div>
 
@@ -286,17 +299,16 @@ export default function PublicationProfile({
         )}
 
         <p className="publication-profile-note">
-          Stored citation counts are dated snapshots and may have
-          different capture dates across papers. For the latest
-          Google Scholar indicators, see{' '}
-          <a
-            href={GOOGLE_SCHOLAR_PROFILE}
-            target="_blank"
-            rel="noreferrer"
-          >
-            my Google Scholar profile
-          </a>
-          .
+          <FontAwesomeIcon icon={faCircleInfo} aria-hidden="true" />
+          <span>
+            Stored citation counts are dated snapshots and may have
+            different capture dates across papers. For the latest
+            Google Scholar indicators, see{' '}
+            <ExternalInlineLink href={GOOGLE_SCHOLAR_PROFILE}>
+              my Google Scholar profile
+            </ExternalInlineLink>
+            .
+          </span>
         </p>
       </section>
 
@@ -319,7 +331,7 @@ export default function PublicationProfile({
             </div>
             <p>
               Mean latest Google Scholar citations among papers
-              with a stored snapshot in each index.
+              with a stored snapshot in each index
             </p>
           </div>
           {profile.averageCitationsByIndex.length > 0 ? (
