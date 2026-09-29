@@ -79,16 +79,15 @@ export default async function CoauthorshipPage() {
                 />
                 Publications with more than{' '}
                 {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. The
-                network then includes every author and co-authorship
-                relationship appearing in the remaining publications on
-                this website. For layout only, weighted collaborator
-                communities are detected after removing the central profile
-                links and are spatially separated to make collaboration
-                clusters easier to distinguish. Repeated co-authorship
-                shortens the preferred distance between connected authors
-                more strongly, while the final collision pass gives strong
-                ties a smaller safe gap and keeps unrelated nodes farther
-                apart to reduce crowding.
+                network includes all authors and co-authorship ties in the
+                remaining publications. Node size represents publications
+                in the displayed network; repeated collaboration is encoded
+                by both edge width and distance, so more joint publications
+                appear as thicker, shorter links. Weighted collaborator
+                communities are estimated without the central profile links
+                and used only to organise the layout. Communities are
+                spatially separated, with collision constraints applied to
+                reduce node and label overlap.
               </span>
             </p>
           </>
