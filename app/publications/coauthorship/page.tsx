@@ -78,21 +78,15 @@ export default async function CoauthorshipPage() {
                   aria-hidden="true"
                 />
                 Publications with more than{' '}
-                {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. The
-                network includes all authors and co-authorship ties in the
-                remaining publications. Node size represents publications
-                in the displayed network, and edge width represents joint
-                publications. For ties to the central profile, repeated
-                co-authorship also reduces distance, so frequent collaborators
-                tend to appear closer to the centre. Weighted collaborator
-                communities are estimated from the collaborator-only graph
-                using weighted modularity and are used only to organise the
-                layout. This helps dense groups remain distinct even when
-                one or a few co-authorship ties bridge them. Those bridge
-                ties remain visible but do not reduce the spacing between
-                communities. Community-level spacing keeps their overall
-                footprints apart, while node-level collision constraints
-                reduce residual node and label overlap.
+                {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. Node size
+                represents publications in the displayed network, while edge
+                width represents joint publications. Repeated co-authorship
+                with the central profile also reduces distance, so frequent
+                collaborators appear closer to the centre. Weighted modularity
+                on the collaborator-only graph is used to organise the layout
+                into communities; bridge ties remain visible but do not pull
+                separate communities together. Community and node-level
+                collision constraints reduce overlap.
               </span>
             </p>
           </>
