@@ -52,8 +52,9 @@ function collaboratorClusters(
   const collaborators = graph.nodes
     .filter((node) => node.id !== profileId)
     .map((node) => node.id)
-  const adjacency = new Map<string, Set<string>>(
-    collaborators.map((id) => [id, new Set<string>()])
+    .sort((a, b) => a.localeCompare(b))
+  const adjacency = new Map<string, Map<string, number>>(
+    collaborators.map((id) => [id, new Map<string, number>()])
   )
 
   for (const edge of graph.edges) {
@@ -64,41 +65,70 @@ function collaboratorClusters(
       continue
     }
 
-    adjacency.get(edge.source)?.add(edge.target)
-    adjacency.get(edge.target)?.add(edge.source)
+    adjacency.get(edge.source)?.set(edge.target, edge.weight)
+    adjacency.get(edge.target)?.set(edge.source, edge.weight)
   }
 
-  const visited = new Set<string>()
-  const clusters: string[][] = []
+  const labels = new Map(
+    collaborators.map((id) => [id, id])
+  )
 
-  for (const id of collaborators.sort((a, b) => a.localeCompare(b))) {
-    if (visited.has(id)) continue
+  for (let iteration = 0; iteration < 40; iteration += 1) {
+    let changed = false
 
-    const stack = [id]
-    const cluster: string[] = []
-    visited.add(id)
+    for (const id of collaborators) {
+      const neighbours = adjacency.get(id)
+      if (!neighbours || neighbours.size === 0) continue
 
-    while (stack.length > 0) {
-      const current = stack.pop()
-      if (!current) continue
+      const scores = new Map<string, number>()
 
-      cluster.push(current)
+      for (const [neighbour, weight] of neighbours) {
+        const label = labels.get(neighbour) ?? neighbour
+        scores.set(label, (scores.get(label) ?? 0) + weight)
+      }
 
-      for (const neighbour of adjacency.get(current) ?? []) {
-        if (visited.has(neighbour)) continue
-        visited.add(neighbour)
-        stack.push(neighbour)
+      const currentLabel = labels.get(id) ?? id
+      let bestLabel = currentLabel
+      let bestScore = scores.get(currentLabel) ?? -1
+
+      for (const [label, score] of scores) {
+        if (
+          score > bestScore ||
+          (score === bestScore &&
+            label.localeCompare(bestLabel) < 0)
+        ) {
+          bestLabel = label
+          bestScore = score
+        }
+      }
+
+      if (bestLabel !== currentLabel) {
+        labels.set(id, bestLabel)
+        changed = true
       }
     }
 
-    clusters.push(cluster.sort((a, b) => a.localeCompare(b)))
+    if (!changed) break
   }
 
-  return clusters.sort(
-    (a, b) =>
-      b.length - a.length ||
-      (a[0] ?? '').localeCompare(b[0] ?? '')
-  )
+  const communities = new Map<string, string[]>()
+
+  for (const id of collaborators) {
+    const label = labels.get(id) ?? id
+    const community = communities.get(label) ?? []
+    community.push(id)
+    communities.set(label, community)
+  }
+
+  return Array.from(communities.values())
+    .map((community) =>
+      community.sort((a, b) => a.localeCompare(b))
+    )
+    .sort(
+      (a, b) =>
+        b.length - a.length ||
+        (a[0] ?? '').localeCompare(b[0] ?? '')
+    )
 }
 
 function clusterLayouts(
@@ -441,7 +471,7 @@ export default function CoauthorshipNetwork({ graph }: Props) {
         </span>
         <span>Node size = publications in network</span>
         <span>Edge width = joint publications</span>
-        <span>Layout separates collaborator clusters</span>
+        <span>Layout separates weighted collaborator communities</span>
       </div>
     </div>
   )
