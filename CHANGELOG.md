@@ -82,12 +82,12 @@
 - Extended the public paper contract with nullable `language` in both list and detail RPCs, constrained to English, Spanish, Portuguese, Dutch, German, French and Italian; Home, Publications and publication-detail metadata now show accessible local SVG language flags (UK for English, Spain for Spanish) for consistent cross-platform rendering.
 - Added client-side Publications pagination at ten records per page, applied after filters and reset to page 1 whenever filters change.
 - Replaced the dynamically alphabetised Publication Index filter with a fixed seven-category Publication Index taxonomy in this order: WoS-SSCI, Scopus, WoS-ESCI, Book chapter, SciELO/Latindex, Working paper, Preprint.
-- Added Publications KPI cards for total papers, distinct journals and first-author percentage, with first authorship defined by Bastián González-Bustamante appearing first in the ordered public `authors[]` array.
+- Added Publications KPI cards for total papers, distinct journals/venues and first-author percentage, with first authorship defined by Bastián González-Bustamante appearing first in the ordered public `authors[]` array.
 - Extended citation rendering to support Markdown bold (`**text**`) and display bold citation emphasis in Oxford coral.
 - Added small status icons to the homepage Roadmap: a completed-state icon for past presentations and a calendar icon for forthcoming presentations.
 - Institutional logos remain monochrome at rest and transition to their original colour on hover; position-logo links also support the colour treatment on keyboard focus.
 - Kept the Conference map data scale in Oxford aqua/blue tones and reserved Oxford coral for the hover state.
-- Updated the Publications introduction to “Papers ordered from the most recent publication onwards.”
+- Updated the Publications introduction to “Here are my peer-reviewed articles, book chapters, working papers, and occasional preprints.”
 - Aligned the Publications page width with Projects and Conferences by using the full site shell instead of the narrower content shell.
 - Removed the separator between the Academic profile and DORA / CRediT cards.
 - Updated the current-year Roadmap heading to “Conferences”, added the contextual line “Public presentations at conferences, workshops, and seminars during [year].”, and retained the past/upcoming visual distinction.
