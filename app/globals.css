@@ -881,6 +881,16 @@ h4 {
   line-height: 1;
 }
 
+.publication-profile-card-note {
+  justify-content: flex-end;
+  margin: 0.85rem 0 0;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.62rem;
+  line-height: 1.45;
+  text-align: right;
+}
+
 .publication-profile-year-chart {
   display: flex;
   align-items: flex-end;
@@ -1233,10 +1243,6 @@ h4 {
 }
 
 .coauthorship-method-note {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 0.38rem;
   margin: 0.65rem 0 0;
   color: var(--oxford-ash);
   font-family: var(--font-roboto), Arial, sans-serif;
@@ -1245,11 +1251,15 @@ h4 {
   text-align: right;
 }
 
+.coauthorship-method-note span {
+  display: inline;
+}
+
 .coauthorship-method-note svg {
   width: 0.65rem;
-  flex: 0 0 0.65rem;
-  margin-top: 0.13rem;
+  margin-right: 0.32rem;
   color: var(--oxford-blue);
+  vertical-align: -0.08rem;
 }
 
 .publication-citation {
@@ -3999,6 +4009,7 @@ h4 {
 
   .publication-profile-scholar-label {
     justify-content: flex-start;
+    text-align: left;
   }
 
   .publication-profile-citation-row {
