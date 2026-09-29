@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import ProjectCard from '@/components/project-card'
 import PublicationKeyHighlight from '@/components/publication-key-highlight'
 import PublicationLanguageFlag from '@/components/publication-language-flag'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
@@ -10,6 +11,11 @@ import {
   isForthcomingPublicationDate,
 } from '@/lib/publication-dates'
 import { getPublicPaper } from '@/lib/publications'
+import {
+  listPublicProjects,
+  orderPublicProjects,
+} from '@/lib/projects'
+import type { PublicProject } from '@/types/public'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -45,6 +51,18 @@ export default async function PublicationPage({ params }: Props) {
   const paper = await getPublicPaper(slug)
 
   if (!paper) notFound()
+
+  let associatedProjects: PublicProject[] = []
+
+  try {
+    associatedProjects = orderPublicProjects(
+      (await listPublicProjects()).filter((project) =>
+        project.publication_slugs.includes(paper.slug)
+      )
+    )
+  } catch {
+    associatedProjects = []
+  }
 
   const publicationMonthYear =
     formatPublicationMonthYear(paper.publication_date)
@@ -100,6 +118,26 @@ export default async function PublicationPage({ params }: Props) {
         )}
 
         <PublicationKeyHighlight paper={paper} />
+
+        {associatedProjects.length > 0 && (
+          <section className="publication-associated-projects">
+            <h2>
+              {associatedProjects.length === 1
+                ? 'Associated project'
+                : 'Associated projects'}
+            </h2>
+
+            <div className="publication-associated-project-grid">
+              {associatedProjects.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  project={project}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
         <ResearchMarkdownEnhancer />
       </div>
     </article>
