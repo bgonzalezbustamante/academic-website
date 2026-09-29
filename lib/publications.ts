@@ -9,6 +9,13 @@ function nullableString(value: unknown) {
   return value == null ? null : String(value)
 }
 
+function nullableNonNegativeInteger(value: unknown) {
+  if (value == null) return null
+
+  const number = Number(value)
+  return Number.isInteger(number) && number >= 0 ? number : null
+}
+
 const PUBLIC_PAPER_LANGUAGES = new Set<PublicPaperLanguage>([
   'English',
   'Spanish',
@@ -48,6 +55,12 @@ function normalizePaper(row: Record<string, unknown>): PublicPaper {
     featured: row.featured === true,
     publication_index: nullableString(row.publication_index),
     language: normalizePaperLanguage(row.language),
+    google_scholar_citations: nullableNonNegativeInteger(
+      row.google_scholar_citations
+    ),
+    google_scholar_citations_captured_on: nullableString(
+      row.google_scholar_citations_captured_on
+    ),
   }
 }
 
