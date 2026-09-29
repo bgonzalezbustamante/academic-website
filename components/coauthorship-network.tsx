@@ -34,8 +34,8 @@ type LayoutResult = {
   clusterByNode: Map<string, ClusterLayout>
 }
 
-const WIDTH = 1240
-const HEIGHT = 860
+const WIDTH = 1320
+const HEIGHT = 920
 const CENTRE_X = WIDTH / 2
 const CENTRE_Y = HEIGHT / 2
 
@@ -159,7 +159,7 @@ function clusterLayouts(
       clusters.length - ringStart
     )
     const localIndex = index - ringStart
-    const radius = Math.min(390, 280 + ring * 95)
+    const radius = Math.min(415, 300 + ring * 105)
     const angle =
       (localIndex / Math.max(ringCount, 1)) * Math.PI * 2 -
       Math.PI / 2 +
@@ -230,7 +230,7 @@ function resolveNodeOverlaps(
           : connected
             ? 14
             : differentClusters
-              ? 42
+              ? 48
               : 30
         const labelAllowance = profileConnected
           ? Math.min(
@@ -244,8 +244,8 @@ function resolveNodeOverlaps(
               )
             : differentClusters
               ? Math.min(
-                  42,
-                  Math.max(a.name.length, b.name.length) * 0.52
+                  48,
+                  Math.max(a.name.length, b.name.length) * 0.58
                 )
               : Math.min(
                   34,
@@ -363,9 +363,9 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
           clusterA &&
           clusterB &&
           clusterA !== clusterB
-        const repulsionMultiplier = differentClusters ? 3.1 : 1
+        const repulsionMultiplier = differentClusters ? 3.8 : 1
         const force =
-          (5750 / distanceSquared) *
+          (5850 / distanceSquared) *
           cooling *
           repulsionMultiplier
         const fx = (dx / distance) * force
@@ -450,8 +450,8 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const cluster = clusterByNode.get(node.id)
       if (!point || !cluster) continue
 
-      point.vx += (cluster.x - point.x) * 0.0135 * cooling
-      point.vy += (cluster.y - point.y) * 0.0135 * cooling
+      point.vx += (cluster.x - point.x) * 0.0145 * cooling
+      point.vy += (cluster.y - point.y) * 0.0145 * cooling
       point.vx += (CENTRE_X - point.x) * 0.0001
       point.vy += (CENTRE_Y - point.y) * 0.0001
       point.vx *= 0.82
