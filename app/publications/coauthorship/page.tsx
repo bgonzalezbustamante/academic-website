@@ -84,8 +84,10 @@ export default async function CoauthorshipPage() {
                 this website. For layout only, weighted collaborator
                 communities are detected after removing the central profile
                 links and are spatially separated to make collaboration
-                clusters easier to distinguish. A final collision pass
-                enforces additional node and label-aware spacing.
+                clusters easier to distinguish. Repeated co-authorship
+                shortens the preferred distance between connected authors,
+                while a final collision pass enforces additional node and
+                label-aware spacing.
               </span>
             </p>
           </>
