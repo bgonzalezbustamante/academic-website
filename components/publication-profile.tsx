@@ -2,7 +2,7 @@ import {
   faCalendarDays,
   faChartColumn,
   faCircleInfo,
-  faQuoteRight,
+  faShareNodes,
   faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -73,8 +73,10 @@ function HorizontalBars({
 
 function AverageBars({
   items,
+  languageFlags = false,
 }: {
   items: ProfileAverage[]
+  languageFlags?: boolean
 }) {
   const max = Math.max(...items.map((item) => item.value), 1)
 
@@ -87,6 +89,11 @@ function AverageBars({
           title={`Average based on ${item.sampleSize} ${item.sampleSize === 1 ? 'paper' : 'papers'} with a Google Scholar snapshot`}
         >
           <div className="publication-profile-horizontal-label">
+            {languageFlags && item.label !== 'Unspecified' && (
+              <PublicationLanguageFlag
+                language={item.label as PublicPaperLanguage}
+              />
+            )}
             <span>{item.label}</span>
           </div>
           <div className="publication-profile-horizontal-track">
@@ -162,7 +169,10 @@ export default function PublicationProfile({
         aria-label="Publication profile summary"
       >
         <article>
-          <FontAwesomeIcon icon={faQuoteRight} aria-hidden="true" />
+          <i
+            className="ai ai-google-scholar publication-profile-kpi-academicon"
+            aria-hidden="true"
+          />
           <div>
             <p>Google Scholar citations</p>
             <strong>
@@ -284,9 +294,12 @@ export default function PublicationProfile({
             <p className="kicker">Impact snapshot</p>
             <h2>Citation profile</h2>
           </div>
-          <p>
-            Ten most-cited public papers by latest stored Google
-            Scholar snapshot
+          <p className="publication-profile-scholar-label">
+            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <span>
+              Ten most-cited public papers by latest stored Google
+              Scholar snapshot
+            </span>
           </p>
         </div>
 
@@ -329,9 +342,12 @@ export default function PublicationProfile({
               <p className="kicker">Impact snapshot</p>
               <h2>Average citations per index</h2>
             </div>
-            <p>
-              Mean latest Google Scholar citations among papers
-              with a stored snapshot in each index
+            <p className="publication-profile-scholar-label">
+              <i className="ai ai-google-scholar" aria-hidden="true" />
+              <span>
+                Mean latest Google Scholar citations among papers
+                with a stored snapshot in each index
+              </span>
             </p>
           </div>
           {profile.averageCitationsByIndex.length > 0 ? (
@@ -344,7 +360,7 @@ export default function PublicationProfile({
         </section>
       </div>
 
-      <div className="publication-profile-two-column">
+      <div className="publication-profile-three-column">
         <section className="publication-profile-panel">
           <div className="publication-profile-section-heading">
             <div>
@@ -369,6 +385,32 @@ export default function PublicationProfile({
             items={profile.languages}
             languageFlags
           />
+        </section>
+
+        <section className="publication-profile-panel">
+          <div className="publication-profile-section-heading">
+            <div>
+              <p className="kicker">Impact snapshot</p>
+              <h2>Average citations per language</h2>
+            </div>
+            <p className="publication-profile-scholar-label">
+              <i className="ai ai-google-scholar" aria-hidden="true" />
+              <span>
+                Mean latest Google Scholar citations among papers
+                with a stored snapshot in each language
+              </span>
+            </p>
+          </div>
+          {profile.averageCitationsByLanguage.length > 0 ? (
+            <AverageBars
+              items={profile.averageCitationsByLanguage}
+              languageFlags
+            />
+          ) : (
+            <p className="publication-profile-empty">
+              No language citation snapshots are available yet.
+            </p>
+          )}
         </section>
       </div>
     </>
