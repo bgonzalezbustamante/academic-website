@@ -87,9 +87,10 @@ export default async function CoauthorshipPage() {
                 tend to appear closer to the centre. Weighted collaborator
                 communities are estimated without the central profile links
                 and used only to organise the layout. Ties that bridge
-                different communities remain visible but do not pull those
-                communities together; spatial separation and collision
-                constraints are used to reduce node and label overlap.
+                different communities remain visible but do not reduce the
+                spacing between those groups. Community-level spacing keeps
+                their overall footprints apart, while node-level collision
+                constraints reduce residual node and label overlap.
               </span>
             </p>
           </>
