@@ -67,6 +67,7 @@ export type PublicationProfile = {
   authorshipStructure: ProfileCount[]
   averageCitationsByIndex: ProfileAverage[]
   averageCitationsByLanguage: ProfileAverage[]
+  averageCitationsByAuthorship: ProfileAverage[]
   collaborationExclusion: CollaborationExclusion | null
   topCitedPapers: ProfileCitationPaper[]
 }
@@ -348,6 +349,53 @@ export function buildPublicationProfile(
       : []),
   ]
 
+  const citationAuthorshipStats = new Map<
+    string,
+    { total: number; count: number }
+  >()
+
+  for (const paper of papers) {
+    if (paper.google_scholar_citations === null) continue
+
+    const label =
+      paper.authors.length <= 1
+        ? 'Single author'
+        : paper.authors.length === 2
+          ? '2 authors'
+          : paper.authors.length === 3
+            ? '3 authors'
+            : '4+ authors'
+    const current = citationAuthorshipStats.get(label) ?? {
+      total: 0,
+      count: 0,
+    }
+
+    current.total += paper.google_scholar_citations
+    current.count += 1
+    citationAuthorshipStats.set(label, current)
+  }
+
+  const averageCitationsByAuthorship = [
+    'Single author',
+    '2 authors',
+    '3 authors',
+    '4+ authors',
+  ]
+    .map((label) => {
+      const stats = citationAuthorshipStats.get(label)
+
+      return stats
+        ? {
+            label,
+            value: stats.total / stats.count,
+            sampleSize: stats.count,
+          }
+        : null
+    })
+    .filter(
+      (item): item is ProfileAverage => item !== null
+    )
+
   return {
     totalGoogleScholarCitations,
     citationCoverage: citationPapers.length,
@@ -367,6 +415,7 @@ export function buildPublicationProfile(
     authorshipStructure,
     averageCitationsByIndex,
     averageCitationsByLanguage,
+    averageCitationsByAuthorship,
     collaborationExclusion: collaborationOutlier
       ? {
           slug: collaborationOutlier.slug,
