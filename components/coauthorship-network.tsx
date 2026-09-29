@@ -59,6 +59,76 @@ function edgeKey(edge: CoauthorshipEdge) {
   return [edge.source, edge.target].sort().join('::')
 }
 
+function weightedModularity(
+  collaborators: string[],
+  adjacency: Map<string, Map<string, number>>,
+  labels: Map<string, string>
+) {
+  const resolution = 1.1
+  let totalEdgeWeight = 0
+  const degree = new Map<string, number>(
+    collaborators.map((id) => [id, 0])
+  )
+
+  for (const source of collaborators) {
+    for (const [target, weight] of adjacency.get(source) ?? []) {
+      degree.set(
+        source,
+        (degree.get(source) ?? 0) + weight
+      )
+
+      if (source.localeCompare(target) < 0) {
+        totalEdgeWeight += weight
+      }
+    }
+  }
+
+  if (totalEdgeWeight === 0) return 0
+
+  const stats = new Map<
+    string,
+    { internalWeight: number; degreeSum: number }
+  >()
+
+  for (const id of collaborators) {
+    const label = labels.get(id) ?? id
+    const current = stats.get(label) ?? {
+      internalWeight: 0,
+      degreeSum: 0,
+    }
+
+    current.degreeSum += degree.get(id) ?? 0
+    stats.set(label, current)
+  }
+
+  for (const source of collaborators) {
+    for (const [target, weight] of adjacency.get(source) ?? []) {
+      if (source.localeCompare(target) >= 0) continue
+
+      const sourceLabel = labels.get(source) ?? source
+      const targetLabel = labels.get(target) ?? target
+
+      if (sourceLabel !== targetLabel) continue
+
+      const current = stats.get(sourceLabel)
+      if (current) {
+        current.internalWeight += weight
+      }
+    }
+  }
+
+  let modularity = 0
+
+  for (const { internalWeight, degreeSum } of stats.values()) {
+    modularity +=
+      internalWeight / totalEdgeWeight -
+      resolution *
+        Math.pow(degreeSum / (2 * totalEdgeWeight), 2)
+  }
+
+  return modularity
+}
+
 function collaboratorClusters(
   graph: CoauthorshipGraph,
   profileId: string | undefined
@@ -86,38 +156,58 @@ function collaboratorClusters(
   const labels = new Map(
     collaborators.map((id) => [id, id])
   )
+  let modularity = weightedModularity(
+    collaborators,
+    adjacency,
+    labels
+  )
 
-  for (let iteration = 0; iteration < 40; iteration += 1) {
+  for (let iteration = 0; iteration < 60; iteration += 1) {
     let changed = false
 
     for (const id of collaborators) {
-      const neighbours = adjacency.get(id)
-      if (!neighbours || neighbours.size === 0) continue
+      const currentLabel = labels.get(id) ?? id
+      const candidateLabels = new Set<string>([
+        currentLabel,
+        id,
+      ])
 
-      const scores = new Map<string, number>()
-
-      for (const [neighbour, weight] of neighbours) {
-        const label = labels.get(neighbour) ?? neighbour
-        scores.set(label, (scores.get(label) ?? 0) + weight)
+      for (const neighbour of adjacency.get(id)?.keys() ?? []) {
+        candidateLabels.add(
+          labels.get(neighbour) ?? neighbour
+        )
       }
 
-      const currentLabel = labels.get(id) ?? id
       let bestLabel = currentLabel
-      let bestScore = scores.get(currentLabel) ?? -1
+      let bestModularity = modularity
 
-      for (const [label, score] of scores) {
+      for (const candidate of Array.from(candidateLabels).sort(
+        (a, b) => a.localeCompare(b)
+      )) {
+        if (candidate === currentLabel) continue
+
+        labels.set(id, candidate)
+        const candidateModularity = weightedModularity(
+          collaborators,
+          adjacency,
+          labels
+        )
+
         if (
-          score > bestScore ||
-          (score === bestScore &&
-            label.localeCompare(bestLabel) < 0)
+          candidateModularity > bestModularity + 1e-9 ||
+          (Math.abs(candidateModularity - bestModularity) <= 1e-9 &&
+            bestLabel !== currentLabel &&
+            candidate.localeCompare(bestLabel) < 0)
         ) {
-          bestLabel = label
-          bestScore = score
+          bestLabel = candidate
+          bestModularity = candidateModularity
         }
       }
 
+      labels.set(id, bestLabel)
+
       if (bestLabel !== currentLabel) {
-        labels.set(id, bestLabel)
+        modularity = bestModularity
         changed = true
       }
     }
@@ -232,7 +322,7 @@ function clusterEnvelope(
       ({ node, point }) =>
         Math.hypot(point.x - x, point.y - y) +
         nodeRadius(node) +
-        24
+        30
     ),
     42
   )
@@ -245,7 +335,7 @@ function resolveClusterOverlaps(
   positions: Map<string, Point>,
   clusters: ClusterLayout[]
 ) {
-  const gap = 38
+  const gap = 44
 
   for (let pass = 0; pass < 90; pass += 1) {
     let moved = false
