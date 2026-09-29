@@ -17,6 +17,8 @@ const PUBLIC_PAPER_FIELDS = [
   'featured',
   'publication_index',
   'language',
+  'google_scholar_citations',
+  'google_scholar_citations_captured_on',
 ]
 
 const PUBLIC_PAPER_LANGUAGES = new Set([
@@ -100,6 +102,10 @@ const PRIVATE_FIELDS = [
   'tracked_hours',
   'session_count',
   'teaching_id',
+  'citation_snapshot_id',
+  'citation_snapshot_ids',
+  'citation_source',
+  'citation_history',
 ]
 
 function fail(message) {
@@ -158,6 +164,41 @@ function assertPaperShape(paper, { detail = false } = {}) {
       'Public paper language must be null or one of English, Spanish, Portuguese, Dutch, German, French, or Italian.'
     )
   }
+  if (
+    paper.google_scholar_citations != null &&
+    (
+      !Number.isInteger(paper.google_scholar_citations) ||
+      paper.google_scholar_citations < 0
+    )
+  ) {
+    fail(
+      'Public paper google_scholar_citations must be a non-negative integer or null.'
+    )
+  }
+
+  if (
+    paper.google_scholar_citations_captured_on != null &&
+    (
+      typeof paper.google_scholar_citations_captured_on !== 'string' ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(
+        paper.google_scholar_citations_captured_on
+      )
+    )
+  ) {
+    fail(
+      'Public paper google_scholar_citations_captured_on must be a YYYY-MM-DD date string or null.'
+    )
+  }
+
+  if (
+    (paper.google_scholar_citations == null) !==
+    (paper.google_scholar_citations_captured_on == null)
+  ) {
+    fail(
+      'Public paper Google Scholar citation count and capture date must either both be present or both be null.'
+    )
+  }
+
 
   if (detail) {
     assertFields(
