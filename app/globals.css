@@ -1602,6 +1602,21 @@ h4 {
   gap: 0.9rem;
 }
 
+.publication-associated-projects {
+  margin-top: 2rem;
+}
+
+.publication-associated-projects h2 {
+  margin: 0 0 0.9rem;
+  font-size: 1.15rem;
+}
+
+.publication-associated-project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+}
+
 .project-card {
   min-width: 0;
   display: grid;
