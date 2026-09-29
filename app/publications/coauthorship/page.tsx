@@ -85,9 +85,10 @@ export default async function CoauthorshipPage() {
                 communities are detected after removing the central profile
                 links and are spatially separated to make collaboration
                 clusters easier to distinguish. Repeated co-authorship
-                shortens the preferred distance between connected authors,
-                while a final collision pass enforces additional node and
-                label-aware spacing.
+                shortens the preferred distance between connected authors
+                more strongly, while the final collision pass gives strong
+                ties a smaller safe gap and keeps unrelated nodes farther
+                apart to reduce crowding.
               </span>
             </p>
           </>
