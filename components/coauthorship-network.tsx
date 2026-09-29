@@ -667,16 +667,16 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const weightFactor = Math.max(1, edge.weight)
       const targetLength = profileEdge
         ? Math.max(
-            74,
+            68,
             225 /
               Math.pow(
-                1 + 0.95 * (weightFactor - 1),
-                0.9
+                1 + 1.08 * (weightFactor - 1),
+                0.94
               )
           )
         : 98
       const strength = profileEdge
-        ? 0.0024 + Math.min(edge.weight, 10) * 0.0007
+        ? 0.0025 + Math.min(edge.weight, 10) * 0.00075
         : 0.0054 + Math.min(edge.weight, 6) * 0.00035
       const spring =
         (distance - targetLength) * strength * cooling
@@ -936,7 +936,6 @@ export default function CoauthorshipNetwork({ graph }: Props) {
         <span>Node size = publications in network</span>
         <span>Edge width = joint publications</span>
         <span>Frequent profile collaborators = closer to centre</span>
-        <span>Layout separates weighted collaborator communities</span>
       </div>
     </div>
   )
