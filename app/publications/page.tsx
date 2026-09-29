@@ -52,7 +52,7 @@ export default async function PublicationsPage() {
           <p className="eyebrow">Research output</p>
           <h1>Publications</h1>
           <p className="page-lead">
-            Papers ordered from the most recent publication onwards.
+            Here are my peer-reviewed articles, book chapters, working papers, and occasional preprints.
           </p>
         </div>
 
