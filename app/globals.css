@@ -761,6 +761,17 @@ h4 {
   line-height: 1.35;
 }
 
+.publication-profile-kpi-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.publication-profile-kpi-label svg {
+  width: 0.62rem;
+  color: var(--oxford-blue);
+}
+
 .publication-profile-kpis strong {
   display: block;
   margin-top: 0.1rem;
@@ -1025,7 +1036,18 @@ h4 {
 }
 
 .publication-profile-note {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.38rem;
   text-align: right;
+}
+
+.publication-profile-note > svg {
+  width: 0.65rem;
+  flex: 0 0 0.65rem;
+  margin-top: 0.13rem;
+  color: var(--oxford-blue);
 }
 
 .publication-profile-note a {
