@@ -778,6 +778,30 @@ h4 {
   line-height: 1.35;
 }
 
+.publication-profile-exclusion-note {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.38rem;
+  margin: -0.2rem 0 0.9rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.61rem;
+  line-height: 1.45;
+  text-align: right;
+}
+
+.publication-profile-exclusion-note svg {
+  width: 0.65rem;
+  flex: 0 0 0.65rem;
+  margin-top: 0.13rem;
+  color: var(--oxford-blue);
+}
+
+.publication-profile-exclusion-note a {
+  font-weight: 650;
+}
+
 .publication-profile-panel {
   margin-top: 0.9rem;
   border: 1px solid var(--oxford-stone);
@@ -868,6 +892,15 @@ h4 {
   white-space: nowrap;
   transform: rotate(-45deg);
   transform-origin: center;
+}
+
+.publication-profile-year-column-forthcoming {
+  min-width: 88px;
+  flex-basis: 88px;
+}
+
+.publication-profile-year-column-forthcoming small {
+  transform: none;
 }
 
 .publication-profile-two-column {
@@ -3913,7 +3946,9 @@ h4 {
     white-space: normal;
   }
 
-  .publication-profile-note {
+  .publication-profile-note,
+  .publication-profile-exclusion-note {
+    justify-content: flex-start;
     text-align: left;
   }
 
