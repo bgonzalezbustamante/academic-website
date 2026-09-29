@@ -106,6 +106,10 @@ const PRIVATE_FIELDS = [
   'citation_snapshot_ids',
   'citation_source',
   'citation_history',
+  'citation_count',
+  'captured_on',
+  'source',
+  'created_at',
 ]
 
 function fail(message) {
