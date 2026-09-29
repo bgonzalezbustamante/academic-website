@@ -173,6 +173,155 @@ function clusterLayouts(
   })
 }
 
+function shiftCluster(
+  cluster: ClusterLayout,
+  positions: Map<string, Point>,
+  dx: number,
+  dy: number
+) {
+  cluster.x += dx
+  cluster.y += dy
+
+  for (const nodeId of cluster.nodeIds) {
+    const point = positions.get(nodeId)
+    if (!point) continue
+
+    point.x += dx
+    point.y += dy
+  }
+}
+
+function clusterEnvelope(
+  graph: CoauthorshipGraph,
+  cluster: ClusterLayout,
+  positions: Map<string, Point>
+) {
+  const nodesById = new Map(
+    graph.nodes.map((node) => [node.id, node])
+  )
+  const points = cluster.nodeIds
+    .map((nodeId) => ({
+      node: nodesById.get(nodeId),
+      point: positions.get(nodeId),
+    }))
+    .filter(
+      (
+        item
+      ): item is {
+        node: CoauthorshipNode
+        point: Point
+      } => Boolean(item.node && item.point)
+    )
+
+  if (points.length === 0) {
+    return {
+      x: cluster.x,
+      y: cluster.y,
+      radius: 0,
+    }
+  }
+
+  const x =
+    points.reduce((total, item) => total + item.point.x, 0) /
+    points.length
+  const y =
+    points.reduce((total, item) => total + item.point.y, 0) /
+    points.length
+  const radius = Math.max(
+    ...points.map(
+      ({ node, point }) =>
+        Math.hypot(point.x - x, point.y - y) +
+        nodeRadius(node) +
+        24
+    ),
+    42
+  )
+
+  return { x, y, radius }
+}
+
+function resolveClusterOverlaps(
+  graph: CoauthorshipGraph,
+  positions: Map<string, Point>,
+  clusters: ClusterLayout[]
+) {
+  const gap = 38
+
+  for (let pass = 0; pass < 90; pass += 1) {
+    let moved = false
+
+    for (let i = 0; i < clusters.length; i += 1) {
+      for (let j = i + 1; j < clusters.length; j += 1) {
+        const a = clusters[i]
+        const b = clusters[j]
+        const envelopeA = clusterEnvelope(graph, a, positions)
+        const envelopeB = clusterEnvelope(graph, b, positions)
+
+        let dx = envelopeB.x - envelopeA.x
+        let dy = envelopeB.y - envelopeA.y
+        let distance = Math.hypot(dx, dy)
+
+        if (distance === 0) {
+          const angle =
+            ((i + 1) * 41 + (j + 1) * 59) *
+            (Math.PI / 180)
+          dx = Math.cos(angle)
+          dy = Math.sin(angle)
+          distance = 1
+        }
+
+        const minimumDistance =
+          envelopeA.radius + envelopeB.radius + gap
+
+        if (distance >= minimumDistance) continue
+
+        const overlap = minimumDistance - distance
+        const shift = Math.min(26, overlap / 2)
+        const ux = dx / distance
+        const uy = dy / distance
+
+        shiftCluster(a, positions, -ux * shift, -uy * shift)
+        shiftCluster(b, positions, ux * shift, uy * shift)
+        moved = true
+      }
+    }
+
+    for (const cluster of clusters) {
+      const envelope = clusterEnvelope(
+        graph,
+        cluster,
+        positions
+      )
+      const margin = 32
+      let dx = 0
+      let dy = 0
+
+      if (envelope.x - envelope.radius < margin) {
+        dx +=
+          margin - (envelope.x - envelope.radius)
+      }
+      if (envelope.x + envelope.radius > WIDTH - margin) {
+        dx -=
+          envelope.x + envelope.radius - (WIDTH - margin)
+      }
+      if (envelope.y - envelope.radius < margin) {
+        dy +=
+          margin - (envelope.y - envelope.radius)
+      }
+      if (envelope.y + envelope.radius > HEIGHT - margin) {
+        dy -=
+          envelope.y + envelope.radius - (HEIGHT - margin)
+      }
+
+      if (dx !== 0 || dy !== 0) {
+        shiftCluster(cluster, positions, dx, dy)
+      }
+    }
+
+    if (!moved) break
+  }
+}
+
 function resolveNodeOverlaps(
   graph: CoauthorshipGraph,
   positions: Map<string, Point>,
@@ -227,25 +376,25 @@ function resolveNodeOverlaps(
               5,
               14 - Math.min(9, (pairWeight - 1) * 2.5)
             )
-          : connected
-            ? 14
-            : differentClusters
-              ? 48
+          : differentClusters
+            ? 48
+            : connected
+              ? 14
               : 30
         const labelAllowance = profileConnected
           ? Math.min(
               8,
               Math.max(a.name.length, b.name.length) * 0.11
             )
-          : connected
+          : differentClusters
             ? Math.min(
-                14,
-                Math.max(a.name.length, b.name.length) * 0.18
+                48,
+                Math.max(a.name.length, b.name.length) * 0.58
               )
-            : differentClusters
+            : connected
               ? Math.min(
-                  48,
-                  Math.max(a.name.length, b.name.length) * 0.58
+                  14,
+                  Math.max(a.name.length, b.name.length) * 0.18
                 )
               : Math.min(
                   34,
@@ -479,6 +628,22 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
     }
   }
 
+  resolveClusterOverlaps(
+    graph,
+    positions,
+    clusters
+  )
+  resolveNodeOverlaps(
+    graph,
+    positions,
+    profileId,
+    clusterByNode
+  )
+  resolveClusterOverlaps(
+    graph,
+    positions,
+    clusters
+  )
   resolveNodeOverlaps(
     graph,
     positions,
