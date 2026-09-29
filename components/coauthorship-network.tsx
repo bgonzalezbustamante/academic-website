@@ -30,8 +30,8 @@ type LayoutResult = {
   clusterByNode: Map<string, ClusterLayout>
 }
 
-const WIDTH = 960
-const HEIGHT = 620
+const WIDTH = 1000
+const HEIGHT = 680
 const CENTRE_X = WIDTH / 2
 const CENTRE_Y = HEIGHT / 2
 
@@ -157,6 +157,86 @@ function clusterLayouts(
       y: CENTRE_Y + Math.sin(angle) * radius,
     }
   })
+}
+
+function resolveNodeOverlaps(
+  graph: CoauthorshipGraph,
+  positions: Map<string, Point>,
+  profileId: string | undefined
+) {
+  const gap = 14
+
+  for (let pass = 0; pass < 140; pass += 1) {
+    let moved = false
+
+    for (let i = 0; i < graph.nodes.length; i += 1) {
+      const a = graph.nodes[i]
+      const pa = positions.get(a.id)
+      if (!pa) continue
+
+      for (let j = i + 1; j < graph.nodes.length; j += 1) {
+        const b = graph.nodes[j]
+        const pb = positions.get(b.id)
+        if (!pb) continue
+
+        let dx = pb.x - pa.x
+        let dy = pb.y - pa.y
+        let distance = Math.hypot(dx, dy)
+
+        if (distance === 0) {
+          const angle =
+            ((i + 1) * 37 + (j + 1) * 53) * (Math.PI / 180)
+          dx = Math.cos(angle)
+          dy = Math.sin(angle)
+          distance = 1
+        }
+
+        const minimumDistance =
+          nodeRadius(a) + nodeRadius(b) + gap
+
+        if (distance >= minimumDistance) continue
+
+        const overlap = minimumDistance - distance
+        const ux = dx / distance
+        const uy = dy / distance
+
+        if (a.id === profileId) {
+          pb.x += ux * overlap
+          pb.y += uy * overlap
+        } else if (b.id === profileId) {
+          pa.x -= ux * overlap
+          pa.y -= uy * overlap
+        } else {
+          const shift = overlap / 2
+          pa.x -= ux * shift
+          pa.y -= uy * shift
+          pb.x += ux * shift
+          pb.y += uy * shift
+        }
+
+        moved = true
+      }
+    }
+
+    for (const node of graph.nodes) {
+      if (node.id === profileId) continue
+
+      const point = positions.get(node.id)
+      if (!point) continue
+
+      const margin = nodeRadius(node) + 18
+      point.x = Math.min(
+        WIDTH - margin,
+        Math.max(margin, point.x)
+      )
+      point.y = Math.min(
+        HEIGHT - margin,
+        Math.max(margin, point.y)
+      )
+    }
+
+    if (!moved) break
+  }
 }
 
 function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
@@ -303,6 +383,8 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       )
     }
   }
+
+  resolveNodeOverlaps(graph, positions, profileId)
 
   return {
     positions,
@@ -461,6 +543,14 @@ export default function CoauthorshipNetwork({ graph }: Props) {
       </svg>
 
       <div className="coauthorship-network-legend">
+        <span className="coauthorship-network-count">
+          {graph.nodes.filter((node) => !node.isProfile).length}{' '}
+          {graph.nodes.filter((node) => !node.isProfile).length === 1
+            ? 'co-author'
+            : 'co-authors'}{' '}
+          · {graph.edges.length}{' '}
+          {graph.edges.length === 1 ? 'link' : 'links'}
+        </span>
         <span>
           <i className="coauthorship-legend-node coauthorship-legend-profile" />
           Bastián González-Bustamante
