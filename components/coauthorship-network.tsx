@@ -34,8 +34,8 @@ type LayoutResult = {
   clusterByNode: Map<string, ClusterLayout>
 }
 
-const WIDTH = 1000
-const HEIGHT = 680
+const WIDTH = 1080
+const HEIGHT = 740
 const CENTRE_X = WIDTH / 2
 const CENTRE_Y = HEIGHT / 2
 
@@ -159,7 +159,7 @@ function clusterLayouts(
       clusters.length - ringStart
     )
     const localIndex = index - ringStart
-    const radius = Math.min(255, 190 + ring * 62)
+    const radius = Math.min(300, 215 + ring * 72)
     const angle =
       (localIndex / Math.max(ringCount, 1)) * Math.PI * 2 -
       Math.PI / 2 +
@@ -178,9 +178,9 @@ function resolveNodeOverlaps(
   positions: Map<string, Point>,
   profileId: string | undefined
 ) {
-  const gap = 14
+  const gap = 20
 
-  for (let pass = 0; pass < 140; pass += 1) {
+  for (let pass = 0; pass < 220; pass += 1) {
     let moved = false
 
     for (let i = 0; i < graph.nodes.length; i += 1) {
@@ -205,8 +205,15 @@ function resolveNodeOverlaps(
           distance = 1
         }
 
+        const labelAllowance = Math.min(
+          24,
+          Math.max(a.name.length, b.name.length) * 0.32
+        )
         const minimumDistance =
-          nodeRadius(a) + nodeRadius(b) + gap
+          nodeRadius(a) +
+          nodeRadius(b) +
+          gap +
+          labelAllowance
 
         if (distance >= minimumDistance) continue
 
@@ -354,7 +361,7 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const distance = Math.max(Math.hypot(dx, dy), 1)
       const profileEdge =
         edge.source === profileId || edge.target === profileId
-      const targetLength = profileEdge ? 205 : 88
+      const targetLength = profileEdge ? 230 : 102
       const strength = profileEdge
         ? 0.0016
         : 0.0048 + Math.min(edge.weight, 5) * 0.0007
