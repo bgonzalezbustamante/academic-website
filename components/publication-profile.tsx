@@ -182,7 +182,14 @@ export default function PublicationProfile({
         >
           {profile.outputOverTime.map((item) => (
             <div
-              className="publication-profile-year-column"
+              className={[
+                'publication-profile-year-column',
+                item.label === 'Forthcoming'
+                  ? 'publication-profile-year-column-forthcoming'
+                  : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
               key={item.label}
             >
               <strong>{item.count}</strong>
@@ -209,8 +216,8 @@ export default function PublicationProfile({
             <h2>Citation profile</h2>
           </div>
           <p>
-            Latest stored Google Scholar snapshot for each public
-            paper.
+            Ten most-cited public papers by latest stored Google
+            Scholar snapshot.
           </p>
         </div>
 
