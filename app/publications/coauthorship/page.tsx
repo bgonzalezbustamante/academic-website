@@ -81,13 +81,13 @@ export default async function CoauthorshipPage() {
                 {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. The
                 network includes all authors and co-authorship ties in the
                 remaining publications. Node size represents publications
-                in the displayed network; repeated collaboration is encoded
-                by both edge width and distance, so more joint publications
-                appear as thicker, shorter links. Weighted collaborator
-                communities are estimated without the central profile links
-                and used only to organise the layout. Communities are
-                spatially separated, with collision constraints applied to
-                reduce node and label overlap.
+                in the displayed network. Repeated collaboration is encoded
+                by edge width and distance: more joint publications appear
+                as thicker, shorter links. Weighted collaborator communities
+                are estimated without the central profile links and used
+                only to organise the layout. Distinct communities are placed
+                farther apart, while collision constraints reduce node and
+                label overlap.
               </span>
             </p>
           </>
