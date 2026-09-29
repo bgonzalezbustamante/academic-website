@@ -3,9 +3,11 @@
 import {
   faBookOpen,
   faFileLines,
+  faShareNodes,
   faUserPen,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
 import PublicationCitationCard, {
@@ -184,9 +186,18 @@ export default function PublicationBrowser({ papers }: Props) {
           </button>
         )}
 
-        <p className="publication-filter-count" aria-live="polite">
-          {filtered.length} {filtered.length === 1 ? 'paper' : 'papers'}
-        </p>
+        <div className="publication-filter-summary">
+          <p className="publication-filter-count" aria-live="polite">
+            {filtered.length} {filtered.length === 1 ? 'paper' : 'papers'}
+          </p>
+          <Link
+            className="publication-network-link"
+            href="/publications/coauthorship"
+          >
+            <FontAwesomeIcon icon={faShareNodes} aria-hidden="true" />
+            Co-authorship network
+          </Link>
+        </div>
       </div>
 
       {filtered.length > 0 ? (
