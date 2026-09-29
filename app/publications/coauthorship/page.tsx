@@ -88,7 +88,7 @@ export default async function CoauthorshipPage() {
                 co-authors use a common preferred distance and mainly inform
                 the community structure. Weighted collaborator communities
                 are estimated without the central profile links and used only
-                to organise the layout, with moderate spatial separation and
+                to organise the layout, with clear spatial separation and
                 collision constraints to reduce node and label overlap.
               </span>
             </p>
