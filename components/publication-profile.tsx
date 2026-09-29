@@ -341,13 +341,6 @@ export default function PublicationProfile({
               <p className="kicker">Impact snapshot</p>
               <h2>Average citations per index</h2>
             </div>
-            <p className="publication-profile-scholar-label">
-              <i className="ai ai-google-scholar" aria-hidden="true" />
-              <span>
-                Mean latest Google Scholar citations among papers
-                with a stored snapshot in each index
-              </span>
-            </p>
           </div>
           {profile.averageCitationsByIndex.length > 0 ? (
             <AverageBars items={profile.averageCitationsByIndex} />
@@ -356,6 +349,13 @@ export default function PublicationProfile({
               No indexed citation snapshots are available yet.
             </p>
           )}
+          <p className="publication-profile-card-note publication-profile-scholar-label">
+            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <span>
+              Mean latest Google Scholar citations among papers
+              with a stored snapshot in each index
+            </span>
+          </p>
         </section>
       </div>
 
@@ -379,13 +379,6 @@ export default function PublicationProfile({
               <p className="kicker">Impact snapshot</p>
               <h2>Average citations per language</h2>
             </div>
-            <p className="publication-profile-scholar-label">
-              <i className="ai ai-google-scholar" aria-hidden="true" />
-              <span>
-                Mean latest Google Scholar citations among papers
-                with a stored snapshot in each language
-              </span>
-            </p>
           </div>
           {profile.averageCitationsByLanguage.length > 0 ? (
             <AverageBars
@@ -397,6 +390,13 @@ export default function PublicationProfile({
               No language citation snapshots are available yet.
             </p>
           )}
+          <p className="publication-profile-card-note publication-profile-scholar-label">
+            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <span>
+              Mean latest Google Scholar citations among papers
+              with a stored snapshot in each language
+            </span>
+          </p>
         </section>
       </div>
 
@@ -420,13 +420,6 @@ export default function PublicationProfile({
               <p className="kicker">Impact snapshot</p>
               <h2>Average citations per authorship</h2>
             </div>
-            <p className="publication-profile-scholar-label">
-              <i className="ai ai-google-scholar" aria-hidden="true" />
-              <span>
-                Mean latest Google Scholar citations by authorship
-                group
-              </span>
-            </p>
           </div>
           {profile.averageCitationsByAuthorship.length > 0 ? (
             <AverageBars
@@ -437,6 +430,13 @@ export default function PublicationProfile({
               No authorship citation snapshots are available yet.
             </p>
           )}
+          <p className="publication-profile-card-note publication-profile-scholar-label">
+            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <span>
+              Mean latest Google Scholar citations by authorship
+              group
+            </span>
+          </p>
         </section>
       </div>
     </>
