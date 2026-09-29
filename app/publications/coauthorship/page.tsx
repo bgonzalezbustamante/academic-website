@@ -1,5 +1,6 @@
 import {
   faArrowLeft,
+  faChartColumn,
   faCircleInfo,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -57,14 +58,24 @@ export default async function CoauthorshipPage() {
             Publications
           </Link>
 
-          {available && (
-            <p>
-              {collaborators}{' '}
-              {collaborators === 1 ? 'co-author' : 'co-authors'} ·{' '}
-              {graph.edges.length}{' '}
-              {graph.edges.length === 1 ? 'link' : 'links'}
-            </p>
-          )}
+          <div className="coauthorship-toolbar-meta">
+            <Link href="/publications/profile">
+              <FontAwesomeIcon
+                icon={faChartColumn}
+                aria-hidden="true"
+              />
+              Publication profile
+            </Link>
+
+            {available && (
+              <p>
+                {collaborators}{' '}
+                {collaborators === 1 ? 'co-author' : 'co-authors'} ·{' '}
+                {graph.edges.length}{' '}
+                {graph.edges.length === 1 ? 'link' : 'links'}
+              </p>
+            )}
+          </div>
         </div>
 
         {!available ? (
@@ -82,7 +93,9 @@ export default async function CoauthorshipPage() {
                 {COAUTHORSHIP_MAX_AUTHORS} authors are excluded. The
                 network then includes every author and co-authorship
                 relationship appearing in the remaining publications on
-                this website.
+                this website. For layout only, collaborator-only connected
+                components are spatially separated to make collaboration
+                clusters easier to distinguish.
               </span>
             </p>
           </>
