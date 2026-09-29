@@ -178,9 +178,11 @@ function resolveNodeOverlaps(
   positions: Map<string, Point>,
   profileId: string | undefined
 ) {
-  const gap = 20
+  const edgeWeights = new Map(
+    graph.edges.map((edge) => [edgeKey(edge), edge.weight])
+  )
 
-  for (let pass = 0; pass < 220; pass += 1) {
+  for (let pass = 0; pass < 320; pass += 1) {
     let moved = false
 
     for (let i = 0; i < graph.nodes.length; i += 1) {
@@ -205,14 +207,27 @@ function resolveNodeOverlaps(
           distance = 1
         }
 
-        const labelAllowance = Math.min(
-          24,
-          Math.max(a.name.length, b.name.length) * 0.32
-        )
+        const pairWeight =
+          edgeWeights.get(
+            [a.id, b.id].sort().join('::')
+          ) ?? 0
+        const connected = pairWeight > 0
+        const safetyGap = connected
+          ? Math.max(8, 16 - Math.min(8, (pairWeight - 1) * 2))
+          : 26
+        const labelAllowance = connected
+          ? Math.min(
+              12,
+              Math.max(a.name.length, b.name.length) * 0.16
+            )
+          : Math.min(
+              32,
+              Math.max(a.name.length, b.name.length) * 0.42
+            )
         const minimumDistance =
           nodeRadius(a) +
           nodeRadius(b) +
-          gap +
+          safetyGap +
           labelAllowance
 
         if (distance >= minimumDistance) continue
@@ -364,18 +379,24 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
       const weightFactor = Math.max(1, edge.weight)
       const targetLength = profileEdge
         ? Math.max(
-            150,
+            110,
             230 /
-              Math.sqrt(1 + 0.22 * (weightFactor - 1))
+              Math.pow(
+                1 + 0.4 * (weightFactor - 1),
+                0.62
+              )
           )
         : Math.max(
-            64,
+            46,
             102 /
-              Math.sqrt(1 + 0.28 * (weightFactor - 1))
+              Math.pow(
+                1 + 0.58 * (weightFactor - 1),
+                0.72
+              )
           )
       const strength = profileEdge
-        ? 0.0018 + Math.min(edge.weight, 7) * 0.00025
-        : 0.0048 + Math.min(edge.weight, 7) * 0.0007
+        ? 0.002 + Math.min(edge.weight, 8) * 0.00035
+        : 0.0052 + Math.min(edge.weight, 8) * 0.00085
       const spring =
         (distance - targetLength) * strength * cooling
       const fx = (dx / distance) * spring
