@@ -40,6 +40,18 @@ export type ProfileCitationPaper = {
   capturedOn: string
 }
 
+export type ProfileAverage = {
+  label: string
+  value: number
+  sampleSize: number
+}
+
+export type CollaborationExclusion = {
+  slug: string
+  title: string
+  authorCount: number
+}
+
 export type PublicationProfile = {
   totalGoogleScholarCitations: number
   citationCoverage: number
@@ -53,7 +65,8 @@ export type PublicationProfile = {
   publicationIndexes: ProfileCount[]
   languages: ProfileCount[]
   authorshipStructure: ProfileCount[]
-  recurrentVenues: ProfileCount[]
+  averageCitationsByIndex: ProfileAverage[]
+  collaborationExclusion: CollaborationExclusion | null
   topCitedPapers: ProfileCitationPaper[]
 }
 
@@ -67,9 +80,21 @@ function countByLabel(labels: string[]) {
   return counts
 }
 
+const COLLABORATION_OUTLIER_TITLE =
+  'Investigating the analytical robustness of the social and behavioural sciences'
+
 export function buildPublicationProfile(
   papers: PublicPaper[]
 ): PublicationProfile {
+  const collaborationOutlier =
+    papers.find(
+      (paper) => paper.title === COLLABORATION_OUTLIER_TITLE
+    ) ?? null
+
+  const collaborationPapers = papers.filter(
+    (paper) => paper.title !== COLLABORATION_OUTLIER_TITLE
+  )
+
   const citationPapers = papers
     .filter(
       (
@@ -94,7 +119,7 @@ export function buildPublicationProfile(
   )
 
   const coauthors = new Set(
-    papers.flatMap((paper) =>
+    collaborationPapers.flatMap((paper) =>
       paper.authors
         .map((author) => author.trim())
         .filter(
@@ -106,12 +131,12 @@ export function buildPublicationProfile(
   )
 
   const averageAuthorsPerPaper =
-    papers.length === 0
+    collaborationPapers.length === 0
       ? 0
-      : papers.reduce(
+      : collaborationPapers.reduce(
           (total, paper) => total + paper.authors.length,
           0
-        ) / papers.length
+        ) / collaborationPapers.length
 
   const outputCounts = countByLabel(
     papers.map((paper) =>
@@ -202,19 +227,74 @@ export function buildPublicationProfile(
     }))
     .filter((item) => item.count > 0)
 
-  const venueCounts = countByLabel(
-    papers
-      .map((paper) => paper.venue?.trim())
-      .filter((venue): venue is string => Boolean(venue))
-  )
+  const citationIndexStats = new Map<
+    string,
+    { total: number; count: number }
+  >()
 
-  const recurrentVenues = Array.from(venueCounts.entries())
-    .filter(([, count]) => count > 1)
-    .map(([label, count]) => ({ label, count }))
-    .sort(
-      (a, b) =>
-        b.count - a.count || a.label.localeCompare(b.label)
-    )
+  for (const paper of papers) {
+    if (paper.google_scholar_citations === null) continue
+
+    const label =
+      paper.publication_index?.trim() || 'Unspecified'
+    const current = citationIndexStats.get(label) ?? {
+      total: 0,
+      count: 0,
+    }
+
+    current.total += paper.google_scholar_citations
+    current.count += 1
+    citationIndexStats.set(label, current)
+  }
+
+  const averageCitationsByIndex = [
+    ...PUBLICATION_INDEX_ORDER.map((label) => {
+      const stats = citationIndexStats.get(label)
+
+      return stats
+        ? {
+            label,
+            value: stats.total / stats.count,
+            sampleSize: stats.count,
+          }
+        : null
+    }).filter(
+      (item): item is {
+        label: (typeof PUBLICATION_INDEX_ORDER)[number]
+        value: number
+        sampleSize: number
+      } => item !== null
+    ),
+    ...Array.from(citationIndexStats.entries())
+      .filter(
+        ([label]) =>
+          label !== 'Unspecified' &&
+          !PUBLICATION_INDEX_ORDER.includes(
+            label as (typeof PUBLICATION_INDEX_ORDER)[number]
+          )
+      )
+      .map(([label, stats]) => ({
+        label,
+        value: stats.total / stats.count,
+        sampleSize: stats.count,
+      }))
+      .sort(
+        (a, b) =>
+          b.value - a.value || a.label.localeCompare(b.label)
+      ),
+    ...(citationIndexStats.get('Unspecified')
+      ? [
+          {
+            label: 'Unspecified',
+            value:
+              citationIndexStats.get('Unspecified')!.total /
+              citationIndexStats.get('Unspecified')!.count,
+            sampleSize:
+              citationIndexStats.get('Unspecified')!.count,
+          },
+        ]
+      : []),
+  ]
 
   return {
     totalGoogleScholarCitations,
@@ -233,7 +313,14 @@ export function buildPublicationProfile(
     publicationIndexes,
     languages,
     authorshipStructure,
-    recurrentVenues,
+    averageCitationsByIndex,
+    collaborationExclusion: collaborationOutlier
+      ? {
+          slug: collaborationOutlier.slug,
+          title: collaborationOutlier.title,
+          authorCount: collaborationOutlier.authors.length,
+        }
+      : null,
     topCitedPapers: citationPapers
       .sort(
         (a, b) =>
