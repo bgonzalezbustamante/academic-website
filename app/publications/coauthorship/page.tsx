@@ -82,14 +82,14 @@ export default async function CoauthorshipPage() {
                 network includes all authors and co-authorship ties in the
                 remaining publications. Node size represents publications
                 in the displayed network, and edge width represents joint
-                publications. For links to the central profile, repeated
+                publications. For ties to the central profile, repeated
                 co-authorship also reduces distance, so frequent collaborators
-                tend to appear closer to the centre. Links among other
-                co-authors use a common preferred distance and mainly inform
-                the community structure. Weighted collaborator communities
-                are estimated without the central profile links and used only
-                to organise the layout, with clear spatial separation and
-                collision constraints to reduce node and label overlap.
+                tend to appear closer to the centre. Weighted collaborator
+                communities are estimated without the central profile links
+                and used only to organise the layout. Ties that bridge
+                different communities remain visible but do not pull those
+                communities together; spatial separation and collision
+                constraints are used to reduce node and label overlap.
               </span>
             </p>
           </>
