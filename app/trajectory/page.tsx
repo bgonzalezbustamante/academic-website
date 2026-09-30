@@ -8,7 +8,7 @@ import AcademicTrajectory from '@/components/academic-trajectory'
 export const metadata: Metadata = {
   title: 'Academic trajectory',
   description:
-    'Selected academic education, research, teaching, consultancy, and faculty appointments of Bastián González-Bustamante.',
+    'Selected academic education, faculty appointments, research, teaching, and consultancy of Bastián González-Bustamante.',
   alternates: {
     canonical: '/trajectory',
   },
@@ -23,8 +23,8 @@ export default function TrajectoryPage() {
           <h1>Academic trajectory</h1>
           <p className="page-lead">
             A chronological view of the most relevant stages of my
-            academic education, research, teaching, consultancy, and
-            faculty appointments.
+            academic education, appointments, research, teaching, and
+            consultancy.
           </p>
         </div>
 
