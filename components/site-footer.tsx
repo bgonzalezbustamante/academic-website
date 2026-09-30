@@ -11,15 +11,6 @@ import { siteProfile } from '@/content/site'
 import { siteCarbonMeasurement } from '@/content/site-carbon'
 import { currentRelease } from '@/lib/releases'
 
-function formatCarbonTestDate(value: string) {
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${value}T00:00:00Z`))
-}
-
 function carbonNoteLabel() {
   const details = ['Website Carbon']
 
@@ -27,23 +18,14 @@ function carbonNoteLabel() {
     details.push(
       `~${siteCarbonMeasurement.gramsCo2ePerView.toFixed(2)} g CO₂e/view`
     )
-  } else if (siteCarbonMeasurement.rating !== null) {
-    details.push(`rating ${siteCarbonMeasurement.rating}`)
-  } else {
-    details.push('current-site estimate')
   }
 
   if (siteCarbonMeasurement.rating !== null) {
-    const ratingText = `rating ${siteCarbonMeasurement.rating}`
-    if (!details.includes(ratingText)) {
-      details.push(ratingText)
-    }
+    details.push(`Rating ${siteCarbonMeasurement.rating}`)
   }
 
-  if (siteCarbonMeasurement.testedOn !== null) {
-    details.push(
-      `tested ${formatCarbonTestDate(siteCarbonMeasurement.testedOn)}`
-    )
+  if (details.length === 1) {
+    details.push('current-site estimate')
   }
 
   return details.join(' · ')
@@ -63,6 +45,17 @@ export default function SiteFooter() {
             <span>{siteProfile.contact.address}</span>
           </span>
 
+        </div>
+
+        <div className="footer-meta">
+          <p className="footer-license">
+            <FontAwesomeIcon
+              icon={faCreativeCommons}
+              aria-hidden="true"
+            />
+            <span>{new Date().getFullYear()} {siteProfile.name}</span>
+          </p>
+
           {siteCarbonMeasurement.showInFooter && (
             <a
               className="footer-carbon-note"
@@ -75,16 +68,7 @@ export default function SiteFooter() {
               <span>{carbonNoteLabel()}</span>
             </a>
           )}
-        </div>
 
-        <div className="footer-meta">
-          <p className="footer-license">
-            <FontAwesomeIcon
-              icon={faCreativeCommons}
-              aria-hidden="true"
-            />
-            <span>{new Date().getFullYear()} {siteProfile.name}</span>
-          </p>
           <p>
             <Link href="/release-notes">
               {currentRelease.version} &quot;{currentRelease.codename}&quot;
