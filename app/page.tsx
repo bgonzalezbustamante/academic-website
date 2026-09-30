@@ -1,3 +1,5 @@
+import { faRoute } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -187,6 +189,14 @@ export default async function HomePage() {
                   Presidential Democracies.”
                 </ExternalInlineLink>
               </p>
+
+              <Link
+                className="bio-trajectory-link"
+                href="/trajectory"
+              >
+                <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
+                Academic trajectory
+              </Link>
             </div>
           </div>
         </div>
