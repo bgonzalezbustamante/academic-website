@@ -235,6 +235,14 @@ export default function PublicationBrowser({ papers }: Props) {
                 <button
                   type="button"
                   disabled={page === 1}
+                  onClick={() => setPage(1)}
+                >
+                  First
+                </button>
+
+                <button
+                  type="button"
+                  disabled={page === 1}
                   onClick={() =>
                     setPage((value) => Math.max(1, value - 1))
                   }
@@ -256,6 +264,14 @@ export default function PublicationBrowser({ papers }: Props) {
                   }
                 >
                   Next
+                </button>
+
+                <button
+                  type="button"
+                  disabled={page === totalPages}
+                  onClick={() => setPage(totalPages)}
+                >
+                  Last
                 </button>
               </div>
             </nav>
