@@ -18,40 +18,34 @@ import {
 type Group = {
   category: TrajectoryCategory
   title: string
-  legend: string
   icon: IconDefinition
 }
 
 const GROUPS: Group[] = [
   {
+    category: 'education',
+    title: 'Education',
+    icon: faGraduationCap,
+  },
+  {
     category: 'faculty',
     title: 'Faculty appointments',
-    legend: 'Tenure-track',
     icon: faBuildingColumns,
   },
   {
     category: 'research',
     title: 'Research',
-    legend: 'Research',
     icon: faMagnifyingGlassChart,
   },
   {
     category: 'teaching',
     title: 'Teaching',
-    legend: 'Teaching',
     icon: faChalkboardUser,
   },
   {
     category: 'consultancy',
     title: 'Consultancy',
-    legend: 'Consultancy',
     icon: faHandshake,
-  },
-  {
-    category: 'education',
-    title: 'Education',
-    legend: 'Education',
-    icon: faGraduationCap,
   },
 ]
 
@@ -115,13 +109,33 @@ export default function AcademicTrajectory() {
         {GROUPS.map((group) => {
           const items = trajectoryItems
             .filter((item) => item.category === group.category)
-            .sort(
-              (a, b) =>
-                b.startYear - a.startYear ||
-                (b.endYear ?? currentYear) -
-                  (a.endYear ?? currentYear) ||
+            .sort((a, b) => {
+              const startComparison =
+                b.startYear - a.startYear
+
+              if (startComparison !== 0) {
+                return startComparison
+              }
+
+              const endComparison =
+                a.endYear === b.endYear
+                  ? 0
+                  : a.endYear === null
+                    ? -1
+                    : b.endYear === null
+                      ? 1
+                      : b.endYear - a.endYear
+
+              if (endComparison !== 0) {
+                return endComparison
+              }
+
+              return (
+                (a.order ?? Number.MAX_SAFE_INTEGER) -
+                  (b.order ?? Number.MAX_SAFE_INTEGER) ||
                 a.role.localeCompare(b.role)
-            )
+              )
+            })
 
           return (
             <section
@@ -171,17 +185,9 @@ export default function AcademicTrajectory() {
                           .filter(Boolean)
                           .join(' ')}
                       >
-                        <span className="trajectory-role-icon">
-                          <FontAwesomeIcon
-                            icon={group.icon}
-                            aria-hidden="true"
-                          />
-                        </span>
-                        <div>
-                          <h3>{item.role}</h3>
-                          <p>{item.institution}</p>
-                          <small>{periodLabel(item)}</small>
-                        </div>
+                        <h3>{item.role}</h3>
+                        <p>{item.institution}</p>
+                        <small>{periodLabel(item)}</small>
                       </div>
 
                       <div
@@ -215,19 +221,8 @@ export default function AcademicTrajectory() {
 
       <div
         className="trajectory-legend"
-        aria-label="Academic trajectory legend"
+        aria-label="Academic trajectory status legend"
       >
-        <div className="trajectory-legend-types">
-          {GROUPS.map((group) => (
-            <span key={group.category}>
-              <FontAwesomeIcon
-                icon={group.icon}
-                aria-hidden="true"
-              />
-              {group.legend}
-            </span>
-          ))}
-        </div>
         <div className="trajectory-legend-status">
           <span>
             <i className="trajectory-status-swatch" />
