@@ -47,7 +47,7 @@ export const trajectoryItems: TrajectoryItem[] = [
     category: 'faculty',
   },
   {
-    role: 'Lecturer',
+    role: 'Faculty member',
     institution: 'Universidad Diego Portales',
     startYear: 2024,
     endYear: 2025,
