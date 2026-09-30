@@ -49,6 +49,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Rebuilt the site with Next.js and a responsive Oxford-inspired visual system designed for the new public academic profile.',
           'Connected the site to Research Dashboard only through deliberately public, anonymous-safe data contracts; private research-management records, account information and individual work sessions remain outside the public website.',
+          'Added an optional, dated Website Carbon estimate in the footer, maintained as a local snapshot rather than fetched from an external service on each visit.',
         ],
       },
     ],
