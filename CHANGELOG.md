@@ -26,7 +26,7 @@
 - Added paired DORA signer and Pro CRediT cards beneath the profile, plus dedicated `/dora` and `/credit` pages with local badge assets.
 - Added a non-navigation `/trajectory` Academic trajectory page linked from the Home biography. It presents selected education, faculty appointments, research positions, teaching positions and consultancy as overlapping interval bands from 2004 to the present.
 - The trajectory uses Oxford blue for completed periods and coral for ongoing periods; desktop uses a shared year axis and mobile collapses to grouped vertical entries.
-- `content/trajectory.ts` is grouped by category for manual editing and supports optional `order` values as tie-breakers for identical intervals.
+- `content/trajectory.ts` is an intentionally manually maintained content source, grouped by category for straightforward editing and supporting optional `order` values as tie-breakers for identical intervals.
 - Trajectory section icons identify Education, Faculty appointments, Research positions, Teaching positions and Consultancy. The bottom legend separates Building Columns = Tenure track, Research/Teaching icons = Non-tenure track, and Completed/Ongoing colour status.
 
 ### Public data boundary
@@ -84,6 +84,7 @@
 - Home order is Academic profile → DORA/CRediT → Population in progress → Featured publications → Featured projects → Activity over time → compact Conferences timeline.
 - Featured publications are capped at four; Featured projects use the shared public project ordering and two-column layouts on wider screens.
 - Added Population in progress using live public record counts against deliberately manual intended-ingestion targets maintained in `lib/site-population.ts`.
+- Added `POPULATION_SETTINGS.showProgress` as the single manual display switch for population progress; setting it to `false` hides both the Home population card and all section-level progress strips without removing targets, periods or coverage logic.
 - Population year strips use domain-specific periods and align to a common Home grid. Publications, Projects, Conferences and Teaching also expose lightweight section-level population strips.
 - Site population readiness uses fixed category weights of 35/30/15/20 for Publications/Projects/Conferences/Teaching and marks a 60% launch threshold.
 - Added current-year aggregate Activity over time using `get_public_work_analytics(year)`, with daily net-minute heatmap bins plus Working hours per day and Coffee per working day annual averages. Individual work sessions and daily coffee counts are never exposed.
@@ -102,7 +103,7 @@
 - Release Notes link to the current v6 CHANGELOG and the legacy `academic-kickstart` CHANGELOG without duplicating pre-v6 technical history.
 - The Release Notes introductory description now uses the full site-shell width rather than the generic narrow reading measure.
 - The current release remains `In development` with `Release date TBC`; merging the development branch into `main` does not close or tag rc.1.
-- Reworked README around the current rc.1 architecture, public surface, manually maintained population/carbon metadata, validation commands and staged Netlify-to-production deployment plan; removed obsolete Phase 4/intermediate implementation wording already covered by this CHANGELOG.
+- Reworked README around the current rc.1 architecture, public surface, intentionally manual population/trajectory/carbon sources, validation commands and staged Netlify-to-production deployment plan; removed obsolete Phase 4/intermediate implementation wording already covered by this CHANGELOG.
 
 ### Local validation and deployment preparation
 
