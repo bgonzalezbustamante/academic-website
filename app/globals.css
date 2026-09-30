@@ -4126,10 +4126,11 @@ h4 {
 /* Academic trajectory */
 
 .bio-trajectory-link {
-  display: inline-flex;
+  width: fit-content;
+  display: flex;
   align-items: center;
   gap: 0.36rem;
-  margin-top: 0.9rem;
+  margin: 0.9rem 0 0 auto;
   color: var(--oxford-blue);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.72rem;
@@ -4249,25 +4250,6 @@ h4 {
 
 .trajectory-role {
   min-width: 0;
-  display: grid;
-  grid-template-columns: 1.45rem minmax(0, 1fr);
-  gap: 0.55rem;
-  align-items: start;
-}
-
-.trajectory-role-icon {
-  width: 1.45rem;
-  height: 1.45rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--oxford-blue-wash);
-  color: var(--oxford-blue);
-}
-
-.trajectory-role-icon svg {
-  width: 0.68rem;
 }
 
 .trajectory-role h3,
@@ -4335,7 +4317,7 @@ h4 {
 .trajectory-legend {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem 1.5rem;
   flex-wrap: wrap;
   border-top: 1px solid rgba(0, 33, 71, 0.1);
@@ -4345,7 +4327,6 @@ h4 {
   font-size: 0.62rem;
 }
 
-.trajectory-legend-types,
 .trajectory-legend-status {
   display: flex;
   flex-wrap: wrap;
@@ -4358,10 +4339,6 @@ h4 {
   gap: 0.3rem;
 }
 
-.trajectory-legend svg {
-  width: 0.68rem;
-  color: var(--oxford-blue);
-}
 
 .trajectory-status-swatch {
   width: 1rem;
@@ -4395,16 +4372,7 @@ h4 {
     display: none;
   }
 
-  .trajectory-role {
-    grid-template-columns: 1.35rem minmax(0, 1fr);
-  }
-
-  .trajectory-role-icon {
-    width: 1.35rem;
-    height: 1.35rem;
-  }
-
   .trajectory-legend {
-    flex-direction: column;
+    justify-content: flex-start;
   }
 }
