@@ -1,8 +1,28 @@
 import { createPublicSupabaseClient } from '@/lib/supabase/public'
-import type { PublicTeachingItem } from '@/types/public'
+import type {
+  PublicTeachingItem,
+  PublicTeachingRole,
+} from '@/types/public'
 
 function nullableString(value: unknown) {
   return value == null ? null : String(value)
+}
+
+const PUBLIC_TEACHING_ROLES = new Set<PublicTeachingRole>([
+  'Course Convenor',
+  'Lecturer',
+  'Tutor',
+  'Thesis Supervisor',
+  'Examiner',
+])
+
+function normalizeTeachingRole(
+  value: unknown
+): PublicTeachingRole | null {
+  if (value == null) return null
+
+  const role = String(value) as PublicTeachingRole
+  return PUBLIC_TEACHING_ROLES.has(role) ? role : null
 }
 
 function nullableYear(value: unknown) {
@@ -24,6 +44,7 @@ function normalizeTeachingItem(
     name: String(row.name ?? ''),
     institution: String(row.institution ?? ''),
     summary: String(row.summary ?? ''),
+    role: normalizeTeachingRole(row.role),
     start_year: nullableYear(row.start_year),
     end_year: nullableYear(row.end_year),
     is_current: row.is_current === true,
