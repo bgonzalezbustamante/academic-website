@@ -18,6 +18,7 @@
 - Replaced the legacy header treatment with a three-affiliation home link using Leiden University, Universidad Diego Portales and OCPSG logos; institutional marks remain monochrome at rest and reveal their original colour on hover/focus.
 - Added a content-hashed profile-portrait workflow: one JPG/JPEG/PNG source in `public/profile` is copied to a generated hash-named asset before development, checks and builds so image replacements invalidate caches automatically.
 - Standardised safe Markdown rendering for publication/project abstracts and publication Key highlights, supporting headings, emphasis, lists, links, code and blockquotes without executing raw HTML.
+- Added an optional manually maintained Website Carbon footer note below the public address. `content/site-carbon.ts` stores the measured/report URLs, CO₂e-per-view estimate, rating, cleaner-than percentile and test date; `showInFooter` can suppress the public note without deleting the stored snapshot. No Website Carbon API request is made at runtime.
 
 ### Academic profile and research practice
 
