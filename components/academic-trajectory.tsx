@@ -236,14 +236,14 @@ export default function AcademicTrajectory() {
               icon={faMagnifyingGlassChart}
               aria-hidden="true"
             />
-            Research
+            Non-tenure track
           </span>
           <span>
             <FontAwesomeIcon
               icon={faChalkboardUser}
               aria-hidden="true"
             />
-            Teaching
+            Non-tenure track
           </span>
         </div>
 
