@@ -22,8 +22,8 @@ export const siteCarbonMeasurement: SiteCarbonMeasurement = {
     'https://www.websitecarbon.com/website/bgonzalezbustamante-com/',
   // Current report values could not be retrieved programmatically while
   // preparing rc.1. Replace these nulls manually with the displayed values.
-  gramsCo2ePerView: null,
-  rating: null,
-  cleanerThanPercent: null,
-  testedOn: null,
+  gramsCo2ePerView: 0.11,
+  rating: 'B',
+  cleanerThanPercent: 79,
+  testedOn: '2026-09-30',
 }
