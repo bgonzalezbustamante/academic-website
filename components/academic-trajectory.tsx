@@ -221,8 +221,25 @@ export default function AcademicTrajectory() {
 
       <div
         className="trajectory-legend"
-        aria-label="Academic trajectory status legend"
+        aria-label="Academic trajectory legend"
       >
+        <div className="trajectory-legend-types">
+          <span>
+            <FontAwesomeIcon
+              icon={faBuildingColumns}
+              aria-hidden="true"
+            />
+            Tenure track
+          </span>
+          <span>
+            <FontAwesomeIcon
+              icon={faChalkboardUser}
+              aria-hidden="true"
+            />
+            Non-tenure track
+          </span>
+        </div>
+
         <div className="trajectory-legend-status">
           <span>
             <i className="trajectory-status-swatch" />
