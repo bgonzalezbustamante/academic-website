@@ -86,10 +86,18 @@ export type PublicWorkAnalytics = {
 }
 
 
+export type PublicTeachingRole =
+  | 'Course Convenor'
+  | 'Lecturer'
+  | 'Tutor'
+  | 'Thesis Supervisor'
+  | 'Examiner'
+
 export type PublicTeachingItem = {
   name: string
   institution: string
   summary: string
+  role: PublicTeachingRole | null
   start_year: number | null
   end_year: number | null
   is_current: boolean
