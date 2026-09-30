@@ -38,7 +38,7 @@
 
 ### Publications
 
-- Added a full-width Publications browser with fixed Publication Index taxonomy, Year/Index filters, ten-record pagination and KPI cards for Papers, distinct Journals/Venues and first-author percentage.
+- Added a full-width Publications browser with fixed Publication Index taxonomy, Year/Index filters, ten-record pagination with First/Previous/Next/Last controls, and KPI cards for Papers, distinct Journals/Venues and first-author percentage.
 - Publication cards use the public citation when available, support safe Markdown abstracts and expose public DOI/Publication, Preprint, Project, Code, Dataset and SI File resources while keeping Overleaf private.
 - Publication metadata supports English, Spanish, Portuguese, Dutch, German, French and Italian with accessible local SVG flags.
 - Future publication dates are consistently treated as `Forthcoming`; publication details distinguish published month/year from forthcoming year.
