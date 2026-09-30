@@ -51,8 +51,15 @@ export const trajectoryItems: TrajectoryItem[] = [
   },
   {
     role: 'Lecturer',
+    institution: 'Leiden University',
+    startYear: 2024,
+    endYear: 2025,
+    category: 'teaching',
+  },
+  {
+    role: 'Lecturer',
     institution: 'Universidad Diego Portales',
-    startYear: 2023,
+    startYear: 2024,
     endYear: 2025,
     category: 'faculty',
   },
@@ -86,7 +93,7 @@ export const trajectoryItems: TrajectoryItem[] = [
   },
   {
     role: 'Consultant',
-    institution: 'United Nations Development Programme - UNDP',
+    institution: 'UNDP',
     startYear: 2016,
     endYear: 2017,
     category: 'consultancy',
