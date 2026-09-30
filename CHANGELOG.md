@@ -73,11 +73,11 @@
 ### Teaching
 
 - Added `/teaching`, backed exclusively by `list_public_teaching()`, with no Teaching detail routes.
-- Teaching cards expose only public course name, institution, summary, period/current status, levels, times taught, cumulative students and optional local image filename.
+- Teaching cards expose only public course name, institution, summary, controlled role, period/current status, levels, times taught, cumulative students and optional local image filename. The role is rendered as a metadata tag after the academic level tag(s), using the controlled values Course Convenor, Lecturer, Tutor, Thesis Supervisor and Examiner.
 - Cards use a one-per-row layout, alternate image placement across the complete ordered list, collapse to image-above-content on mobile and paginate at five records with First/Previous/Next/Last controls.
 - Teaching imagery uses the Project logo/contain treatment inside an Oxford-blue-wash visual area, with a local teaching icon fallback.
 - KPI cards report cumulative Teaching/Supervision occurrences, distinct Institutions and cumulative Students.
-- Public-contract checks explicitly reject internal Teaching IDs, activity-label relationships, tracked hours/sessions and owner metadata.
+- Public-contract checks validate the controlled Teaching role when present and explicitly reject internal Teaching IDs, activity-label relationships, tracked hours/sessions and owner metadata.
 
 ### Home population, activity and roadmap
 
