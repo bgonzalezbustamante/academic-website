@@ -6,6 +6,7 @@ import {
   faMagnifyingGlassChart,
 } from '@fortawesome/free-solid-svg-icons'
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import type { CSSProperties } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {
@@ -83,7 +84,8 @@ export default function AcademicTrajectory() {
   )
   const yearGrid = {
     gridTemplateColumns: `repeat(${years.length}, minmax(0, 1fr))`,
-  }
+    '--trajectory-year-width': `${100 / years.length}%`,
+  } as CSSProperties
   const axisYears = years.filter(
     (year) =>
       year === startYear ||
@@ -149,7 +151,14 @@ export default function AcademicTrajectory() {
 
                   return (
                     <div
-                      className="trajectory-row"
+                      className={[
+                        'trajectory-row',
+                        ongoing
+                          ? 'trajectory-row-ongoing'
+                          : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
                       key={`${item.role}-${item.institution}-${item.startYear}`}
                     >
                       <div
