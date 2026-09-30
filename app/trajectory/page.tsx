@@ -23,7 +23,7 @@ export default function TrajectoryPage() {
           <h1>Academic trajectory</h1>
           <p className="page-lead">
             A chronological view of the most relevant stages of my
-            academic education, appointments, research, teaching, and
+            academic education, faculty appointments, research, teaching, and
             consultancy.
           </p>
         </div>
