@@ -4,6 +4,7 @@ import type { CSSProperties } from 'react'
 
 import {
   POPULATION_PERIODS,
+  POPULATION_SETTINGS,
   POPULATION_TARGETS,
   type PopulationDomain,
   populationPercentage,
@@ -25,6 +26,10 @@ export default function SectionPopulationProgress({
   unit,
   coveredYears,
 }: Props) {
+  if (!POPULATION_SETTINGS.showProgress) {
+    return null
+  }
+
   const available = value !== null
   const total = POPULATION_TARGETS[domain]
   const period = POPULATION_PERIODS[domain]
