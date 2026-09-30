@@ -44,7 +44,6 @@ export default function SiteFooter() {
             <FontAwesomeIcon icon={faLocationDot} aria-hidden="true" />
             <span>{siteProfile.contact.address}</span>
           </span>
-
         </div>
 
         <div className="footer-meta">
