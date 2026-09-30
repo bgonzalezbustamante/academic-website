@@ -62,7 +62,7 @@
 
 ### Conferences
 
-- Added `/conferences` as a dashboard-style public presentation record with KPI cards, Presentation map, paginated Overview table and full current-year roadmap.
+- Added `/conferences` as a dashboard-style public presentation record with KPI cards, Presentation map, paginated Overview table with First/Previous/Next/Last controls, and full current-year roadmap.
 - Public conference data supports ordered authors, event short names, start/end date ranges, location, presentation type and optional external URL; private notes and Dashboard paper relationships remain excluded.
 - Presentation types are constrained to Conference paper, Keynote and Workshop. Keynotes carry a small coral marker and legend in the shared conference table.
 - Country totals/maps exclude `Virtual` presentations and report the virtual count separately.
