@@ -21,36 +21,34 @@ export const releases: ReleaseNote[] = [
     releasedOn: 'Release date TBC',
     comparison: 'First release candidate in the Next.js repository',
     summary:
-      'Swift Harbour rebuilds the academic website as a modern public research profile connected safely to Research Dashboard, while preserving continuity with the previous site.',
+      'Swift Harbour is the first release candidate for the rebuilt academic website: a modern public research profile connected safely to Research Dashboard, with the existing website kept online while the replacement is completed and tested.',
     sections: [
       {
-        title: 'Academic profile',
+        title: 'Academic profile and trajectory',
         items: [
-          'Introduced the new portrait-led academic profile, current appointments, research interests, institutional branding and responsible-research statements for DORA and CRediT.',
-          'Added a clearer homepage for featured publications and projects, yearly work activity, a compact five-presentation recent/forthcoming timeline linking to the full Conferences roadmap, and a live population-progress snapshot connected to Research Dashboard.',
-          'Added a public Teaching Portfolio for current and previous courses, teaching levels and cumulative teaching indicators.',
+          'Introduced a new portrait-led homepage with current appointments, research interests, institutional links, DORA and CRediT research-practice information, and an Academic trajectory page covering selected education and professional positions.',
+          'Added a clearer view of completed and ongoing appointments while keeping the main navigation focused on the core public research sections.',
         ],
       },
       {
-        title: 'Research outputs',
+        title: 'Research portfolio',
         items: [
-          'Added public Publications with citation-based records, language flags, compact Markdown abstracts, filters, summary indicators, pagination, publication details, Project/SI File resource links and optional Key highlights.',
-          'Added public Projects with funding information, associated publications and conference presentations, including the TERGAP geographic-coverage view.',
-          'Added a Conferences dashboard with top-level presentation indicators, geographic coverage, a paginated presentation record and a full current-year roadmap after the Overview, alongside multi-day date ranges and virtual-presentation reporting.',
+          'Expanded Publications with filters, citation information, language indicators, related projects, publication analytics and a co-authorship network.',
+          'Added Projects, Conferences and Teaching sections, including research outputs, funding information, presentation maps and roadmaps, keynote markers, and cumulative teaching information.',
         ],
       },
       {
-        title: 'Public data and analytics',
+        title: 'Activity and site coverage',
         items: [
-          'Connected the site to Research Dashboard only through deliberately public, anonymous-safe contracts rather than private application tables, including live progress indicators for the ongoing website population.',
-          'Added aggregate yearly work analytics while keeping individual work sessions and private research-management data outside the public website.',
+          'Added public yearly work-activity summaries and a compact view of recent and forthcoming conference presentations.',
+          'Added population-progress indicators showing how much of the intended Publications, Projects, Conferences and Teaching record has been added while the new site is still being populated.',
         ],
       },
       {
-        title: 'Website foundation',
+        title: 'Platform and privacy',
         items: [
-          'Moved the site to Next.js with a responsive Oxford-inspired visual system, accessible navigation and local-first development during the release-candidate stage.',
-          'Kept the existing Hugo/Wowchemy website in production while the replacement is populated, tested and prepared for migration.',
+          'Rebuilt the site with Next.js and a responsive Oxford-inspired visual system designed for the new public academic profile.',
+          'Connected the site to Research Dashboard only through deliberately public, anonymous-safe data contracts; private research-management records, account information and individual work sessions remain outside the public website.',
         ],
       },
     ],
