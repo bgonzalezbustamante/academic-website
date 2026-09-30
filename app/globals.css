@@ -4121,3 +4121,291 @@ h4 {
     text-align: left;
   }
 }
+
+
+/* Academic trajectory */
+
+.bio-trajectory-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+  margin-top: 0.9rem;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.bio-trajectory-link svg {
+  width: 0.72rem;
+  color: var(--oxford-coral);
+}
+
+.bio-trajectory-link:hover {
+  color: var(--oxford-coral);
+}
+
+.trajectory-page-heading .page-lead {
+  max-width: none;
+  margin-bottom: 0.8rem;
+}
+
+.trajectory-toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.72rem;
+}
+
+.trajectory-toolbar a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.trajectory-toolbar a svg {
+  width: 0.68rem;
+  color: var(--oxford-coral);
+}
+
+.trajectory {
+  display: grid;
+  gap: 1.05rem;
+}
+
+.trajectory-axis,
+.trajectory-row {
+  display: grid;
+  grid-template-columns: minmax(235px, 285px) minmax(0, 1fr);
+  gap: 1.1rem;
+}
+
+.trajectory-axis {
+  align-items: end;
+  padding: 0 0.25rem 0.15rem;
+}
+
+.trajectory-year-grid,
+.trajectory-track {
+  display: grid;
+  min-width: 0;
+}
+
+.trajectory-year-grid {
+  align-items: end;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.58rem;
+  line-height: 1;
+}
+
+.trajectory-year-grid span {
+  justify-self: center;
+  white-space: nowrap;
+}
+
+.trajectory-groups {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.trajectory-group {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.trajectory-group-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-bottom: 1px solid rgba(0, 33, 71, 0.1);
+  padding-bottom: 0.38rem;
+}
+
+.trajectory-group-heading svg {
+  width: 0.8rem;
+  color: var(--oxford-coral);
+}
+
+.trajectory-group-heading h2 {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.trajectory-rows {
+  display: grid;
+  gap: 0.46rem;
+}
+
+.trajectory-row {
+  align-items: center;
+  min-height: 58px;
+}
+
+.trajectory-role {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1.45rem minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: start;
+}
+
+.trajectory-role-icon {
+  width: 1.45rem;
+  height: 1.45rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--oxford-blue-wash);
+  color: var(--oxford-blue);
+}
+
+.trajectory-role-icon svg {
+  width: 0.68rem;
+}
+
+.trajectory-role h3,
+.trajectory-role p,
+.trajectory-role small {
+  margin: 0;
+}
+
+.trajectory-role h3 {
+  color: var(--oxford-charcoal);
+  font-size: 0.76rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.trajectory-role p {
+  margin-top: 0.08rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.66rem;
+  line-height: 1.35;
+}
+
+.trajectory-role small {
+  display: block;
+  margin-top: 0.08rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.58rem;
+  line-height: 1.3;
+}
+
+.trajectory-role-ongoing small {
+  color: var(--oxford-coral);
+  font-weight: 650;
+}
+
+.trajectory-track {
+  position: relative;
+  min-height: 20px;
+  align-items: center;
+  border-radius: 999px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(0, 33, 71, 0.055) 0,
+      rgba(0, 33, 71, 0.055) 1px,
+      transparent 1px,
+      transparent calc(100% / 23)
+    ),
+    rgba(0, 33, 71, 0.025);
+}
+
+.trajectory-band {
+  height: 8px;
+  align-self: center;
+  border-radius: 999px;
+  background: var(--oxford-blue);
+  box-shadow: 0 0 0 1px rgba(0, 33, 71, 0.04);
+}
+
+.trajectory-band-ongoing {
+  background: var(--oxford-coral);
+}
+
+.trajectory-legend {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(0, 33, 71, 0.1);
+  padding-top: 0.8rem;
+  color: var(--oxford-ash);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.62rem;
+}
+
+.trajectory-legend-types,
+.trajectory-legend-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+}
+
+.trajectory-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.trajectory-legend svg {
+  width: 0.68rem;
+  color: var(--oxford-blue);
+}
+
+.trajectory-status-swatch {
+  width: 1rem;
+  height: 0.34rem;
+  display: inline-block;
+  border-radius: 999px;
+  background: var(--oxford-blue);
+}
+
+.trajectory-status-swatch-ongoing {
+  background: var(--oxford-coral);
+}
+
+@media (max-width: 760px) {
+  .trajectory-axis {
+    display: none;
+  }
+
+  .trajectory-row {
+    grid-template-columns: 1fr;
+    gap: 0.42rem;
+    border-left: 3px solid var(--oxford-blue);
+    padding: 0.5rem 0 0.5rem 0.72rem;
+  }
+
+  .trajectory-row:has(.trajectory-role-ongoing) {
+    border-left-color: var(--oxford-coral);
+  }
+
+  .trajectory-track {
+    display: none;
+  }
+
+  .trajectory-role {
+    grid-template-columns: 1.35rem minmax(0, 1fr);
+  }
+
+  .trajectory-role-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .trajectory-legend {
+    flex-direction: column;
+  }
+}
