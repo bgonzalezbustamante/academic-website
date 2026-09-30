@@ -34,12 +34,12 @@ const GROUPS: Group[] = [
   },
   {
     category: 'research',
-    title: 'Research',
+    title: 'Research positions',
     icon: faMagnifyingGlassChart,
   },
   {
     category: 'teaching',
-    title: 'Teaching',
+    title: 'Teaching positions',
     icon: faChalkboardUser,
   },
   {
@@ -232,10 +232,13 @@ export default function AcademicTrajectory() {
             Tenure track
           </span>
           <span>
-            <FontAwesomeIcon
-              icon={faChalkboardUser}
+            <span
+              className="trajectory-legend-icon-pair"
               aria-hidden="true"
-            />
+            >
+              <FontAwesomeIcon icon={faMagnifyingGlassChart} />
+              <FontAwesomeIcon icon={faChalkboardUser} />
+            </span>
             Non-tenure track
           </span>
         </div>
