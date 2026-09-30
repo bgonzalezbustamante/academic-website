@@ -47,14 +47,6 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer-meta">
-          <p className="footer-license">
-            <FontAwesomeIcon
-              icon={faCreativeCommons}
-              aria-hidden="true"
-            />
-            <span>{new Date().getFullYear()} {siteProfile.name}</span>
-          </p>
-
           {siteCarbonMeasurement.showInFooter && (
             <a
               className="footer-carbon-note"
@@ -67,6 +59,14 @@ export default function SiteFooter() {
               <span>{carbonNoteLabel()}</span>
             </a>
           )}
+
+          <p className="footer-license">
+            <FontAwesomeIcon
+              icon={faCreativeCommons}
+              aria-hidden="true"
+            />
+            <span>{new Date().getFullYear()} {siteProfile.name}</span>
+          </p>
 
           <p>
             <Link href="/release-notes">
