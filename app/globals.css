@@ -3772,6 +3772,25 @@ h4 {
   text-decoration: none;
 }
 
+.footer-carbon-note {
+  width: fit-content;
+  margin-top: 0.08rem;
+  font-size: 0.66rem;
+  line-height: 1.4;
+}
+
+.footer-carbon-note span {
+  color: var(--oxford-ash);
+}
+
+.footer-carbon-note svg {
+  color: var(--oxford-blue);
+}
+
+.footer-carbon-note:hover span {
+  color: var(--oxford-coral);
+}
+
 .footer-meta {
   justify-items: end;
   text-align: right;
