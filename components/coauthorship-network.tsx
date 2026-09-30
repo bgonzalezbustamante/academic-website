@@ -660,26 +660,29 @@ function layoutGraph(graph: CoauthorshipGraph): LayoutResult {
         targetCluster &&
         sourceCluster !== targetCluster
 
-      if (crossCommunityEdge) {
-        continue
-      }
-
       const weightFactor = Math.max(1, edge.weight)
       const targetLength = profileEdge
         ? Math.max(
-            68,
+            64,
             225 /
               Math.pow(
-                1 + 1.08 * (weightFactor - 1),
-                0.94
+                1 + 1.18 * (weightFactor - 1),
+                0.98
               )
           )
-        : 98
+        : crossCommunityEdge
+          ? 175
+          : 98
       const strength = profileEdge
-        ? 0.0025 + Math.min(edge.weight, 10) * 0.00075
-        : 0.0054 + Math.min(edge.weight, 6) * 0.00035
-      const spring =
-        (distance - targetLength) * strength * cooling
+        ? 0.0026 + Math.min(edge.weight, 10) * 0.0008
+        : crossCommunityEdge
+          ? 0.00045 + Math.min(edge.weight, 4) * 0.00008
+          : 0.0054 + Math.min(edge.weight, 6) * 0.00035
+      const spring = crossCommunityEdge
+        ? Math.max(0, distance - targetLength) *
+          strength *
+          cooling
+        : (distance - targetLength) * strength * cooling
       const fx = (dx / distance) * spring
       const fy = (dy / distance) * spring
 
