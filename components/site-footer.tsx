@@ -1,3 +1,6 @@
+import { faCreativeCommons } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
 import { siteProfile } from '@/content/site'
@@ -7,16 +10,31 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="site-shell footer-inner">
-        <div>
-          <p>© {new Date().getFullYear()} {siteProfile.name}</p>
-          <p>Next.js · Netlify · Supabase public RPCs</p>
+        <div className="footer-contact">
+          <a href={`mailto:${siteProfile.contact.email}`}>
+            <FontAwesomeIcon icon={faEnvelope} aria-hidden="true" />
+            <span>{siteProfile.contact.email}</span>
+          </a>
+          <span className="footer-address">
+            <FontAwesomeIcon icon={faLocationDot} aria-hidden="true" />
+            <span>{siteProfile.contact.address}</span>
+          </span>
         </div>
 
-        <p>
-          <Link href="/release-notes">
-            Academic Website — {currentRelease.version} &quot;{currentRelease.codename}&quot;
-          </Link>
-        </p>
+        <div className="footer-meta">
+          <p className="footer-license">
+            <FontAwesomeIcon
+              icon={faCreativeCommons}
+              aria-hidden="true"
+            />
+            <span>{new Date().getFullYear()} {siteProfile.name}</span>
+          </p>
+          <p>
+            <Link href="/release-notes">
+              {currentRelease.version} &quot;{currentRelease.codename}&quot;
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   )

@@ -1,33 +1,83 @@
 import type { Metadata } from 'next'
 
-import PublicationCard from '@/components/publication-card'
-import { listPublicPapers } from '@/lib/publications'
+import PublicationBrowser from '@/components/publication-browser'
+import SectionPopulationProgress from '@/components/section-population-progress'
+import { getPublicPaper, listPublicPapers } from '@/lib/publications'
+import { publicationPopulationYears } from '@/lib/site-population'
+import type { PublicPaper } from '@/types/public'
 
 export const metadata: Metadata = {
   title: 'Publications',
-  description: 'Publications and working papers by Bastián González-Bustamante.',
+  description:
+    'Publications and working papers by Bastián González-Bustamante.',
+  alternates: {
+    canonical: '/publications',
+  },
 }
 
 export const revalidate = 300
 
 export default async function PublicationsPage() {
-  const papers = await listPublicPapers()
+  let papers: PublicPaper[] = []
+  let available = true
+
+  try {
+    papers = await listPublicPapers()
+  } catch {
+    available = false
+  }
+
+  const papersWithCitation = await Promise.all(
+    papers.map(async (paper) => {
+      try {
+        const detail = await getPublicPaper(paper.slug)
+
+        return {
+          ...paper,
+          citation: detail?.citation ?? null,
+        }
+      } catch {
+        return {
+          ...paper,
+          citation: null,
+        }
+      }
+    })
+  )
 
   return (
     <section className="page-section">
-      <div className="site-shell narrow-shell">
-        <p className="eyebrow">Research output</p>
-        <h1>Publications</h1>
-        <p className="page-lead">
-          This list is generated from papers explicitly marked Public in Research Dashboard.
-        </p>
+      <div className="site-shell">
+        <div className="publications-page-heading">
+          <p className="eyebrow">Research output</p>
+          <h1>Publications</h1>
+          <p className="page-lead">
+            Peer-reviewed articles, book chapters, working papers, and occasional preprints.
+          </p>
+        </div>
 
-        {papers.length === 0 ? (
-          <div className="empty-state"><p>No public papers are currently available.</p></div>
-        ) : (
-          <div className="publication-list">
-            {papers.map((paper) => <PublicationCard key={paper.slug} paper={paper} />)}
+        <SectionPopulationProgress
+          domain="publications"
+          label="Publications"
+          value={available ? papers.length : null}
+          unit="publications"
+          coveredYears={
+            available
+              ? publicationPopulationYears(papers)
+              : null
+          }
+        />
+
+        {!available ? (
+          <div className="empty-state">
+            <p>Publications are temporarily unavailable.</p>
           </div>
+        ) : papers.length === 0 ? (
+          <div className="empty-state">
+            <p>No public papers are currently available.</p>
+          </div>
+        ) : (
+          <PublicationBrowser papers={papersWithCitation} />
         )}
       </div>
     </section>

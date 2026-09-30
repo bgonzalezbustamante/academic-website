@@ -2,20 +2,37 @@
   "name": "academic-website",
   "version": "6.0.0-rc.1",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
+    "profile:sync": "node scripts/sync-profile-portrait.mjs",
+    "predev": "npm run profile:sync",
     "dev": "next dev",
+    "prebuild": "npm run profile:sync",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "precheck": "npm run profile:sync",
+    "check": "npm run lint && npm run typecheck",
+    "check:public-contract": "node --env-file=.env.local scripts/check-public-contract.mjs"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "7.3.1",
+    "@fortawesome/free-brands-svg-icons": "7.3.1",
+    "@fortawesome/free-solid-svg-icons": "7.3.1",
+    "@fortawesome/react-fontawesome": "3.5.0",
     "@supabase/supabase-js": "^2.112.3",
+    "i18n-iso-countries": "7.14.0",
     "next": "16.3.6",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "react-simple-maps": "5.0.5",
+    "world-atlas": "2.0.2"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

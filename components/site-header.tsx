@@ -1,17 +1,21 @@
 import Link from 'next/link'
 
+import InstitutionStrip from '@/components/institution-strip'
+
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/publications', label: 'Publications' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/conferences', label: 'Conferences' },
+  { href: '/teaching', label: 'Teaching' },
 ]
 
 export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-shell header-inner">
-        <Link className="site-mark" href="/" aria-label="Bastián González-Bustamante home">
-          BGB
-        </Link>
+        <InstitutionStrip />
+
         <nav aria-label="Primary navigation">
           <ul className="nav-list">
             {navItems.map((item) => (

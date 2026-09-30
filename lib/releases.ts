@@ -21,38 +21,34 @@ export const releases: ReleaseNote[] = [
     releasedOn: 'Release date TBC',
     comparison: 'First release candidate in the Next.js repository',
     summary:
-      'Swift Harbour establishes the Next.js foundation for the next generation of bgonzalezbustamante.com while preserving continuity with the academic-kickstart website and using Research Dashboard only through curated public Supabase contracts.',
+      'Swift Harbour is the first release candidate for the rebuilt academic website: a modern public research profile connected safely to Research Dashboard, with the existing website kept online while the replacement is completed and tested.',
     sections: [
       {
-        title: 'Project continuity',
+        title: 'Academic profile and trajectory',
         items: [
-          'Continued the academic website version line from the Hugo/Wowchemy implementation maintained in academic-kickstart.',
-          'Started a fresh v6 changelog while keeping the detailed pre-v6 history authoritative in the predecessor repository.',
-          'Kept the existing production website unchanged during parallel development.',
+          'Introduced a new portrait-led homepage with current appointments, research interests, institutional links, DORA and CRediT research-practice information, and an Academic trajectory page covering selected education and professional positions.',
+          'Added a clearer view of completed and ongoing appointments while keeping the main navigation focused on the core public research sections.',
         ],
       },
       {
-        title: 'Public website foundation',
+        title: 'Research portfolio',
         items: [
-          'Added a Next.js App Router and TypeScript foundation for a distinct public academic website.',
-          'Added responsive site navigation, footer, homepage, publication listing and stable publication detail routes.',
-          'Introduced a restrained academic design system drawing on the visual language used across related projects without reproducing the Research Dashboard interface.',
+          'Expanded Publications with filters, citation information, language indicators, related projects, publication analytics and a co-authorship network.',
+          'Added Projects, Conferences and Teaching sections, including research outputs, funding information, presentation maps and roadmaps, keynote markers, and cumulative teaching information.',
         ],
       },
       {
-        title: 'Public data boundary',
+        title: 'Activity and site coverage',
         items: [
-          'Connected publication rendering only to explicit anonymous-safe Supabase RPC contracts maintained by Research Dashboard.',
-          'Kept service-role credentials, private Dashboard tables, internal workflow metadata, work-session details and account data outside the public application.',
-          'Reserved aggregate public work analytics for the later analytics phase without broadening the existing public contract.',
+          'Added public yearly work-activity summaries and a compact view of recent and forthcoming conference presentations.',
+          'Added population-progress indicators showing how much of the intended Publications, Projects, Conferences and Teaching record has been added while the new site is still being populated.',
         ],
       },
       {
-        title: 'Development and deployment',
+        title: 'Platform and privacy',
         items: [
-          'Adopted local-first development during the release-candidate stage so routine changes do not consume Netlify build minutes.',
-          'Reserved Netlify deployments for selective milestone and integration verification during early development.',
-          'Deferred automatic GitHub-to-Netlify deployment on every push until a later stage of the replacement project.',
+          'Rebuilt the site with Next.js and a responsive Oxford-inspired visual system designed for the new public academic profile.',
+          'Connected the site to Research Dashboard only through deliberately public, anonymous-safe data contracts; private research-management records, account information and individual work sessions remain outside the public website.',
         ],
       },
     ],
@@ -63,14 +59,13 @@ export const releases: ReleaseNote[] = [
     releasedOn: 'Through 21 Sep 2026',
     comparison: 'Pre-v6 Hugo/Wowchemy implementation',
     summary:
-      'Versions before v6 are maintained in the academic-kickstart repository. The legacy site evolved across several generations of the Academic/Wowchemy Hugo stack and remains the production website while the Next.js replacement is developed.',
+      'Versions before v6 belong to the academic-kickstart generation of the website, which remains the historical record for the Hugo/Wowchemy implementation.',
     sections: [
       {
         title: 'Historical scope',
         items: [
-          'Maintained the academic profile, publications, projects and resources, presentations and other research-facing content for bgonzalezbustamante.com.',
-          'Added and refined publication automation, profile content, deployment configuration and academic-site features over multiple major versions.',
-          'The complete detailed record remains in the academic-kickstart CHANGELOG rather than being duplicated in this repository.',
+          'Maintained the academic profile, publications, projects, presentations and other research-facing material for bgonzalezbustamante.com.',
+          'The full pre-v6 release history remains available in the academic-kickstart CHANGELOG.',
         ],
       },
     ],

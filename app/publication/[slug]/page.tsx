@@ -1,8 +1,21 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import ProjectCard from '@/components/project-card'
+import PublicationKeyHighlight from '@/components/publication-key-highlight'
+import PublicationLanguageFlag from '@/components/publication-language-flag'
+import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 import PublicationLinks from '@/components/publication-links'
+import {
+  formatPublicationMonthYear,
+  isForthcomingPublicationDate,
+} from '@/lib/publication-dates'
 import { getPublicPaper } from '@/lib/publications'
+import {
+  listPublicProjects,
+  orderPublicProjects,
+} from '@/lib/projects'
+import type { PublicProject } from '@/types/public'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -16,9 +29,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!paper) return { title: 'Publication not found' }
 
+  const description =
+    paper.abstract ?? paper.venue ?? 'Academic publication.'
+
   return {
     title: paper.title,
-    description: paper.abstract ?? paper.venue ?? 'Academic publication.',
+    description,
+    alternates: {
+      canonical: `/publication/${paper.slug}`,
+    },
+    openGraph: {
+      title: paper.title,
+      description,
+      type: 'article',
+    },
   }
 }
 
@@ -28,26 +52,93 @@ export default async function PublicationPage({ params }: Props) {
 
   if (!paper) notFound()
 
+  let associatedProjects: PublicProject[] = []
+
+  try {
+    associatedProjects = orderPublicProjects(
+      (await listPublicProjects()).filter((project) =>
+        project.publication_slugs.includes(paper.slug)
+      )
+    )
+  } catch {
+    associatedProjects = []
+  }
+
+  const publicationMonthYear =
+    formatPublicationMonthYear(paper.publication_date)
+  const publicationYear =
+    paper.publication_date?.slice(0, 4) ?? null
+  const forthcoming = isForthcomingPublicationDate(
+    paper.publication_date
+  )
+
   return (
     <article className="page-section">
       <div className="site-shell narrow-shell publication-detail">
         <p className="eyebrow">Publication</p>
         <h1>{paper.title}</h1>
-        <p className="authors detail-authors">{paper.authors.join(', ')}</p>
-        {paper.venue && <p className="venue detail-venue">{paper.venue}</p>}
-        {paper.publication_date && (
-          <p className="publication-date">
-            Published {new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'long' }).format(new Date(`${paper.publication_date}T00:00:00Z`))}
+
+        {paper.authors.length > 0 && (
+          <p className="authors detail-authors">
+            {paper.authors.join(', ')}
           </p>
         )}
+
+        {paper.venue && (
+          <p className="venue detail-venue">{paper.venue}</p>
+        )}
+
+        <div className="publication-detail-meta">
+          {(paper.publication_date || forthcoming) && (
+            <span>
+              {forthcoming
+                ? publicationYear
+                  ? `Forthcoming · ${publicationYear}`
+                  : 'Forthcoming'
+                : `Published ${publicationMonthYear}`}
+            </span>
+          )}
+          {paper.publication_index && (
+            <span>{paper.publication_index}</span>
+          )}
+          {paper.language && (
+            <PublicationLanguageFlag language={paper.language} />
+          )}
+        </div>
+
         <PublicationLinks paper={paper} />
 
         {paper.abstract && (
           <section className="abstract-section">
             <h2>Abstract</h2>
-            <p>{paper.abstract}</p>
+            <p className="research-markdown-source abstract-markdown-source">
+              {paper.abstract}
+            </p>
           </section>
         )}
+
+        <PublicationKeyHighlight paper={paper} />
+
+        {associatedProjects.length > 0 && (
+          <section className="publication-associated-projects">
+            <h2>
+              {associatedProjects.length === 1
+                ? 'Associated project'
+                : 'Associated projects'}
+            </h2>
+
+            <div className="publication-associated-project-grid">
+              {associatedProjects.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  project={project}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <ResearchMarkdownEnhancer />
       </div>
     </article>
   )

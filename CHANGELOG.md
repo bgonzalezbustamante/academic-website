@@ -4,36 +4,111 @@
 
 ### Summary
 
-- Started the Next.js replacement of `bgonzalezbustamante.com` as a separate public/read-only application.
-- Continued the website version line from the Hugo/Wowchemy implementation in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart) while starting a fresh v6 changelog.
-- Established Research Dashboard's curated Supabase RPCs as the only dynamic research-data boundary.
-- Adopted a local-first development workflow during the release-candidate stage, with Netlify reserved for selective milestone verification.
+- Rebuilt `bgonzalezbustamante.com` as a Next.js 16 / TypeScript public academic website while preserving continuity with the previous Hugo/Wowchemy site in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
+- Established Research Dashboard's curated anonymous-safe Supabase RPCs as the only dynamic research-data boundary; runtime code does not query private Dashboard tables directly or use service-role credentials.
+- Adopted a local-first release-candidate workflow. The legacy site remains in production while Swift Harbour is populated, tested and prepared for Netlify migration.
+- Kept `v6.0.0-rc.1` open as an in-development release candidate for remaining content population, deployment work, SEO, accessibility and minor visual refinements.
 
-`project continuity`
+### Application foundation and design
 
-- Defined v6 as a technical replacement and continuation of the existing academic website rather than an unrelated new product.
-- Kept [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart) unchanged and in production during parallel development.
-- Preserved the detailed pre-v6 history in the [legacy CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
+- Added the Next.js App Router, React 19, TypeScript, Node.js 22+ requirement, reproducible npm lockfile and local validation scripts.
+- Added responsive global navigation, footer, error handling, stable public detail routes and a shared site shell.
+- Standardised the visual system around Roboto interface typography, Noto Serif editorial text, Oxford blue and Oxford coral, with Oxford aqua reserved for limited interaction states and washed Oxford-blue supporting surfaces.
+- Added Font Awesome 7 and Academicons for interface, academic-profile and research-resource iconography.
+- Replaced the legacy header treatment with a three-affiliation home link using Leiden University, Universidad Diego Portales and OCPSG logos; institutional marks remain monochrome at rest and reveal their original colour on hover/focus.
+- Added a content-hashed profile-portrait workflow: one JPG/JPEG/PNG source in `public/profile` is copied to a generated hash-named asset before development, checks and builds so image replacements invalidate caches automatically.
+- Standardised safe Markdown rendering for publication/project abstracts and publication Key highlights, supporting headings, emphasis, lists, links, code and blockquotes without executing raw HTML.
 
-`Phase 4 foundation`
+### Academic profile and research practice
 
-- Added a Next.js App Router and TypeScript foundation with a distinct public academic-site design.
-- Added responsive global navigation, footer, homepage, publication listing and stable publication-detail routes.
-- Added an RPC-only Supabase client for explicitly curated public paper data.
-- Reserved the aggregate public work-analytics contract for the later analytics phase without exposing additional Dashboard data.
+- Reworked Home around a portrait-led academic profile with three current positions, research interests, external-link cues, public contact information and institutional branding.
+- Added paired DORA signer and Pro CRediT cards beneath the profile, plus dedicated `/dora` and `/credit` pages with local badge assets.
+- Added a non-navigation `/trajectory` Academic trajectory page linked from the Home biography. It presents selected education, faculty appointments, research positions, teaching positions and consultancy as overlapping interval bands from 2004 to the present.
+- The trajectory uses Oxford blue for completed periods and coral for ongoing periods; desktop uses a shared year axis and mobile collapses to grouped vertical entries.
+- `content/trajectory.ts` is grouped by category for manual editing and supports optional `order` values as tie-breakers for identical intervals.
+- Trajectory section icons identify Education, Faculty appointments, Research positions, Teaching positions and Consultancy. The bottom legend separates Building Columns = Tenure track, Research/Teaching icons = Non-tenure track, and Completed/Ongoing colour status.
 
-`release management`
+### Public data boundary
 
-- Established v6.0.0-rc.1 "Swift Harbour" as the first release identity in the new repository.
-- Added structured public release-note data and a dedicated Release Notes page following the Research Dashboard release model.
-- Added the current release identity to the site footer.
-- Updated the package version to `6.0.0-rc.1`.
+- Public research data is consumed only through curated Research Dashboard RPCs: `list_public_papers()`, `get_public_paper(slug)`, `list_public_projects()`, `get_public_project(slug)`, `list_public_conference_presentations()`, `list_public_teaching()` and `get_public_work_analytics(year)`.
+- Public-contract validation rejects private identifiers, workflow data, notes, activity-label relationships, tracked work-session detail, private links and other Dashboard-only metadata.
+- Unknown public paper/project slugs map to the normal Next.js not-found behaviour; zero-row public lists are treated as valid empty states rather than triggering private-data fallbacks.
+- The site uses the Supabase publishable/anonymous boundary only; service-role credentials are not part of the public application.
 
-`development and deployment`
+### Publications
 
-- Documented local development as the default workflow during early release-candidate work.
-- Deferred automatic GitHub-to-Netlify deployment on every push to a later development stage to conserve build minutes.
-- Kept `bgonzalezbustamante.com` on the legacy Hugo/Wowchemy deployment until the verified production-migration phase.
+- Added a full-width Publications browser with fixed Publication Index taxonomy, Year/Index filters, ten-record pagination and KPI cards for Papers, distinct Journals/Venues and first-author percentage.
+- Publication cards use the public citation when available, support safe Markdown abstracts and expose public DOI/Publication, Preprint, Project, Code, Dataset and SI File resources while keeping Overleaf private.
+- Publication metadata supports English, Spanish, Portuguese, Dutch, German, French and Italian with accessible local SVG flags.
+- Future publication dates are consistently treated as `Forthcoming`; publication details distinguish published month/year from forthcoming year.
+- Detail pages support optional Key highlights with local images, alt text and captions, and reverse public Project relationships so multiple associated projects can be shown.
+- The public paper client consumes only the latest stored Google Scholar citation snapshot exposed by Research Dashboard: nullable citation count plus capture date, never citation history or source metadata.
+- Added `/publications/profile` with output-over-time, latest Google Scholar citation profile, publication-index/language composition, average citations by index/language/authorship, and authorship structure.
+- Publication-profile co-author/average-author KPIs exclude the exceptional 494-author collaboration `Investigating the analytical robustness of the social and behavioural sciences`; other profile analyses continue to use the complete public corpus.
+- Added `/publications/coauthorship`, excluding publications with more than five authors. Node size represents publications in the displayed network and edge width represents joint publications.
+- Co-authorship layout uses deterministic weighted modularity on the collaborator-only graph (central-profile edges excluded from community detection). Repeated co-authorship to the profile shortens central links; within-community collaborator links use a common preferred distance.
+- Cross-community bridge ties remain visible and exert only weak long-range attraction. Community-envelope spacing, cross-community collision buffers and node-level collision resolution preserve distinct groups while allowing bridge relationships to influence orientation.
+
+### Projects
+
+- Added `/projects` and `/project/[slug]` using only public Project RPCs, with Featured/Other grouping and one shared ordering rule: later `end_year`, later `start_year`, then title.
+- Project cards and detail pages support status/period tags, funder notes, canonical project URLs and optional local funder/project imagery.
+- Detail pages follow About the project → visual/map → Research outputs → Funding.
+- Research outputs combine associated public publications and project-linked public conference presentations; the conference table is shared with Conferences, including Keynote markers.
+- Publication detail pages reverse the public `publication_slugs` relationship to show associated projects.
+- Added the TERGAP 47-country derived map snapshot under `public/data/tergap-map.json` using `react-simple-maps`, `world-atlas` and ISO-country conversion. The website stores only the compact derived snapshot, not the source dashboard dataset.
+- TERGAP uses its ERC funding asset as a configured presentation fallback where no public funder-image filename is supplied. PNG project figures/logos are served losslessly; other detail imagery can use quality 90.
+
+### Conferences
+
+- Added `/conferences` as a dashboard-style public presentation record with KPI cards, Presentation map, paginated Overview table and full current-year roadmap.
+- Public conference data supports ordered authors, event short names, start/end date ranges, location, presentation type and optional external URL; private notes and Dashboard paper relationships remain excluded.
+- Presentation types are constrained to Conference paper, Keynote and Workshop. Keynotes carry a small coral marker and legend in the shared conference table.
+- Country totals/maps exclude `Virtual` presentations and report the virtual count separately.
+- Conference presentation titles become external links when a public URL exists; the former trailing external-link column is not rendered.
+- The full current-year roadmap is a multi-row continuous snake timeline ordered by `start_date`, with state determined by `end_date`; labels show short event name plus location.
+- Home uses a compact five-presentation timeline instead, prioritising ongoing/forthcoming presentations and then the most recently completed presentations.
+
+### Teaching
+
+- Added `/teaching`, backed exclusively by `list_public_teaching()`, with no Teaching detail routes.
+- Teaching cards expose only public course name, institution, summary, period/current status, levels, times taught, cumulative students and optional local image filename.
+- Cards use a one-per-row layout, alternate image placement across the complete ordered list, collapse to image-above-content on mobile and paginate at five records.
+- Teaching imagery uses the Project logo/contain treatment inside an Oxford-blue-wash visual area, with a local teaching icon fallback.
+- KPI cards report cumulative Teaching/Supervision occurrences, distinct Institutions and cumulative Students.
+- Public-contract checks explicitly reject internal Teaching IDs, activity-label relationships, tracked hours/sessions and owner metadata.
+
+### Home population, activity and roadmap
+
+- Home order is Academic profile → DORA/CRediT → Population in progress → Featured publications → Featured projects → Activity over time → compact Conferences timeline.
+- Featured publications are capped at four; Featured projects use the shared public project ordering and two-column layouts on wider screens.
+- Added Population in progress using live public record counts against deliberately manual intended-ingestion targets maintained in `lib/site-population.ts`.
+- Population year strips use domain-specific periods and align to a common Home grid. Publications, Projects, Conferences and Teaching also expose lightweight section-level population strips.
+- Site population readiness uses fixed category weights of 35/30/15/20 for Publications/Projects/Conferences/Teaching and marks a 60% launch threshold.
+- Added current-year aggregate Activity over time using `get_public_work_analytics(year)`, with daily net-minute heatmap bins plus Working hours per day and Coffee per working day annual averages. Individual work sessions and daily coffee counts are never exposed.
+
+### Maps, dates and shared presentation behaviour
+
+- Conferences and TERGAP share the same responsive geographic-map system and no-data canvas treatment while retaining domain-specific colour scales and hover states.
+- Conference and Roadmap date handling uses explicit start/end ranges; future/past state and ordering no longer depend on the deprecated single presentation-date model.
+- Shared conference tables are reused in project Research outputs to keep presentation formatting, external links and Keynote markers consistent.
+- Public page introductions for Publications, Projects, Conferences, Teaching, Publication profile, Co-authorship network and Academic trajectory use the full site-shell width where appropriate.
+
+### Release notes and documentation
+
+- Established `v6.0.0-rc.1 "Swift Harbour"` as the first Next.js release-candidate identity; package version and footer use the same release data.
+- Added structured public Release Notes as a plain-language capability summary; detailed implementation history remains in this CHANGELOG.
+- Release Notes link to the current v6 CHANGELOG and the legacy `academic-kickstart` CHANGELOG without duplicating pre-v6 technical history.
+- The Release Notes introductory description now uses the full site-shell width rather than the generic narrow reading measure.
+- The current release remains `In development` with `Release date TBC`; merging the development branch into `main` does not close or tag rc.1.
+
+### Local validation and deployment preparation
+
+- `npm run check` runs ESLint and TypeScript; `npm run check:public-contract` validates anonymous-safe RPC payloads; `npm run build` performs the production Next.js build.
+- Profile portrait synchronisation runs automatically before development, checks and builds.
+- Local-first development remains the default through rc.1; automatic GitHub-to-Netlify deployment has not yet been enabled.
+- The legacy `bgonzalezbustamante.com` deployment remains untouched until the Netlify replacement is verified.
+- Netlify deployment, production-domain migration, SEO review, accessibility checks and final release tagging remain rc.1 work.
 
 ## Previous implementation
 

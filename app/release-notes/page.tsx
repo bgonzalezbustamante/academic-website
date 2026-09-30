@@ -6,18 +6,28 @@ import { releases } from '@/lib/releases'
 export const metadata: Metadata = {
   title: 'Release notes',
   description:
-    'Release history for the Next.js academic website and a concise link back to the pre-v6 academic-kickstart implementation.',
+    'Plain-language release history for the academic website, with technical implementation details kept in the repository changelogs.',
 }
 
 export default function ReleaseNotesPage() {
   return (
     <section className="page-section">
-      <div className="site-shell narrow-shell">
-        <p className="eyebrow">Release notes</p>
-        <h1>What changed between versions</h1>
-        <p className="page-lead">
-          A concise release history for the Next.js academic website. Detailed
-          pre-v6 changes remain in the{' '}
+      <div className="site-shell">
+        <div className="release-notes-page-heading">
+          <p className="eyebrow">Release notes</p>
+          <h1>What changed between versions</h1>
+          <p className="page-lead">
+          A plain-language history of the academic website, focused on features
+          and behaviour rather than implementation details. Technical v6 changes
+          are recorded in the{' '}
+          <a
+            href="https://github.com/bgonzalezbustamante/academic-website/blob/main/CHANGELOG.md"
+            target="_blank"
+            rel="noreferrer"
+          >
+            academic-website CHANGELOG
+          </a>
+          . Detailed pre-v6 changes remain in the{' '}
           <a
             href="https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md"
             target="_blank"
@@ -26,7 +36,8 @@ export default function ReleaseNotesPage() {
             academic-kickstart CHANGELOG
           </a>
           .
-        </p>
+          </p>
+        </div>
 
         <div className="release-list">
           {releases.map((release) => (
