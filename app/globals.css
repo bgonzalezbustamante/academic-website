@@ -3772,7 +3772,7 @@ h4 {
   text-decoration: none;
 }
 
-.footer-carbon-note {
+.footer-inner .footer-carbon-note {
   width: fit-content;
   display: inline-flex;
   align-items: center;
