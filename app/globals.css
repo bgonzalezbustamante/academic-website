@@ -3774,20 +3774,21 @@ h4 {
 
 .footer-carbon-note {
   width: fit-content;
-  margin-top: 0.08rem;
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.38rem;
+  color: var(--oxford-ash);
   font-size: 0.66rem;
   line-height: 1.4;
 }
 
-.footer-carbon-note span {
-  color: var(--oxford-ash);
-}
-
 .footer-carbon-note svg {
+  width: 0.68rem;
   color: var(--oxford-blue);
 }
 
-.footer-carbon-note:hover span {
+.footer-carbon-note:hover {
   color: var(--oxford-coral);
 }
 
@@ -4142,6 +4143,10 @@ h4 {
   .footer-meta {
     justify-items: start;
     text-align: left;
+  }
+
+  .footer-carbon-note {
+    justify-self: start;
   }
 }
 
