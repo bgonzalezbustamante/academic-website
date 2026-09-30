@@ -232,14 +232,18 @@ export default function AcademicTrajectory() {
             Tenure track
           </span>
           <span>
-            <span
-              className="trajectory-legend-icon-pair"
+            <FontAwesomeIcon
+              icon={faMagnifyingGlassChart}
               aria-hidden="true"
-            >
-              <FontAwesomeIcon icon={faMagnifyingGlassChart} />
-              <FontAwesomeIcon icon={faChalkboardUser} />
-            </span>
-            Non-tenure track
+            />
+            Research
+          </span>
+          <span>
+            <FontAwesomeIcon
+              icon={faChalkboardUser}
+              aria-hidden="true"
+            />
+            Teaching
           </span>
         </div>
 
