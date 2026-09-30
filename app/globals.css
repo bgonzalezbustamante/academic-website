@@ -4317,7 +4317,7 @@ h4 {
 .trajectory-legend {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 1rem 1.5rem;
   flex-wrap: wrap;
   border-top: 1px solid rgba(0, 33, 71, 0.1);
@@ -4334,6 +4334,14 @@ h4 {
   gap: 0.45rem 0.9rem;
 }
 
+.trajectory-legend-types {
+  margin-right: auto;
+}
+
+.trajectory-legend-status {
+  margin-left: auto;
+}
+
 .trajectory-legend span {
   display: inline-flex;
   align-items: center;
@@ -4343,16 +4351,6 @@ h4 {
 .trajectory-legend svg {
   width: 0.68rem;
   color: var(--oxford-blue);
-}
-
-.trajectory-legend-icon-pair {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.18rem;
-}
-
-.trajectory-legend-icon-pair svg {
-  width: 0.62rem;
 }
 
 
@@ -4390,6 +4388,10 @@ h4 {
 
   .trajectory-legend {
     justify-content: space-between;
+  }
+
+  .trajectory-legend-types {
+    margin-right: auto;
   }
 
   .trajectory-legend-status {
