@@ -41,12 +41,13 @@ The homepage population indicator is intentionally a progress measure for the on
 
 ## Manually maintained site metadata
 
-Two small TypeScript files intentionally remain manual:
+Three small TypeScript sources intentionally remain manual:
 
-- `lib/site-population.ts` stores intended-ingestion totals and population periods used by the public progress indicators.
+- `lib/site-population.ts` stores intended-ingestion totals, population periods and the `POPULATION_SETTINGS.showProgress` display switch. Set it to `false` to hide both the Home population card and the section-level progress strips without deleting the underlying targets.
+- `content/trajectory.ts` stores the selected education and professional positions shown on the Academic trajectory page. Entries are grouped by category for manual editing, and the optional `order` field resolves ties when positions share the same interval.
 - `content/site-carbon.ts` stores the current Website Carbon snapshot. Set `showInFooter: false` to suppress the public footer note while retaining the measurement data.
 
-Website Carbon values are stored locally and linked to the corresponding public report; the site does not call Website Carbon at runtime.
+These files are deliberately local configuration/content rather than Research Dashboard contracts. Website Carbon values are linked to the corresponding public report; the site does not call Website Carbon at runtime.
 
 ## Local development
 
