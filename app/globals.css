@@ -4311,13 +4311,12 @@ h4 {
   align-items: center;
   border-radius: 999px;
   background:
-    repeating-linear-gradient(
+    linear-gradient(
       to right,
-      rgba(0, 33, 71, 0.055) 0,
       rgba(0, 33, 71, 0.055) 1px,
-      transparent 1px,
-      transparent calc(100% / 23)
-    ),
+      transparent 1px
+    )
+      0 0 / var(--trajectory-year-width) 100% repeat-x,
     rgba(0, 33, 71, 0.025);
 }
 
@@ -4388,7 +4387,7 @@ h4 {
     padding: 0.5rem 0 0.5rem 0.72rem;
   }
 
-  .trajectory-row:has(.trajectory-role-ongoing) {
+  .trajectory-row-ongoing {
     border-left-color: var(--oxford-coral);
   }
 
