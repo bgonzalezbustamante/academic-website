@@ -1,4 +1,7 @@
-import { faCreativeCommons } from '@fortawesome/free-brands-svg-icons'
+import {
+  faCreativeCommons,
+  faGithub,
+} from '@fortawesome/free-brands-svg-icons'
 import {
   faEnvelope,
   faLeaf,
@@ -68,7 +71,8 @@ export default function SiteFooter() {
             <span>{new Date().getFullYear()} {siteProfile.name}</span>
           </p>
 
-          <p>
+          <p className="footer-release">
+            <FontAwesomeIcon icon={faGithub} aria-hidden="true" />
             <Link href="/release-notes">
               {currentRelease.version} &quot;{currentRelease.codename}&quot;
             </Link>
