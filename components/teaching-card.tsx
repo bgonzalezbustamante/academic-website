@@ -73,6 +73,9 @@ export default function TeachingCard({
               {formatLevel(level)}
             </span>
           ))}
+          {item.role && (
+            <span className="metadata-tag">{item.role}</span>
+          )}
         </div>
 
         <h2>{item.name}</h2>
