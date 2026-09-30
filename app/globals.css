@@ -3808,6 +3808,17 @@ h4 {
   color: var(--oxford-coral);
 }
 
+.footer-release {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.footer-release svg {
+  width: 0.72rem;
+  color: var(--oxford-coral);
+}
+
 .footer-inner p {
   margin: 0;
 }
