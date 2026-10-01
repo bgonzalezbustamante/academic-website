@@ -13,6 +13,7 @@
 
 - Added the Next.js App Router, React 19, TypeScript, Node.js 22+ requirement, reproducible npm lockfile and local validation scripts; the pre-cut-over security pass moves Next.js and `eslint-config-next` to 16.3.8.
 - Added responsive global navigation, footer, error handling, stable public detail routes and a shared site shell.
+- Refined the global 404 page with the local transparent penguin illustration, using a responsive two-column desktop composition that stacks cleanly on smaller screens while preserving the existing 404 copy and home action.
 - Added a keyboard-accessible “Skip to main content” link at the root layout level so keyboard users can bypass the repeated header/navigation on every route.
 - Standardised the visual system around Roboto interface typography, Noto Serif editorial text, Oxford blue and Oxford coral, with Oxford aqua reserved for limited interaction states and washed Oxford-blue supporting surfaces.
 - Standardised interface, academic-profile and research-resource iconography on locally bundled Font Awesome 7; the pre-cut-over quality pass removed the runtime Academicons CDN stylesheet/font dependency.
@@ -114,6 +115,12 @@
 - Removed the external Academicons runtime request by using bundled Font Awesome equivalents for ORCID and Google Scholar and a local link icon for DOI.
 - Parallelised independent homepage public-data requests with `Promise.allSettled()` while retaining independent failure/empty states.
 
+### Legacy URL migration
+
+- Added permanent Next.js redirects for the legacy Publications and Projects section indexes, the former author profile, the CPS Ranking landing page, and legacy Project URLs with clear Swift Harbour replacements.
+- Preserved publication detail URLs wherever the Hugo/Wowchemy slug already matches the current public publication slug, avoiding unnecessary redirect hops.
+- Intentionally avoided catch-all redirects for legacy publications, projects and specialist pages that have no current equivalent; those continue to use normal not-found behaviour rather than soft-404-style generic destinations.
+
 ### Release notes and documentation
 
 - Established `v6.0.0-rc.1 "Swift Harbour"` as the first Next.js release-candidate identity; package version and footer use the same release data.
@@ -130,7 +137,7 @@
 - Local-first development remains the default through rc.1; the separate `academic-website-swift-harbour` Netlify project now follows validated `main` for deployment verification.
 - The temporary Netlify deployment and manual public-surface smoke test completed successfully before the quality-hardening pass.
 - The legacy `bgonzalezbustamante.com` deployment remains untouched until the Netlify replacement is verified.
-- Redirect verification, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
+- Legacy redirect implementation is complete; deployment-level redirect verification, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
 
 ## Previous implementation
 

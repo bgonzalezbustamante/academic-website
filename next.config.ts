@@ -23,6 +23,56 @@ const securityHeaders = [
   },
 ]
 
+const legacyRedirects = [
+  {
+    source: '/publication',
+    destination: '/publications',
+    permanent: true,
+  },
+  {
+    source: '/project',
+    destination: '/projects',
+    permanent: true,
+  },
+  {
+    source: '/authors',
+    destination: '/',
+    permanent: true,
+  },
+  {
+    source: '/authors/bgonzalezbustamante',
+    destination: '/',
+    permanent: true,
+  },
+  {
+    source: '/cps-ranking',
+    destination: '/project/cps-ranking',
+    permanent: true,
+  },
+  {
+    source: '/project/chilean-political-science-impact-ranking',
+    destination: '/project/cps-ranking',
+    permanent: true,
+  },
+  {
+    source: '/project/twitter-tracker-chilean-referendum',
+    destination:
+      '/project/twitter-online-tracker-of-the-chilean-referendum',
+    permanent: true,
+  },
+  {
+    source: '/project/local-government-indicators',
+    destination:
+      '/project/territorial-patterns-of-electronic-and-open-government',
+    permanent: true,
+  },
+  {
+    source: '/project/credit-contributor-roles-taxonomy',
+    destination: '/credit',
+    permanent: true,
+  },
+]
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
@@ -35,6 +85,9 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
     ]
+  },
+  async redirects() {
+    return legacyRedirects
   },
 }
 

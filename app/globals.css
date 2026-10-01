@@ -564,6 +564,66 @@ h4 {
   line-height: 1.75;
 }
 
+/* Not found */
+
+.not-found-section {
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem) 0;
+}
+
+.not-found-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+  align-items: center;
+  gap: clamp(1.25rem, 3.5vw, 3rem);
+}
+
+.not-found-copy {
+  min-width: 0;
+}
+
+.not-found-copy .page-lead {
+  margin-bottom: 1.4rem;
+}
+
+.not-found-illustration {
+  width: min(100%, 480px);
+  justify-self: center;
+}
+
+.not-found-illustration img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .not-found-section {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .not-found-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .not-found-illustration {
+    width: min(72vw, 340px);
+  }
+}
+
+@media (max-width: 560px) {
+  .not-found-layout {
+    gap: 1.2rem;
+  }
+
+  .not-found-illustration {
+    width: min(78vw, 300px);
+  }
+}
+
 /* Section population progress */
 
 .section-population-progress {
