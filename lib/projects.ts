@@ -1,6 +1,9 @@
 import { normalizeConferencePresentation } from '@/lib/conferences'
 import { createPublicSupabaseClient } from '@/lib/supabase/public'
-import type { PublicProject } from '@/types/public'
+import type {
+  PublicProject,
+  PublicProjectRole,
+} from '@/types/public'
 
 function nullableString(value: unknown) {
   return value == null ? null : String(value)
@@ -11,6 +14,21 @@ function nullableYear(value: unknown) {
 
   const year = Number(value)
   return Number.isInteger(year) ? year : null
+}
+
+function normalizeProjectRole(
+  value: unknown
+): PublicProjectRole | null {
+  if (
+    value === 'Principal Investigator' ||
+    value === 'Research Associate' ||
+    value === 'Consultancy Chief' ||
+    value === 'Consultant'
+  ) {
+    return value
+  }
+
+  return null
 }
 
 export function orderPublicProjects(
@@ -41,6 +59,7 @@ function normalizeProject(
     short_title: String(row.short_title ?? ''),
     title: String(row.title ?? ''),
     abstract: String(row.abstract ?? ''),
+    role: normalizeProjectRole(row.role),
     funder: String(row.funder ?? ''),
     funder_note: nullableString(row.funder_note),
     url: nullableString(row.url),
