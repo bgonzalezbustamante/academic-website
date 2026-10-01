@@ -117,11 +117,14 @@ export default function CreditPage() {
 
         <div className="credit-table-wrap">
           <table className="credit-table">
+            <caption className="sr-only">
+              CRediT contributor roles and definitions
+            </caption>
             <thead>
               <tr>
-                <th>Badge</th>
-                <th>Role</th>
-                <th>Definition</th>
+                <th scope="col">Badge</th>
+                <th scope="col">Role</th>
+                <th scope="col">Definition</th>
               </tr>
             </thead>
             <tbody>
