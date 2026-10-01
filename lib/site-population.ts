@@ -5,6 +5,16 @@ import type {
   PublicTeachingItem,
 } from '@/types/public'
 
+/**
+ * Manually maintained population-progress display settings.
+ *
+ * Set `showProgress` to false to hide both the Home population card and
+ * the section-level progress strips without deleting targets or periods.
+ */
+export const POPULATION_SETTINGS = {
+  showProgress: true,
+} as const
+
 export const POPULATION_END_YEAR = 2026
 
 export const POPULATION_TARGETS = {

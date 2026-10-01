@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'CRediT',
   description:
     'Contributor Roles Taxonomy and the fourteen CRediT contributor roles.',
+  alternates: {
+    canonical: '/credit',
+  },
 }
 
 const roles = [

@@ -5,6 +5,7 @@ import type { CSSProperties } from 'react'
 import ExternalInlineLink from '@/components/external-inline-link'
 import {
   POPULATION_PERIODS,
+  POPULATION_SETTINGS,
   POPULATION_TARGETS,
   type PopulationDomain,
   conferencePopulationYears,
@@ -152,6 +153,10 @@ export default function SitePopulationProgress({
   presentations,
   teaching,
 }: Props) {
+  if (!POPULATION_SETTINGS.showProgress) {
+    return null
+  }
+
   const paperYears = papers ? publicationPopulationYears(papers) : null
   const projectCoverageYears = projects
     ? projectPopulationYears(projects)

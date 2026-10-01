@@ -64,6 +64,9 @@ export default function ProjectCard({
         <div className="metadata-tags project-meta">
           {status && <span className="metadata-tag">{status}</span>}
           {years && <span className="metadata-tag">{years}</span>}
+          {project.role && (
+            <span className="metadata-tag">{project.role}</span>
+          )}
           {(featured || project.featured) && (
             <span className="metadata-tag metadata-tag-accent">Featured</span>
           )}

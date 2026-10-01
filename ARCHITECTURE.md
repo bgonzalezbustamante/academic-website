@@ -53,7 +53,7 @@ The site never derives a Supabase Storage URL for these assets. The supplied alt
 
 ### Projects and Conferences
 
-Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
+Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. The public Project shape includes an optional controlled Role limited to Principal Investigator, Research Associate, Consultancy Chief or Consultant; the website renders it as metadata and does not infer any other role. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
 
 Project images and funder logos are local static assets:
 
@@ -66,7 +66,7 @@ Conferences are supplied exclusively through `list_public_conference_presentatio
 
 ### Teaching Portfolio
 
-Teaching is supplied exclusively through `list_public_teaching()`. The public website consumes only the course name, institution, summary, period/current state, `levels[]`, cumulative times taught, cumulative student count and optional course-image filename. The RPC may also expose an optional slug for contract stability, but the academic website does not use it for navigation: Teaching cards are deliberately self-contained and there is no `/teaching/[slug]` route.
+Teaching is supplied exclusively through `list_public_teaching()`. The public website consumes only the course name, institution, summary, controlled teaching role, period/current state, `levels[]`, cumulative times taught, cumulative student count and optional course-image filename. Teaching roles are limited by the public contract to Course Convenor, Lecturer, Tutor, Thesis Supervisor and Examiner, and are rendered as metadata tags after the academic level tag(s). The RPC may also expose an optional slug for contract stability, but the academic website does not use it for navigation: Teaching cards are deliberately self-contained and there is no `/teaching/[slug]` route.
 
 Teaching activity-label relationships, tracked teaching hours, session counts, owner metadata and internal IDs remain private and are neither requested nor inferred by the academic website. Course imagery follows the local static convention:
 
@@ -181,9 +181,9 @@ The check deliberately calls public RPCs only. It provides a reproducible way to
 
 ## Development and deployment
 
-During the release-candidate stage, development is local-first. Netlify deployments should be used selectively for milestone or integration verification rather than on every push.
+During the release-candidate stage, development is local-first. After the local npm/public-contract/build gate passes, validated release-candidate work is merged into `main`. The separate `academic-website-swift-harbour` Netlify project follows `main` for deployment verification; environment-aware robots block indexing outside the final HTTPS production hosts.
 
-Continuous deployment from GitHub to Netlify is intentionally deferred. When the site reaches a later stage, automatic deployment can be enabled using the same broad GitHub-to-Netlify workflow that supported the predecessor repository.
+This temporary GitHub-to-Netlify connection is deliberately isolated from the legacy production Netlify project. Production-domain continuous deployment is not moved to the Next.js site until the final cut-over, after smoke testing, SEO/accessibility/security/performance review, redirects and the Website Carbon re-test.
 
 The production domain remains on the predecessor site until Phase 8.
 

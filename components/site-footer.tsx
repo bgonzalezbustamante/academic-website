@@ -1,10 +1,38 @@
-import { faCreativeCommons } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCreativeCommons,
+  faGithub,
+} from '@fortawesome/free-brands-svg-icons'
+import {
+  faEnvelope,
+  faLeaf,
+  faLocationDot,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
 import { siteProfile } from '@/content/site'
+import { siteCarbonMeasurement } from '@/content/site-carbon'
 import { currentRelease } from '@/lib/releases'
+
+function carbonNoteLabel() {
+  const details = ['Website Carbon']
+
+  if (siteCarbonMeasurement.gramsCo2ePerView !== null) {
+    details.push(
+      `~${siteCarbonMeasurement.gramsCo2ePerView.toFixed(2)} g CO₂e/view`
+    )
+  }
+
+  if (siteCarbonMeasurement.rating !== null) {
+    details.push(`Rating ${siteCarbonMeasurement.rating}`)
+  }
+
+  if (details.length === 1) {
+    details.push('current-site estimate')
+  }
+
+  return details.join(' · ')
+}
 
 export default function SiteFooter() {
   return (
@@ -22,6 +50,19 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer-meta">
+          {siteCarbonMeasurement.showInFooter && (
+            <a
+              className="footer-carbon-note"
+              href={siteCarbonMeasurement.reportUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={carbonNoteLabel()}
+            >
+              <FontAwesomeIcon icon={faLeaf} aria-hidden="true" />
+              <span>{carbonNoteLabel()}</span>
+            </a>
+          )}
+
           <p className="footer-license">
             <FontAwesomeIcon
               icon={faCreativeCommons}
@@ -29,7 +70,9 @@ export default function SiteFooter() {
             />
             <span>{new Date().getFullYear()} {siteProfile.name}</span>
           </p>
-          <p>
+
+          <p className="footer-release">
+            <FontAwesomeIcon icon={faGithub} aria-hidden="true" />
             <Link href="/release-notes">
               {currentRelease.version} &quot;{currentRelease.codename}&quot;
             </Link>

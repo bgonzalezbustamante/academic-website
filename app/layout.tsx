@@ -46,8 +46,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`${roboto.variable} ${notoSerif.variable}`}>
+        <a className="skip-link" href="#main-content">
+          Skip to main content
+        </a>
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>

@@ -34,7 +34,7 @@ export const releases: ReleaseNote[] = [
         title: 'Research portfolio',
         items: [
           'Expanded Publications with filters, citation information, language indicators, related projects, publication analytics and a co-authorship network.',
-          'Added Projects, Conferences and Teaching sections, including research outputs, funding information, presentation maps and roadmaps, keynote markers, and cumulative teaching information.',
+          'Added Projects, Conferences and Teaching sections, including controlled project/teaching role tags, research outputs, funding information, presentation maps and roadmaps, keynote markers, academic-level tags, and cumulative teaching information.',
         ],
       },
       {
@@ -49,6 +49,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Rebuilt the site with Next.js and a responsive Oxford-inspired visual system designed for the new public academic profile.',
           'Connected the site to Research Dashboard only through deliberately public, anonymous-safe data contracts; private research-management records, account information and individual work sessions remain outside the public website.',
+          'Added an optional Website Carbon estimate in the footer, maintained as a local snapshot rather than fetched from an external service on each visit.',
         ],
       },
     ],

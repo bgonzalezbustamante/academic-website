@@ -41,11 +41,18 @@ export type ConferencePresentationType =
   | 'Keynote'
   | 'Workshop'
 
+export type PublicProjectRole =
+  | 'Principal Investigator'
+  | 'Research Associate'
+  | 'Consultancy Chief'
+  | 'Consultant'
+
 export type PublicProject = {
   slug: string
   short_title: string
   title: string
   abstract: string
+  role: PublicProjectRole | null
   funder: string
   funder_note: string | null
   url: string | null
@@ -86,10 +93,18 @@ export type PublicWorkAnalytics = {
 }
 
 
+export type PublicTeachingRole =
+  | 'Course Convenor'
+  | 'Lecturer'
+  | 'Tutor'
+  | 'Thesis Supervisor'
+  | 'Examiner'
+
 export type PublicTeachingItem = {
   name: string
   institution: string
   summary: string
+  role: PublicTeachingRole | null
   start_year: number | null
   end_year: number | null
   is_current: boolean

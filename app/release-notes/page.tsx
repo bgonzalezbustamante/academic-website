@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'Release notes',
   description:
     'Plain-language release history for the academic website, with technical implementation details kept in the repository changelogs.',
+  alternates: {
+    canonical: '/release-notes',
+  },
 }
 
 export default function ReleaseNotesPage() {

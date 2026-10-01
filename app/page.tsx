@@ -1,5 +1,6 @@
 import { faRoute } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -29,6 +30,12 @@ import type {
   PublicTeachingItem,
   PublicWorkAnalytics,
 } from '@/types/public'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 export const revalidate = 300
 

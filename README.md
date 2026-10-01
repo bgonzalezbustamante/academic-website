@@ -1,59 +1,57 @@
 # Academic Website
 
-Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
+Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-The pre-v6 Hugo/Wowchemy implementation remains the production website while this repository is developed in parallel. Its detailed version history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
+Current development release: **v6.0.0-rc.1 "Swift Harbour"**. The release candidate remains in development while the public record is populated and the replacement site is prepared for Netlify deployment, SEO/accessibility review and production-domain migration.
 
-Current development release: **v6.0.0-rc.1 "Swift Harbour"**.
+The pre-v6 Hugo/Wowchemy implementation remains the production website until that migration is complete. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
 ## Architecture
 
-This repository is the public/read-only presentation layer. [Research Dashboard](https://github.com/bgonzalezbustamante/research-dashboard) remains the authenticated administrative application and the canonical source for public research metadata.
+This repository is the public/read-only presentation layer. [Research Dashboard](https://github.com/bgonzalezbustamante/research-dashboard) remains the authenticated administrative application and canonical source for public research metadata.
 
-The website consumes only the explicit anonymous-safe Supabase RPC contracts:
+The website consumes only explicitly curated anonymous-safe Supabase RPC contracts:
 
 - `list_public_papers()`
-- `get_public_paper(text)`
+- `get_public_paper(slug)`
 - `list_public_projects()`
-- `get_public_project(text)`
+- `get_public_project(slug)`
 - `list_public_conference_presentations()`
+- `list_public_teaching()`
 - `get_public_work_analytics(year)`
 
-It must not query Research Dashboard tables directly or use a service-role key.
+Runtime website code must not query Research Dashboard tables directly or use a service-role key. Private workflow metadata, notes, account information, work-session details and other Dashboard-only data remain outside the public application.
 
-## Phase 4 scope
+## Public site
 
-The current foundation includes:
+Swift Harbour currently includes:
 
-- Next.js App Router + TypeScript
-- distinct academic-site design system inspired by the existing projects' Oxford palette
-- portrait-led public academic profile with three current positions, research interests and the revised biography
-- supplied Leiden University, Universidad Diego Portales and OCPSG institutional branding, with a Leiden-prioritised favicon
-- compact public contact information in the footer
-- global header/footer and responsive layout
-- RPC-only Supabase client
-- public publication listing
-- stable publication detail routes with safe Markdown-formatted abstracts, optional local-static Key highlights and safe Markdown-formatted highlight text
-- citation-based Publications listing enriched only through `get_public_paper(slug)`, with client-side year and Publication index filters
-- standalone Projects listing and `/project/[slug]` detail routes with safe Markdown-formatted project abstracts, including Research outputs with associated publications and public conference presentations
-- standalone `/teaching` Teaching Portfolio with one self-contained card per public course, sourced only from `list_public_teaching()`
-- homepage Featured publications and Featured projects shown in two-column grids on wider screens; Featured projects remain ordered by latest end year and use funder imagery first
-- TERGAP detail-page map derived from a compact snapshot of the public TERGAP dashboard metrics, matching the TERGAP dashboard map canvas/no-data treatment and original colour scale; Home/Projects cards use the ERC funder logo
-- standalone Conferences dashboard with KPI cards including Keynote share, presentation geography and a compact 10-row paginated table with Keynote markers
-- current-year two-sided presentation Roadmap using public event short names, wrapped into connected rows of five
-- current-year public Activity over time heatmap
-- current-year average working time and coffee summary cards
-- DORA signatory card and `/dora` responsible-research-assessment statement
-- CRediT card and migrated `/credit` Contributor Roles Taxonomy page
-- public-safe error handling
-- local validation of the Supabase public contract
-- v6 changelog and structured public release notes
+- a portrait-led academic homepage with current appointments, research interests, institutional links, DORA/CRediT research-practice information and public contact details;
+- an Academic trajectory page for selected education, faculty appointments, research positions, teaching positions and consultancy;
+- Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
+- a Publication profile with output, citation, language, venue and authorship summaries;
+- a Co-authorship network for publications with five or fewer authors;
+- Projects with controlled public role tags, funding information, associated publications, conference presentations and project visuals, including the TERGAP map;
+- Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
+- Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
+- aggregate current-year work activity and homepage population-progress indicators;
+- structured public Release Notes and a detailed technical CHANGELOG.
 
-The legacy Hugo/Wowchemy publication corpus is intentionally **not** imported here. Phase 5 remains deferred.
+The homepage population indicator is intentionally a progress measure for the ongoing migration rather than a completeness claim.
+
+## Manually maintained site metadata
+
+Three small TypeScript sources intentionally remain manual:
+
+- `lib/site-population.ts` stores intended-ingestion totals, population periods and the `POPULATION_SETTINGS.showProgress` display switch. Set it to `false` to hide both the Home population card and the section-level progress strips without deleting the underlying targets.
+- `content/trajectory.ts` stores the selected education and professional positions shown on the Academic trajectory page. Entries are grouped by category for manual editing, and the optional `order` field resolves ties when positions share the same interval.
+- `content/site-carbon.ts` stores the current Website Carbon snapshot. Set `showInFooter: false` to suppress the public footer note while retaining the measurement data.
+
+These files are deliberately local configuration/content rather than Research Dashboard contracts. Website Carbon values are linked to the corresponding public report; the site does not call Website Carbon at runtime.
 
 ## Local development
 
-This project requires **Node.js 22 or later**. Next.js 16 itself supports older Node 20 releases, but the current Supabase JavaScript stack no longer supports Node 20 and relies on native WebSocket support available in Node 22+.
+This project requires **Node.js 22 or later**.
 
 ```bash
 git clone https://github.com/bgonzalezbustamante/academic-website.git
@@ -73,19 +71,19 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-The application expects a modern Supabase publishable key (`sb_publishable_...`), not a service-role key.
+Use a Supabase publishable key (`sb_publishable_...`), never a service-role key.
+
+### Profile portrait
+
+Place exactly one JPG, JPEG or PNG source image in `public/profile`. The pre-development/check/build synchronisation step copies it to a content-hashed generated filename so profile-image replacements invalidate caches automatically.
 
 ### TERGAP map snapshot
 
-The TERGAP project map uses the same `react-simple-maps` / `world-atlas` approach as [tergap-dashboard](https://github.com/bgonzalezbustamante/tergap-dashboard), but the academic website does **not** copy the full dashboard metrics file. Instead, `public/data/tergap-map.json` is a compact derived snapshot containing only:
+The TERGAP project map uses a compact derived snapshot at `public/data/tergap-map.json` rather than copying the full TERGAP dashboard metrics file.
 
-- the TERGAP dashboard `generated_at` timestamp;
-- the collection window;
-- country name, ISO-3 code and complete-article count.
+When the TERGAP dashboard data changes, regenerate the snapshot from the TERGAP repository and commit only the derived academic-website JSON.
 
-When the TERGAP dashboard metrics are refreshed, this small snapshot should be regenerated from its public `public/data/dashboard_metrics.json`. A short local exporter can be run from the TERGAP repository and write directly to `../academic-website/public/data/tergap-map.json`.
-
-### Local checks
+## Validation
 
 Run linting and TypeScript validation:
 
@@ -93,25 +91,19 @@ Run linting and TypeScript validation:
 npm run check
 ```
 
-Validate the complete public Supabase contract surface using the publishable key in `.env.local`:
+Validate the anonymous-safe public Supabase contract:
 
 ```bash
 npm run check:public-contract
 ```
 
-The contract check:
+Build the production application:
 
-- verifies `list_public_papers()` and keeps citation/Key highlight fields detail-only;
-- resolves a listed publication through `get_public_paper(text)`;
-- verifies `list_public_projects()` and `get_public_project(text)`, including `funder_note`;
-- confirms project publication slugs resolve only to papers returned by the public publication list;
-- verifies `list_public_conference_presentations()`, including required `event_short_name`, ordered presentation authors and the absence of private notes/paper IDs;
-- verifies `list_public_teaching()`, including multi-level `levels[]`, period/current state, teaching/student counts, course image filename and the absence of private activity/session metadata;
-- validates `get_public_work_analytics(year)`;
-- accepts empty curated publication/project/conference datasets;
-- never queries internal Research Dashboard tables.
+```bash
+npm run build
+```
 
-Before a milestone merge or deployment:
+Before a deployment or milestone merge, run all three:
 
 ```bash
 npm run check
@@ -119,16 +111,26 @@ npm run check:public-contract
 npm run build
 ```
 
+The public-contract check covers Publications, Projects, Conferences, Teaching and aggregate work analytics, verifies expected public relationships and controlled Project/Teaching roles, and rejects private fields. Empty curated datasets are valid states.
+
 ## Deployment
 
-Development is intentionally **local-first during the release-candidate stage**. Routine pushes should not be used merely to trigger Netlify builds.
+Development remains local-first during **v6.0.0-rc.1**.
 
-Netlify should be used selectively for milestone and integration verification during the release-candidate period. At a later stage, the repository will be connected to Netlify continuous deployment so pushes can deploy automatically, following the workflow previously used by [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart).
+The deployment sequence is:
 
-The production domain `bgonzalezbustamante.com` must remain attached to the existing Hugo/Wowchemy site until the production migration phase.
+1. continue populating the public record to/through the 60% readiness threshold;
+2. merge the locally validated release-candidate work into `main`, then deploy `main` to the separate temporary Netlify project/URL with production data access but non-production indexing disabled;
+3. smoke-test the complete public surface and production environment;
+4. complete the SEO, metadata, accessibility, security, performance and responsive-layout pass;
+5. address deployment-specific fixes within rc.1;
+6. move `bgonzalezbustamante.com` only after the Netlify replacement is verified;
+7. tag the release candidate after deployment verification rather than merely after a repository merge.
+
+The temporary `academic-website-swift-harbour` Netlify project follows validated `main` during rc.1 verification. The current Hugo/Wowchemy production deployment remains a separate Netlify project and should remain untouched until the production-domain cut-over.
 
 ## Release history
 
-- Current v6 history: [CHANGELOG.md](CHANGELOG.md)
-- Public-facing release notes: [`/release-notes`](./app/release-notes/page.tsx)
+- Technical v6 history: [CHANGELOG.md](CHANGELOG.md)
+- Public-facing release notes: [Release Notes](./app/release-notes/page.tsx)
 - Detailed pre-v6 history: [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md)

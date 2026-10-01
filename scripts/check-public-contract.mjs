@@ -44,6 +44,7 @@ const PUBLIC_PROJECT_FIELDS = [
   'short_title',
   'title',
   'abstract',
+  'role',
   'funder',
   'funder_note',
   'url',
@@ -62,6 +63,7 @@ const PUBLIC_TEACHING_FIELDS = [
   'name',
   'institution',
   'summary',
+  'role',
   'start_year',
   'end_year',
   'is_current',
@@ -82,6 +84,21 @@ const PUBLIC_CONFERENCE_FIELDS = [
   'presentation_type',
   'url',
 ]
+
+const PUBLIC_PROJECT_ROLES = new Set([
+  'Principal Investigator',
+  'Research Associate',
+  'Consultancy Chief',
+  'Consultant',
+])
+
+const PUBLIC_TEACHING_ROLES = new Set([
+  'Course Convenor',
+  'Lecturer',
+  'Tutor',
+  'Thesis Supervisor',
+  'Examiner',
+])
 
 const PUBLIC_CONFERENCE_TYPES = new Set([
   'Conference paper',
@@ -225,6 +242,15 @@ function assertProjectShape(project) {
   assertFields(project, PUBLIC_PROJECT_FIELDS, 'Public project')
   assertPrivateFieldsAbsent(project, 'Public project')
 
+  if (
+    project.role != null &&
+    !PUBLIC_PROJECT_ROLES.has(project.role)
+  ) {
+    fail(
+      'Public project role must be null or one of the controlled project roles.'
+    )
+  }
+
   if (!Array.isArray(project.publication_slugs)) {
     fail('Public project publication_slugs must be an array.')
   }
@@ -262,6 +288,15 @@ function assertTeachingShape(item) {
 
   if (!Array.isArray(item.levels)) {
     fail('Public teaching levels must be an array.')
+  }
+
+  if (
+    item.role != null &&
+    !PUBLIC_TEACHING_ROLES.has(item.role)
+  ) {
+    fail(
+      'Public teaching role must be null or one of the controlled teaching roles.'
+    )
   }
 
   if (
@@ -560,7 +595,7 @@ async function main() {
   }
 
   console.log(
-    `✓ list_public_teaching(): ${teaching.length} public teaching item(s); private activity/session metadata absent`
+    `✓ list_public_teaching(): ${teaching.length} public teaching item(s); controlled roles validated; private activity/session metadata absent`
   )
 
   const conferenceResult = await supabase.rpc(

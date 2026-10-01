@@ -64,6 +64,14 @@ export default function TeachingPortfolioList({
             <button
               type="button"
               disabled={safePage === 1}
+              onClick={() => setPage(1)}
+            >
+              First
+            </button>
+
+            <button
+              type="button"
+              disabled={safePage === 1}
               onClick={() =>
                 setPage((current) => Math.max(1, current - 1))
               }
@@ -85,6 +93,14 @@ export default function TeachingPortfolioList({
               }
             >
               Next
+            </button>
+
+            <button
+              type="button"
+              disabled={safePage === totalPages}
+              onClick={() => setPage(totalPages)}
+            >
+              Last
             </button>
           </div>
         </div>
