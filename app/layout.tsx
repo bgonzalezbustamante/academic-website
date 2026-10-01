@@ -6,6 +6,10 @@ import type { ReactNode } from 'react'
 
 import SiteFooter from '@/components/site-footer'
 import SiteHeader from '@/components/site-header'
+import {
+  getSiteUrl,
+  isProductionSiteUrl,
+} from '@/lib/site-url'
 import './globals.css'
 
 config.autoAddCss = false
@@ -22,16 +26,35 @@ const notoSerif = Noto_Serif({
   display: 'swap',
 })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+const siteUrl = getSiteUrl()
+const allowIndexing = isProductionSiteUrl(siteUrl)
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: siteUrl,
   title: {
     default: 'Bastián González-Bustamante',
     template: '%s | Bastián González-Bustamante',
   },
   description:
     'Academic website of Bastián González-Bustamante, researcher in comparative politics, government and computational social science.',
+  authors: [
+    {
+      name: 'Bastián González-Bustamante',
+      url: siteUrl,
+    },
+  ],
+  creator: 'Bastián González-Bustamante',
+  publisher: 'Bastián González-Bustamante',
+  robots: allowIndexing
+    ? {
+        index: true,
+        follow: true,
+      }
+    : {
+        index: false,
+        follow: false,
+        noarchive: true,
+      },
 }
 
 export default function RootLayout({
@@ -39,12 +62,6 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
-        />
-      </head>
       <body className={`${roboto.variable} ${notoSerif.variable}`}>
         <a className="skip-link" href="#main-content">
           Skip to main content
