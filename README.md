@@ -120,14 +120,14 @@ Development remains local-first during **v6.0.0-rc.1**.
 The deployment sequence is:
 
 1. continue populating the public record to/through the 60% readiness threshold;
-2. deploy the release-candidate branch to a separate temporary Netlify project/URL with production data access but non-production indexing disabled;
+2. merge the locally validated release-candidate work into `main`, then deploy `main` to the separate temporary Netlify project/URL with production data access but non-production indexing disabled;
 3. smoke-test the complete public surface and production environment;
 4. complete the SEO, metadata, accessibility, security, performance and responsive-layout pass;
 5. address deployment-specific fixes within rc.1;
 6. move `bgonzalezbustamante.com` only after the Netlify replacement is verified;
 7. tag the release candidate after deployment verification rather than merely after a repository merge.
 
-The current Hugo/Wowchemy production deployment should remain untouched until the production-domain cut-over.
+The temporary `academic-website-swift-harbour` Netlify project follows validated `main` during rc.1 verification. The current Hugo/Wowchemy production deployment remains a separate Netlify project and should remain untouched until the production-domain cut-over.
 
 ## Release history
 
