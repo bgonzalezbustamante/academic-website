@@ -12,12 +12,12 @@ export type SiteCarbonMeasurement = {
  * Manually maintained Website Carbon snapshot.
  */
 export const siteCarbonMeasurement: SiteCarbonMeasurement = {
-  showInFooter: false,
+  showInFooter: true,
   measuredUrl: 'https://bgonzalezbustamante.com/',
   reportUrl:
     'https://www.websitecarbon.com/website/bgonzalezbustamante-com/',
-  gramsCo2ePerView: 0.11,
+  gramsCo2ePerView: 0.08,
   rating: 'B',
-  cleanerThanPercent: 79,
-  testedOn: '2026-09-30',
+  cleanerThanPercent: 85,
+  testedOn: '2026-10-01',
 }
