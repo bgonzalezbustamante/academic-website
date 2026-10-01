@@ -77,6 +77,8 @@ Use a Supabase publishable key (`sb_publishable_...`), never a service-role key.
 
 Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS production hosts are indexable; localhost, branch/preview deployments and the temporary Netlify hostname emit `noindex` metadata and a disallowing `robots.txt`. Production `robots.txt` also advertises the generated public sitemap.
 
+Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when Swift Harbour has a clear successor. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
+
 ### Profile portrait
 
 Place exactly one JPG, JPEG or PNG source image in `public/profile`. The pre-development/check/build synchronisation step copies it to a content-hashed generated filename so profile-image replacements invalidate caches automatically.
@@ -127,7 +129,7 @@ The deployment sequence is:
 2. merge the locally validated release-candidate work into `main`, then deploy `main` to the separate temporary Netlify project/URL with production data access but non-production indexing disabled;
 3. smoke-test the complete public surface and production environment;
 4. complete the SEO, metadata, accessibility, security, performance and responsive-layout pass;
-5. add and verify legacy-to-Next.js redirects;
+5. verify the exact legacy-to-Next.js redirect map on the temporary deployment;
 6. re-test Website Carbon on the hardened deployment;
 7. move `bgonzalezbustamante.com` only after the Netlify replacement is verified;
 8. tag the release candidate after deployment verification rather than merely after a repository merge.
