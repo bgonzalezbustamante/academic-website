@@ -23,14 +23,6 @@ import {
 } from '@/lib/projects'
 import { listPublicTeaching } from '@/lib/teaching'
 import { getPublicWorkAnalytics } from '@/lib/work-analytics'
-import type {
-  PublicConferencePresentation,
-  PublicPaper,
-  PublicProject,
-  PublicTeachingItem,
-  PublicWorkAnalytics,
-} from '@/types/public'
-
 export const metadata: Metadata = {
   alternates: {
     canonical: '/',
@@ -60,60 +52,46 @@ function getCurrentAmsterdamDateParts() {
 }
 
 export default async function HomePage() {
-  let papers: PublicPaper[] = []
-  let projects: PublicProject[] = []
-  let featuredPapers: PublicPaper[] = []
-  let featuredProjects: PublicProject[] = []
-  let presentations: PublicConferencePresentation[] = []
-  let teaching: PublicTeachingItem[] = []
-  let workAnalytics: PublicWorkAnalytics | null = null
-
-  let publicationsAvailable = true
-  let projectsAvailable = true
-  let conferencesAvailable = true
-  let teachingAvailable = true
-
   const currentAmsterdam = getCurrentAmsterdamDateParts()
   const currentYear = currentAmsterdam.year
 
-  try {
-    papers = await listPublicPapers()
-    featuredPapers = papers
-      .filter((paper) => paper.featured)
-      .slice(0, 4)
-  } catch {
-    publicationsAvailable = false
-  }
+  const [
+    papersResult,
+    projectsResult,
+    presentationsResult,
+    teachingResult,
+    workAnalyticsResult,
+  ] = await Promise.allSettled([
+    listPublicPapers(),
+    listPublicProjects(),
+    listPublicConferencePresentations(),
+    listPublicTeaching(),
+    getPublicWorkAnalytics(currentYear),
+  ])
 
-  try {
-    projects = await listPublicProjects()
-    featuredProjects = orderPublicProjects(
-      projects.filter((project) => project.featured)
-    )
-  } catch {
-    projectsAvailable = false
-  }
+  const publicationsAvailable = papersResult.status === 'fulfilled'
+  const projectsAvailable = projectsResult.status === 'fulfilled'
+  const conferencesAvailable =
+    presentationsResult.status === 'fulfilled'
+  const teachingAvailable = teachingResult.status === 'fulfilled'
 
-  try {
-    presentations = await listPublicConferencePresentations()
-  } catch {
-    conferencesAvailable = false
-  }
+  const papers = publicationsAvailable ? papersResult.value : []
+  const projects = projectsAvailable ? projectsResult.value : []
+  const presentations = conferencesAvailable
+    ? presentationsResult.value
+    : []
+  const teaching = teachingAvailable ? teachingResult.value : []
+  const workAnalytics =
+    workAnalyticsResult.status === 'fulfilled'
+      ? workAnalyticsResult.value
+      : null
 
-  try {
-    teaching = await listPublicTeaching()
-  } catch {
-    teachingAvailable = false
-  }
-
-  try {
-    workAnalytics =
-      await getPublicWorkAnalytics(
-        currentYear
-      )
-  } catch {
-    workAnalytics = null
-  }
+  const featuredPapers = papers
+    .filter((paper) => paper.featured)
+    .slice(0, 4)
+  const featuredProjects = orderPublicProjects(
+    projects.filter((project) => project.featured)
+  )
 
   return (
     <>
