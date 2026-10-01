@@ -13,6 +13,7 @@
 
 - Added the Next.js App Router, React 19, TypeScript, Node.js 22+ requirement, reproducible npm lockfile and local validation scripts; the pre-cut-over security pass moves Next.js and `eslint-config-next` to 16.3.8.
 - Added responsive global navigation, footer, error handling, stable public detail routes and a shared site shell.
+- Refined the global 404 page with the local transparent penguin illustration, using a responsive two-column desktop composition that stacks cleanly on smaller screens while preserving the existing 404 copy and home action.
 - Added a keyboard-accessible “Skip to main content” link at the root layout level so keyboard users can bypass the repeated header/navigation on every route.
 - Standardised the visual system around Roboto interface typography, Noto Serif editorial text, Oxford blue and Oxford coral, with Oxford aqua reserved for limited interaction states and washed Oxford-blue supporting surfaces.
 - Standardised interface, academic-profile and research-resource iconography on locally bundled Font Awesome 7; the pre-cut-over quality pass removed the runtime Academicons CDN stylesheet/font dependency.
