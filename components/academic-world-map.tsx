@@ -233,7 +233,6 @@ export default function AcademicWorldMap({
                       setHovered(hoverValue)
                     }
                     onBlur={() => setHovered(null)}
-                    style={{ outline: 'none' }}
                   />
                 )
               })
