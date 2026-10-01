@@ -41,18 +41,11 @@ export type ConferencePresentationType =
   | 'Keynote'
   | 'Workshop'
 
-export type PublicProjectRole =
-  | 'Principal Investigator'
-  | 'Research Associate'
-  | 'Consultancy Chief'
-  | 'Consultant'
-
 export type PublicProject = {
   slug: string
   short_title: string
   title: string
   abstract: string
-  role: PublicProjectRole | null
   funder: string
   funder_note: string | null
   url: string | null
