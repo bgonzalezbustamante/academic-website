@@ -181,9 +181,9 @@ The check deliberately calls public RPCs only. It provides a reproducible way to
 
 ## Development and deployment
 
-During the release-candidate stage, development is local-first. Netlify deployments should be used selectively for milestone or integration verification rather than on every push. Temporary deployments use a separate Netlify project/URL rather than the legacy production project; environment-aware robots block indexing outside the final HTTPS production hosts.
+During the release-candidate stage, development is local-first. After the local npm/public-contract/build gate passes, validated release-candidate work is merged into `main`. The separate `academic-website-swift-harbour` Netlify project follows `main` for deployment verification; environment-aware robots block indexing outside the final HTTPS production hosts.
 
-Continuous deployment from GitHub to Netlify is intentionally deferred. When the site reaches a later stage, automatic deployment can be enabled using the same broad GitHub-to-Netlify workflow that supported the predecessor repository.
+This temporary GitHub-to-Netlify connection is deliberately isolated from the legacy production Netlify project. Production-domain continuous deployment is not moved to the Next.js site until the final cut-over, after smoke testing, SEO/accessibility/security/performance review, redirects and the Website Carbon re-test.
 
 The production domain remains on the predecessor site until Phase 8.
 
