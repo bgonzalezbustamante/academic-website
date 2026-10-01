@@ -104,9 +104,6 @@ export default async function ProjectPage({ params }: Props) {
         <div className="metadata-tags project-detail-meta">
           {status && <span className="metadata-tag">{status}</span>}
           {years && <span className="metadata-tag">{years}</span>}
-          {project.role && (
-            <span className="metadata-tag">{project.role}</span>
-          )}
           {project.featured && (
             <span className="metadata-tag metadata-tag-accent">Featured</span>
           )}
