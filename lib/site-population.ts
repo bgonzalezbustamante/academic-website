@@ -15,7 +15,7 @@ export const POPULATION_SETTINGS = {
 export const POPULATION_END_YEAR = 2026
 
 export const POPULATION_TARGETS = {
-  publications: 63,
+  publications: 64,
   projects: 16,
   conferences: 139,
   teaching: 35,
