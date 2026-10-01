@@ -31,7 +31,7 @@ Swift Harbour currently includes:
 - Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
-- Projects with controlled public role tags, funding information, associated publications, conference presentations and project visuals, including the TERGAP map;
+- Projects with funding information, associated publications, conference presentations and project visuals, including the TERGAP map;
 - Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
@@ -111,7 +111,7 @@ npm run check:public-contract
 npm run build
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching and aggregate work analytics, verifies expected public relationships and controlled Project/Teaching roles, and rejects private fields. Empty curated datasets are valid states.
+The public-contract check covers Publications, Projects, Conferences, Teaching and aggregate work analytics, verifies expected public relationships and controlled Teaching roles, and rejects private fields. Empty curated datasets are valid states.
 
 ## Deployment
 
