@@ -34,7 +34,7 @@ export const releases: ReleaseNote[] = [
         title: 'Research portfolio',
         items: [
           'Expanded Publications with filters, citation information, language indicators, related projects, publication analytics and a co-authorship network.',
-          'Added Projects, Conferences and Teaching sections, including controlled project/teaching role tags, research outputs, funding information, presentation maps and roadmaps, keynote markers, academic-level tags, and cumulative teaching information.',
+          'Added Projects, Conferences and Teaching sections, including research outputs, funding information, presentation maps and roadmaps, keynote markers, controlled teaching-role tags, academic-level tags, and cumulative teaching information.',
         ],
       },
       {
