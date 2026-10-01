@@ -59,6 +59,36 @@ main {
   min-height: calc(100vh - 170px);
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(calc(-100% - 1rem));
+  border: 1px solid var(--oxford-stone);
+  border-radius: 999px;
+  background: var(--paper);
+  padding: 0.5rem 0.8rem;
+  color: var(--oxford-blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 33, 71, 0.12);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid var(--oxford-coral);
+  outline-offset: 2px;
+}
+
+#main-content:focus {
+  outline: none;
+}
+
 .site-shell {
   width: min(calc(100% - 2rem), var(--max-width));
   margin-inline: auto;
