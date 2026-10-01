@@ -1,13 +1,13 @@
 # CHANGELOG
 
-## v6.0.0-rc.1 "Swift Harbour" (in development)
+## v6.0.0-rc.1 "Swift Harbour" (1 Oct 2026)
 
 ### Summary
 
 - Rebuilt `bgonzalezbustamante.com` as a Next.js 16 / TypeScript public academic website while preserving continuity with the previous Hugo/Wowchemy site in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 - Established Research Dashboard's curated anonymous-safe Supabase RPCs as the only dynamic research-data boundary; runtime code does not query private Dashboard tables directly or use service-role credentials.
-- Adopted a local-first release-candidate workflow. The legacy site remains in production while Swift Harbour is populated, tested and prepared for Netlify migration.
-- Kept `v6.0.0-rc.1` open as an in-development release candidate for remaining content population, deployment work, SEO, accessibility and minor visual refinements.
+- Completed the local-first release-candidate workflow and production cut-over: Swift Harbour now serves `bgonzalezbustamante.com` from the Netlify project `bgonzalezbustamante`, while the predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy.
+- Closed `v6.0.0-rc.1` on 1 Oct 2026 after local validation, temporary-deployment smoke testing, quality hardening, legacy-redirect verification, production-domain migration and post-cut-over Website Carbon re-testing.
 
 ### Application foundation and design
 
@@ -22,7 +22,7 @@
 - Added a content-hashed profile-portrait workflow: one JPG/JPEG/PNG source in `public/profile` is copied to a generated hash-named asset before development, checks and builds so image replacements invalidate caches automatically.
 - Standardised safe Markdown rendering for publication/project abstracts and publication Key highlights, supporting headings, emphasis, lists, links, code and blockquotes without executing raw HTML.
 - Added an optional manually maintained Website Carbon footer note as the first row of the right-hand footer metadata, followed by the Creative Commons/year/name line and the release version. `content/site-carbon.ts` stores the measured/report URLs, CO₂e-per-view estimate, rating, cleaner-than percentile and test date; `showInFooter` can suppress the public note without deleting the stored snapshot. The public label is intentionally compact (`Website Carbon · ~X.XX g CO₂e/view · Rating X`), and no Website Carbon API request is made at runtime.
-- Suppress the Website Carbon footer note during the production-domain cut-over so the legacy-site measurement is not presented as a Swift Harbour result; the stored snapshot remains intact until the live production site is re-tested.
+- Re-tested Website Carbon on the live production domain after cut-over and restored the footer snapshot at ~0.08 g CO₂e/view, Rating B, cleaner than 85% of tested sites (1 Oct 2026).
 
 ### Academic profile and research practice
 
@@ -129,17 +129,18 @@
 - Added structured public Release Notes as a plain-language capability summary; detailed implementation history remains in this CHANGELOG.
 - Release Notes link to the current v6 CHANGELOG and the legacy `academic-kickstart` CHANGELOG without duplicating pre-v6 technical history.
 - The Release Notes introductory description now uses the full site-shell width rather than the generic narrow reading measure.
-- The current release remains `In development` with `Release date TBC`; merging the development branch into `main` does not close or tag rc.1.
-- Reworked README around the current rc.1 architecture, public surface, intentionally manual population/trajectory/carbon sources, validation commands and staged Netlify-to-production deployment plan; removed obsolete Phase 4/intermediate implementation wording already covered by this CHANGELOG.
+- Marked `v6.0.0-rc.1 "Swift Harbour"` as the current release with a release date of 1 Oct 2026; the final tag is created only after the release-finalisation changes are merged into `main`.
+- Reworked README around the current rc.1 architecture, public surface, intentionally manual population/trajectory/carbon sources, validation commands and the final production deployment topology.
 
-### Local validation and deployment preparation
+### Validation and production deployment
 
 - `npm run check` runs ESLint and TypeScript; `npm run check:public-contract` validates anonymous-safe RPC payloads; `npm run build` performs the production Next.js build.
 - Profile portrait synchronisation runs automatically before development, checks and builds.
-- Local-first development remains the default through rc.1; the separate `academic-website-swift-harbour` Netlify project now follows validated `main` for deployment verification.
+- Local-first validation remains the default: release-candidate changes pass the npm/public-contract/build gate before integration into `main`.
 - The temporary Netlify deployment and manual public-surface smoke test completed successfully before the quality-hardening pass.
-- The legacy `bgonzalezbustamante.com` deployment remains untouched until the Netlify replacement is verified.
-- Legacy redirect implementation is complete; deployment-level redirect verification, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
+- Production cut-over completed successfully: the Netlify project `bgonzalezbustamante` serves `https://bgonzalezbustamante.com`, `www` redirects to the apex host, and `bgonzalezbustamante.netlify.app` redirects permanently to the canonical domain while preserving paths.
+- The predecessor is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy and can be archived after the post-migration observation period.
+- Deployment-level redirect verification, production-domain SEO verification and the post-cut-over Website Carbon re-test all completed before rc.1 finalisation.
 
 ## Previous implementation
 
