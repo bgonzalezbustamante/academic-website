@@ -2,9 +2,9 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current development release: **v6.0.0-rc.1 "Swift Harbour"**. The release candidate remains in development while the temporary Netlify deployment is hardened and the replacement site is prepared for redirects, final verification and production-domain migration.
+Current release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). It is the production website at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/), deployed from validated `main` through the Netlify project `bgonzalezbustamante`.
 
-The pre-v6 Hugo/Wowchemy implementation remains the production website until that migration is complete. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
+The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
 ## Architecture
 
@@ -121,20 +121,19 @@ The public-contract check covers Publications, Projects, Conferences, Teaching a
 
 ## Deployment
 
-Development remains local-first during **v6.0.0-rc.1**.
+Development remains local-first. Before integration, release changes should pass:
 
-The deployment sequence is:
+```bash
+npm run check
+npm run check:public-contract
+npm run build
+```
 
-1. continue populating the public record to/through the 60% readiness threshold;
-2. merge the locally validated release-candidate work into `main`, then deploy `main` to the separate temporary Netlify project/URL with production data access but non-production indexing disabled;
-3. smoke-test the complete public surface and production environment;
-4. complete the SEO, metadata, accessibility, security, performance and responsive-layout pass;
-5. verify the exact legacy-to-Next.js redirect map on the temporary deployment;
-6. re-test Website Carbon on the hardened deployment;
-7. move `bgonzalezbustamante.com` only after the Netlify replacement is verified;
-8. tag the release candidate after deployment verification rather than merely after a repository merge.
+Validated work is merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 
-The temporary `academic-website-swift-harbour` Netlify project is connected to validated `main` during rc.1 verification. The current Hugo/Wowchemy production deployment remains a separate Netlify project and should remain untouched until the production-domain cut-over.
+The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, quality hardening, legacy redirect verification, SEO verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and `bgonzalezbustamante.netlify.app` redirects permanently to the corresponding canonical `.com` path.
+
+The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` for rollback and can be archived after the post-migration observation period.
 
 ## Release history
 
