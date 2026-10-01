@@ -53,7 +53,7 @@ The site never derives a Supabase Storage URL for these assets. The supplied alt
 
 ### Projects and Conferences
 
-Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
+Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. The public Project shape includes an optional controlled Role limited to Principal Investigator, Research Associate, Consultancy Chief or Consultant; the website renders it as metadata and does not infer any other role. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
 
 Project images and funder logos are local static assets:
 
@@ -181,7 +181,7 @@ The check deliberately calls public RPCs only. It provides a reproducible way to
 
 ## Development and deployment
 
-During the release-candidate stage, development is local-first. Netlify deployments should be used selectively for milestone or integration verification rather than on every push.
+During the release-candidate stage, development is local-first. Netlify deployments should be used selectively for milestone or integration verification rather than on every push. Temporary deployments use a separate Netlify project/URL rather than the legacy production project; environment-aware robots block indexing outside the final HTTPS production hosts.
 
 Continuous deployment from GitHub to Netlify is intentionally deferred. When the site reaches a later stage, automatic deployment can be enabled using the same broad GitHub-to-Netlify workflow that supported the predecessor repository.
 
