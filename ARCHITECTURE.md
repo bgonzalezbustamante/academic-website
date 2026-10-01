@@ -179,6 +179,12 @@ The repository includes `scripts/check-public-contract.mjs` so the public RPC bo
 
 The check deliberately calls public RPCs only. It provides a reproducible way to verify integration without creating Netlify builds.
 
+## Legacy URL migration
+
+The Hugo/Wowchemy and Next.js sites share many publication detail slugs, so matching `/publication/[slug]` URLs remain canonical without a redirect. `next.config.ts` contains only exact permanent redirects for routes with a clear replacement, including the former singular section indexes, author profile, CPS Ranking landing page and selected legacy Project pages.
+
+There is intentionally no legacy catch-all. Old research resources or publications that are not yet represented by the current public site should return normal not-found behaviour until a genuine replacement exists, rather than being redirected to a generic section page.
+
 ## Development and deployment
 
 During the release-candidate stage, development is local-first. After the local npm/public-contract/build gate passes, validated release-candidate work is merged into `main`. The separate `academic-website-swift-harbour` Netlify project follows `main` for deployment verification; environment-aware robots block indexing outside the final HTTPS production hosts.
@@ -193,6 +199,6 @@ The production domain remains on the predecessor site until Phase 8.
 
 - Phase 5 legacy publication reconciliation/import
 - Phase 6 remaining full-profile, teaching/service and CV content
-- Phase 7 legacy redirects and final production-domain SEO verification
+- Phase 7 deployment-level redirect and final production-domain SEO verification
 - Phase 8 production domain migration and continuous-deployment finalisation
 - Phase 9 archival of `academic-kickstart` after verified migration
