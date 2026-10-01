@@ -31,14 +31,12 @@ const links = [
   {
     href: siteProfile.links.github,
     label: 'GitHub',
-    kind: 'fontawesome',
     icon: faGithub,
     external: true,
   },
   {
     href: siteProfile.links.linkedin,
     label: 'LinkedIn',
-    kind: 'fontawesome',
     icon: faLinkedin,
     external: true,
   },
