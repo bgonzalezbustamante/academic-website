@@ -7,9 +7,6 @@ import type {
 
 /**
  * Manually maintained population-progress display settings.
- *
- * Set `showProgress` to false to hide both the Home population card and
- * the section-level progress strips without deleting targets or periods.
  */
 export const POPULATION_SETTINGS = {
   showProgress: true,
