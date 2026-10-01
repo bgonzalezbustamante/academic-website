@@ -1,3 +1,4 @@
+import { faGoogleScholar } from '@fortawesome/free-brands-svg-icons'
 import {
   faCalendarDays,
   faChartColumn,
@@ -168,8 +169,8 @@ export default function PublicationProfile({
         aria-label="Publication profile summary"
       >
         <article>
-          <i
-            className="ai ai-google-scholar publication-profile-kpi-academicon"
+          <FontAwesomeIcon
+            icon={faGoogleScholar}
             aria-hidden="true"
           />
           <div>
@@ -294,7 +295,7 @@ export default function PublicationProfile({
             <h2>Citation profile</h2>
           </div>
           <p className="publication-profile-scholar-label">
-            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <FontAwesomeIcon icon={faGoogleScholar} aria-hidden="true" />
             <span>
               Ten most-cited public papers by latest stored Google
               Scholar snapshot
