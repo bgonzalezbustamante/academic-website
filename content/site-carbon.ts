@@ -10,10 +10,6 @@ export type SiteCarbonMeasurement = {
 
 /**
  * Manually maintained Website Carbon snapshot.
- *
- * After re-testing the deployed site, copy the latest values from the
- * Website Carbon report below. Set `showInFooter` to false to suppress
- * the public footer note without deleting the stored measurement.
  */
 export const siteCarbonMeasurement: SiteCarbonMeasurement = {
   showInFooter: false,
