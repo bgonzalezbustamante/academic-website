@@ -54,7 +54,7 @@
 ### Projects
 
 - Added `/projects` and `/project/[slug]` using only public Project RPCs, with Featured/Other grouping and one shared ordering rule: later `end_year`, later `start_year`, then title.
-- Project cards and detail pages support status/period tags, the controlled public project Role (Principal Investigator, Research Associate, Consultancy Chief or Consultant), funder notes, canonical project URLs and optional local funder/project imagery.
+- Project cards and detail pages support status/period tags, funder notes, canonical project URLs and optional local funder/project imagery.
 - Detail pages follow About the project → visual/map → Research outputs → Funding.
 - Research outputs combine associated public publications and project-linked public conference presentations; the conference table is shared with Conferences, including Keynote markers.
 - Publication detail pages reverse the public `publication_slugs` relationship to show associated projects.
