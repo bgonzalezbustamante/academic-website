@@ -54,7 +54,7 @@
 ### Projects
 
 - Added `/projects` and `/project/[slug]` using only public Project RPCs, with Featured/Other grouping and one shared ordering rule: later `end_year`, later `start_year`, then title.
-- Project cards and detail pages support status/period tags, funder notes, canonical project URLs and optional local funder/project imagery.
+- Project cards and detail pages support status/period tags, the controlled public project Role (Principal Investigator, Research Associate, Consultancy Chief or Consultant), funder notes, canonical project URLs and optional local funder/project imagery.
 - Detail pages follow About the project → visual/map → Research outputs → Funding.
 - Research outputs combine associated public publications and project-linked public conference presentations; the conference table is shared with Conferences, including Keynote markers.
 - Publication detail pages reverse the public `publication_slugs` relationship to show associated projects.
@@ -100,6 +100,7 @@
 ### SEO and metadata
 
 - Standardised explicit canonical metadata across the public surface. Home now declares `/`, while DORA, CRediT and Release Notes declare `/dora`, `/credit` and `/release-notes`; existing section/detail canonicals remain unchanged and resolve against `NEXT_PUBLIC_SITE_URL`.
+- Added an environment-aware `robots.txt` route: only the final HTTPS production hosts (`bgonzalezbustamante.com` and `www.bgonzalezbustamante.com`) are indexable; localhost, Netlify previews and temporary deployment URLs are disallowed by default.
 
 ### Release notes and documentation
 
@@ -116,7 +117,7 @@
 - Profile portrait synchronisation runs automatically before development, checks and builds.
 - Local-first development remains the default through rc.1; automatic GitHub-to-Netlify deployment has not yet been enabled.
 - The legacy `bgonzalezbustamante.com` deployment remains untouched until the Netlify replacement is verified.
-- Netlify deployment, production-domain migration, SEO review, accessibility checks and final release tagging remain rc.1 work.
+- Temporary Netlify deployment, smoke testing, SEO/accessibility/security/performance review, redirects, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
 
 ## Previous implementation
 
