@@ -1,4 +1,9 @@
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import {
+  faGithub,
+  faGoogleScholar,
+  faLinkedin,
+  faOrcid,
+} from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -8,22 +13,19 @@ const links = [
   {
     href: `mailto:${siteProfile.contact.email}`,
     label: 'Email',
-    kind: 'fontawesome',
     icon: faEnvelope,
     external: false,
   },
   {
     href: siteProfile.links.orcid,
     label: 'ORCID',
-    kind: 'academicon',
-    icon: 'ai ai-orcid',
+    icon: faOrcid,
     external: true,
   },
   {
     href: siteProfile.links.scholar,
     label: 'Google Scholar',
-    kind: 'academicon',
-    icon: 'ai ai-google-scholar',
+    icon: faGoogleScholar,
     external: true,
   },
   {
@@ -55,11 +57,7 @@ export default function AcademicLinks() {
           aria-label={link.label}
           title={link.label}
         >
-          {link.kind === 'academicon' ? (
-            <i className={link.icon} aria-hidden="true" />
-          ) : (
-            <FontAwesomeIcon icon={link.icon} aria-hidden="true" />
-          )}
+          <FontAwesomeIcon icon={link.icon} aria-hidden="true" />
           <span className="sr-only">{link.label}</span>
         </a>
       ))}
