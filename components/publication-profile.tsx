@@ -351,7 +351,7 @@ export default function PublicationProfile({
             </p>
           )}
           <p className="publication-profile-card-note publication-profile-scholar-label">
-            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <FontAwesomeIcon icon={faGoogleScholar} aria-hidden="true" />
             <span>
               Mean latest Google Scholar citations among papers
               with a stored snapshot in each index
@@ -392,7 +392,7 @@ export default function PublicationProfile({
             </p>
           )}
           <p className="publication-profile-card-note publication-profile-scholar-label">
-            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <FontAwesomeIcon icon={faGoogleScholar} aria-hidden="true" />
             <span>
               Mean latest Google Scholar citations among papers
               with a stored snapshot in each language
@@ -432,7 +432,7 @@ export default function PublicationProfile({
             </p>
           )}
           <p className="publication-profile-card-note publication-profile-scholar-label">
-            <i className="ai ai-google-scholar" aria-hidden="true" />
+            <FontAwesomeIcon icon={faGoogleScholar} aria-hidden="true" />
             <span>
               Mean latest Google Scholar citations by authorship
               group
