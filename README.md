@@ -31,7 +31,7 @@ Swift Harbour currently includes:
 - Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
-- Projects with funding information, associated publications, conference presentations and project visuals, including the TERGAP map;
+- Projects with controlled public role tags, funding information, associated publications, conference presentations and project visuals, including the TERGAP map;
 - Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
@@ -111,7 +111,7 @@ npm run check:public-contract
 npm run build
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching and aggregate work analytics, verifies expected public relationships and controlled Teaching roles, and rejects private fields. Empty curated datasets are valid states.
+The public-contract check covers Publications, Projects, Conferences, Teaching and aggregate work analytics, verifies expected public relationships and controlled Project/Teaching roles, and rejects private fields. Empty curated datasets are valid states.
 
 ## Deployment
 
@@ -120,9 +120,9 @@ Development remains local-first during **v6.0.0-rc.1**.
 The deployment sequence is:
 
 1. continue populating the public record to/through the 60% readiness threshold;
-2. deploy `main` to a temporary Netlify URL;
+2. deploy the release-candidate branch to a separate temporary Netlify project/URL with production data access but non-production indexing disabled;
 3. smoke-test the complete public surface and production environment;
-4. complete the SEO, metadata, accessibility and responsive-layout pass;
+4. complete the SEO, metadata, accessibility, security, performance and responsive-layout pass;
 5. address deployment-specific fixes within rc.1;
 6. move `bgonzalezbustamante.com` only after the Netlify replacement is verified;
 7. tag the release candidate after deployment verification rather than merely after a repository merge.
