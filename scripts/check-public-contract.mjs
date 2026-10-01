@@ -44,6 +44,7 @@ const PUBLIC_PROJECT_FIELDS = [
   'short_title',
   'title',
   'abstract',
+  'role',
   'funder',
   'funder_note',
   'url',
@@ -83,6 +84,13 @@ const PUBLIC_CONFERENCE_FIELDS = [
   'presentation_type',
   'url',
 ]
+
+const PUBLIC_PROJECT_ROLES = new Set([
+  'Principal Investigator',
+  'Research Associate',
+  'Consultancy Chief',
+  'Consultant',
+])
 
 const PUBLIC_TEACHING_ROLES = new Set([
   'Course Convenor',
@@ -233,6 +241,15 @@ function assertPaperShape(paper, { detail = false } = {}) {
 function assertProjectShape(project) {
   assertFields(project, PUBLIC_PROJECT_FIELDS, 'Public project')
   assertPrivateFieldsAbsent(project, 'Public project')
+
+  if (
+    project.role != null &&
+    !PUBLIC_PROJECT_ROLES.has(project.role)
+  ) {
+    fail(
+      'Public project role must be null or one of the controlled project roles.'
+    )
+  }
 
   if (!Array.isArray(project.publication_slugs)) {
     fail('Public project publication_slugs must be an array.')
