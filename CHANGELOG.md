@@ -21,6 +21,7 @@
 - Added a content-hashed profile-portrait workflow: one JPG/JPEG/PNG source in `public/profile` is copied to a generated hash-named asset before development, checks and builds so image replacements invalidate caches automatically.
 - Standardised safe Markdown rendering for publication/project abstracts and publication Key highlights, supporting headings, emphasis, lists, links, code and blockquotes without executing raw HTML.
 - Added an optional manually maintained Website Carbon footer note as the first row of the right-hand footer metadata, followed by the Creative Commons/year/name line and the release version. `content/site-carbon.ts` stores the measured/report URLs, CO₂e-per-view estimate, rating, cleaner-than percentile and test date; `showInFooter` can suppress the public note without deleting the stored snapshot. The public label is intentionally compact (`Website Carbon · ~X.XX g CO₂e/view · Rating X`), and no Website Carbon API request is made at runtime.
+- Suppress the Website Carbon footer note during the production-domain cut-over so the legacy-site measurement is not presented as a Swift Harbour result; the stored snapshot remains intact until the live production site is re-tested.
 
 ### Academic profile and research practice
 
