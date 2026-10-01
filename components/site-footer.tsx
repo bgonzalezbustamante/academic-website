@@ -68,7 +68,7 @@ export default function SiteFooter() {
               icon={faCreativeCommons}
               aria-hidden="true"
             />
-            <span>{new Date().getFullYear()} {siteProfile.name}</span>
+            <span>{new Date().getFullYear()} Dr. {siteProfile.name}</span>
           </p>
 
           <p className="footer-release">

@@ -131,7 +131,7 @@ The public site deliberately shares a visual family with Research Dashboard whil
 - Oxford coral (`#FE615A`) is the main secondary accent for links, rules and emphasis.
 - Oxford aqua (`#00AAB4`) is deliberately limited to small interactive states.
 - A washed Oxford-blue surface (`#edf2f7`) provides supporting backgrounds without competing with the primary blue/coral identity.
-- Font Awesome provides general interface/brand icons; Academicons provides scholarly identifiers such as ORCID, Google Scholar and DOI.
+- Locally bundled Font Awesome provides interface, brand and scholarly-profile icons; no external icon stylesheet/font is required at runtime.
 
 Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
 
@@ -183,7 +183,9 @@ The check deliberately calls public RPCs only. It provides a reproducible way to
 
 During the release-candidate stage, development is local-first. After the local npm/public-contract/build gate passes, validated release-candidate work is merged into `main`. The separate `academic-website-swift-harbour` Netlify project follows `main` for deployment verification; environment-aware robots block indexing outside the final HTTPS production hosts.
 
-This temporary GitHub-to-Netlify connection is deliberately isolated from the legacy production Netlify project. Production-domain continuous deployment is not moved to the Next.js site until the final cut-over, after smoke testing, SEO/accessibility/security/performance review, redirects and the Website Carbon re-test.
+This temporary GitHub-to-Netlify connection is deliberately isolated from the legacy production Netlify project. The temporary project follows validated `main`; production-domain continuous deployment is not moved to the Next.js site until the final cut-over, after smoke testing, SEO/accessibility/security/performance review, redirects and the Website Carbon re-test.
+
+Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`, non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, and the production robots policy advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`.
 
 The production domain remains on the predecessor site until Phase 8.
 
@@ -191,6 +193,6 @@ The production domain remains on the predecessor site until Phase 8.
 
 - Phase 5 legacy publication reconciliation/import
 - Phase 6 remaining full-profile, teaching/service and CV content
-- Phase 7 citation metadata, sitemap, redirects and SEO hardening beyond the detail metadata and public activity heatmap already implemented
+- Phase 7 legacy redirects and final production-domain SEO verification
 - Phase 8 production domain migration and continuous-deployment finalisation
 - Phase 9 archival of `academic-kickstart` after verified migration

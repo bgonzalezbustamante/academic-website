@@ -23,9 +23,13 @@ export default function FeaturedProjectsCarousel({
     const track = trackRef.current
     if (!track) return
 
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     track.scrollBy({
       left: direction * track.clientWidth * 0.82,
-      behavior: 'smooth',
+      behavior: reduceMotion ? 'auto' : 'smooth',
     })
   }
 

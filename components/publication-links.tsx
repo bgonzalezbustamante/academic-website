@@ -4,6 +4,7 @@ import {
   faDatabase,
   faDiagramProject,
   faFileLines,
+  faLink,
   faPaperclip,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,7 +20,7 @@ export default function PublicationLinks({ paper }: Props) {
     {
       label: 'DOI',
       href: paper.doi_url,
-      icon: <i className="ai ai-doi" aria-hidden="true" />,
+      icon: <FontAwesomeIcon icon={faLink} aria-hidden="true" />,
     },
     {
       label: 'Publication',

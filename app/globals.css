@@ -55,6 +55,18 @@ a:hover {
   color: var(--oxford-coral);
 }
 
+:where(
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [tabindex]:not([tabindex='-1'])
+):focus-visible {
+  outline: 3px solid var(--oxford-coral);
+  outline-offset: 2px;
+}
+
 main {
   min-height: calc(100vh - 170px);
 }
@@ -431,7 +443,6 @@ h4 {
   text-decoration: none;
 }
 
-.academic-link i,
 .academic-link svg {
   width: 1rem;
   min-width: 1rem;
@@ -4466,5 +4477,21 @@ h4 {
 
   .trajectory-legend-status {
     margin-left: auto;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

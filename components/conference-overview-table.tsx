@@ -62,13 +62,16 @@ export default function ConferenceOverviewTable({
     <>
       <div className="conference-table-wrap">
         <table className="conference-table">
+          <caption className="sr-only">
+            Conference presentations
+          </caption>
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Event</th>
-              <th>Presentation</th>
-              <th>Location</th>
-              <th>Authors</th>
+              <th scope="col">Date</th>
+              <th scope="col">Event</th>
+              <th scope="col">Presentation</th>
+              <th scope="col">Location</th>
+              <th scope="col">Authors</th>
             </tr>
           </thead>
           <tbody>

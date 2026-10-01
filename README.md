@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current development release: **v6.0.0-rc.1 "Swift Harbour"**. The release candidate remains in development while the public record is populated and the replacement site is prepared for Netlify deployment, SEO/accessibility review and production-domain migration.
+Current development release: **v6.0.0-rc.1 "Swift Harbour"**. The release candidate remains in development while the temporary Netlify deployment is hardened and the replacement site is prepared for redirects, final verification and production-domain migration.
 
 The pre-v6 Hugo/Wowchemy implementation remains the production website until that migration is complete. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -73,6 +73,10 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 Use a Supabase publishable key (`sb_publishable_...`), never a service-role key.
 
+### Search and preview safety
+
+Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS production hosts are indexable; localhost, branch/preview deployments and the temporary Netlify hostname emit `noindex` metadata and a disallowing `robots.txt`. Production `robots.txt` also advertises the generated public sitemap.
+
 ### Profile portrait
 
 Place exactly one JPG, JPEG or PNG source image in `public/profile`. The pre-development/check/build synchronisation step copies it to a content-hashed generated filename so profile-image replacements invalidate caches automatically.
@@ -123,11 +127,12 @@ The deployment sequence is:
 2. merge the locally validated release-candidate work into `main`, then deploy `main` to the separate temporary Netlify project/URL with production data access but non-production indexing disabled;
 3. smoke-test the complete public surface and production environment;
 4. complete the SEO, metadata, accessibility, security, performance and responsive-layout pass;
-5. address deployment-specific fixes within rc.1;
-6. move `bgonzalezbustamante.com` only after the Netlify replacement is verified;
-7. tag the release candidate after deployment verification rather than merely after a repository merge.
+5. add and verify legacy-to-Next.js redirects;
+6. re-test Website Carbon on the hardened deployment;
+7. move `bgonzalezbustamante.com` only after the Netlify replacement is verified;
+8. tag the release candidate after deployment verification rather than merely after a repository merge.
 
-The temporary `academic-website-swift-harbour` Netlify project follows validated `main` during rc.1 verification. The current Hugo/Wowchemy production deployment remains a separate Netlify project and should remain untouched until the production-domain cut-over.
+The temporary `academic-website-swift-harbour` Netlify project is connected to validated `main` during rc.1 verification. The current Hugo/Wowchemy production deployment remains a separate Netlify project and should remain untouched until the production-domain cut-over.
 
 ## Release history
 

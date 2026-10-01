@@ -11,11 +11,11 @@
 
 ### Application foundation and design
 
-- Added the Next.js App Router, React 19, TypeScript, Node.js 22+ requirement, reproducible npm lockfile and local validation scripts.
+- Added the Next.js App Router, React 19, TypeScript, Node.js 22+ requirement, reproducible npm lockfile and local validation scripts; the pre-cut-over security pass moves Next.js and `eslint-config-next` to 16.3.8.
 - Added responsive global navigation, footer, error handling, stable public detail routes and a shared site shell.
 - Added a keyboard-accessible “Skip to main content” link at the root layout level so keyboard users can bypass the repeated header/navigation on every route.
 - Standardised the visual system around Roboto interface typography, Noto Serif editorial text, Oxford blue and Oxford coral, with Oxford aqua reserved for limited interaction states and washed Oxford-blue supporting surfaces.
-- Added Font Awesome 7 and Academicons for interface, academic-profile and research-resource iconography.
+- Standardised interface, academic-profile and research-resource iconography on locally bundled Font Awesome 7; the pre-cut-over quality pass removed the runtime Academicons CDN stylesheet/font dependency.
 - Replaced the legacy header treatment with a three-affiliation home link using Leiden University, Universidad Diego Portales and OCPSG logos; institutional marks remain monochrome at rest and reveal their original colour on hover/focus.
 - Added a content-hashed profile-portrait workflow: one JPG/JPEG/PNG source in `public/profile` is copied to a generated hash-named asset before development, checks and builds so image replacements invalidate caches automatically.
 - Standardised safe Markdown rendering for publication/project abstracts and publication Key highlights, supporting headings, emphasis, lists, links, code and blockquotes without executing raw HTML.
@@ -102,6 +102,17 @@
 
 - Standardised explicit canonical metadata across the public surface. Home now declares `/`, while DORA, CRediT and Release Notes declare `/dora`, `/credit` and `/release-notes`; existing section/detail canonicals remain unchanged and resolve against `NEXT_PUBLIC_SITE_URL`.
 - Added an environment-aware `robots.txt` route: only the final HTTPS production hosts (`bgonzalezbustamante.com` and `www.bgonzalezbustamante.com`) are indexable; localhost, Netlify previews and temporary deployment URLs are disallowed by default.
+- Added matching metadata-level `noindex`/nofollow protection for non-production hosts so preview URLs are protected even beyond crawler-level `robots.txt` controls.
+- Added a generated `/sitemap.xml` covering static public routes plus live public publication/project detail routes; production `robots.txt` advertises it.
+- Added author/creator/publisher root metadata while preserving per-route canonical metadata.
+
+### Accessibility, security and performance
+
+- Added a consistent visible keyboard focus treatment, restored focus visibility on interactive map countries, and added table captions/column scopes for conference and CRediT tables.
+- Added reduced-motion handling for global smooth scrolling/transitions and the Featured projects carousel.
+- Added baseline response hardening with a restrictive framing/object/base CSP, Permissions Policy, strict-origin referrer policy, MIME sniffing protection and frame denial.
+- Removed the external Academicons runtime request by using bundled Font Awesome equivalents for ORCID and Google Scholar and a local link icon for DOI.
+- Parallelised independent homepage public-data requests with `Promise.allSettled()` while retaining independent failure/empty states.
 
 ### Release notes and documentation
 
@@ -116,9 +127,10 @@
 
 - `npm run check` runs ESLint and TypeScript; `npm run check:public-contract` validates anonymous-safe RPC payloads; `npm run build` performs the production Next.js build.
 - Profile portrait synchronisation runs automatically before development, checks and builds.
-- Local-first development remains the default through rc.1; automatic GitHub-to-Netlify deployment has not yet been enabled.
+- Local-first development remains the default through rc.1; the separate `academic-website-swift-harbour` Netlify project now follows validated `main` for deployment verification.
+- The temporary Netlify deployment and manual public-surface smoke test completed successfully before the quality-hardening pass.
 - The legacy `bgonzalezbustamante.com` deployment remains untouched until the Netlify replacement is verified.
-- Temporary Netlify deployment, smoke testing, SEO/accessibility/security/performance review, redirects, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
+- Redirect verification, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
 
 ## Previous implementation
 
