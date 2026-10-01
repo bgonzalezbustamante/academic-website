@@ -24,6 +24,7 @@
 ### Academic profile and research practice
 
 - Reworked Home around a portrait-led academic profile with three current positions, research interests, external-link cues, public contact information and institutional branding.
+- The profile icon row begins with the public email contact, followed by ORCID, Google Scholar, GitHub and LinkedIn.
 - Added paired DORA signer and Pro CRediT cards beneath the profile, plus dedicated `/dora` and `/credit` pages with local badge assets.
 - Added a non-navigation `/trajectory` Academic trajectory page linked from the Home biography. It presents selected education, faculty appointments, research positions, teaching positions and consultancy as overlapping interval bands from 2004 to the present.
 - The trajectory uses Oxford blue for completed periods and coral for ongoing periods; desktop uses a shared year axis and mobile collapses to grouped vertical entries.
