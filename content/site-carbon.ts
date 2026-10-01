@@ -16,7 +16,7 @@ export type SiteCarbonMeasurement = {
  * the public footer note without deleting the stored measurement.
  */
 export const siteCarbonMeasurement: SiteCarbonMeasurement = {
-  showInFooter: true,
+  showInFooter: false,
   measuredUrl: 'https://bgonzalezbustamante.com/',
   reportUrl:
     'https://www.websitecarbon.com/website/bgonzalezbustamante-com/',
