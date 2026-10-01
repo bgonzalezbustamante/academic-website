@@ -114,6 +114,12 @@
 - Removed the external Academicons runtime request by using bundled Font Awesome equivalents for ORCID and Google Scholar and a local link icon for DOI.
 - Parallelised independent homepage public-data requests with `Promise.allSettled()` while retaining independent failure/empty states.
 
+### Legacy URL migration
+
+- Added permanent Next.js redirects for the legacy Publications and Projects section indexes, the former author profile, the CPS Ranking landing page, and legacy Project URLs with clear Swift Harbour replacements.
+- Preserved publication detail URLs wherever the Hugo/Wowchemy slug already matches the current public publication slug, avoiding unnecessary redirect hops.
+- Intentionally avoided catch-all redirects for legacy publications, projects and specialist pages that have no current equivalent; those continue to use normal not-found behaviour rather than soft-404-style generic destinations.
+
 ### Release notes and documentation
 
 - Established `v6.0.0-rc.1 "Swift Harbour"` as the first Next.js release-candidate identity; package version and footer use the same release data.
@@ -130,7 +136,7 @@
 - Local-first development remains the default through rc.1; the separate `academic-website-swift-harbour` Netlify project now follows validated `main` for deployment verification.
 - The temporary Netlify deployment and manual public-surface smoke test completed successfully before the quality-hardening pass.
 - The legacy `bgonzalezbustamante.com` deployment remains untouched until the Netlify replacement is verified.
-- Redirect verification, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
+- Legacy redirect implementation is complete; deployment-level redirect verification, Website Carbon re-testing, production-domain migration and final release tagging remain rc.1 work.
 
 ## Previous implementation
 
