@@ -23,6 +23,20 @@ const securityHeaders = [
   },
 ]
 
+const canonicalHostRedirects = [
+  {
+    source: '/:path*',
+    has: [
+      {
+        type: 'host',
+        value: 'bgonzalezbustamante.netlify.app',
+      },
+    ],
+    destination: 'https://bgonzalezbustamante.com/:path*',
+    permanent: true,
+  },
+]
+
 const legacyRedirects = [
   {
     source: '/publication',
@@ -87,7 +101,7 @@ const nextConfig: NextConfig = {
     ]
   },
   async redirects() {
-    return legacyRedirects
+    return [...canonicalHostRedirects, ...legacyRedirects]
   },
 }
 
