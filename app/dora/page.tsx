@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'DORA',
   description:
     'A short statement on the San Francisco Declaration on Research Assessment (DORA) and responsible research assessment.',
+  alternates: {
+    canonical: '/dora',
+  },
 }
 
 export default function DoraPage() {
