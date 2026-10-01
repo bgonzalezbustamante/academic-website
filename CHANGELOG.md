@@ -13,12 +13,13 @@
 
 - Added the Next.js App Router, React 19, TypeScript, Node.js 22+ requirement, reproducible npm lockfile and local validation scripts.
 - Added responsive global navigation, footer, error handling, stable public detail routes and a shared site shell.
+- Added a keyboard-accessible “Skip to main content” link at the root layout level so keyboard users can bypass the repeated header/navigation on every route.
 - Standardised the visual system around Roboto interface typography, Noto Serif editorial text, Oxford blue and Oxford coral, with Oxford aqua reserved for limited interaction states and washed Oxford-blue supporting surfaces.
 - Added Font Awesome 7 and Academicons for interface, academic-profile and research-resource iconography.
 - Replaced the legacy header treatment with a three-affiliation home link using Leiden University, Universidad Diego Portales and OCPSG logos; institutional marks remain monochrome at rest and reveal their original colour on hover/focus.
 - Added a content-hashed profile-portrait workflow: one JPG/JPEG/PNG source in `public/profile` is copied to a generated hash-named asset before development, checks and builds so image replacements invalidate caches automatically.
 - Standardised safe Markdown rendering for publication/project abstracts and publication Key highlights, supporting headings, emphasis, lists, links, code and blockquotes without executing raw HTML.
-- Added an optional manually maintained Website Carbon footer note in the right-hand footer metadata, positioned between the name/licence line and release version. `content/site-carbon.ts` stores the measured/report URLs, CO₂e-per-view estimate, rating, cleaner-than percentile and test date; `showInFooter` can suppress the public note without deleting the stored snapshot. The public label is intentionally compact (`Website Carbon · ~X.XX g CO₂e/view · Rating X`), and no Website Carbon API request is made at runtime.
+- Added an optional manually maintained Website Carbon footer note as the first row of the right-hand footer metadata, followed by the Creative Commons/year/name line and the release version. `content/site-carbon.ts` stores the measured/report URLs, CO₂e-per-view estimate, rating, cleaner-than percentile and test date; `showInFooter` can suppress the public note without deleting the stored snapshot. The public label is intentionally compact (`Website Carbon · ~X.XX g CO₂e/view · Rating X`), and no Website Carbon API request is made at runtime.
 
 ### Academic profile and research practice
 
@@ -95,6 +96,10 @@
 - Conference and Roadmap date handling uses explicit start/end ranges; future/past state and ordering no longer depend on the deprecated single presentation-date model.
 - Shared conference tables are reused in project Research outputs to keep presentation formatting, external links and Keynote markers consistent.
 - Public page introductions for Publications, Projects, Conferences, Teaching, Publication profile, Co-authorship network and Academic trajectory use the full site-shell width where appropriate.
+
+### SEO and metadata
+
+- Standardised explicit canonical metadata across the public surface. Home now declares `/`, while DORA, CRediT and Release Notes declare `/dora`, `/credit` and `/release-notes`; existing section/detail canonicals remain unchanged and resolve against `NEXT_PUBLIC_SITE_URL`.
 
 ### Release notes and documentation
 
