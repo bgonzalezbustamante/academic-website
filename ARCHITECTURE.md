@@ -1,6 +1,6 @@
 # Architecture
 
-This repository is the Next.js continuation of the academic website previously implemented in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart). The predecessor remains the production Hugo/Wowchemy implementation until the later domain-migration phase.
+This repository is the Next.js production implementation of [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and the continuation of the academic website previously implemented in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart). The predecessor is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy.
 
 The full pre-v6 history is retained in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md). This repository starts a fresh changelog at v6.0.0-rc.1 "Swift Harbour".
 
@@ -89,9 +89,9 @@ It contains only the TERGAP dashboard generation timestamp, collection window an
 
 ## Information architecture
 
-The current Hugo/Wowchemy homepage combines profile, publications/preprints, projects/resources and contact information. The replacement preserves that conceptual structure without reproducing Wowchemy's widget system.
+The production site preserves the conceptual structure of the former Hugo/Wowchemy homepage without reproducing Wowchemy's widget system.
 
-The planned public structure is:
+The public structure is:
 
 ```text
 /
@@ -187,18 +187,16 @@ There is intentionally no legacy catch-all. Old research resources or publicatio
 
 ## Development and deployment
 
-During the release-candidate stage, development is local-first. After the local npm/public-contract/build gate passes, validated release-candidate work is merged into `main`. The separate `academic-website-swift-harbour` Netlify project follows `main` for deployment verification; environment-aware robots block indexing outside the final HTTPS production hosts.
+Development remains local-first. After the local npm/public-contract/build gate passes, validated changes are merged into `main` and deployed through the Netlify project `bgonzalezbustamante`, which serves the canonical production domain `https://bgonzalezbustamante.com`.
 
-This temporary GitHub-to-Netlify connection is deliberately isolated from the legacy production Netlify project. The temporary project follows validated `main`; production-domain continuous deployment is not moved to the Next.js site until the final cut-over, after smoke testing, SEO/accessibility/security/performance review, redirects and the Website Carbon re-test.
+Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`.
 
-Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`, non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, and the production robots policy advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`.
+The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, SEO/accessibility/security/performance hardening, exact legacy-redirect verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and the default production Netlify hostname redirects permanently to the equivalent canonical `.com` path.
 
-The production domain remains on the predecessor site until Phase 8.
+The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy.
 
 ## Deferred work
 
-- Phase 5 legacy publication reconciliation/import
-- Phase 6 remaining full-profile, teaching/service and CV content
-- Phase 7 deployment-level redirect and final production-domain SEO verification
-- Phase 8 production domain migration and continuous-deployment finalisation
-- Phase 9 archival of `academic-kickstart` after verified migration
+- Continue population and reconciliation of historical publication, project, conference and teaching records as required.
+- Add remaining profile/service/CV material only when it has a clear place in the current information architecture.
+- Archive the legacy Netlify project and predecessor repository after the post-migration observation period and once rollback is no longer required.
