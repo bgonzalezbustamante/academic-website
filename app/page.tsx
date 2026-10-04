@@ -183,6 +183,12 @@ export default async function HomePage() {
                   <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
                   Academic trajectory
                 </Link>
+                <span
+                  className="bio-profile-link-separator"
+                  aria-hidden="true"
+                >
+                  ·
+                </span>
                 <Link
                   className="bio-profile-link"
                   href="/software"

@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import SoftwareStagePill from '@/components/software-stage-pill'
 import type { PublicSoftwareItem } from '@/types/public'
 
 type Props = {
@@ -27,13 +28,15 @@ export default function SoftwareCard({ item }: Props) {
     <article className="software-card">
       <div>
         <h2>{item.name}</h2>
+        {item.current_version && (
+          <p className="software-card-version">
+            {item.current_version}
+          </p>
+        )}
         <div className="metadata-tags software-card-meta">
           <span className="metadata-tag">{item.category}</span>
-          <span className="metadata-tag">{item.development_stage}</span>
+          <SoftwareStagePill stage={item.development_stage} />
           <span className="metadata-tag">{item.status}</span>
-          {item.current_version && (
-            <span className="metadata-tag">{item.current_version}</span>
-          )}
           {item.featured && (
             <span className="metadata-tag metadata-tag-accent">
               Featured

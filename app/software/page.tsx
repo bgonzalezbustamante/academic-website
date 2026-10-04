@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 
 import SoftwareCard from '@/components/software-card'
+import SoftwareStagePill, {
+  SOFTWARE_DEVELOPMENT_STAGES,
+} from '@/components/software-stage-pill'
 import { listPublicSoftware } from '@/lib/software'
 import type { PublicSoftwareItem } from '@/types/public'
 
@@ -35,6 +38,19 @@ export default async function SoftwarePage() {
             Applications, websites, packages, utilities and reusable tools
             represented in my public software portfolio.
           </p>
+          <div
+            className="software-stage-legend"
+            aria-label="Development stage legend"
+          >
+            <span className="software-stage-legend-label">
+              Development stage
+            </span>
+            <div className="software-stage-legend-pills">
+              {SOFTWARE_DEVELOPMENT_STAGES.map((stage) => (
+                <SoftwareStagePill key={stage} stage={stage} />
+              ))}
+            </div>
+          </div>
         </div>
 
         {!available ? (

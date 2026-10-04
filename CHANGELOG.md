@@ -13,9 +13,10 @@
 ### Software Ecosystem
 
 - Added `list_public_software()` to the website data layer and public contract checker.
-- Added `/software` as a responsive card catalogue showing public category, version, development stage, status, lifecycle period and available Live/Code/Documentation links.
+- Added `/software` as a responsive card catalogue showing public category, development stage, status, lifecycle period and available Live/Code/Documentation links, with the current version presented beneath each software title.
+- Added a complete development-stage legend and distinct stage colours for Alpha, Beta, Release candidate, Stable and Maintenance.
 - Preserved the upstream privacy invariant that private repositories never expose a repository URL.
-- Kept Software out of the primary navigation and omitted `/software/[slug]` detail routes; the homepage exposes the catalogue beside the existing Academic trajectory entry.
+- Kept Software out of the primary navigation and omitted `/software/[slug]` detail routes; the homepage presents Software ecosystem inline beside Academic trajectory with a subtle separator.
 
 ### Robustness and public-readiness
 

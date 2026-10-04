@@ -27,7 +27,7 @@ export const releases: ReleaseNote[] = [
         title: 'Software Ecosystem',
         items: [
           'Added a non-navigation /software catalogue backed exclusively by Research Dashboard public Software Ecosystem RPCs.',
-          'Linked Software ecosystem directly below Academic trajectory on the homepage and kept software profiles self-contained as cards without detail routes.',
+          'Linked Software ecosystem inline beside Academic trajectory on the homepage, added a complete colour-coded development-stage legend, and kept software profiles self-contained as cards without detail routes.',
         ],
       },
       {
