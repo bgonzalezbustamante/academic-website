@@ -1,5 +1,6 @@
 import {
   firstAuthorPercentage,
+  normalizeAuthors,
   PROFILE_AUTHOR_NAME,
 } from '@/lib/authorship'
 import { publicationYearLabel } from '@/lib/publication-dates'
@@ -82,19 +83,19 @@ function countByLabel(labels: string[]) {
   return counts
 }
 
-const COLLABORATION_OUTLIER_TITLE =
-  'Investigating the analytical robustness of the social and behavioural sciences'
+const COLLABORATION_OUTLIER_SLUG =
+  'investigating-the-analytical-robustness-of-the-social-and-behavioural-sciences'
 
 export function buildPublicationProfile(
   papers: PublicPaper[]
 ): PublicationProfile {
   const collaborationOutlier =
     papers.find(
-      (paper) => paper.title === COLLABORATION_OUTLIER_TITLE
+      (paper) => paper.slug === COLLABORATION_OUTLIER_SLUG
     ) ?? null
 
   const collaborationPapers = papers.filter(
-    (paper) => paper.title !== COLLABORATION_OUTLIER_TITLE
+    (paper) => paper.slug !== COLLABORATION_OUTLIER_SLUG
   )
 
   const citationPapers = papers
@@ -122,13 +123,9 @@ export function buildPublicationProfile(
 
   const coauthors = new Set(
     collaborationPapers.flatMap((paper) =>
-      paper.authors
-        .map((author) => author.trim())
-        .filter(
-          (author) =>
-            author.length > 0 &&
-            author !== PROFILE_AUTHOR_NAME
-        )
+      normalizeAuthors(paper.authors).filter(
+        (author) => author !== PROFILE_AUTHOR_NAME
+      )
     )
   )
 
@@ -136,7 +133,7 @@ export function buildPublicationProfile(
     collaborationPapers.length === 0
       ? 0
       : collaborationPapers.reduce(
-          (total, paper) => total + paper.authors.length,
+          (total, paper) => total + normalizeAuthors(paper.authors).length,
           0
         ) / collaborationPapers.length
 
@@ -210,9 +207,10 @@ export function buildPublicationProfile(
 
   const authorshipCounts = countByLabel(
     papers.map((paper) => {
-      if (paper.authors.length <= 1) return 'Single author'
-      if (paper.authors.length === 2) return '2 authors'
-      if (paper.authors.length === 3) return '3 authors'
+      const authorCount = normalizeAuthors(paper.authors).length
+      if (authorCount <= 1) return 'Single author'
+      if (authorCount === 2) return '2 authors'
+      if (authorCount === 3) return '3 authors'
       return '4+ authors'
     })
   )
@@ -357,12 +355,13 @@ export function buildPublicationProfile(
   for (const paper of papers) {
     if (paper.google_scholar_citations === null) continue
 
+    const authorCount = normalizeAuthors(paper.authors).length
     const label =
-      paper.authors.length <= 1
+      authorCount <= 1
         ? 'Single author'
-        : paper.authors.length === 2
+        : authorCount === 2
           ? '2 authors'
-          : paper.authors.length === 3
+          : authorCount === 3
             ? '3 authors'
             : '4+ authors'
     const current = citationAuthorshipStats.get(label) ?? {
@@ -420,7 +419,7 @@ export function buildPublicationProfile(
       ? {
           slug: collaborationOutlier.slug,
           title: collaborationOutlier.title,
-          authorCount: collaborationOutlier.authors.length,
+          authorCount: normalizeAuthors(collaborationOutlier.authors).length,
         }
       : null,
     topCitedPapers: citationPapers

@@ -39,6 +39,14 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="site-shell footer-inner">
         <div className="footer-contact">
+          <p className="footer-license">
+            <FontAwesomeIcon
+              icon={faCreativeCommons}
+              aria-hidden="true"
+            />
+            <span>{new Date().getFullYear()} Dr. {siteProfile.name}</span>
+          </p>
+
           <a href={`mailto:${siteProfile.contact.email}`}>
             <FontAwesomeIcon icon={faEnvelope} aria-hidden="true" />
             <span>{siteProfile.contact.email}</span>
@@ -63,13 +71,6 @@ export default function SiteFooter() {
             </a>
           )}
 
-          <p className="footer-license">
-            <FontAwesomeIcon
-              icon={faCreativeCommons}
-              aria-hidden="true"
-            />
-            <span>{new Date().getFullYear()} Dr. {siteProfile.name}</span>
-          </p>
 
           <p className="footer-release">
             <FontAwesomeIcon icon={faGithub} aria-hidden="true" />

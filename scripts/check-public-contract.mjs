@@ -98,6 +98,55 @@ const PUBLIC_CONFERENCE_TYPES = new Set([
   'Workshop',
 ])
 
+const PUBLIC_SOFTWARE_FIELDS = [
+  'slug',
+  'name',
+  'short_description',
+  'category',
+  'current_version',
+  'development_stage',
+  'status',
+  'repository_visibility',
+  'repository_url',
+  'production_url',
+  'documentation_url',
+  'start_year',
+  'end_year',
+  'featured',
+]
+
+const PUBLIC_SOFTWARE_CATEGORIES = new Set([
+  'Application',
+  'Website',
+  'Utility',
+  'Reusable component',
+  'Package/library',
+  'API/service',
+  'Data product',
+  'Template',
+  'Other',
+])
+
+const PUBLIC_SOFTWARE_STAGES = new Set([
+  'Alpha',
+  'Beta',
+  'Release candidate',
+  'Stable',
+  'Maintenance',
+])
+
+const PUBLIC_SOFTWARE_STATUSES = new Set([
+  'active',
+  'paused',
+  'completed',
+  'archived',
+])
+
+const PUBLIC_REPOSITORY_VISIBILITIES = new Set([
+  'public',
+  'private',
+])
+
 const PRIVATE_FIELDS = [
   'id',
   'owner_id',
@@ -167,6 +216,18 @@ function assertPaperShape(paper, { detail = false } = {}) {
 
   if (!Array.isArray(paper.authors)) {
     fail('Public paper authors must be an array.')
+  }
+
+  const normalizedAuthors = paper.authors
+    .map((author) => String(author).trim())
+    .filter(Boolean)
+
+  if (normalizedAuthors.length !== paper.authors.length) {
+    fail('Public paper authors must not contain blank names.')
+  }
+
+  if (new Set(normalizedAuthors).size !== normalizedAuthors.length) {
+    fail('Public paper authors must not contain duplicate names.')
   }
 
   if (
@@ -372,6 +433,44 @@ function assertConferenceShape(presentation) {
     fail(
       'Deprecated conference presentation presentation_date must equal start_date when present.'
     )
+  }
+}
+
+function assertSoftwareShape(item) {
+  assertFields(item, PUBLIC_SOFTWARE_FIELDS, 'Public software item')
+  assertPrivateFieldsAbsent(item, 'Public software item')
+
+  if (!PUBLIC_SOFTWARE_CATEGORIES.has(item.category)) {
+    fail('Public software category is outside the controlled vocabulary.')
+  }
+
+  if (!PUBLIC_SOFTWARE_STAGES.has(item.development_stage)) {
+    fail('Public software development_stage is outside the controlled vocabulary.')
+  }
+
+  if (!PUBLIC_SOFTWARE_STATUSES.has(item.status)) {
+    fail('Public software status is outside the controlled vocabulary.')
+  }
+
+  if (!PUBLIC_REPOSITORY_VISIBILITIES.has(item.repository_visibility)) {
+    fail('Public software repository_visibility is outside the controlled vocabulary.')
+  }
+
+  if (
+    item.repository_visibility === 'private' &&
+    item.repository_url !== null
+  ) {
+    fail('Private software repositories must not expose repository_url.')
+  }
+
+  if (typeof item.featured !== 'boolean') {
+    fail('Public software featured must be boolean.')
+  }
+
+  for (const field of ['start_year', 'end_year']) {
+    if (item[field] != null && !Number.isInteger(item[field])) {
+      fail(`Public software ${field} must be an integer or null.`)
+    }
   }
 }
 
@@ -606,6 +705,67 @@ async function main() {
   console.log(
     `✓ list_public_conference_presentations(): ${presentations.length} public presentation(s); private notes/paper IDs absent`
   )
+
+  const softwareResult = await supabase.rpc('list_public_software')
+
+  if (softwareResult.error) {
+    fail(
+      `list_public_software() failed: ${softwareResult.error.message}`
+    )
+  }
+
+  const software = softwareResult.data ?? []
+
+  if (!Array.isArray(software)) {
+    fail('list_public_software() did not return an array.')
+  }
+
+  for (const item of software) {
+    assertSoftwareShape(item)
+  }
+
+  console.log(
+    `✓ list_public_software(): ${software.length} public software item(s); private repository URLs suppressed`
+  )
+
+  if (software.length > 0) {
+    const firstSoftwareSlug = software[0]?.slug
+
+    if (
+      typeof firstSoftwareSlug !== 'string' ||
+      !firstSoftwareSlug
+    ) {
+      fail('First public software item has no usable slug.')
+    }
+
+    const softwareDetailResult = await supabase.rpc(
+      'get_public_software',
+      { p_slug: firstSoftwareSlug }
+    )
+
+    if (softwareDetailResult.error) {
+      fail(
+        `get_public_software(text) failed: ${softwareDetailResult.error.message}`
+      )
+    }
+
+    const softwareDetail = softwareDetailResult.data?.[0]
+
+    if (!softwareDetail) {
+      fail(
+        'get_public_software(text) returned no row for a listed public slug.'
+      )
+    }
+
+    assertSoftwareShape(softwareDetail)
+    console.log(
+      '✓ get_public_software(text): listed slug resolved with public-safe repository metadata'
+    )
+  } else {
+    console.log(
+      '✓ get_public_software(text): skipped because zero public software items is a valid curated state'
+    )
+  }
 
   const configuredYear = Number.parseInt(
     process.env.PUBLIC_ANALYTICS_YEAR ?? '',

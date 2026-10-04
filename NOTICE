@@ -1,0 +1,13 @@
+# Third-Party and Rights Notices
+
+Academic Website uses separate licensing boundaries for software, original editorial content, and third-party material.
+
+- Repository software is licensed under the MIT License in `LICENSE`.
+- Original editorial website content authored by Bastián González-Bustamante is licensed under CC BY 4.0 as described in `CONTENT-LICENSE.md`.
+- Third-party and institutional material is excluded from both grants unless an asset-specific notice expressly states otherwise.
+
+Third-party names, logos, crests, trademarks, service marks, institutional branding, publication material, externally sourced graphics, photographs, flags, and other assets whose rights are not held by Bastián González-Bustamante remain subject to the rights, policies, licences, and permissions of their respective owners.
+
+This includes, without limitation, institutional and organisational assets under `public/branding`, `public/funders`, `public/dora`, `public/credit`, and `public/teaching`, as well as publication/project imagery and other credited or externally derived assets.
+
+The presence of an asset in this repository does not grant trademark rights or imply that the asset is licensed under MIT or CC BY 4.0.

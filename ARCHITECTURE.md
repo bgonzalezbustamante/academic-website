@@ -26,11 +26,21 @@ The site is allowed to call only:
 - `get_public_project(text)`
 - `list_public_conference_presentations()`
 - `list_public_teaching()`
+- `list_public_software()`
+- `get_public_software(text)`
 - `get_public_work_analytics(year)`
 
 The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
 
 Aggregate work analytics are rendered on the homepage for the current Europe/Amsterdam calendar year. The public site reproduces the Dashboard Activity over time heatmap from daily net working minutes and shows only the two annual averages already exposed by the RPC: net working time per working day and coffees per working day.
+
+### Software Ecosystem
+
+Software Ecosystem is supplied exclusively through `list_public_software()`. The public `/software` page renders self-contained cards and does not expose software detail routes. Cards may show the public name, short description, category, current version, development stage, status, repository visibility, safe repository URL, production URL, documentation URL, lifecycle years and Featured state.
+
+Repository visibility is independent from profile exposure. When `repository_visibility` is `private`, `repository_url` must remain null even for an otherwise public Software Ecosystem profile. `get_public_software(text)` is validated as part of the public contract for forward compatibility, but rc.2 does not use it for navigation because its current detail shape is intentionally identical to the listing shape.
+
+The homepage links to `/software` directly below Academic trajectory. Software is intentionally absent from the primary navigation.
 
 ### Publication Key highlights
 

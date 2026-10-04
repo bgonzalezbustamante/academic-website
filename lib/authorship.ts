@@ -4,8 +4,18 @@ type AuthoredItem = {
   authors: string[]
 }
 
+export function normalizeAuthors(authors: string[]) {
+  return Array.from(
+    new Set(
+      authors
+        .map((author) => author.trim())
+        .filter(Boolean)
+    )
+  )
+}
+
 export function isProfileFirstAuthor(authors: string[]) {
-  return authors[0]?.trim() === PROFILE_AUTHOR_NAME
+  return normalizeAuthors(authors)[0] === PROFILE_AUTHOR_NAME
 }
 
 export function firstAuthorPercentage(items: AuthoredItem[]) {

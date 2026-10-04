@@ -12,6 +12,7 @@ const STATIC_PATHS = [
   '/publications/profile',
   '/publications/coauthorship',
   '/projects',
+  '/software',
   '/conferences',
   '/teaching',
   '/trajectory',

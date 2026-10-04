@@ -1,4 +1,4 @@
-import { faRoute } from '@fortawesome/free-solid-svg-icons'
+import { faCode, faRoute } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 import Image from 'next/image'
@@ -175,13 +175,22 @@ export default async function HomePage() {
                 </ExternalInlineLink>
               </p>
 
-              <Link
-                className="bio-trajectory-link"
-                href="/trajectory"
-              >
-                <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
-                Academic trajectory
-              </Link>
+              <div className="bio-profile-links">
+                <Link
+                  className="bio-profile-link"
+                  href="/trajectory"
+                >
+                  <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
+                  Academic trajectory
+                </Link>
+                <Link
+                  className="bio-profile-link"
+                  href="/software"
+                >
+                  <FontAwesomeIcon icon={faCode} aria-hidden="true" />
+                  Software ecosystem
+                </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -15,6 +15,39 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
+    version: 'v6.0.0-rc.2',
+    codename: 'Bold River',
+    status: 'In development',
+    releasedOn: 'TBC',
+    comparison: 'Second release candidate in the Next.js repository',
+    summary:
+      'Bold River hardens collaboration analytics, introduces a public Software Ecosystem catalogue, refines footer presentation, and prepares the repository for eventual public visibility with explicit licensing boundaries.',
+    sections: [
+      {
+        title: 'Software Ecosystem',
+        items: [
+          'Added a non-navigation /software catalogue backed exclusively by Research Dashboard public Software Ecosystem RPCs.',
+          'Linked Software ecosystem directly below Academic trajectory on the homepage and kept software profiles self-contained as cards without detail routes.',
+        ],
+      },
+      {
+        title: 'Robustness and presentation',
+        items: [
+          'Normalised publication author arrays before collaboration calculations and identified the exceptional large collaboration by stable slug rather than exact title.',
+          'Moved the Creative Commons/year/name line to the left footer column above the public email address.',
+          'Included the updated 404 penguin assets and revised publication population target already added after rc.1.',
+        ],
+      },
+      {
+        title: 'Public-repository preparation',
+        items: [
+          'Added explicit software, editorial-content and third-party asset licensing boundaries in preparation for making the repository public.',
+          'Extended the website public-contract checker to validate Software Ecosystem fields, controlled vocabularies, repository privacy invariants and clean publication author arrays.',
+        ],
+      },
+    ],
+  },
+  {
     version: 'v6.0.0-rc.1',
     codename: 'Swift Harbour',
     status: 'Current release',

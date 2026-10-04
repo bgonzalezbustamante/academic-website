@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). It is the production website at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/), deployed from validated `main` through the Netlify project `bgonzalezbustamante`.
+Current production release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). **v6.0.0-rc.2 "Bold River"** is in development. Production remains at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/), deployed from validated `main` through the Netlify project `bgonzalezbustamante`.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -18,6 +18,8 @@ The website consumes only explicitly curated anonymous-safe Supabase RPC contrac
 - `get_public_project(slug)`
 - `list_public_conference_presentations()`
 - `list_public_teaching()`
+- `list_public_software()`
+- `get_public_software(slug)`
 - `get_public_work_analytics(year)`
 
 Runtime website code must not query Research Dashboard tables directly or use a service-role key. Private workflow metadata, notes, account information, work-session details and other Dashboard-only data remain outside the public application.
@@ -28,6 +30,7 @@ Swift Harbour currently includes:
 
 - a portrait-led academic homepage with current appointments, research interests, institutional links, DORA/CRediT research-practice information and public contact details;
 - an Academic trajectory page for selected education, faculty appointments, research positions, teaching positions and consultancy;
+- a non-navigation Software Ecosystem catalogue with public lifecycle, version, repository, production and documentation metadata;
 - Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
@@ -117,7 +120,7 @@ npm run check:public-contract
 npm run build
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching and aggregate work analytics, verifies expected public relationships and controlled Teaching roles, and rejects private fields. Empty curated datasets are valid states.
+The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. Empty curated datasets are valid states.
 
 ## Deployment
 
@@ -140,3 +143,12 @@ The predecessor remains temporarily available at `legacy-bgonzalezbustamante.net
 - Technical v6 history: [CHANGELOG.md](CHANGELOG.md)
 - Public-facing release notes: [Release Notes](./app/release-notes/page.tsx)
 - Detailed pre-v6 history: [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md)
+
+
+## Licensing
+
+Repository software is licensed under the MIT License; see `LICENSE`.
+
+Original editorial website content authored by Bastián González-Bustamante is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0) unless a page or asset states otherwise; see `CONTENT-LICENSE.md`.
+
+Institutional branding, third-party logos and marks, publication material, externally sourced graphics, flags, photographs and other assets whose rights are not held by the repository author are excluded from those licence grants and remain subject to their respective rights; see `NOTICE`.

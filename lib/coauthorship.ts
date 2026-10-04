@@ -1,4 +1,4 @@
-import { PROFILE_AUTHOR_NAME } from '@/lib/authorship'
+import { normalizeAuthors, PROFILE_AUTHOR_NAME } from '@/lib/authorship'
 import type { PublicPaper } from '@/types/public'
 
 export const COAUTHORSHIP_MAX_AUTHORS = 5
@@ -22,23 +22,13 @@ export type CoauthorshipGraph = {
   includedPaperCount: number
 }
 
-function uniqueAuthors(authors: string[]) {
-  return Array.from(
-    new Set(
-      authors
-        .map((author) => author.trim())
-        .filter(Boolean)
-    )
-  )
-}
-
 export function buildCoauthorshipGraph(
   papers: PublicPaper[]
 ): CoauthorshipGraph {
   const includedPapers = papers
     .map((paper) => ({
       paper,
-      authors: uniqueAuthors(paper.authors),
+      authors: normalizeAuthors(paper.authors),
     }))
     .filter(
       ({ authors }) =>

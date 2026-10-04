@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## v6.0.0-rc.2 "Bold River" (in development)
+
+### Summary
+
+- Added a non-navigation `/software` Software Ecosystem catalogue backed only by Research Dashboard's public Software RPC contract, with a homepage link directly below Academic trajectory.
+- Hardened publication authorship analytics by normalising author names before counting and by identifying the unusually large collaboration through its stable slug.
+- Moved the Creative Commons/year/name line to the left footer column above the public email address.
+- Incorporated the post-rc.1 publication population-target update and replacement 404 penguin assets.
+- Began public-repository preparation with explicit MIT software licensing, CC BY 4.0 original editorial-content licensing, third-party asset notices, and expanded public-contract validation.
+
+### Software Ecosystem
+
+- Added `list_public_software()` to the website data layer and public contract checker.
+- Added `/software` as a responsive card catalogue showing public category, version, development stage, status, lifecycle period and available Live/Code/Documentation links.
+- Preserved the upstream privacy invariant that private repositories never expose a repository URL.
+- Kept Software out of the primary navigation and omitted `/software/[slug]` detail routes; the homepage exposes the catalogue beside the existing Academic trajectory entry.
+
+### Robustness and public-readiness
+
+- Publication collaboration summaries and the co-authorship network now trim author names, remove blank entries and deduplicate names within each paper before counting.
+- The large collaboration exclusion for Distinct co-authors and Authors per paper now uses the stable publication slug rather than exact title text.
+- Public-contract validation now rejects blank/duplicate publication author entries and validates Software Ecosystem controlled vocabularies, lifecycle years and repository privacy.
+- Added `LICENSE`, `CONTENT-LICENSE.md` and `NOTICE` to distinguish software, original editorial content and third-party/institutional assets before eventual repository publication.
+
 ## v6.0.0-rc.1 "Swift Harbour" (1 Oct 2026)
 
 ### Summary
