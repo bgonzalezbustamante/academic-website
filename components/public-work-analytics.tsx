@@ -75,9 +75,9 @@ function getDateRange(start: string, end: string) {
 function getHeatmapLevel(minutes: number) {
   if (minutes <= 0) return 'level-0'
   if (minutes < 240) return 'level-1'
-  if (minutes < 360) return 'level-2'
-  if (minutes < 480) return 'level-3'
-  if (minutes < 600) return 'level-4'
+  if (minutes < 480) return 'level-2'
+  if (minutes < 600) return 'level-3'
+  if (minutes < 720) return 'level-4'
   return 'level-5'
 }
 
@@ -374,10 +374,10 @@ export default function PublicWorkAnalytics({
           <div className="activity-bins">
             <span>0h</span>
             <span>&lt;4h</span>
-            <span>4–6h</span>
-            <span>6–8h</span>
+            <span>4–8h</span>
             <span>8–10h</span>
-            <span>10h+</span>
+            <span>10–12h</span>
+            <span>12h+</span>
           </div>
         </div>
       </div>
