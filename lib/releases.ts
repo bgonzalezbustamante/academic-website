@@ -34,7 +34,7 @@ export const releases: ReleaseNote[] = [
         title: 'Personal curation',
         items: [
           'Added a non-navigation Selected paintings page with a rights-aware editorial mosaic, visible image provenance, and a single-column mobile fallback.',
-          'Expanded the mosaic with The Colossus and Pieter Bruegel the Elder’s The Tower of Babel, and reorganised selections whose images are not republished into compact linked cards.',
+          'Expanded the mosaic with El coloso and Pieter Bruegel the Elder’s Turmbau zu Babel, reorganised selections whose images are not republished into compact linked cards, and standardised artwork titles to the canonical catalogue wording used by each holding institution.',
         ],
       },
       {
