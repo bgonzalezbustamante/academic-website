@@ -4,6 +4,8 @@ export type PaintingLayout =
   | 'portrait'
   | 'night-watch'
   | 'saturn'
+  | 'colossus'
+  | 'tower'
 
 export type SelectedPainting = {
   slug: string
@@ -189,6 +191,54 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://creativecommons.org/licenses/by-sa/4.0/',
     imageCredit: 'Museo Nacional del Prado via Wikimedia Commons',
     layout: 'saturn',
+  },
+  {
+    slug: 'the-colossus',
+    title: 'The Colossus',
+    artist: 'Attributed to Francisco de Goya y Lucientes',
+    year: 'After 1808',
+    museum: 'Museo Nacional del Prado',
+    city: 'Madrid',
+    medium: 'Oil on canvas',
+    museumUrl:
+      'https://www.museodelprado.es/en/the-collection/art-work/the-colossus/2a678f69-fbdd-409c-8959-5c873f8feb82',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/7/70/Goya.colossus.jpg',
+    imageWidth: 882,
+    imageHeight: 970,
+    imageAlt:
+      'The Colossus, attributed to Francisco de Goya y Lucientes',
+    imageSourceName: 'Wikimedia Commons',
+    imageSourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Goya.colossus.jpg',
+    imageRightsLabel: 'Public Domain',
+    imageRightsUrl:
+      'https://creativecommons.org/publicdomain/mark/1.0/',
+    layout: 'colossus',
+  },
+  {
+    slug: 'tower-of-babel',
+    title: 'The Tower of Babel',
+    artist: 'Pieter Bruegel the Elder',
+    year: '1563',
+    museum: 'Kunsthistorisches Museum',
+    city: 'Vienna',
+    medium: 'Oil on oak panel',
+    museumUrl:
+      'https://www.khm.at/en/objectdb/detail/323/',
+    imageUrl:
+      'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg/1280px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg',
+    imageWidth: 1280,
+    imageHeight: 937,
+    imageAlt:
+      'The Tower of Babel by Pieter Bruegel the Elder, Vienna version',
+    imageSourceName: 'Wikimedia Commons',
+    imageSourceUrl:
+      'https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg',
+    imageRightsLabel: 'Public Domain',
+    imageRightsUrl:
+      'https://creativecommons.org/publicdomain/mark/1.0/',
+    layout: 'tower',
   },
 ]
 
