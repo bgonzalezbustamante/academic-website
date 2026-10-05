@@ -32,7 +32,7 @@ Swift Harbour currently includes:
 - a portrait-led academic homepage with current appointments, research interests, institutional links, DORA/CRediT research-practice information and public contact details;
 - an Academic trajectory page for selected education, faculty appointments, research positions, teaching positions and consultancy;
 - a non-navigation Software Ecosystem catalogue with public lifecycle, version, repository, production and documentation metadata;
-- a non-navigation Selected paintings page implemented as a manually curated editorial mosaic with per-image source/licence metadata and a single-column mobile fallback;
+- a non-navigation Selected paintings page implemented as a manually curated nine-work editorial mosaic with per-image source/licence metadata, compact rights-aware cards for unreproduced selections and a single-column mobile fallback;
 - Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
