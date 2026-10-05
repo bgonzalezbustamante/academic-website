@@ -40,6 +40,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Robustness and presentation',
         items: [
+          'Aligned the Activity over time heatmap with the revised Research Dashboard working-hour ranges, from 0h through 12h+.',
           'Normalised publication author arrays before collaboration calculations and identified the exceptional large collaboration by stable slug rather than exact title.',
           'Moved the Creative Commons/year/name line to the left footer column above the public email address and added a Dashboard-controlled Catholic Calendar composed display above Website Carbon, including a maximum-width stress mode.',
           'Included the updated 404 penguin assets and revised publication population target already added after rc.1.',
