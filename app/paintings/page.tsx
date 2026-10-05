@@ -45,31 +45,22 @@ export default function PaintingsPage() {
                 className="painting-unreproduced-item"
                 key={painting.title}
               >
-                <h2>
-                  <a
-                    href={painting.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {painting.title}
-                  </a>
-                </h2>
-                <p>
+                <h2>{painting.title}</h2>
+                <p className="painting-unreproduced-meta">
                   {painting.artist} · {painting.year} ·{' '}
                   {painting.venue}, {painting.city}
                 </p>
-                <p>
-                  This work is part of my selection, but I do not
-                  reproduce an image here. {painting.reason}{' '}
-                  <a
-                    href={painting.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {painting.linkLabel}
-                  </a>
-                  .
+                <p className="painting-unreproduced-reason">
+                  {painting.reason}
                 </p>
+                <a
+                  className="painting-unreproduced-link"
+                  href={painting.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {painting.linkLabel}
+                </a>
               </article>
             ))}
           </div>
