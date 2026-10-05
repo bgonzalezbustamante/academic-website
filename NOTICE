@@ -11,3 +11,18 @@ Third-party names, logos, crests, trademarks, service marks, institutional brand
 This includes, without limitation, institutional and organisational assets under `public/branding`, `public/funders`, `public/dora`, `public/credit`, and `public/teaching`, as well as publication/project imagery and other credited or externally derived assets.
 
 The presence of an asset in this repository does not grant trademark rights or imply that the asset is licensed under MIT or CC BY 4.0.
+
+
+## Catholic Calendar
+
+The footer uses `@bgonzalezbustamante/catholic-calendar`, an MIT-licensed package maintained by Bastián González-Bustamante. The package supplies calendar rules and semantic display metadata; its demonstration application is not embedded in this website.
+
+## Christicons
+
+Selected Christian-themed SVG icons used by the Catholic Calendar footer are provided by **Christicons**, created and maintained by **Dimitri Conejo Sanz**.
+
+- Project: https://christicons.com/
+- Licence: Christicons Icon License, Version 1.0 — 29 May 2026
+- Licence text: https://christicons.com/license
+
+The Christicons licence permits integration into projects but does not permit redistribution as a standalone icon collection or use for AI or machine-learning training. The curated files under `public/calendar/christicons` are included only as supporting interface assets for the Catholic Calendar footer and remain subject to the Christicons licence.
