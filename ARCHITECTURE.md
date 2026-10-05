@@ -45,7 +45,7 @@ The homepage links to `/software` inline beside Academic trajectory. Software is
 
 ### Selected paintings
 
-`/paintings` is intentionally local editorial content rather than an Academic API contract. The small curated dataset lives in `content/paintings.ts` and records artwork metadata, official museum links, image-source URLs, image-rights metadata and one of a small set of editorial layout hints.
+`/paintings` is intentionally local editorial content rather than an Academic API contract. The small curated dataset lives in `content/paintings.ts` and records artwork metadata, official museum links, image-source URLs, image-rights metadata and one of a small set of editorial layout hints. Display titles follow the canonical catalogue wording used by the holding institution, preserving the institution’s own language rather than imposing English translations.
 
 Desktop presentation uses a controlled 12-column mosaic that exploits the works' contrasting proportions while preserving every complete image with `object-fit: contain`. The four complete rows use 8+4, 4+4+4, 7+5 and 5+7 column spans, with `The Colossus` and `The Tower of Babel` forming the mirrored final row. At 760px and below, all grid spans are discarded and the page becomes a single-column sequence using each image's natural aspect ratio.
 
