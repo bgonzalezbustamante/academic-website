@@ -121,7 +121,7 @@ npm run check:public-contract
 npm run build
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` separately scans the Catholic Calendar package's complete 2000–2100 range to protect the two-item footer composition and its longest display case. Empty curated datasets are valid states.
+The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` separately protects deterministic Catholic Calendar footer fixtures, including the longest known composed-display stress case and a current-day integration sample, without adding an expensive full-range scan to every build. Empty curated datasets are valid states.
 
 ## Deployment
 

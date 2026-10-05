@@ -201,7 +201,7 @@ The footer consumes the exact `@bgonzalezbustamante/catholic-calendar@0.1.0-beta
 
 The composed display remains fixed at the package contract's maximum of two items. The entire display links to `https://catholic.bgonzalezbustamante.com/` and uses local Christicons masks corresponding to the semantic icon identifiers returned by the package. The right-hand footer order is Catholic Calendar → Website Carbon → release version.
 
-`scripts/check-calendar-footer.mjs` scans every supported date from 2000 through 2100 before production builds. It verifies the two-item/icon invariants and protects the longest current composition, `St Michael's Lent · 13 days until Saints Michael, Gabriel and Raphael, Archangels`, as a width stress case.
+`scripts/check-calendar-footer.mjs` runs deterministic footer fixtures before production builds. It verifies the two-item/icon invariants and protects the longest known composition, `St Michael's Lent · 13 days until Saints Michael, Gabriel and Raphael, Archangels` (16 September 2026), as a width stress case without exhaustively recomputing the package's full 2000–2100 range on every deployment.
 
 ## Development and deployment
 
