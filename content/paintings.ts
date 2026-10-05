@@ -31,7 +31,7 @@ export type SelectedPainting = {
 export const selectedPaintings: SelectedPainting[] = [
   {
     slug: 'garden-of-earthly-delights',
-    title: 'The Garden of Earthly Delights',
+    title: 'Tríptico del Jardín de las delicias',
     artist: 'Hieronymus Bosch',
     year: '1490–1500',
     museum: 'Museo Nacional del Prado',
@@ -44,7 +44,7 @@ export const selectedPaintings: SelectedPainting[] = [
     imageWidth: 1280,
     imageHeight: 655,
     imageAlt:
-      'The Garden of Earthly Delights Triptych by Hieronymus Bosch',
+      'Tríptico del Jardín de las delicias by Hieronymus Bosch',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:The_Garden_of_Earthly_Delights_by_Hieronymus_Bosch.jpg',
@@ -55,7 +55,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'the-dog',
-    title: 'The Dog',
+    title: 'Perro semihundido',
     artist: 'Francisco de Goya',
     year: '1820–1823',
     museum: 'Museo Nacional del Prado',
@@ -67,7 +67,7 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Goya_Dog.jpg/960px-Goya_Dog.jpg',
     imageWidth: 960,
     imageHeight: 1630,
-    imageAlt: 'The Dog by Francisco de Goya',
+    imageAlt: 'Perro semihundido by Francisco de Goya',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:Goya_Dog.jpg',
@@ -102,7 +102,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'penitent-magdalene',
-    title: 'Penitent Magdalene',
+    title: 'Maddalena penitente',
     artist: 'Domenico Tintoretto',
     year: '1598–1602',
     museum: 'Musei Capitolini',
@@ -112,7 +112,7 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/TINTORETTO_-_Magdalena_penitente_%28Musei_Capitolini%2C_Roma%2C_1598-1602%29_-_copia.jpg/960px-TINTORETTO_-_Magdalena_penitente_%28Musei_Capitolini%2C_Roma%2C_1598-1602%29_-_copia.jpg',
     imageWidth: 960,
     imageHeight: 1186,
-    imageAlt: 'Penitent Magdalene by Domenico Tintoretto',
+    imageAlt: 'Maddalena penitente by Domenico Tintoretto',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:TINTORETTO_-_Magdalena_penitente_(Musei_Capitolini,_Roma,_1598-1602)_-_copia.jpg',
@@ -123,7 +123,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'las-meninas',
-    title: 'Las Meninas',
+    title: 'Las meninas',
     artist: 'Diego Velázquez',
     year: '1656',
     museum: 'Museo Nacional del Prado',
@@ -135,7 +135,7 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://upload.wikimedia.org/wikipedia/commons/7/76/La_familia_de_Felipe_IV_o_Las_Meninas_%28Vel%C3%A1zquez%2C_Museo_del_Prado_de_Madrid%2C_1656%29.jpg',
     imageWidth: 2649,
     imageHeight: 3051,
-    imageAlt: 'Las Meninas by Diego Velázquez',
+    imageAlt: 'Las meninas by Diego Velázquez',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:La_familia_de_Felipe_IV_o_Las_Meninas_(Vel%C3%A1zquez,_Museo_del_Prado_de_Madrid,_1656).jpg',
@@ -146,7 +146,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'night-watch',
-    title: 'The Night Watch',
+    title: 'De Nachtwacht',
     artist: 'Rembrandt van Rijn',
     year: '1642',
     museum: 'Rijksmuseum',
@@ -158,7 +158,7 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg/1280px-The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg',
     imageWidth: 1280,
     imageHeight: 1041,
-    imageAlt: 'The Night Watch by Rembrandt van Rijn',
+    imageAlt: 'De Nachtwacht by Rembrandt van Rijn',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg',
@@ -170,7 +170,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'saturn',
-    title: 'Saturn Devouring His Son',
+    title: 'Saturno',
     artist: 'Francisco de Goya',
     year: '1820–1823',
     museum: 'Museo Nacional del Prado',
@@ -182,7 +182,7 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://upload.wikimedia.org/wikipedia/commons/b/bc/Saturn_Devouring_His_Son.jpg',
     imageWidth: 1071,
     imageHeight: 1920,
-    imageAlt: 'Saturn Devouring His Son by Francisco de Goya',
+    imageAlt: 'Saturno by Francisco de Goya',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:Saturn_Devouring_His_Son.jpg',
@@ -194,7 +194,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'the-colossus',
-    title: 'The Colossus',
+    title: 'El coloso',
     artist: 'Attributed to Francisco de Goya y Lucientes',
     year: 'After 1808',
     museum: 'Museo Nacional del Prado',
@@ -207,7 +207,7 @@ export const selectedPaintings: SelectedPainting[] = [
     imageWidth: 882,
     imageHeight: 970,
     imageAlt:
-      'The Colossus, attributed to Francisco de Goya y Lucientes',
+      'El coloso, attributed to Francisco de Goya y Lucientes',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:Goya.colossus.jpg',
@@ -218,7 +218,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'tower-of-babel',
-    title: 'The Tower of Babel',
+    title: 'Turmbau zu Babel',
     artist: 'Pieter Bruegel the Elder',
     year: '1563',
     museum: 'Kunsthistorisches Museum',
@@ -231,7 +231,7 @@ export const selectedPaintings: SelectedPainting[] = [
     imageWidth: 1280,
     imageHeight: 937,
     imageAlt:
-      'The Tower of Babel by Pieter Bruegel the Elder, Vienna version',
+      'Turmbau zu Babel by Pieter Bruegel the Elder, Vienna version',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg',
