@@ -34,7 +34,7 @@ export const releases: ReleaseNote[] = [
         title: 'Personal curation',
         items: [
           'Added a non-navigation Selected paintings page with a rights-aware editorial mosaic, visible image provenance, and a single-column mobile fallback.',
-          'Linked Selected paintings below Main Interests on the homepage and represented Leonora Carrington’s Las distracciones de Dagoberto only through a MALBA-linked copyright note.',
+          'Linked Selected paintings below Main Interests on the homepage and represented copyrighted selections by Leonora Carrington, Matthew Wong and Pablo Picasso only through institutional links and rights-aware notes rather than copied images.',
         ],
       },
       {

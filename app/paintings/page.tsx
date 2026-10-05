@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import PaintingCard from '@/components/painting-card'
 import {
   selectedPaintings,
-  unreproducedPainting,
+  unreproducedPaintings,
 } from '@/content/paintings'
 
 export const metadata: Metadata = {
@@ -38,36 +38,41 @@ export default function PaintingsPage() {
         </div>
 
         <aside className="painting-rights-note">
-          <p className="eyebrow">Not reproduced here</p>
-          <h2>
-            <a
-              href={unreproducedPainting.museumUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {unreproducedPainting.title}
-            </a>
-          </h2>
-          <p>
-            {unreproducedPainting.artist} ·{' '}
-            {unreproducedPainting.year} ·{' '}
-            {unreproducedPainting.museum},{' '}
-            {unreproducedPainting.city}
-          </p>
-          <p>
-            This work is part of my selection, but I do not
-            reproduce an image here because the artwork remains
-            protected by copyright and I have not identified an
-            image licence suitable for republication on this site.{' '}
-            <a
-              href={unreproducedPainting.museumUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View the work at MALBA
-            </a>
-            .
-          </p>
+          <p className="eyebrow">Selected works not reproduced here</p>
+          <div className="painting-unreproduced-list">
+            {unreproducedPaintings.map((painting) => (
+              <article
+                className="painting-unreproduced-item"
+                key={painting.title}
+              >
+                <h2>
+                  <a
+                    href={painting.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {painting.title}
+                  </a>
+                </h2>
+                <p>
+                  {painting.artist} · {painting.year} ·{' '}
+                  {painting.venue}, {painting.city}
+                </p>
+                <p>
+                  This work is part of my selection, but I do not
+                  reproduce an image here. {painting.reason}{' '}
+                  <a
+                    href={painting.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {painting.linkLabel}
+                  </a>
+                  .
+                </p>
+              </article>
+            ))}
+          </div>
         </aside>
       </div>
     </section>

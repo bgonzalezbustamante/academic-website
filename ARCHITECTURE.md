@@ -49,7 +49,7 @@ The homepage links to `/software` inline beside Academic trajectory. Software is
 
 Desktop presentation uses a controlled 12-column mosaic that exploits the works' contrasting proportions while preserving every complete image with `object-fit: contain`. The current arrangement is wide+tall, three portrait-format works, then wide+tall. At 760px and below, all grid spans are discarded and the page becomes a single-column sequence using each image's natural aspect ratio.
 
-Artwork images are loaded from explicitly recorded Wikimedia Commons sources and remain outside the repository's own software/content licences. The rights line is visible on every reproduced card. `Las distracciones de Dagoberto` by Leonora Carrington is represented only by a bottom note and a MALBA link because no suitable republication licence has been identified.
+Artwork images are loaded from explicitly recorded Wikimedia Commons sources and remain outside the repository's own software/content licences. The rights line is visible on every reproduced card. `Las distracciones de Dagoberto` by Leonora Carrington, `A Walk through Primordial Garden` by Matthew Wong and `L’Étagère` by Pablo Picasso are represented only in a bottom rights-aware note group, with links to MALBA, Van Gogh Museum material and ALBERTINA respectively, because suitable republication rights have not been established.
 
 The homepage exposes `/paintings` through a small Selected paintings link below Main Interests. The page is deliberately absent from the primary navigation.
 

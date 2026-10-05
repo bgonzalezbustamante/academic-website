@@ -4987,8 +4987,36 @@ h4 {
   line-height: 1.65;
 }
 
-.painting-rights-note > p:last-child {
+.painting-unreproduced-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.painting-unreproduced-item + .painting-unreproduced-item {
+  border-top: 1px solid rgba(0, 33, 71, 0.1);
+  padding-top: 1rem;
+}
+
+.painting-unreproduced-item h2,
+.painting-unreproduced-item p {
+  margin: 0;
+}
+
+.painting-unreproduced-item h2 {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.painting-unreproduced-item h2 a {
+  text-decoration: none;
+}
+
+.painting-unreproduced-item p {
+  margin-top: 0.38rem;
   max-width: 760px;
+  color: var(--oxford-ash);
+  font-size: 0.78rem;
+  line-height: 1.65;
 }
 
 @media (max-width: 760px) {

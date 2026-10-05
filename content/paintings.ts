@@ -192,12 +192,52 @@ export const selectedPaintings: SelectedPainting[] = [
   },
 ]
 
-export const unreproducedPainting = {
-  title: 'Las distracciones de Dagoberto',
-  artist: 'Leonora Carrington',
-  year: '1945',
-  museum: 'MALBA',
-  city: 'Buenos Aires',
-  museumUrl:
-    'https://malba.org.ar/las-distracciones-de-dagoberto-de-leonora-carrington-malba/',
-} as const
+export type UnreproducedPainting = {
+  title: string
+  artist: string
+  year: string
+  venue: string
+  city: string
+  url: string
+  linkLabel: string
+  reason: string
+}
+
+export const unreproducedPaintings: UnreproducedPainting[] = [
+  {
+    title: 'Las distracciones de Dagoberto',
+    artist: 'Leonora Carrington',
+    year: '1945',
+    venue: 'MALBA',
+    city: 'Buenos Aires',
+    url:
+      'https://malba.org.ar/las-distracciones-de-dagoberto-de-leonora-carrington-malba/',
+    linkLabel: 'View the work at MALBA',
+    reason:
+      'The artwork remains protected by copyright, and I have not identified an image licence suitable for republication on this site.',
+  },
+  {
+    title: 'A Walk through Primordial Garden',
+    artist: 'Matthew Wong',
+    year: '2018',
+    venue: 'Van Gogh Museum exhibition',
+    city: 'Amsterdam',
+    url:
+      'https://www.vangoghmuseum.nl/assets/dbe7d644-e1e6-4940-b29b-e02369bd39b7/English%20Gallery%20Texts%20for%20the%20exhibition%20%27Matthew%20Wong%20%7C%20Vincent%20van%20Gogh%3A%20Painting%20as%20a%20Last%20Resort%27?c=3c3cf9132e3025ea8e8d2aa37f18ec7e4f3a4d73e995022254c91856c1023fc4',
+    linkLabel: 'View the Van Gogh Museum exhibition text',
+    reason:
+      'The work remains protected by copyright, and I have not identified an image licence suitable for republication on this site.',
+  },
+  {
+    title: 'L’Étagère',
+    artist: 'Pablo Picasso',
+    year: '1911–1912',
+    venue: 'ALBERTINA',
+    city: 'Vienna',
+    url:
+      'https://sammlungenonline.albertina.at/objects/604673/letagere',
+    linkLabel: 'View the work at ALBERTINA',
+    reason:
+      'ALBERTINA explicitly credits the reproduction to Succession Picasso / Bildrecht Wien, so I do not reproduce the image here.',
+  },
+]

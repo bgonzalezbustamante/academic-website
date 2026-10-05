@@ -26,7 +26,7 @@
 - Added seven image-backed selections with visible source/licence metadata: works by Bosch, Goya, Vigée Le Brun, Domenico Tintoretto, Velázquez and Rembrandt.
 - Used a controlled desktop puzzle layout that respects different artwork proportions without cropping, with a single-column natural-ratio fallback on mobile.
 - Added a Selected paintings link directly below Main Interests on the homepage.
-- Added `Las distracciones de Dagoberto` by Leonora Carrington as a bottom note linking to MALBA without reproducing the copyrighted artwork.
+- Added a bottom “Selected works not reproduced here” group for Leonora Carrington’s `Las distracciones de Dagoberto`, Matthew Wong’s `A Walk through Primordial Garden`, and Pablo Picasso’s `L’Étagère`, with institutional links and explicit copyright/reuse explanations instead of copied images.
 
 ### Robustness and public-readiness
 
