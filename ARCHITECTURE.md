@@ -40,7 +40,7 @@ Software Ecosystem is supplied exclusively through `list_public_software()`. The
 
 Repository visibility is independent from profile exposure. When `repository_visibility` is `private`, `repository_url` must remain null even for an otherwise public Software Ecosystem profile. `get_public_software(text)` is validated as part of the public contract for forward compatibility, but rc.2 does not use it for navigation because its current detail shape is intentionally identical to the listing shape.
 
-The homepage links to `/software` directly below Academic trajectory. Software is intentionally absent from the primary navigation.
+The homepage links to `/software` inline beside Academic trajectory. Software is intentionally absent from the primary navigation.
 
 ### Publication Key highlights
 
@@ -201,7 +201,7 @@ The footer consumes the exact `@bgonzalezbustamante/catholic-calendar@0.1.0-beta
 
 The composed display remains fixed at the package contract's maximum of two items. The entire display links to `https://catholic.bgonzalezbustamante.com/` and uses local Christicons masks corresponding to the semantic icon identifiers returned by the package. The right-hand footer order is Catholic Calendar → Website Carbon → release version.
 
-`scripts/check-calendar-footer.mjs` runs deterministic footer fixtures before production builds. It verifies the two-item/icon invariants and protects the longest known composition, `St Michael's Lent · 13 days until Saints Michael, Gabriel and Raphael, Archangels` (16 September 2026), as a width stress case without exhaustively recomputing the package's full 2000–2100 range on every deployment.
+`scripts/check-calendar-footer.mjs` runs fast deterministic footer fixtures before production builds. It protects the 85-character maximum-width composition identified by the full beta.1 range audit — `Our Lord Jesus Christ, King of the Universe · Presentation of the Blessed Virgin Mary` — together with the long St Michael's Lent/countdown composition and the 5 October 2026 integration sample. `scripts/audit-calendar-footer.mjs` retains the exhaustive 2000–2100 scan for deliberate package/release audits rather than every deployment.
 
 ## Development and deployment
 

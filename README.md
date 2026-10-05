@@ -121,7 +121,7 @@ npm run check:public-contract
 npm run build
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` separately protects deterministic Catholic Calendar footer fixtures, including the longest known composed-display stress case and a current-day integration sample, without adding an expensive full-range scan to every build. Empty curated datasets are valid states.
+The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` protects deterministic Catholic Calendar footer fixtures: the 85-character maximum-width composition found by the full beta.1 audit, the long St Michael's Lent/countdown composition, and a current-day integration sample. `npm run audit:calendar-footer` retains the exhaustive 2000–2100 scan for deliberate package/release audits without adding it to every Netlify build. Empty curated datasets are valid states.
 
 ## Deployment
 

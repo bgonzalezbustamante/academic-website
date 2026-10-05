@@ -8,7 +8,7 @@
 - Hardened publication authorship analytics by normalising author names before counting and by identifying the unusually large collaboration through its stable slug.
 - Moved the Creative Commons/year/name line to the left footer column above the public email address.
 - Added the Catholic Calendar two-item composed display above Website Carbon in the right footer, powered by the published calendar package, linked to the standalone calendar site and rendered with semantic Christicons.
-- Added deterministic calendar-footer regression fixtures using the longest composed string as a width stress case and a current-day integration sample, while resolving the live footer display from the current Europe/Amsterdam date.
+- Added fast deterministic calendar-footer regression fixtures for the 85-character maximum-width composition, the long St Michael's Lent/countdown combination and a current-day sample, while retaining a separate exhaustive 2000–2100 audit for deliberate package/release checks.
 - Incorporated the post-rc.1 publication population-target update and replacement 404 penguin assets.
 - Began public-repository preparation with explicit MIT software licensing, CC BY 4.0 original editorial-content licensing, third-party asset notices, and expanded public-contract validation.
 

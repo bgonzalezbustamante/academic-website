@@ -5,12 +5,20 @@ import {
   getCatholicCalendarState,
 } from '@bgonzalezbustamante/catholic-calendar'
 
+const MAX_COMPOSED_DISPLAY_CHARACTERS = 85
+
 const FIXTURES = [
+  {
+    date: '2027-11-21',
+    expected:
+      'Our Lord Jesus Christ, King of the Universe · Presentation of the Blessed Virgin Mary',
+    purpose: 'maximum-width composition from the full beta.1 range audit',
+  },
   {
     date: '2026-09-16',
     expected:
       "St Michael's Lent · 13 days until Saints Michael, Gabriel and Raphael, Archangels",
-    purpose: 'longest composed-display width stress case',
+    purpose: 'long period-plus-countdown composition',
   },
   {
     date: '2026-10-05',
@@ -28,6 +36,11 @@ for (const fixture of FIXTURES) {
     display.text,
     fixture.expected,
     `Unexpected ${fixture.purpose} on ${fixture.date}.`
+  )
+
+  assert.ok(
+    display.text.length <= MAX_COMPOSED_DISPLAY_CHARACTERS,
+    `Footer display exceeds the reviewed ${MAX_COMPOSED_DISPLAY_CHARACTERS}-character width envelope on ${fixture.date}.`
   )
 
   assert.ok(

@@ -17,6 +17,7 @@
     "precheck": "npm run profile:sync",
     "check": "npm run lint && npm run typecheck && npm run check:calendar-footer",
     "check:calendar-footer": "node scripts/check-calendar-footer.mjs",
+    "audit:calendar-footer": "node scripts/audit-calendar-footer.mjs",
     "check:public-contract": "node --env-file=.env.local scripts/check-public-contract.mjs"
   },
   "dependencies": {
