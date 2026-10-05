@@ -23,10 +23,10 @@
 ### Selected paintings
 
 - Added a non-navigation `/paintings` page as a manually curated editorial mosaic rather than an Academic API-backed dataset.
-- Added seven image-backed selections with visible source/licence metadata: works by Bosch, Goya, Vigée Le Brun, Domenico Tintoretto, Velázquez and Rembrandt.
-- Used a controlled desktop puzzle layout that respects different artwork proportions without cropping, with a single-column natural-ratio fallback on mobile.
+- Added nine image-backed selections with visible source/licence metadata, including `The Colossus` using the Prado’s current “Attributed to Francisco de Goya y Lucientes” catalogue wording and Pieter Bruegel the Elder’s 1563 Vienna `The Tower of Babel`.
+- Extended the controlled 12-column desktop puzzle to a fourth complete row: `The Colossus` spans five columns and `The Tower of Babel` seven, mirroring the preceding 7+5 row while preserving uncropped images; mobile remains a single-column natural-ratio layout.
 - Added a Selected paintings link directly below Main Interests on the homepage.
-- Added a bottom “Selected works not reproduced here” group for Leonora Carrington’s `Las distracciones de Dagoberto`, Matthew Wong’s `A Walk through Primordial Garden`, and Pablo Picasso’s `L’Étagère`, with institutional links and explicit copyright/reuse explanations instead of copied images.
+- Reworked the bottom “Selected works not reproduced here” group for Leonora Carrington’s `Las distracciones de Dagoberto`, Matthew Wong’s `A Walk through Primordial Garden`, and Pablo Picasso’s `L’Étagère` into compact responsive mini-cards with one institutional destination link and concise copyright/reuse explanations.
 
 ### Robustness and public-readiness
 
