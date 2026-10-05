@@ -4848,8 +4848,13 @@ h4 {
   grid-column: span 7;
 }
 
-.painting-tile-saturn {
+.painting-tile-saturn,
+.painting-tile-colossus {
   grid-column: span 5;
+}
+
+.painting-tile-tower {
+  grid-column: span 7;
 }
 
 .painting-media {
@@ -4876,11 +4881,13 @@ h4 {
   aspect-ratio: 4 / 5;
 }
 
-.painting-tile-night-watch .painting-media {
+.painting-tile-night-watch .painting-media,
+.painting-tile-tower .painting-media {
   aspect-ratio: 7 / 5;
 }
 
-.painting-tile-saturn .painting-media {
+.painting-tile-saturn .painting-media,
+.painting-tile-colossus .painting-media {
   aspect-ratio: 1 / 1;
 }
 
@@ -4960,41 +4967,30 @@ h4 {
 }
 
 .painting-rights-note {
-  max-width: 820px;
   margin-top: 2rem;
   border-top: 1px solid var(--oxford-stone);
   padding-top: 1.15rem;
 }
 
-.painting-rights-note h2,
-.painting-rights-note p {
-  margin: 0;
-}
-
-.painting-rights-note h2 {
-  font-size: 1rem;
-  line-height: 1.35;
-}
-
-.painting-rights-note h2 a {
-  text-decoration: none;
-}
-
-.painting-rights-note > p:not(.eyebrow) {
-  margin-top: 0.38rem;
-  color: var(--oxford-ash);
-  font-size: 0.78rem;
-  line-height: 1.65;
+.painting-rights-note > .eyebrow {
+  margin-bottom: 0.72rem;
 }
 
 .painting-unreproduced-list {
   display: grid;
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
 }
 
-.painting-unreproduced-item + .painting-unreproduced-item {
-  border-top: 1px solid rgba(0, 33, 71, 0.1);
-  padding-top: 1rem;
+.painting-unreproduced-item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--oxford-stone);
+  border-radius: 0.65rem;
+  padding: 0.86rem 0.9rem 0.82rem;
+  background: var(--paper);
+  box-shadow: 0 4px 14px rgba(0, 33, 71, 0.025);
 }
 
 .painting-unreproduced-item h2,
@@ -5003,20 +4999,45 @@ h4 {
 }
 
 .painting-unreproduced-item h2 {
-  font-size: 1rem;
+  color: var(--oxford-blue);
+  font-size: 0.9rem;
+  font-weight: 650;
   line-height: 1.35;
 }
 
-.painting-unreproduced-item h2 a {
-  text-decoration: none;
+.painting-unreproduced-meta,
+.painting-unreproduced-reason,
+.painting-unreproduced-link {
+  font-family: var(--font-roboto), Arial, sans-serif;
 }
 
-.painting-unreproduced-item p {
-  margin-top: 0.38rem;
-  max-width: 760px;
+.painting-unreproduced-meta {
+  margin-top: 0.3rem !important;
+  color: var(--oxford-charcoal);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.painting-unreproduced-reason {
+  margin-top: 0.58rem !important;
   color: var(--oxford-ash);
-  font-size: 0.78rem;
-  line-height: 1.65;
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.painting-unreproduced-link {
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 0.72rem;
+  color: var(--oxford-blue);
+  font-size: 0.64rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration-color: rgba(254, 97, 90, 0.55);
+}
+
+.painting-unreproduced-link:hover {
+  color: var(--oxford-coral);
 }
 
 @media (max-width: 760px) {
@@ -5037,12 +5058,18 @@ h4 {
   .painting-tile-dog .painting-media,
   .painting-tile-portrait .painting-media,
   .painting-tile-night-watch .painting-media,
-  .painting-tile-saturn .painting-media {
+  .painting-tile-saturn .painting-media,
+  .painting-tile-colossus .painting-media,
+  .painting-tile-tower .painting-media {
     aspect-ratio: auto;
   }
 
   .painting-image {
     width: 100%;
     height: auto;
+  }
+
+  .painting-unreproduced-list {
+    grid-template-columns: 1fr;
   }
 }
