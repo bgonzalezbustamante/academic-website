@@ -279,7 +279,7 @@ export const unreproducedPaintings: UnreproducedPainting[] = [
       'The work remains protected by copyright, and I have not identified an image licence suitable for republication on this site.',
   },
   {
-    title: 'L’Étagère',
+    title: 'L'étagère',
     artist: 'Pablo Picasso',
     year: '1911–1912',
     venue: 'ALBERTINA',
