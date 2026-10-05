@@ -43,6 +43,16 @@ Repository visibility is independent from profile exposure. When `repository_vis
 
 The homepage links to `/software` inline beside Academic trajectory. Software is intentionally absent from the primary navigation.
 
+### Selected paintings
+
+`/paintings` is intentionally local editorial content rather than an Academic API contract. The small curated dataset lives in `content/paintings.ts` and records artwork metadata, official museum links, image-source URLs, image-rights metadata and one of a small set of editorial layout hints.
+
+Desktop presentation uses a controlled 12-column mosaic that exploits the works' contrasting proportions while preserving every complete image with `object-fit: contain`. The current arrangement is wide+tall, three portrait-format works, then wide+tall. At 760px and below, all grid spans are discarded and the page becomes a single-column sequence using each image's natural aspect ratio.
+
+Artwork images are loaded from explicitly recorded Wikimedia Commons sources and remain outside the repository's own software/content licences. The rights line is visible on every reproduced card. `Las distracciones de Dagoberto` by Leonora Carrington is represented only by a bottom note and a MALBA link because no suitable republication licence has been identified.
+
+The homepage exposes `/paintings` through a small Selected paintings link below Main Interests. The page is deliberately absent from the primary navigation.
+
 ### Publication Key highlights
 
 Citation and Key highlights are deliberately detail-only presentation metadata. `list_public_papers()` remains the compact canonical publication listing and does not expose them. The Publications page resolves each already-public slug through `get_public_paper(text)` to obtain the owner-entered citation without querying Dashboard tables. `get_public_paper(text)` additionally provides:

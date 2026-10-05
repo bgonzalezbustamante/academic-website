@@ -26,3 +26,12 @@ Selected Christian-themed SVG icons used by the Catholic Calendar footer are pro
 - Licence text: https://christicons.com/license
 
 The Christicons licence permits integration into projects but does not permit redistribution as a standalone icon collection or use for AI or machine-learning training. The curated files under `public/calendar/christicons` are included only as supporting interface assets for the Catholic Calendar footer and remain subject to the Christicons licence.
+
+
+## Selected paintings
+
+The `/paintings` page contains a manually curated personal selection of artworks. Artwork images are loaded from Wikimedia Commons and are not covered by this repository's MIT or CC BY 4.0 grants.
+
+The page records a source and rights statement for every reproduced image. Most current reproductions are marked Public Domain on Wikimedia Commons. The image used for Francisco de Goya's `Saturn` is licensed CC BY-SA 4.0 and is visibly credited on the page to Museo Nacional del Prado via Wikimedia Commons.
+
+Leonora Carrington's `Las distracciones de Dagoberto` is intentionally not reproduced because the artwork remains protected by copyright and no suitable republication licence has been identified. The page links to MALBA's official presentation of the work instead.

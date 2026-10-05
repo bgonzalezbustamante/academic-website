@@ -32,6 +32,7 @@ Swift Harbour currently includes:
 - a portrait-led academic homepage with current appointments, research interests, institutional links, DORA/CRediT research-practice information and public contact details;
 - an Academic trajectory page for selected education, faculty appointments, research positions, teaching positions and consultancy;
 - a non-navigation Software Ecosystem catalogue with public lifecycle, version, repository, production and documentation metadata;
+- a non-navigation Selected paintings page implemented as a manually curated editorial mosaic with per-image source/licence metadata and a single-column mobile fallback;
 - Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
@@ -46,11 +47,12 @@ The homepage population indicator is intentionally a progress measure for the on
 
 ## Manually maintained site metadata
 
-Three small TypeScript sources intentionally remain manual:
+Four small TypeScript sources intentionally remain manual:
 
 - `lib/site-population.ts` stores intended-ingestion totals, population periods and the `POPULATION_SETTINGS.showProgress` display switch. Set it to `false` to hide both the Home population card and the section-level progress strips without deleting the underlying targets.
 - `content/trajectory.ts` stores the selected education and professional positions shown on the Academic trajectory page. Entries are grouped by category for manual editing, and the optional `order` field resolves ties when positions share the same interval.
 - `content/site-carbon.ts` stores the current Website Carbon snapshot. Set `showInFooter: false` to suppress the public footer note while retaining the measurement data.
+- `content/paintings.ts` stores the deliberately small personal painting selection, museum/source links, image rights metadata and editorial mosaic layout hints.
 
 These files are deliberately local configuration/content rather than Research Dashboard contracts. Website Carbon values are linked to the corresponding public report; the site does not call Website Carbon at runtime.
 

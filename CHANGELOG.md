@@ -20,6 +20,14 @@
 - Preserved the upstream privacy invariant that private repositories never expose a repository URL.
 - Kept Software out of the primary navigation and omitted `/software/[slug]` detail routes; the homepage presents Software ecosystem inline beside Academic trajectory with deliberate spacing and no separator.
 
+### Selected paintings
+
+- Added a non-navigation `/paintings` page as a manually curated editorial mosaic rather than an Academic API-backed dataset.
+- Added seven image-backed selections with visible source/licence metadata: works by Bosch, Goya, Vigée Le Brun, Domenico Tintoretto, Velázquez and Rembrandt.
+- Used a controlled desktop puzzle layout that respects different artwork proportions without cropping, with a single-column natural-ratio fallback on mobile.
+- Added a Selected paintings link directly below Main Interests on the homepage.
+- Added `Las distracciones de Dagoberto` by Leonora Carrington as a bottom note linking to MALBA without reproducing the copyrighted artwork.
+
 ### Robustness and public-readiness
 
 - Publication collaboration summaries and the co-authorship network now trim author names, remove blank entries and deduplicate names within each paper before counting.

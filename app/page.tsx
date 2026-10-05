@@ -1,4 +1,8 @@
-import { faCode, faRoute } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCode,
+  faPalette,
+  faRoute,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 import Image from 'next/image'
@@ -121,6 +125,11 @@ export default async function HomePage() {
                 ))}
               </ul>
             </div>
+
+            <Link className="profile-personal-link" href="/paintings">
+              <FontAwesomeIcon icon={faPalette} aria-hidden="true" />
+              Selected paintings
+            </Link>
           </aside>
 
           <div className="profile-main">

@@ -31,6 +31,13 @@ export const releases: ReleaseNote[] = [
         ],
       },
       {
+        title: 'Personal curation',
+        items: [
+          'Added a non-navigation Selected paintings page with a rights-aware editorial mosaic, visible image provenance, and a single-column mobile fallback.',
+          'Linked Selected paintings below Main Interests on the homepage and represented Leonora Carrington’s Las distracciones de Dagoberto only through a MALBA-linked copyright note.',
+        ],
+      },
+      {
         title: 'Robustness and presentation',
         items: [
           'Normalised publication author arrays before collaboration calculations and identified the exceptional large collaboration by stable slug rather than exact title.',
