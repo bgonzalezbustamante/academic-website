@@ -149,3 +149,8 @@ export type PublicSoftwareItem = {
   end_year: number | null
   featured: boolean
 }
+
+export type PublicCalendarSettings = {
+  catholic_calendar_active: boolean
+  stress_test_active: boolean
+}

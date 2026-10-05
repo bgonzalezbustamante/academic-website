@@ -20,6 +20,7 @@ The website consumes only explicitly curated anonymous-safe Supabase RPC contrac
 - `list_public_teaching()`
 - `list_public_software()`
 - `get_public_software(slug)`
+- `get_public_calendar_settings()`
 - `get_public_work_analytics(year)`
 
 Runtime website code must not query Research Dashboard tables directly or use a service-role key. Private workflow metadata, notes, account information, work-session details and other Dashboard-only data remain outside the public application.
@@ -38,7 +39,7 @@ Swift Harbour currently includes:
 - Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
-- a compact Catholic Calendar composed display in the footer, computed in Europe/Amsterdam from the reusable `@bgonzalezbustamante/catholic-calendar` package and linked to the standalone Catholic Calendar site;
+- a compact Catholic Calendar composed display in the footer, controlled live by `get_public_calendar_settings()`, computed in Europe/Amsterdam from the reusable `@bgonzalezbustamante/catholic-calendar` package and linked to the standalone Catholic Calendar site;
 - structured public Release Notes and a detailed technical CHANGELOG.
 
 The homepage population indicator is intentionally a progress measure for the ongoing migration rather than a completeness claim.
@@ -121,7 +122,7 @@ npm run check:public-contract
 npm run build
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` protects deterministic Catholic Calendar footer fixtures: the 85-character maximum-width composition found by the full beta.1 audit, the long St Michael's Lent/countdown composition, and a current-day integration sample. `npm run audit:calendar-footer` retains the exhaustive 2000–2100 scan for deliberate package/release audits without adding it to every Netlify build. Empty curated datasets are valid states.
+The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem, public calendar settings and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` protects deterministic Catholic Calendar footer fixtures: the 85-character maximum-width composition found by the full beta.1 audit, the long St Michael's Lent/countdown composition, and a current-day integration sample. `npm run audit:calendar-footer` retains the exhaustive 2000–2100 scan for deliberate package/release audits without adding it to every Netlify build. Empty curated datasets are valid states.
 
 ## Deployment
 

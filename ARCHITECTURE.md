@@ -28,6 +28,7 @@ The site is allowed to call only:
 - `list_public_teaching()`
 - `list_public_software()`
 - `get_public_software(text)`
+- `get_public_calendar_settings()`
 - `get_public_work_analytics(year)`
 
 The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
@@ -197,7 +198,7 @@ There is intentionally no legacy catch-all. Old research resources or publicatio
 
 ### Catholic Calendar footer
 
-The footer consumes the exact `@bgonzalezbustamante/catholic-calendar@0.1.0-beta.1` package rather than duplicating calendar rules. A small client component resolves the current civil date in `Europe/Amsterdam`, calls `getCatholicCalendarState()` and `getCalendarDisplaySummary()`, and refreshes hourly so statically generated pages do not freeze the calendar date at build time.
+The footer consumes the exact `@bgonzalezbustamante/catholic-calendar@0.1.0-beta.1` package rather than duplicating calendar rules. A small client component polls `get_public_calendar_settings()` every five minutes. When `catholic_calendar_active` is false, the calendar footer is hidden. When it is true and `stress_test_active` is true, the footer renders the deterministic maximum-width stress composition from 21 November 2027; otherwise it resolves the current civil date in `Europe/Amsterdam` through `getCatholicCalendarState()` and `getCalendarDisplaySummary()`.
 
 The composed display remains fixed at the package contract's maximum of two items. The entire display links to `https://catholic.bgonzalezbustamante.com/` and uses local Christicons masks corresponding to the semantic icon identifiers returned by the package. The right-hand footer order is Catholic Calendar → Website Carbon → release version.
 

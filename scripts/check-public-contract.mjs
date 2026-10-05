@@ -147,6 +147,11 @@ const PUBLIC_REPOSITORY_VISIBILITIES = new Set([
   'private',
 ])
 
+const PUBLIC_CALENDAR_SETTINGS_FIELDS = [
+  'catholic_calendar_active',
+  'stress_test_active',
+]
+
 const PRIVATE_FIELDS = [
   'id',
   'owner_id',
@@ -474,6 +479,26 @@ function assertSoftwareShape(item) {
   }
 }
 
+function assertCalendarSettingsShape(settings) {
+  assertFields(
+    settings,
+    PUBLIC_CALENDAR_SETTINGS_FIELDS,
+    'Public calendar settings'
+  )
+  assertPrivateFieldsAbsent(
+    settings,
+    'Public calendar settings'
+  )
+
+  if (typeof settings.catholic_calendar_active !== 'boolean') {
+    fail('Public calendar catholic_calendar_active must be boolean.')
+  }
+
+  if (typeof settings.stress_test_active !== 'boolean') {
+    fail('Public calendar stress_test_active must be boolean.')
+  }
+}
+
 function assertAnalyticsShape(payload, year) {
   if (!payload || typeof payload !== 'object') {
     fail('Public work analytics returned no payload.')
@@ -766,6 +791,30 @@ async function main() {
       '✓ get_public_software(text): skipped because zero public software items is a valid curated state'
     )
   }
+
+  const calendarSettingsResult = await supabase.rpc(
+    'get_public_calendar_settings'
+  )
+
+  if (calendarSettingsResult.error) {
+    fail(
+      `get_public_calendar_settings() failed: ${calendarSettingsResult.error.message}`
+    )
+  }
+
+  const calendarSettings = Array.isArray(calendarSettingsResult.data)
+    ? calendarSettingsResult.data[0]
+    : calendarSettingsResult.data
+
+  if (!calendarSettings) {
+    fail('get_public_calendar_settings() returned no settings row.')
+  }
+
+  assertCalendarSettingsShape(calendarSettings)
+
+  console.log(
+    `✓ get_public_calendar_settings(): catholic_calendar_active=${calendarSettings.catholic_calendar_active}; stress_test_active=${calendarSettings.stress_test_active}`
+  )
 
   const configuredYear = Number.parseInt(
     process.env.PUBLIC_ANALYTICS_YEAR ?? '',

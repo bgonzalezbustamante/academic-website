@@ -12,7 +12,7 @@ const FIXTURES = [
     date: '2027-11-21',
     expected:
       'Our Lord Jesus Christ, King of the Universe · Presentation of the Blessed Virgin Mary',
-    purpose: 'maximum-width composition from the full beta.1 range audit',
+    purpose: 'Dashboard stress-test composition and maximum-width case',
   },
   {
     date: '2026-09-16',

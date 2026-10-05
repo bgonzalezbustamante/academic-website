@@ -10,15 +10,28 @@ import {
 import type { CSSProperties } from 'react'
 import { useEffect, useState } from 'react'
 
+import { getPublicCalendarSettings } from '@/lib/calendar-settings'
+
 const CATHOLIC_CALENDAR_URL =
   'https://catholic.bgonzalezbustamante.com/'
 const CALENDAR_TIME_ZONE = 'Europe/Amsterdam'
+const CALENDAR_REFRESH_MS = 5 * 60 * 1000
+const STRESS_TEST_DATE = '2027-11-21'
 
-function currentDisplayItems() {
-  const date = todayInTimeZone(CALENDAR_TIME_ZONE)
+function displayItemsForDate(date: string) {
   return getCalendarDisplaySummary(
     getCatholicCalendarState(date)
   ).items
+}
+
+function currentDisplayItems() {
+  return displayItemsForDate(
+    todayInTimeZone(CALENDAR_TIME_ZONE)
+  )
+}
+
+function stressTestDisplayItems() {
+  return displayItemsForDate(STRESS_TEST_DATE)
 }
 
 function calendarIconStyle(
@@ -36,12 +49,39 @@ export default function CatholicCalendarFooter() {
   )
 
   useEffect(() => {
-    const refresh = () => setItems(currentDisplayItems())
+    let cancelled = false
 
-    refresh()
-    const interval = window.setInterval(refresh, 60 * 60 * 1000)
+    const refresh = async () => {
+      try {
+        const settings = await getPublicCalendarSettings()
 
-    return () => window.clearInterval(interval)
+        if (cancelled) return
+
+        if (!settings.catholic_calendar_active) {
+          setItems(null)
+          return
+        }
+
+        setItems(
+          settings.stress_test_active
+            ? stressTestDisplayItems()
+            : currentDisplayItems()
+        )
+      } catch {
+        if (!cancelled) setItems(null)
+      }
+    }
+
+    void refresh()
+    const interval = window.setInterval(
+      () => void refresh(),
+      CALENDAR_REFRESH_MS
+    )
+
+    return () => {
+      cancelled = true
+      window.clearInterval(interval)
+    }
   }, [])
 
   if (!items || items.length === 0) {
