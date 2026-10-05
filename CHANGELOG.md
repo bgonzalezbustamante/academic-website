@@ -27,6 +27,7 @@
 - Extended the controlled 12-column desktop puzzle to a fourth complete row: `The Colossus` spans five columns and `The Tower of Babel` seven, mirroring the preceding 7+5 row while preserving uncropped images; mobile remains a single-column natural-ratio layout.
 - Added a Selected paintings link directly below Main Interests on the homepage.
 - Reworked the bottom “Selected works not reproduced here” group for Leonora Carrington’s `Las distracciones de Dagoberto`, Matthew Wong’s `A Walk through Primordial Garden`, and Pablo Picasso’s `L’Étagère` into compact responsive mini-cards with one institutional destination link and concise copyright/reuse explanations.
+- Standardised reproduced artwork titles to the canonical catalogue titles used by their holding institutions, retaining the institution’s own language rather than translating every work into English.
 
 ### Robustness and public-readiness
 
