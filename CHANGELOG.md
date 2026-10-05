@@ -31,6 +31,7 @@
 
 ### Robustness and public-readiness
 
+- Aligned the public Activity over time heatmap with Research Dashboard's revised working-hour bands: `0h`, `<4h`, `4–8h`, `8–10h`, `10–12h`, and `12h+`.
 - Publication collaboration summaries and the co-authorship network now trim author names, remove blank entries and deduplicate names within each paper before counting.
 - The large collaboration exclusion for Distinct co-authors and Authors per paper now uses the stable publication slug rather than exact title text.
 - Public-contract validation now rejects blank/duplicate publication author entries and validates Software Ecosystem controlled vocabularies, lifecycle years and repository privacy.
