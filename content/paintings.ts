@@ -29,7 +29,7 @@ export type SelectedPainting = {
 export const selectedPaintings: SelectedPainting[] = [
   {
     slug: 'garden-of-earthly-delights',
-    title: 'The Garden of Earthly Delights Triptych',
+    title: 'The Garden of Earthly Delights',
     artist: 'Hieronymus Bosch',
     year: '1490–1500',
     museum: 'Museo Nacional del Prado',
@@ -53,7 +53,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'the-dog',
-    title: 'The Drowning Dog',
+    title: 'The Dog',
     artist: 'Francisco de Goya',
     year: '1820–1823',
     museum: 'Museo Nacional del Prado',
@@ -65,7 +65,7 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Goya_Dog.jpg/960px-Goya_Dog.jpg',
     imageWidth: 960,
     imageHeight: 1630,
-    imageAlt: 'The Drowning Dog by Francisco de Goya',
+    imageAlt: 'The Dog by Francisco de Goya',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:Goya_Dog.jpg',
@@ -168,7 +168,7 @@ export const selectedPaintings: SelectedPainting[] = [
   },
   {
     slug: 'saturn',
-    title: 'Saturn',
+    title: 'Saturn Devouring His Son',
     artist: 'Francisco de Goya',
     year: '1820–1823',
     museum: 'Museo Nacional del Prado',
@@ -180,7 +180,7 @@ export const selectedPaintings: SelectedPainting[] = [
       'https://upload.wikimedia.org/wikipedia/commons/b/bc/Saturn_Devouring_His_Son.jpg',
     imageWidth: 1071,
     imageHeight: 1920,
-    imageAlt: 'Saturn by Francisco de Goya',
+    imageAlt: 'Saturn Devouring His Son by Francisco de Goya',
     imageSourceName: 'Wikimedia Commons',
     imageSourceUrl:
       'https://commons.wikimedia.org/wiki/File:Saturn_Devouring_His_Son.jpg',
