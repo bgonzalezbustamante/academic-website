@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
+import CatholicCalendarFooter from '@/components/catholic-calendar-footer'
 import { siteProfile } from '@/content/site'
 import { siteCarbonMeasurement } from '@/content/site-carbon'
 import { currentRelease } from '@/lib/releases'
@@ -58,6 +59,8 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer-meta">
+          <CatholicCalendarFooter />
+
           {siteCarbonMeasurement.showInFooter && (
             <a
               className="footer-carbon-note"

@@ -195,6 +195,14 @@ The Hugo/Wowchemy and Next.js sites share many publication detail slugs, so matc
 
 There is intentionally no legacy catch-all. Old research resources or publications that are not yet represented by the current public site should return normal not-found behaviour until a genuine replacement exists, rather than being redirected to a generic section page.
 
+### Catholic Calendar footer
+
+The footer consumes the exact `@bgonzalezbustamante/catholic-calendar@0.1.0-beta.1` package rather than duplicating calendar rules. A small client component resolves the current civil date in `Europe/Amsterdam`, calls `getCatholicCalendarState()` and `getCalendarDisplaySummary()`, and refreshes hourly so statically generated pages do not freeze the calendar date at build time.
+
+The composed display remains fixed at the package contract's maximum of two items. The entire display links to `https://catholic.bgonzalezbustamante.com/` and uses local Christicons masks corresponding to the semantic icon identifiers returned by the package. The right-hand footer order is Catholic Calendar → Website Carbon → release version.
+
+`scripts/check-calendar-footer.mjs` scans every supported date from 2000 through 2100 before production builds. It verifies the two-item/icon invariants and protects the longest current composition, `St Michael's Lent · 13 days until Saints Michael, Gabriel and Raphael, Archangels`, as a width stress case.
+
 ## Development and deployment
 
 Development remains local-first. After the local npm/public-contract/build gate passes, validated changes are merged into `main` and deployed through the Netlify project `bgonzalezbustamante`, which serves the canonical production domain `https://bgonzalezbustamante.com`.

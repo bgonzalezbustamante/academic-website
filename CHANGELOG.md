@@ -7,6 +7,8 @@
 - Added a non-navigation `/software` Software Ecosystem catalogue backed only by Research Dashboard's public Software RPC contract, with a homepage link directly below Academic trajectory.
 - Hardened publication authorship analytics by normalising author names before counting and by identifying the unusually large collaboration through its stable slug.
 - Moved the Creative Commons/year/name line to the left footer column above the public email address.
+- Added the Catholic Calendar two-item composed display above Website Carbon in the right footer, powered by the published calendar package, linked to the standalone calendar site and rendered with semantic Christicons.
+- Added a complete 2000–2100 calendar-footer regression scan using the longest composed string as a width stress case, while resolving the live footer display from the current Europe/Amsterdam date.
 - Incorporated the post-rc.1 publication population-target update and replacement 404 penguin assets.
 - Began public-repository preparation with explicit MIT software licensing, CC BY 4.0 original editorial-content licensing, third-party asset notices, and expanded public-contract validation.
 
@@ -16,7 +18,7 @@
 - Added `/software` as a responsive card catalogue showing public category, development stage, status, lifecycle period and available Live/Code/Documentation links, with the current version presented beneath each software title.
 - Added a complete development-stage legend and distinct stage colours for Alpha, Beta, Release candidate, Stable and Maintenance.
 - Preserved the upstream privacy invariant that private repositories never expose a repository URL.
-- Kept Software out of the primary navigation and omitted `/software/[slug]` detail routes; the homepage presents Software ecosystem inline beside Academic trajectory with a subtle separator.
+- Kept Software out of the primary navigation and omitted `/software/[slug]` detail routes; the homepage presents Software ecosystem inline beside Academic trajectory with deliberate spacing and no separator.
 
 ### Robustness and public-readiness
 

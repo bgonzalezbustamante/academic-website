@@ -27,14 +27,14 @@ export const releases: ReleaseNote[] = [
         title: 'Software Ecosystem',
         items: [
           'Added a non-navigation /software catalogue backed exclusively by Research Dashboard public Software Ecosystem RPCs.',
-          'Linked Software ecosystem inline beside Academic trajectory on the homepage, added a complete colour-coded development-stage legend, and kept software profiles self-contained as cards without detail routes.',
+          'Linked Software ecosystem inline beside Academic trajectory on the homepage without a separator, added a complete colour-coded development-stage legend, and kept software profiles self-contained as cards without detail routes.',
         ],
       },
       {
         title: 'Robustness and presentation',
         items: [
           'Normalised publication author arrays before collaboration calculations and identified the exceptional large collaboration by stable slug rather than exact title.',
-          'Moved the Creative Commons/year/name line to the left footer column above the public email address.',
+          'Moved the Creative Commons/year/name line to the left footer column above the public email address and added the Catholic Calendar composed display above Website Carbon.',
           'Included the updated 404 penguin assets and revised publication population target already added after rc.1.',
         ],
       },

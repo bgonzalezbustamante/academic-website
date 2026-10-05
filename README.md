@@ -38,6 +38,7 @@ Swift Harbour currently includes:
 - Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
+- a compact Catholic Calendar composed display in the footer, computed in Europe/Amsterdam from the reusable `@bgonzalezbustamante/catholic-calendar` package and linked to the standalone Catholic Calendar site;
 - structured public Release Notes and a detailed technical CHANGELOG.
 
 The homepage population indicator is intentionally a progress measure for the ongoing migration rather than a completeness claim.
@@ -120,7 +121,7 @@ npm run check:public-contract
 npm run build
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. Empty curated datasets are valid states.
+The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` separately scans the Catholic Calendar package's complete 2000–2100 range to protect the two-item footer composition and its longest display case. Empty curated datasets are valid states.
 
 ## Deployment
 
