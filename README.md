@@ -90,9 +90,9 @@ Legacy URL migration uses a deliberately small set of permanent redirects in `ne
 
 The canonical raster sources live outside `public/`: one `assets/sources/profile/avatar.png`, nine slug-named JPEGs in `assets/sources/paintings/`, and three logo PNGs (`leiden.png`, `udp.png`, `ocpsg.png`) in `assets/sources/branding/`. Keep original source files unchanged; their museum links, licence terms and institutional ownership are preserved in the painting metadata and `NOTICE`.
 
-Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. Project, teaching and funder images and Christicons are deliberately outside this pipeline.
+Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Project, teaching and funder images and Christicons are deliberately outside this pipeline.
 
-The legacy `public/branding/oxford.webp` remains unchanged because it has no corresponding source PNG and is not currently referenced by the three-affiliation UI.
+The three current academic positions are defined in `content/positions.ts`. Edit the role, institution or URL there; reorder the array to change both the Home positions list and navbar logo order. The site currently uses this local list, which can later be replaced by the Academic API. The unused legacy `public/branding/oxford.webp` has been retired.
 
 ### TERGAP map snapshot
 
