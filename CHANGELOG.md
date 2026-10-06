@@ -7,7 +7,7 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 ### Software Ecosystem
 
 - Added `/software`, an unlisted-in-primary-navigation catalogue supplied exclusively through `list_public_software()`. Cards show category, current version, lifecycle years, status, Featured state and available Live/Code/Documentation links.
-- Added colour-coded Alpha, Beta, Release candidate, Stable and Maintenance stages with a complete legend, and linked Software ecosystem below Academic trajectory on Home.
+- Added colour-coded Alpha, Beta, Release candidate, Stable and Maintenance stages with a legend beneath the software cards, and linked Software ecosystem below Academic trajectory on Home.
 - Suppressed repository URLs when the public software record is marked `private`; validated the RPC detail and listing contracts without directly querying Dashboard tables.
 
 ### Selected paintings
