@@ -34,6 +34,7 @@
 - Added `/weekly-timeline`, integrating only the standalone Weekly Penguin Timeline's interactive seven-day visual component with rolling day/week navigation and the three-month window, without its test/gallery/release panels.
 - Ported its public Academic API adapters and runtime validation, availability/conference/travel precedence, Teaching-season Saturday handling and package-backed Catholic dates into a separate `lib/weekly-timeline/` namespace; retained the shared anonymous-safe Supabase client.
 - Used the standalone deployment's generated penguin WebP artwork to avoid committing duplicated large PNG masters, with explicit remote-asset attribution and licensing. Scoped the original responsive controls to the new route, added sitemap metadata and a Home link below Activity over time.
+- Extended the public-contract release check to validate timeline conference-attendance flags, daily coffee counts, public availability ranges and the public Teaching-season setting.
 
 ### Image generation and mobile footer
 

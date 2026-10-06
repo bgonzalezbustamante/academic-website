@@ -30,6 +30,8 @@ The site is allowed to call only:
 - `get_public_software(text)`
 - `get_public_calendar_settings()`
 - `get_public_work_analytics(year)`
+- `list_public_availability(year)`
+- `get_public_teaching_settings()`
 
 The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
 

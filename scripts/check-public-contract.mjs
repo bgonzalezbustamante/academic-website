@@ -147,6 +147,30 @@ const PUBLIC_REPOSITORY_VISIBILITIES = new Set([
   'private',
 ])
 
+const PUBLIC_AVAILABILITY_FIELDS = [
+  'type',
+  'start_date',
+  'end_date',
+  'label',
+]
+
+const PUBLIC_AVAILABILITY_TYPES = new Set([
+  'winter_holiday',
+  'summer_holiday',
+  'trip',
+  'unavailable',
+])
+
+const PUBLIC_TEACHING_SETTINGS_FIELDS = [
+  'teaching_season_active',
+]
+
+const TIMELINE_CONFERENCE_FIELDS = [
+  'presentation_date',
+  'personal_attendance',
+  'involves_trip',
+]
+
 const PUBLIC_CALENDAR_SETTINGS_FIELDS = [
   'catholic_calendar_active',
   'stress_test_active',
@@ -499,6 +523,57 @@ function assertCalendarSettingsShape(settings) {
   }
 }
 
+function assertTimelineConferenceShape(presentation) {
+  assertFields(presentation, TIMELINE_CONFERENCE_FIELDS, 'Timeline conference')
+
+  if (presentation.presentation_date !== presentation.start_date) {
+    fail('Timeline conference presentation_date must match start_date.')
+  }
+  if (typeof presentation.personal_attendance !== 'boolean' ||
+      typeof presentation.involves_trip !== 'boolean') {
+    fail('Timeline conference attendance and trip flags must be booleans.')
+  }
+  if (presentation.involves_trip && !presentation.personal_attendance) {
+    fail('Timeline trip flag requires personal attendance.')
+  }
+}
+
+function assertPublicAvailabilityShape(item, year) {
+  assertFields(item, PUBLIC_AVAILABILITY_FIELDS, 'Public availability')
+  assertPrivateFieldsAbsent(item, 'Public availability')
+  if (!PUBLIC_AVAILABILITY_TYPES.has(item.type)) {
+    fail('Public availability type is outside the controlled vocabulary.')
+  }
+  if (typeof item.start_date !== 'string' ||
+      typeof item.end_date !== 'string' ||
+      typeof item.label !== 'string' ||
+      !item.label.trim() ||
+      item.start_date > item.end_date ||
+      item.start_date.slice(0, 4) !== String(year) ||
+      item.end_date.slice(0, 4) !== String(year)) {
+    fail('Public availability contains an invalid date range or label.')
+  }
+  if (item.type === 'unavailable' && item.label !== 'Unavailable') {
+    fail('Public unavailable ranges must use the generic public label.')
+  }
+}
+
+function assertTimelineTeachingSettingsShape(data) {
+  if (!Array.isArray(data) || data.length !== 1) {
+    fail('Public teaching settings must contain exactly one row.')
+  }
+  const [settings] = data
+  if (!settings || typeof settings !== 'object') {
+    fail('Public teaching settings row must be an object.')
+  }
+  assertFields(settings, PUBLIC_TEACHING_SETTINGS_FIELDS, 'Teaching settings')
+  assertPrivateFieldsAbsent(settings, 'Teaching settings')
+  if (Object.keys(settings).length !== PUBLIC_TEACHING_SETTINGS_FIELDS.length ||
+      typeof settings.teaching_season_active !== 'boolean') {
+    fail('Public teaching settings must expose only a boolean teaching_season_active.')
+  }
+}
+
 function assertAnalyticsShape(payload, year) {
   if (!payload || typeof payload !== 'object') {
     fail('Public work analytics returned no payload.')
@@ -518,7 +593,9 @@ function assertAnalyticsShape(payload, year) {
     if (
       !day ||
       typeof day.date !== 'string' ||
-      typeof day.net_minutes !== 'number'
+      typeof day.net_minutes !== 'number' ||
+      !Number.isInteger(day.coffee_count) ||
+      day.coffee_count < 0
     ) {
       fail('Public work analytics contains an invalid day entry.')
     }
@@ -725,6 +802,7 @@ async function main() {
 
   for (const presentation of presentations) {
     assertConferenceShape(presentation)
+    assertTimelineConferenceShape(presentation)
   }
 
   console.log(
@@ -823,6 +901,31 @@ async function main() {
   const year = Number.isFinite(configuredYear)
     ? configuredYear
     : currentAmsterdamYear()
+
+  const availabilityResult = await supabase.rpc(
+    'list_public_availability',
+    { p_year: year }
+  )
+  if (availabilityResult.error) {
+    fail(`list_public_availability(year) failed: ${availabilityResult.error.message}`)
+  }
+  const availability = availabilityResult.data ?? []
+  if (!Array.isArray(availability)) {
+    fail('list_public_availability(year) must return an array.')
+  }
+  for (const item of availability) {
+    assertPublicAvailabilityShape(item, year)
+  }
+  console.log(
+    `✓ list_public_availability(${year}): ${availability.length} public availability range(s); private notes and identifiers absent`
+  )
+
+  const teachingSettingsResult = await supabase.rpc('get_public_teaching_settings')
+  if (teachingSettingsResult.error) {
+    fail(`get_public_teaching_settings() failed: ${teachingSettingsResult.error.message}`)
+  }
+  assertTimelineTeachingSettingsShape(teachingSettingsResult.data)
+  console.log('✓ get_public_teaching_settings(): public teaching-season flag validated')
 
   const analyticsResult = await supabase.rpc(
     'get_public_work_analytics',
