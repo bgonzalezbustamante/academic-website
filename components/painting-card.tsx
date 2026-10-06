@@ -1,3 +1,5 @@
+import { imageAssets } from '@/content/image-assets.generated'
+
 import type { SelectedPainting } from '@/content/paintings'
 
 type Props = {
@@ -7,6 +9,8 @@ type Props = {
 export default function PaintingCard({ painting }: Props) {
   const credit =
     painting.imageCredit ?? painting.imageSourceName
+  const image = imageAssets.paintings[painting.slug]
+  if (!image) throw new Error(`Missing generated image for ${painting.slug}`)
 
   return (
     <article
@@ -15,7 +19,9 @@ export default function PaintingCard({ painting }: Props) {
       <div className="painting-media">
         <img
           className="painting-image"
-          src={painting.imageUrl}
+          src={image.src}
+          srcSet={image.srcSet}
+          sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 1100px) 60vw, 800px"
           width={painting.imageWidth}
           height={painting.imageHeight}
           alt={painting.imageAlt}
