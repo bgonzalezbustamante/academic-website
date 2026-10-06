@@ -4076,9 +4076,9 @@ h4 {
 
 .footer-calendar-icon {
   display: inline-block;
-  width: 0.82rem;
-  height: 0.82rem;
-  flex: 0 0 0.82rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: 0 0 0.95rem;
   background: var(--oxford-coral);
   -webkit-mask: var(--footer-calendar-icon) center / contain no-repeat;
   mask: var(--footer-calendar-icon) center / contain no-repeat;
