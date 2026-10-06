@@ -4834,7 +4834,7 @@ h4 {
   max-width: 220px;
   display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 0.38rem;
   color: var(--oxford-blue);
   font-family: var(--font-roboto), Arial, sans-serif;

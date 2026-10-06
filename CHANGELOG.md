@@ -15,8 +15,7 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 - Added `/paintings`, a manually curated nine-artwork mosaic with visible museum, image source and licence links. Original catalogue-language titles are retained, including the Prado's attribution of `The Colossus`.
 - Arranged the uncropped desktop mosaic in 8+4, 4+4+4, 7+5 and 5+7 grid rows (ending with `The Colossus` and `The Tower of Babel`); mobile uses natural image proportions in one column.
 - Added compact institutional links and copyright explanations for works by Leonora Carrington, Matthew Wong and Pablo Picasso whose reproductions are not republished.
-- Linked Selected paintings below Main Interests on Home. Reproductions are local, source-attributed WebPs rather than externally loaded museum images.
-- Reused the Academic trajectory Home return link on Selected paintings, Software Ecosystem and Weekly timeline; adjusted the private-repository lock size and spacing.
+- Linked Selected paintings right-aligned beneath Main Interests on Home; on mobile, both appear after Academic Profile. Reproductions are locally generated, source-attributed WebPs.
 
 ### Weekly timeline
 
@@ -27,11 +26,9 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 
 ### Profile, imagery and footer
 
-- Built a deterministic Sharp pipeline for `assets/sources/` portrait, painting and institutional-logo originals. It emits content-hashed, ignored WebPs and a local manifest: up to 660px/quality 95 for the portrait, responsive quality-95 painting variants, and lossless 168px logos.
-- Validated generated WebP formats, dimensions, painting `srcSet` candidates and file sizes; verified Leiden's transparent background. Original image-source and licence information remains available.
+- Built and validated a deterministic Sharp pipeline for `assets/sources/` portrait, paintings and institutional logos. It generates ignored, content-hashed WebPs and a local manifest: portrait up to 660px at quality 95, responsive quality-95 paintings, lossless 168px logos, and checks for dimensions, `srcSet` candidates and transparency. Image credits remain available.
 - Centralised current appointments in `content/positions.ts`, so the Home position list and navbar logos share the same order; retired unused branding WebPs.
-- Moved Home's Main Interests and Selected paintings link below the Academic Profile on mobile, preserving their desktop sidebar placement and the document reading order.
-- Added the shared Home return link beneath DORA and CRediT headings, and restored the external-link arrow on CRediT's Center for Open Science citation.
+- Reused the Academic trajectory Home link on Selected paintings, Software Ecosystem, Weekly timeline, DORA and CRediT; refined private-repository lock spacing and restored the external-link arrow on the CRediT source citation.
 - Standardised most general-purpose information and Google Scholar SVG icons to Oxford coral; retained Oxford blue for Home academic links, the Academic trajectory legend and unusually large collaboration exclusion cues, alongside existing state-specific colours.
 - Added a two-item Catholic Calendar footer display using the published package, 0.95rem coral Christicons and Dashboard-controlled visibility/stress settings. Added deterministic long-label regression fixtures and a separate full 2000–2100 audit.
 - Moved the Creative Commons/year/name footer line above the email address; aligned the Website Carbon note with the other footer information on mobile.

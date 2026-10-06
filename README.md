@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026), succeeding **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The rc.2 metadata is prepared in [PR #11](https://github.com/bgonzalezbustamante/academic-website/pull/11) before the approved merge; until that PR reaches production, the live website continues to serve rc.1. The production website at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) deploys from validated `main` through the Netlify project `bgonzalezbustamante`.
+Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The site is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify. While [PR #11](https://github.com/bgonzalezbustamante/academic-website/pull/11) is awaiting approval, production still runs rc.1.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -29,13 +29,13 @@ Runtime website code must not query Research Dashboard tables directly or use a 
 
 ## Public site
 
-The website combines the original rc.1 research profile with the rc.2 enhancements:
+The public website provides:
 
 - a portrait-led academic homepage with current appointments, research interests, institutional links, DORA/CRediT research-practice information and public contact details;
 - an Academic trajectory page for selected education, faculty appointments, research positions, teaching positions and consultancy;
-- a non-navigation Software Ecosystem catalogue with public lifecycle, version, repository, production and documentation metadata;
-- a non-navigation `/weekly-timeline` page presenting the interactive seven-day Weekly Penguin Timeline, linked below Activity over time on Home;
-- a non-navigation Selected paintings page implemented as a manually curated nine-work editorial mosaic with per-image source/licence metadata, compact rights-aware cards for unreproduced selections and a single-column mobile fallback;
+- a Software Ecosystem catalogue of public tools and applications, with versions, development stages and relevant links;
+- a seven-day illustrated Weekly timeline, linked from the Home activity chart;
+- a Selected paintings gallery with nine reproduced works, source and rights credits, and links to other favourites that cannot be reproduced;
 - Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
@@ -43,10 +43,10 @@ The website combines the original rc.1 research profile with the rc.2 enhancemen
 - Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
-- a compact Catholic Calendar composed display in the footer, controlled live by `get_public_calendar_settings()`, computed in Europe/Amsterdam from the reusable `@bgonzalezbustamante/catholic-calendar` package and linked to the standalone Catholic Calendar site;
-- structured public Release Notes and a detailed technical CHANGELOG.
+- Catholic Calendar highlights in the footer, linked to the standalone calendar and controlled by the public calendar settings;
+- public-facing Release Notes and a separate technical CHANGELOG.
 
-The homepage population indicator is intentionally a progress measure for the ongoing migration rather than a completeness claim.
+The homepage population indicator tracks migration progress; it does not claim that all research records are complete. The Software, Timeline and Paintings pages are linked from Home rather than the primary navigation.
 
 ## Manually maintained site metadata
 
@@ -102,7 +102,7 @@ The canonical raster sources live outside `public/`: one `assets/sources/profile
 
 Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Project, teaching and funder images and Christicons are deliberately outside this pipeline.
 
-The retired legacy branding WebPs are no longer used; the navbar and Home positions list use the generated assets.
+The navbar and Home positions list use these generated institutional logo assets.
 
 ### TERGAP map snapshot
 
@@ -133,16 +133,16 @@ The predecessor remains temporarily available at `legacy-bgonzalezbustamante.net
 
 ### Repository visibility
 
-The GitHub repository remains private pending the complete publication review. After merging, production verification and a complete Git history/asset rights/security review, the repository may be made public through GitHub's repository visibility settings. Publishing the repository exposes its existing branches and commit history, not just the current `main` tree. Confirm that source imagery, licence notices and any historical files are suitable for public distribution; never rely on `.gitignore` to protect material already committed.
+The GitHub repository remains private pending the complete publication review. Make it public only after merging, production verification and review of historical files, security and asset redistribution rights. Publishing the repository exposes its existing branches and commit history, not just the current `main` tree. Confirm that source imagery, licence notices and any historical files are suitable for public distribution; never rely on `.gitignore` to protect material already committed.
 
 ### Release procedure
 
-Release-candidate metadata is finalised in `CHANGELOG.md`, `README.md` and `lib/releases.ts` before merging. After explicit approval, merge the reviewed PR, verify the production deployment and new routes, and create the corresponding annotated tag **on the merged `main` commit**. Publish a GitHub **pre-release** using a concise visitor-facing summary rather than copying the technical CHANGELOG. Do not tag an unmerged feature-branch commit. For rc.2, use `v6.0.0-rc.2` and the release title `v6.0.0-rc.2 “Bold River”`.
+Finalise `README.md`, `CHANGELOG.md` and `lib/releases.ts` on the release branch. After explicit approval, merge the PR and verify the production deployment and new routes. Tag **the merged `main` commit**, never an unmerged branch head; then publish a GitHub **pre-release** with a short summary. For Bold River, the tag is `v6.0.0-rc.2` and the release title is `v6.0.0-rc.2 “Bold River”`.
 
 ## Release history
 
 - Technical v6 history: [CHANGELOG.md](CHANGELOG.md)
-- Public-facing release notes: [Release Notes](./lib/releases.ts) (rendered at `/release-notes`)
+- Plain-language [Release Notes](/release-notes) (source: `lib/releases.ts`)
 - Detailed pre-v6 history: [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md)
 
 
