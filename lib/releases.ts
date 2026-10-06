@@ -36,6 +36,7 @@ export const releases: ReleaseNote[] = [
           'Added a non-navigation Selected paintings page with a rights-aware editorial mosaic, visible image provenance, and a single-column mobile fallback.',
           'Expanded the mosaic with El coloso and Pieter Bruegel the Elder’s Turmbau zu Babel, reorganised selections whose images are not republished into compact linked cards, and standardised artwork titles to the canonical catalogue wording used by each holding institution.',
           'Made painting images load from the website itself, with high-quality versions that adapt to different screen sizes.',
+          'Added a Weekly timeline page showing each day’s public work and coffee activity through interactive penguin illustrations, linked below the homepage activity chart.',
         ],
       },
       {

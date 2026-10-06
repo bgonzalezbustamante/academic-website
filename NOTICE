@@ -35,3 +35,9 @@ The `/paintings` page contains a manually curated personal selection of artworks
 The page records a source and rights statement for every reproduced image. Most current reproductions are marked Public Domain on Wikimedia Commons. The reproduction used for Francisco de Goya's `Saturno` is credited as CC BY-SA 4.0 and is visibly credited on the page to Museo Nacional del Prado via Wikimedia Commons.
 
 Leonora Carrington's `Las distracciones de Dagoberto` and Matthew Wong's `A Walk through Primordial Garden` are intentionally not reproduced because the artworks remain protected by copyright and no suitable republication licences have been identified. Pablo Picasso's `L'étagère` is also not reproduced: ALBERTINA explicitly credits its image to Succession Picasso / Bildrecht Wien. The page links to the relevant institutional records instead.
+
+## Weekly Penguin Timeline artwork
+
+The `/weekly-timeline` page integrates the seven-day visual presentation from [Weekly Penguin Timeline](https://github.com/bgonzalezbustamante/weekly-penguin-timeline). The penguin WebP illustrations remain served by the standalone application at `https://timeline.bgonzalezbustamante.com/`; they are not copied into the Academic Website repository.
+
+Penguin artwork and generated derivatives are © 2026 Dr. Bastián González-Bustamante and licensed under Creative Commons Attribution–NonCommercial 4.0 (CC BY-NC 4.0), independently of this repository's MIT software and CC BY 4.0 editorial-content licences. See the [artwork licence](https://github.com/bgonzalezbustamante/weekly-penguin-timeline/blob/main/LICENSE-ARTWORK.md).

@@ -29,6 +29,12 @@
 - Reworked the bottom “Selected works not reproduced here” group for Leonora Carrington’s `Las distracciones de Dagoberto`, Matthew Wong’s `A Walk through Primordial Garden`, and Pablo Picasso’s `L'étagère` into compact responsive mini-cards with one institutional destination link and concise copyright/reuse explanations.
 - Standardised reproduced artwork titles to the canonical catalogue titles used by their holding institutions, retaining the institution’s own language rather than translating every work into English.
 
+### Weekly timeline integration
+
+- Added `/weekly-timeline`, integrating only the standalone Weekly Penguin Timeline's interactive seven-day visual component with rolling day/week navigation and the three-month window, without its test/gallery/release panels.
+- Ported its public Academic API adapters and runtime validation, availability/conference/travel precedence, Teaching-season Saturday handling and package-backed Catholic dates into a separate `lib/weekly-timeline/` namespace; retained the shared anonymous-safe Supabase client.
+- Used the standalone deployment's generated penguin WebP artwork to avoid committing duplicated large PNG masters, with explicit remote-asset attribution and licensing. Scoped the original responsive controls to the new route, added sitemap metadata and a Home link below Activity over time.
+
 ### Image generation and mobile footer
 
 - Added a deterministic Sharp-based build step for the source portrait, nine licensed painting reproductions and three institutional logos, with content-hashed WebP outputs and an automatically generated URL manifest. Sources remain under `assets/sources/`; output assets are excluded from Git.
