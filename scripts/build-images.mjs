@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { mkdir, readdir, rm, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import sharp from 'sharp'
 
@@ -126,6 +126,81 @@ async function makeBranding() {
   return images
 }
 
+// Inspect the actual generated files, not just their source metadata or filenames.
+async function inspectWebp(src, expectedMaxWidth) {
+  const filename = path.join(publicRoot, src.replace(/^\\//, ''))
+  const metadata = await sharp(filename).metadata()
+  if (metadata.format !== 'webp' || !metadata.width || !metadata.height) {
+    throw new Error(`Generated image is not a valid WebP: ${src}`)
+  }
+  if (metadata.width > expectedMaxWidth) {
+    throw new Error(`Generated image exceeds ${expectedMaxWidth}px: ${src}`)
+  }
+  return {
+    ...metadata,
+    bytes: (await stat(filename)).size,
+  }
+}
+
+async function auditOutputs({ profile, paintings, branding }) {
+  const portrait = await inspectWebp(profile.src, profiles.profile.width)
+  if (portrait.width !== profile.width || portrait.height !== profile.height) {
+    throw new Error('Generated portrait dimensions disagree with the manifest.')
+  }
+
+  let paintingCount = 0
+  let paintingBytes = 0
+  for (const slug of paintingsSlugs()) {
+    const output = paintings[slug]
+    if (!output) throw new Error(`Missing painting from generated manifest: ${slug}`)
+    const variants = output.srcSet.split(', ')
+    let lastWidth = 0
+    for (const entry of variants) {
+      const match = /^(\\S+) (\\d+)w$/.exec(entry)
+      if (!match) throw new Error(`Invalid generated srcSet candidate: ${entry}`)
+      const [, src, widthText] = match
+      const width = Number(widthText)
+      const info = await inspectWebp(src, profiles.paintings.widths.at(-1))
+      if (info.width !== width || width <= lastWidth) {
+        throw new Error(`Inconsistent responsive painting widths for ${slug}`)
+      }
+      lastWidth = width
+      paintingBytes += info.bytes
+      paintingCount++
+    }
+    if (!output.srcSet.endsWith(`${output.src} ${lastWidth}w`)) {
+      throw new Error(`Painting default image is not its largest variant: ${slug}`)
+    }
+  }
+
+  let brandingBytes = 0
+  for (const slug of brandingSlugs()) {
+    const src = branding[slug]
+    if (!src) throw new Error(`Missing branding from generated manifest: ${slug}`)
+    brandingBytes += (await inspectWebp(src, profiles.branding.width)).bytes
+  }
+
+  // Source Leiden PNG has transparent corners. Lossless conversion must retain them.
+  const leidenOutput = path.join(publicRoot, branding.leiden.replace(/^\\//, ''))
+  const leidenMetadata = await sharp(leidenOutput).metadata()
+  const leidenStats = await sharp(leidenOutput).stats()
+  if (!leidenMetadata.hasAlpha || leidenStats.channels.length < 4 ||
+      leidenStats.channels[3].min !== 0) {
+    throw new Error('Generated Leiden logo has lost its transparent background.')
+  }
+
+  const kib = (size) => (size / 1024).toFixed(1)
+  console.log(
+    `Verified generated WebP: portrait ${kib(portrait.bytes)} KiB; ` +
+    `${paintingCount} painting variants ${kib(paintingBytes)} KiB total; ` +
+    `${brandingSlugs().length} lossless logos ${kib(brandingBytes)} KiB total; ` +
+    'Leiden transparency preserved.'
+  )
+}
+
+function paintingsSlugs() { return paintings }
+function brandingSlugs() { return branding }
+
 const [profile, paintingImages, brandingImages] = await Promise.all([
   makeProfile(),
   makePaintings(),
@@ -149,6 +224,7 @@ export type GeneratedImageAssets = {
 export const imageAssets: GeneratedImageAssets = ${JSON.stringify(assetManifest, null, 2)}
 `
 await writeFile(manifestPath, manifest, 'utf8')
+await auditOutputs(assetManifest)
 console.log(
   `Generated high-quality WebP assets: 1 portrait, ${paintings.length} paintings, and ${branding.length} branding logos.`
 )
