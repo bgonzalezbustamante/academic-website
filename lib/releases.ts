@@ -45,6 +45,7 @@ export const releases: ReleaseNote[] = [
           'Normalised publication author arrays before collaboration calculations and identified the exceptional large collaboration by stable slug rather than exact title.',
           'Moved the Creative Commons/year/name line to the left footer column above the public email address and added a Dashboard-controlled Catholic Calendar composed display above Website Carbon, including a maximum-width stress mode.',
           'Improved the profile photograph and university logo delivery, and aligned Website Carbon with other footer details on mobile.',
+          'Made it easier to update academic positions and their order, with the navbar logos now following the same list; image checks also protect the Leiden logo’s transparent background.',
           'Included the updated 404 penguin assets and revised publication population target already added after rc.1.',
         ],
       },
