@@ -88,6 +88,10 @@ const legacyRedirects = [
 ]
 
 const nextConfig: NextConfig = {
+  // Embed Netlify's build context so SSR and static metadata agree.
+  env: {
+    SITE_DEPLOY_CONTEXT: process.env.CONTEXT ?? '',
+  },
   poweredByHeader: false,
   images: {
     qualities: [75, 90, 95],
