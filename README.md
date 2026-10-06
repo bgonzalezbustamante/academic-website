@@ -86,7 +86,7 @@ Use a Supabase publishable key (`sb_publishable_...`), never a service-role key.
 
 ### Search and preview safety
 
-Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS production hosts are indexable; localhost, branch/preview deployments and the temporary Netlify hostname emit `noindex` metadata and a disallowing `robots.txt`. Production `robots.txt` also advertises the generated public sitemap.
+Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS production hosts are indexable; localhost, branch/preview deployments and the temporary Netlify hostname emit `noindex` metadata and a disallowing `robots.txt`. Netlify's build context is embedded in Next.js so that Deploy Previews stay non-indexable even when they inherit the production site URL. Production `robots.txt` also advertises the generated public sitemap.
 
 Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when Swift Harbour has a clear successor. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
 
