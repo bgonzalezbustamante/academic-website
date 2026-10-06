@@ -128,7 +128,7 @@ async function makeBranding() {
 
 // Inspect the actual generated files, not just their source metadata or filenames.
 async function inspectWebp(src, expectedMaxWidth) {
-  const filename = path.join(publicRoot, src.replace(/^\\//, ''))
+  const filename = path.join(publicRoot, src.slice(1))
   const metadata = await sharp(filename).metadata()
   if (metadata.format !== 'webp' || !metadata.width || !metadata.height) {
     throw new Error(`Generated image is not a valid WebP: ${src}`)
@@ -156,10 +156,12 @@ async function auditOutputs({ profile, paintings, branding }) {
     const variants = output.srcSet.split(', ')
     let lastWidth = 0
     for (const entry of variants) {
-      const match = /^(\\S+) (\\d+)w$/.exec(entry)
-      if (!match) throw new Error(`Invalid generated srcSet candidate: ${entry}`)
-      const [, src, widthText] = match
-      const width = Number(widthText)
+      const [src, widthToken] = entry.split(' ')
+      const width = Number(widthToken?.slice(0, -1))
+      if (!src?.startsWith('/') || !widthToken?.endsWith('w') ||
+          !Number.isInteger(width) || width <= 0) {
+        throw new Error(`Invalid generated srcSet candidate: ${entry}`)
+      }
       const info = await inspectWebp(src, profiles.paintings.widths.at(-1))
       if (info.width !== width || width <= lastWidth) {
         throw new Error(`Inconsistent responsive painting widths for ${slug}`)
@@ -181,7 +183,7 @@ async function auditOutputs({ profile, paintings, branding }) {
   }
 
   // Source Leiden PNG has transparent corners. Lossless conversion must retain them.
-  const leidenOutput = path.join(publicRoot, branding.leiden.replace(/^\\//, ''))
+  const leidenOutput = path.join(publicRoot, branding.leiden.slice(1))
   const leidenMetadata = await sharp(leidenOutput).metadata()
   const leidenStats = await sharp(leidenOutput).stats()
   if (!leidenMetadata.hasAlpha || leidenStats.channels.length < 4 ||
