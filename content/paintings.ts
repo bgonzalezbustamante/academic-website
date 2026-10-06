@@ -16,7 +16,6 @@ export type SelectedPainting = {
   city: string
   medium: string
   museumUrl?: string
-  imageUrl: string
   imageWidth: number
   imageHeight: number
   imageAlt: string
@@ -39,8 +38,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Grisaille and oil on oak panel',
     museumUrl:
       'https://www.museodelprado.es/en/the-collection/art-work/triptych-garden-earthly-delights/02388242-6d6a-4e9e-a992-e1311eab3609',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/The_Garden_of_Earthly_Delights_by_Hieronymus_Bosch.jpg/1280px-The_Garden_of_Earthly_Delights_by_Hieronymus_Bosch.jpg',
     imageWidth: 1280,
     imageHeight: 655,
     imageAlt:
@@ -63,8 +60,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Mixed method on mural transferred to canvas',
     museumUrl:
       'https://www.museodelprado.es/en/the-collection/art-work/the-drowning-dog/4ea6a3d1-00ee-49ee-b423-ab1c6969bca6',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Goya_Dog.jpg/960px-Goya_Dog.jpg',
     imageWidth: 960,
     imageHeight: 1630,
     imageAlt: 'Perro semihundido by Francisco de Goya',
@@ -86,8 +81,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Oil on canvas',
     museumUrl:
       'https://www.nationalgallery.org.uk/paintings/elisabeth-louise-vigee-le-brun-self-portrait-in-a-straw-hat',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Self-portrait_in_a_Straw_Hat_by_Elisabeth-Louise_Vig%C3%A9e-Lebrun_-_1782.jpg/960px-Self-portrait_in_a_Straw_Hat_by_Elisabeth-Louise_Vig%C3%A9e-Lebrun_-_1782.jpg',
     imageWidth: 960,
     imageHeight: 1320,
     imageAlt:
@@ -108,8 +101,6 @@ export const selectedPaintings: SelectedPainting[] = [
     museum: 'Musei Capitolini',
     city: 'Rome',
     medium: 'Oil on canvas',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/TINTORETTO_-_Magdalena_penitente_%28Musei_Capitolini%2C_Roma%2C_1598-1602%29_-_copia.jpg/960px-TINTORETTO_-_Magdalena_penitente_%28Musei_Capitolini%2C_Roma%2C_1598-1602%29_-_copia.jpg',
     imageWidth: 960,
     imageHeight: 1186,
     imageAlt: 'Maddalena penitente by Domenico Tintoretto',
@@ -131,8 +122,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Oil on canvas',
     museumUrl:
       'https://www.museodelprado.es/en/the-collection/art-work/las-meninas/9fdc7800-9ade-48b0-ab8b-edee94ea877f',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/7/76/La_familia_de_Felipe_IV_o_Las_Meninas_%28Vel%C3%A1zquez%2C_Museo_del_Prado_de_Madrid%2C_1656%29.jpg',
     imageWidth: 2649,
     imageHeight: 3051,
     imageAlt: 'Las meninas by Diego Velázquez',
@@ -154,8 +143,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Oil on canvas',
     museumUrl:
       'https://www.rijksmuseum.nl/en/collection/object/The-Night-Watch-Militia-Company-of-District-II-under-the-Command-of-Captain-Frans-Banninck-Cocq--3137deb45cd7765f9a76084a16c99544',
-    imageUrl:
-      'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg/1280px-The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg',
     imageWidth: 1280,
     imageHeight: 1041,
     imageAlt: 'De Nachtwacht by Rembrandt van Rijn',
@@ -178,8 +165,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Mixed method on mural transferred to canvas',
     museumUrl:
       'https://www.museodelprado.es/en/the-collection/art-work/saturn/18110a75-b0e7-430c-bc73-2a4d55893bd6',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/b/bc/Saturn_Devouring_His_Son.jpg',
     imageWidth: 1071,
     imageHeight: 1920,
     imageAlt: 'Saturno by Francisco de Goya',
@@ -202,8 +187,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Oil on canvas',
     museumUrl:
       'https://www.museodelprado.es/en/the-collection/art-work/the-colossus/2a678f69-fbdd-409c-8959-5c873f8feb82',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/7/70/Goya.colossus.jpg',
     imageWidth: 882,
     imageHeight: 970,
     imageAlt:
@@ -226,8 +209,6 @@ export const selectedPaintings: SelectedPainting[] = [
     medium: 'Oil on oak panel',
     museumUrl:
       'https://www.khm.at/en/objectdb/detail/323/',
-    imageUrl:
-      'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg/1280px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg',
     imageWidth: 1280,
     imageHeight: 937,
     imageAlt:
