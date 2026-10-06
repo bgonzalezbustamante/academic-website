@@ -91,6 +91,13 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     qualities: [75, 90, 95],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'timeline.bgonzalezbustamante.com',
+        pathname: '/penguins/**',
+      },
+    ],
   },
   async headers() {
     return [

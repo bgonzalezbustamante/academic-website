@@ -1,8 +1,10 @@
 import {
+  faCalendarWeek,
   faClock,
   faMugHot,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from 'next/link'
 
 import type {
   PublicWorkAnalytics,
@@ -379,6 +381,13 @@ export default function PublicWorkAnalytics({
             <span>10–12h</span>
             <span>12h+</span>
           </div>
+        </div>
+
+        <div className="activity-timeline-link">
+          <Link className="bio-profile-link" href="/weekly-timeline">
+            <FontAwesomeIcon icon={faCalendarWeek} aria-hidden="true" />
+            Weekly timeline
+          </Link>
         </div>
       </div>
     </section>

@@ -305,7 +305,6 @@ export default async function HomePage() {
         </section>
       )}
 
-
       {conferencesAvailable ? (
         <PresentationRoadmap
           presentations={presentations}

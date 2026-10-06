@@ -14,6 +14,7 @@ const STATIC_PATHS = [
   '/projects',
   '/software',
   '/paintings',
+  '/weekly-timeline',
   '/conferences',
   '/teaching',
   '/trajectory',
