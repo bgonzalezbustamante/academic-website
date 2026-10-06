@@ -17,44 +17,33 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.2',
     codename: 'Bold River',
-    status: 'In development',
+    status: 'Release pending',
     releasedOn: 'TBC',
-    comparison: 'Second release candidate in the Next.js repository',
+    comparison: 'Second release candidate',
     summary:
-      'Bold River hardens collaboration analytics, introduces a public Software Ecosystem catalogue, refines footer presentation, and prepares the repository for eventual public visibility with explicit licensing boundaries.',
+      'Bold River brings three new ways to explore my work and interests, alongside clearer activity displays and improvements throughout the website.',
     sections: [
       {
-        title: 'Software Ecosystem',
+        title: 'Explore',
         items: [
-          'Added a non-navigation /software catalogue backed exclusively by Research Dashboard public Software Ecosystem RPCs.',
-          'Linked Software ecosystem inline beside Academic trajectory on the homepage without a separator, added a complete colour-coded development-stage legend, and kept software profiles self-contained as cards without detail routes.',
+          'Discover the applications, packages and other tools I develop in Software Ecosystem.',
+          'Browse nine favourite paintings, with links to their museums and image credits.',
+          'Explore the Weekly timeline, where illustrated penguins represent daily working time and coffee activity.',
         ],
       },
       {
-        title: 'Personal curation',
+        title: 'A better experience',
         items: [
-          'Added a non-navigation Selected paintings page with a rights-aware editorial mosaic, visible image provenance, and a single-column mobile fallback.',
-          'Expanded the mosaic with El coloso and Pieter Bruegel the Elder’s Turmbau zu Babel, reorganised selections whose images are not republished into compact linked cards, and standardised artwork titles to the canonical catalogue wording used by each holding institution.',
-          'Made painting images load from the website itself, with high-quality versions that adapt to different screen sizes.',
-          'Added a Weekly timeline page showing each day’s public work and coffee activity through interactive penguin illustrations, linked below the homepage activity chart.',
+          'Improved the appearance and delivery of the profile photograph, artwork and institutional logos.',
+          'Updated the activity chart and made academic positions easier to keep in order.',
+          'Added Catholic Calendar highlights to the footer and improved its layout on mobile.',
         ],
       },
       {
-        title: 'Robustness and presentation',
+        title: 'Clearer and more reliable',
         items: [
-          'Aligned the Activity over time heatmap with the revised Research Dashboard working-hour ranges, from 0h through 12h+.',
-          'Normalised publication author arrays before collaboration calculations and identified the exceptional large collaboration by stable slug rather than exact title.',
-          'Moved the Creative Commons/year/name line to the left footer column above the public email address and added a Dashboard-controlled Catholic Calendar composed display above Website Carbon, including a maximum-width stress mode.',
-          'Improved the profile photograph and university logo delivery, and aligned Website Carbon with other footer details on mobile.',
-          'Made it easier to update academic positions and their order, with the navbar logos now following the same list; image checks also protect the Leiden logo’s transparent background.',
-          'Included the updated 404 penguin assets and revised publication population target already added after rc.1.',
-        ],
-      },
-      {
-        title: 'Public-repository preparation',
-        items: [
-          'Added explicit software, editorial-content and third-party asset licensing boundaries in preparation for making the repository public.',
-          'Extended the website public-contract checker to validate Software Ecosystem fields, controlled vocabularies, repository privacy invariants and clean publication author arrays.',
+          'Improved collaboration summaries, refreshed the illustrated page-not-found screen and strengthened checks on public information.',
+          'Clarified the credits and usage rights for artwork and other material featured on the site.',
         ],
       },
     ],

@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current production release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). **v6.0.0-rc.2 "Bold River"** is in development. Production remains at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/), deployed from validated `main` through the Netlify project `bgonzalezbustamante`.
+Current production release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). **v6.0.0-rc.2 "Bold River"** is undergoing final release review in [draft PR #11](https://github.com/bgonzalezbustamante/academic-website/pull/11); it has not yet been merged, tagged or published. Production remains at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/), deployed from validated `main` through the Netlify project `bgonzalezbustamante`.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -22,12 +22,14 @@ The website consumes only explicitly curated anonymous-safe Supabase RPC contrac
 - `get_public_software(slug)`
 - `get_public_calendar_settings()`
 - `get_public_work_analytics(year)`
+- `list_public_availability(year)`
+- `get_public_teaching_settings()`
 
 Runtime website code must not query Research Dashboard tables directly or use a service-role key. Private workflow metadata, notes, account information, work-session details and other Dashboard-only data remain outside the public application.
 
 ## Public site
 
-Swift Harbour currently includes:
+The website combines the rc.1 research profile with features prepared for rc.2:
 
 - a portrait-led academic homepage with current appointments, research interests, institutional links, DORA/CRediT research-practice information and public contact details;
 - an Academic trajectory page for selected education, faculty appointments, research positions, teaching positions and consultancy;
@@ -48,10 +50,11 @@ The homepage population indicator is intentionally a progress measure for the on
 
 ## Manually maintained site metadata
 
-Four small TypeScript sources intentionally remain manual:
+Five small TypeScript sources intentionally remain manual:
 
 - `lib/site-population.ts` stores intended-ingestion totals, population periods and the `POPULATION_SETTINGS.showProgress` display switch. Set it to `false` to hide both the Home population card and the section-level progress strips without deleting the underlying targets.
-- `content/trajectory.ts` stores the selected education and professional positions shown on the Academic trajectory page. Entries are grouped by category for manual editing, and the optional `order` field resolves ties when positions share the same interval.
+- `content/trajectory.ts` stores selected education and professional positions shown on Academic trajectory; `order` resolves ties within a category.
+- `content/positions.ts` sets current academic positions, institutional links and their shared ordering in the Home profile and navbar. These can move to the Academic API later.
 - `content/site-carbon.ts` stores the current Website Carbon snapshot. Set `showInFooter: false` to suppress the public footer note while retaining the measurement data.
 - `content/paintings.ts` stores the deliberately small personal painting selection, museum/source links, image rights metadata and editorial mosaic layout hints.
 
@@ -99,7 +102,7 @@ The canonical raster sources live outside `public/`: one `assets/sources/profile
 
 Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Project, teaching and funder images and Christicons are deliberately outside this pipeline.
 
-The three current academic positions are defined in `content/positions.ts`. Edit the role, institution or URL there; reorder the array to change both the Home positions list and navbar logo order. The site currently uses this local list, which can later be replaced by the Academic API. The unused legacy `public/branding/oxford.webp` has been retired.
+The retired legacy branding WebPs are no longer used; the navbar and Home positions list use the generated assets.
 
 ### TERGAP map snapshot
 
@@ -109,54 +112,33 @@ When the TERGAP dashboard data changes, regenerate the snapshot from the TERGAP 
 
 ## Validation
 
-Run linting and TypeScript validation:
-
-```bash
-npm run check
-```
-
-Validate the anonymous-safe public Supabase contract:
-
-```bash
-npm run check:public-contract
-```
-
-Build the production application:
-
-```bash
-npm run build
-```
-
-Before a deployment or milestone merge, run all three:
+Before merging or deploying a release candidate, run:
 
 ```bash
 npm run check
 npm run check:public-contract
 npm run build
+npm audit --omit=dev
 ```
 
-The public-contract check covers Publications, Projects, Conferences, Teaching, Software Ecosystem, public calendar and Teaching settings, public availability and aggregate work analytics, verifies expected public relationships and controlled vocabularies, enforces private-repository URL suppression, and rejects private fields. `npm run check:calendar-footer` protects deterministic Catholic Calendar footer fixtures: the 85-character maximum-width composition found by the full beta.1 audit, the long St Michael's Lent/countdown composition, and a current-day integration sample. `npm run audit:calendar-footer` retains the exhaustive 2000–2100 scan for deliberate package/release audits without adding it to every Netlify build. Empty curated datasets are valid states.
+`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and the deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Check the Netlify preview on desktop and mobile and run a secrets scan before repository-publication decisions.
 
 ## Deployment
 
-Development remains local-first. Before integration, release changes should pass:
-
-```bash
-npm run check
-npm run check:public-contract
-npm run build
-```
-
-Validated work is merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
+Development remains local-first and follows the validation gate above. Only approved, validated pull requests are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, quality hardening, legacy redirect verification, SEO verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and `bgonzalezbustamante.netlify.app` redirects permanently to the corresponding canonical `.com` path.
 
 The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` for rollback and can be archived after the post-migration observation period.
 
+### Release procedure
+
+For rc.2, keep PR #11 unmerged until approval. In the final release commit, update the version/date/status in `CHANGELOG.md`, `README.md` and `lib/releases.ts`, with rc.1 marked as the preceding release. Merge the reviewed PR, verify the production deployment and new routes, then create the `v6.0.0-rc.2` tag **on the merged `main` commit**. Publish a GitHub release named `v6.0.0-rc.2 “Bold River”` and mark it as a **pre-release**; use a concise visitor-facing summary, not a copy of the technical CHANGELOG. Never tag an unmerged feature-branch commit.
+
 ## Release history
 
 - Technical v6 history: [CHANGELOG.md](CHANGELOG.md)
-- Public-facing release notes: [Release Notes](./app/release-notes/page.tsx)
+- Public-facing release notes: [Release Notes](./lib/releases.ts) (rendered at `/release-notes`)
 - Detailed pre-v6 history: [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md)
 
 

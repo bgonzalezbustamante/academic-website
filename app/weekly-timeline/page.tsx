@@ -149,14 +149,15 @@ export default async function WeeklyTimelinePage() {
           )}
         </div>
         <p className="weekly-timeline-source-note">
-          A reusable Next.js component that turns seven days of public working-time
-          and coffee data into a compact visual timeline.{' '}
+          A reusable Next.js component that transforms seven days of public
+          working-time and coffee data into an illustrated timeline.{' '}
+          Further details at{' '}
           <a
             href="https://timeline.bgonzalezbustamante.com/"
             target="_blank"
             rel="noreferrer"
           >
-            Explore the standalone Weekly Penguin Timeline
+            timeline.bgonzalezbustamante.com
           </a>.
         </p>
       </div>
