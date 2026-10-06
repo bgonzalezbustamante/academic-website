@@ -35,6 +35,8 @@
 - Generate the profile at up to 660px with quality-95 WebP, preserving source proportions and serving the generated asset without additional image re-encoding; paintings use responsive quality-95 variants with uncropped images, and logos use 168px lossless WebP.
 - Retained rights/source links for local painting reproductions, and left project, teaching, funder and Christicons imagery outside this conversion pipeline.
 - Matched Website Carbon's mobile footer alignment to Catholic Calendar and the release version, overriding the desktop alignment rule at the same specificity.
+- Consolidated current academic positions in a single ordered TypeScript configuration: both Home role descriptions and navbar logos now follow the same editable list. Removed the unused legacy Oxford branding image.
+- Added post-generation WebP inspection for dimensions, responsive painting candidates and output sizes, plus an explicit check that Leiden's lossless logo retains a transparent background. UDP and OCPSG source logos remain intentionally opaque.
 
 ### Robustness and public-readiness
 
