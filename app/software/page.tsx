@@ -59,18 +59,18 @@ export default async function SoftwarePage() {
         )}
 
         <div
-            className="software-stage-legend"
-            aria-label="Development stage legend"
-          >
-            <span className="software-stage-legend-label">
-              Development stage
-            </span>
-            <div className="software-stage-legend-pills">
-              {SOFTWARE_DEVELOPMENT_STAGES.map((stage) => (
-                <SoftwareStagePill key={stage} stage={stage} />
-              ))}
-            </div>
+          className="software-stage-legend"
+          aria-label="Development stage legend"
+        >
+          <span className="software-stage-legend-label">
+            Development stage
+          </span>
+          <div className="software-stage-legend-pills">
+            {SOFTWARE_DEVELOPMENT_STAGES.map((stage) => (
+              <SoftwareStagePill key={stage} stage={stage} />
+            ))}
           </div>
+        </div>
       </div>
     </section>
   )
