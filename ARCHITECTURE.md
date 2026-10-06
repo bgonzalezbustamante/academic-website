@@ -57,7 +57,7 @@ The nine reproduced artwork JPEG sources are kept at `assets/sources/paintings/<
 
 The output contains content-hashed `.webp` files under `public/{profile,paintings,branding}/generated/` and an ignored `content/image-assets.generated.ts` manifest with the public URLs. The generated directories are rebuilt from scratch; old files never accumulate. The portrait preserves the full source aspect ratio and is resized without upscaling to fit 660px, at quality 95. The nine paintings receive distinct responsive widths up to 1800px, also at quality 95. Branding is resized without upscaling to fit 168px and encoded losslessly. Source originals are not published under `public/`.
 
-The profile image is delivered without additional Next.js optimisation to avoid a second lossy encode. Branding images are also delivered without re-encoding so lossless colours and edges are preserved. Projects, funders, teaching, publication imagery and vector Christicons retain their existing handling; `oxford.webp` remains a legacy branding asset until an original is available.
+The profile image is delivered without additional Next.js optimisation to avoid a second lossy encode. Branding images are also delivered without re-encoding so lossless colours and edges are preserved. After conversion, the build reopens the resulting WebP files and checks their format and dimensions, confirms the painting `srcSet` candidates and file sizes, and verifies that the Leiden logo still has fully transparent pixels. This validation runs as part of the normal image-generation step. Projects, funders, teaching, publication imagery and vector Christicons retain their existing handling. The unused legacy `oxford.webp` has been removed.
 
 The homepage exposes `/paintings` through a small Selected paintings link below Main Interests. The page is deliberately absent from the primary navigation.
 
@@ -162,7 +162,7 @@ The public site deliberately shares a visual family with Research Dashboard whil
 - A washed Oxford-blue surface (`#edf2f7`) provides supporting backgrounds without competing with the primary blue/coral identity.
 - Locally bundled Font Awesome provides interface, brand and scholarly-profile icons; no external icon stylesheet/font is required at runtime.
 
-Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
+Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. `content/positions.ts` is the single ordered configuration for current roles, institutions, links and generated branding assets: rearranging that array simultaneously reorders the homepage positions and navbar logo strip. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. This local presentation boundary can eventually be replaced by Academic API current-position records without maintaining two separate ordering lists. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
 
 ## Immediate data sources
 
