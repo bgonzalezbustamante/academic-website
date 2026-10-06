@@ -23,6 +23,7 @@ export default function PositionList() {
               alt=""
               width={26}
               height={26}
+              unoptimized
             />
           </a>
           <p>
