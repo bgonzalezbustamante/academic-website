@@ -29,6 +29,13 @@
 - Reworked the bottom “Selected works not reproduced here” group for Leonora Carrington’s `Las distracciones de Dagoberto`, Matthew Wong’s `A Walk through Primordial Garden`, and Pablo Picasso’s `L'étagère` into compact responsive mini-cards with one institutional destination link and concise copyright/reuse explanations.
 - Standardised reproduced artwork titles to the canonical catalogue titles used by their holding institutions, retaining the institution’s own language rather than translating every work into English.
 
+### Image generation and mobile footer
+
+- Added a deterministic Sharp-based build step for the source portrait, nine licensed painting reproductions and three institutional logos, with content-hashed WebP outputs and an automatically generated URL manifest. Sources remain under `assets/sources/`; output assets are excluded from Git.
+- Generate the profile at up to 660px with quality-95 WebP, preserving source proportions and serving the generated asset without additional image re-encoding; paintings use responsive quality-95 variants with uncropped images, and logos use 168px lossless WebP.
+- Retained rights/source links for local painting reproductions, and left project, teaching, funder and Christicons imagery outside this conversion pipeline.
+- Matched Website Carbon's mobile footer alignment to Catholic Calendar and the release version, overriding the desktop alignment rule at the same specificity.
+
 ### Robustness and public-readiness
 
 - Aligned the public Activity over time heatmap with Research Dashboard's revised working-hour bands: `0h`, `<4h`, `4–8h`, `8–10h`, `10–12h`, and `12h+`.
