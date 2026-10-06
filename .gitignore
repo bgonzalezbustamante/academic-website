@@ -12,8 +12,11 @@
 .env*
 !.env.example
 
-# generated portrait cache
+# generated image assets and manifest
 /public/profile/generated/
+/public/paintings/generated/
+/public/branding/generated/
+/content/image-assets.generated.ts
 
 # misc
 .DS_Store
