@@ -243,13 +243,26 @@ h4 {
 .profile-grid {
   display: grid;
   grid-template-columns: minmax(180px, 230px) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-rows: min-content 1fr;
+  column-gap: clamp(2rem, 5vw, 4rem);
+  row-gap: 1.15rem;
   align-items: start;
 }
 
 .profile-aside {
+  grid-column: 1;
+  grid-row: 1;
   display: grid;
   justify-items: center;
+  gap: 1.15rem;
+}
+
+.profile-aside-details {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  justify-items: center;
+  align-content: start;
   gap: 1.15rem;
 }
 
@@ -272,6 +285,8 @@ h4 {
 
 .profile-main {
   min-width: 0;
+  grid-column: 2;
+  grid-row: 1 / span 2;
 }
 
 .hero-name {
@@ -4160,9 +4175,13 @@ h4 {
 @media (max-width: 760px) {
   .profile-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: clamp(2rem, 5vw, 4rem);
   }
 
   .profile-aside {
+    grid-column: 1;
+    grid-row: 1;
     justify-items: start;
     grid-template-columns: 150px minmax(0, 1fr);
     align-items: start;
@@ -4170,11 +4189,21 @@ h4 {
 
   .portrait-frame {
     width: 150px;
-    grid-row: 1 / span 2;
   }
 
   .academic-links {
     justify-content: flex-start;
+  }
+
+  .profile-main {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .profile-aside-details {
+    grid-column: 1;
+    grid-row: 3;
+    justify-items: start;
   }
 
   .research-interests {
