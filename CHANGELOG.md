@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v6.0.0-rc.2 "Bold River" (release pending)
+## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
 Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alongside improvements to academic activity, imagery, footer presentation and public-data safeguards.
 

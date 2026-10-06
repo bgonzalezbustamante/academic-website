@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current production release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). **v6.0.0-rc.2 "Bold River"** is undergoing final release review in [draft PR #11](https://github.com/bgonzalezbustamante/academic-website/pull/11); it has not yet been merged, tagged or published. Production remains at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/), deployed from validated `main` through the Netlify project `bgonzalezbustamante`.
+Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026), succeeding **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The rc.2 metadata is prepared in [PR #11](https://github.com/bgonzalezbustamante/academic-website/pull/11) before the approved merge; until that PR reaches production, the live website continues to serve rc.1. The production website at [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) deploys from validated `main` through the Netlify project `bgonzalezbustamante`.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -29,7 +29,7 @@ Runtime website code must not query Research Dashboard tables directly or use a 
 
 ## Public site
 
-The website combines the rc.1 research profile with features prepared for rc.2:
+The website combines the original rc.1 research profile with the rc.2 enhancements:
 
 - a portrait-led academic homepage with current appointments, research interests, institutional links, DORA/CRediT research-practice information and public contact details;
 - an Academic trajectory page for selected education, faculty appointments, research positions, teaching positions and consultancy;
@@ -133,11 +133,11 @@ The predecessor remains temporarily available at `legacy-bgonzalezbustamante.net
 
 ### Repository visibility
 
-The GitHub repository remains private during rc.2 review. After merging, production verification and a complete Git history/asset rights/security scan, the repository may be made public through GitHub's repository visibility settings. Publishing the repository exposes its existing branches and commit history, not just the current `main` tree. Confirm that source imagery, licence notices and any historical files are suitable for public distribution; never rely on `.gitignore` to protect material already committed.
+The GitHub repository remains private pending the complete publication review. After merging, production verification and a complete Git history/asset rights/security review, the repository may be made public through GitHub's repository visibility settings. Publishing the repository exposes its existing branches and commit history, not just the current `main` tree. Confirm that source imagery, licence notices and any historical files are suitable for public distribution; never rely on `.gitignore` to protect material already committed.
 
 ### Release procedure
 
-For rc.2, keep PR #11 unmerged until approval. In the final release commit, update the version/date/status in `CHANGELOG.md`, `README.md` and `lib/releases.ts`, with rc.1 marked as the preceding release. Merge the reviewed PR, verify the production deployment and new routes, then create the `v6.0.0-rc.2` tag **on the merged `main` commit**. Publish a GitHub release named `v6.0.0-rc.2 “Bold River”` and mark it as a **pre-release**; use a concise visitor-facing summary, not a copy of the technical CHANGELOG. Never tag an unmerged feature-branch commit.
+Release-candidate metadata is finalised in `CHANGELOG.md`, `README.md` and `lib/releases.ts` before merging. After explicit approval, merge the reviewed PR, verify the production deployment and new routes, and create the corresponding annotated tag **on the merged `main` commit**. Publish a GitHub **pre-release** using a concise visitor-facing summary rather than copying the technical CHANGELOG. Do not tag an unmerged feature-branch commit. For rc.2, use `v6.0.0-rc.2` and the release title `v6.0.0-rc.2 “Bold River”`.
 
 ## Release history
 

@@ -17,8 +17,8 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.2',
     codename: 'Bold River',
-    status: 'Release pending',
-    releasedOn: 'TBC',
+    status: 'Current release',
+    releasedOn: '6 Oct 2026',
     comparison: 'Second release candidate',
     summary:
       'Bold River brings three new ways to explore my work and interests, alongside clearer activity displays and improvements throughout the website.',
@@ -51,7 +51,7 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.1',
     codename: 'Swift Harbour',
-    status: 'Current release',
+    status: 'Previous release',
     releasedOn: '1 Oct 2026',
     comparison: 'First release candidate in the Next.js repository',
     summary:
