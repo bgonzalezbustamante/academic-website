@@ -205,8 +205,16 @@ main {
 
 .nav-list a:hover,
 .nav-list a:focus-visible {
+  background: rgba(254, 97, 90, 0.1);
+  color: var(--oxford-coral);
+}
+
+.nav-list a[aria-current='page'],
+.nav-list a[aria-current='page']:hover,
+.nav-list a[aria-current='page']:focus-visible {
   background: var(--oxford-blue-wash);
   color: var(--oxford-blue);
+  font-weight: 650;
 }
 
 /* Shared typography */
