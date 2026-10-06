@@ -6,15 +6,15 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "profile:sync": "node scripts/sync-profile-portrait.mjs",
-    "predev": "npm run profile:sync",
+    "assets:build": "node scripts/build-images.mjs",
+    "predev": "npm run assets:build",
     "dev": "next dev",
-    "prebuild": "npm run profile:sync && npm run check:calendar-footer",
+    "prebuild": "npm run assets:build && npm run check:calendar-footer",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "precheck": "npm run profile:sync",
+    "precheck": "npm run assets:build",
     "check": "npm run lint && npm run typecheck && npm run check:calendar-footer",
     "check:calendar-footer": "node scripts/check-calendar-footer.mjs",
     "audit:calendar-footer": "node scripts/audit-calendar-footer.mjs",
@@ -32,6 +32,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-simple-maps": "5.0.5",
+    "sharp": "0.35.4",
     "world-atlas": "2.0.2"
   },
   "devDependencies": {
