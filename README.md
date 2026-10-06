@@ -86,9 +86,13 @@ Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS
 
 Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when Swift Harbour has a clear successor. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
 
-### Profile portrait
+### Local image assets
 
-Place exactly one JPG, JPEG or PNG source image in `public/profile`. The pre-development/check/build synchronisation step copies it to a content-hashed generated filename so profile-image replacements invalidate caches automatically.
+The canonical raster sources live outside `public/`: one `assets/sources/profile/avatar.png`, nine slug-named JPEGs in `assets/sources/paintings/`, and three logo PNGs (`leiden.png`, `udp.png`, `ocpsg.png`) in `assets/sources/branding/`. Keep original source files unchanged; their museum links, licence terms and institutional ownership are preserved in the painting metadata and `NOTICE`.
+
+Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. Project, teaching and funder images and Christicons are deliberately outside this pipeline.
+
+The legacy `public/branding/oxford.webp` remains unchanged because it has no corresponding source PNG and is not currently referenced by the three-affiliation UI.
 
 ### TERGAP map snapshot
 
