@@ -1,6 +1,6 @@
 {
   "source_repository": "bgonzalezbustamante/tergap-dashboard",
-  "generated_at": "2026-09-29T10:00:19Z",
+  "generated_at": "2026-10-06T13:19:33Z",
   "collection_window": {
     "from_year": 2011,
     "to_year": 2025
@@ -65,6 +65,11 @@
       "country": "Côte d'Ivoire",
       "iso3": "CIV",
       "complete_articles": 101899
+    },
+    {
+      "country": "Democratic Republic of the Congo",
+      "iso3": "COD",
+      "complete_articles": 137805
     },
     {
       "country": "Djibouti",
@@ -187,6 +192,11 @@
       "complete_articles": 1509826
     },
     {
+      "country": "Republic of the Congo",
+      "iso3": "COG",
+      "complete_articles": 24378
+    },
+    {
       "country": "Rwanda",
       "iso3": "RWA",
       "complete_articles": 183072
@@ -222,6 +232,11 @@
       "complete_articles": 70707
     },
     {
+      "country": "Sudan",
+      "iso3": "SDN",
+      "complete_articles": 255800
+    },
+    {
       "country": "Tanzania",
       "iso3": "TZA",
       "complete_articles": 165443
@@ -237,9 +252,19 @@
       "complete_articles": 41181
     },
     {
+      "country": "Tunisia",
+      "iso3": "TUN",
+      "complete_articles": 182088
+    },
+    {
       "country": "Uganda",
       "iso3": "UGA",
       "complete_articles": 249389
+    },
+    {
+      "country": "Western Sahara",
+      "iso3": "ESH",
+      "complete_articles": 8140
     },
     {
       "country": "Zambia",
