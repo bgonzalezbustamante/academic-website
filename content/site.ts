@@ -1,3 +1,5 @@
+import { imageAssets } from '@/content/image-assets.generated'
+
 export const siteProfile = {
   name: 'Bastián González-Bustamante',
   positions: [
@@ -5,21 +7,21 @@ export const siteProfile = {
       role: 'Post-doctoral Researcher in Computational Social Science',
       institution: 'Leiden University',
       href: 'https://www.universiteitleiden.nl/en',
-      logo: '/branding/leiden.webp',
+      logo: imageAssets.branding.leiden,
       logoAlt: 'Leiden University',
     },
     {
       role: 'Associate Professor of Public Administration',
       institution: 'Universidad Diego Portales',
       href: 'https://www.udp.cl/',
-      logo: '/branding/udp.webp',
+      logo: imageAssets.branding.udp,
       logoAlt: 'Universidad Diego Portales',
     },
     {
       role: 'Research Leader',
       institution: 'Oxford Computational Political Science Group',
       href: 'https://www.politics.ox.ac.uk/oxford-computational-political-science-group',
-      logo: '/branding/ocpsg.webp',
+      logo: imageAssets.branding.ocpsg,
       logoAlt: 'Oxford Computational Political Science Group',
     },
   ],
