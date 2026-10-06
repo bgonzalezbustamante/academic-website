@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Unreleased — v6.0.0 "Crimson Delta"
+
+### Navigation
+
+- Updated primary navigation so hover and keyboard-focus highlights use Oxford coral, while the active section remains Oxford blue.
+- Added active-section indicators for Home, Publications, Projects, Conferences and Teaching, including nested publication and project detail pages.
+
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
 Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alongside improvements to academic activity, imagery, footer presentation and public-data safeguards.

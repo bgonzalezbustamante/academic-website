@@ -4,6 +4,8 @@ Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.co
 
 Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
+**In development:** v6.0.0 "Crimson Delta" accumulates small fixes on the `crimson-delta` branch through a draft pull request. It remains unreleased; the website and published Release Notes continue to reflect the version on `main` until the next approved merge.
+
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
 ## Architecture
