@@ -29,12 +29,14 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 - Built a deterministic Sharp pipeline for `assets/sources/` portrait, painting and institutional-logo originals. It emits content-hashed, ignored WebPs and a local manifest: up to 660px/quality 95 for the portrait, responsive quality-95 painting variants, and lossless 168px logos.
 - Validated generated WebP formats, dimensions, painting `srcSet` candidates and file sizes; verified Leiden's transparent background. Original image-source and licence information remains available.
 - Centralised current appointments in `content/positions.ts`, so the Home position list and navbar logos share the same order; retired unused branding WebPs.
+- Standardised general-purpose information, academic-link, trajectory-legend and Google Scholar SVG icons to Oxford coral, while preserving state-specific colours for conference progress, co-authorship, private-repository metadata and Weekly Timeline.
 - Added a two-item Catholic Calendar footer display using the published package, semantic Christicons and Dashboard-controlled visibility/stress settings. Added deterministic long-label regression fixtures and a separate full 2000–2100 audit.
 - Moved the Creative Commons/year/name footer line above the email address; aligned the Website Carbon note with the other footer information on mobile.
 - Updated 404 penguin artwork and the post-rc.1 publication-population targets.
 
 ### Research data, security and public readiness
 
+- Matched TERGAP Dashboard's Africa-centred Equal Earth projection (15° E, 5° N; scale 245) in the project's choropleth without changing the shared Conferences world map.
 - Aligned the Activity over time heatmap with Research Dashboard's six revised working-time intervals (`0h`, `<4h`, `4–8h`, `8–10h`, `10–12h`, `12h+`).
 - Normalised and deduplicated publication authors before co-authorship analysis; excluded the exceptional large collaboration by stable paper slug rather than title text.
 - Expanded the public-contract checker to validate Software controlled vocabularies and repository privacy, calendar settings, author arrays, timeline conference/travel flags, coffee counts, public availability and the Teaching-season flag.

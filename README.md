@@ -106,7 +106,7 @@ The retired legacy branding WebPs are no longer used; the navbar and Home positi
 
 ### TERGAP map snapshot
 
-The TERGAP project map uses a compact derived snapshot at `public/data/tergap-map.json` rather than copying the full TERGAP dashboard metrics file.
+The TERGAP project map uses a compact derived snapshot at `public/data/tergap-map.json` rather than copying the full TERGAP dashboard metrics file. Its Africa-centred view matches the standalone TERGAP Dashboard; Conferences retains its global map.
 
 When the TERGAP dashboard data changes, regenerate the snapshot from the TERGAP repository and commit only the derived academic-website JSON.
 

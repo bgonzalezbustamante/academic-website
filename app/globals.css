@@ -446,7 +446,7 @@ h4 {
 .academic-link svg {
   width: 1rem;
   min-width: 1rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
   font-size: 1rem;
 }
 
@@ -712,7 +712,7 @@ h4 {
 .section-population-note svg {
   width: 0.62rem;
   flex: 0 0 0.62rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
 }
 
 /* Publications */
@@ -886,7 +886,7 @@ h4 {
 
 .publication-profile-kpi-label svg {
   width: 0.62rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
 }
 
 .publication-profile-kpis strong {
@@ -923,7 +923,7 @@ h4 {
   width: 0.65rem;
   flex: 0 0 0.65rem;
   margin-top: 0.13rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
 }
 
 .publication-profile-exclusion-note a {
@@ -975,10 +975,10 @@ h4 {
   gap: 0.35rem;
 }
 
-.publication-profile-scholar-label i {
+.publication-profile-scholar-label svg {
   flex: 0 0 auto;
-  color: var(--oxford-blue);
-  font-size: 0.9rem;
+  width: 0.78rem;
+  color: var(--oxford-coral);
   line-height: 1;
 }
 
@@ -1188,7 +1188,7 @@ h4 {
   width: 0.65rem;
   flex: 0 0 0.65rem;
   margin-top: 0.13rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
 }
 
 .publication-profile-note a {
@@ -1359,7 +1359,7 @@ h4 {
 .coauthorship-method-note svg {
   width: 0.65rem;
   margin-right: 0.32rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
   vertical-align: -0.08rem;
 }
 
@@ -2534,7 +2534,7 @@ h4 {
 .project-outputs-note svg {
   width: 0.65rem;
   flex: 0 0 0.65rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
 }
 
 .project-funding-section {
@@ -3272,7 +3272,7 @@ h4 {
 .population-readiness-note svg {
   width: 0.65rem;
   flex: 0 0 0.65rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
 }
 
 /* Research practice */
@@ -4718,7 +4718,7 @@ h4 {
 
 .trajectory-legend svg {
   width: 0.68rem;
-  color: var(--oxford-blue);
+  color: var(--oxford-coral);
 }
 
 

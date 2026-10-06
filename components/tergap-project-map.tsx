@@ -19,10 +19,11 @@ export default function TergapProjectMap({
   return (
     <AcademicWorldMap
       countries={countries}
-      ariaLabel="World map showing TERGAP news-corpus coverage by collection country"
+      ariaLabel="Africa-centred map showing TERGAP news-corpus coverage by collection country"
       valueLabel="articles"
       singularValueLabel="article"
       palette="tergap"
+      view="africa"
       compact={compact}
       updatedAt={tergapMapData.generated_at}
     />
