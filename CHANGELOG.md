@@ -40,6 +40,7 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 - Aligned the Activity over time heatmap with Research Dashboard's six revised working-time intervals (`0h`, `<4h`, `4–8h`, `8–10h`, `10–12h`, `12h+`).
 - Normalised and deduplicated publication authors before co-authorship analysis; excluded the exceptional large collaboration by stable paper slug rather than title text.
 - Expanded the public-contract checker to validate Software controlled vocabularies and repository privacy, calendar settings, author arrays, timeline conference/travel flags, coffee counts, public availability and the Teaching-season flag.
+- Hardened preview SEO safeguards by embedding Netlify's deployment context in Next.js metadata and `robots.txt` logic; added regression checks for production and preview indexing.
 - Updated `source-map-js` to 1.2.2 to clear the reported production advisory. The unpatched `braces` advisory remains confined to development-tooling dependencies; no forced ESLint downgrade was applied.
 - Added `LICENSE` (MIT software), `CONTENT-LICENSE.md` (CC BY 4.0 original editorial content) and `NOTICE` (third-party images, Christicons and CC BY-NC penguin artwork) to make rights boundaries explicit before any future repository visibility change.
 
