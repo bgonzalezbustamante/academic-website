@@ -15,7 +15,7 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 - Added `/paintings`, a manually curated nine-artwork mosaic with visible museum, image source and licence links. Original catalogue-language titles are retained, including the Prado's attribution of `The Colossus`.
 - Arranged the uncropped desktop mosaic in 8+4, 4+4+4, 7+5 and 5+7 grid rows (ending with `The Colossus` and `The Tower of Babel`); mobile uses natural image proportions in one column.
 - Added compact institutional links and copyright explanations for works by Leonora Carrington, Matthew Wong and Pablo Picasso whose reproductions are not republished.
-- Linked Selected paintings right-aligned beneath Main Interests on Home; on mobile, both appear after Academic Profile. Reproductions are locally generated, source-attributed WebPs.
+- Linked Selected paintings beneath Main Interests on Home, left-aligned on desktop and right-aligned on mobile; on mobile, both appear after Academic Profile. Reproductions are locally generated, source-attributed WebPs.
 
 ### Weekly timeline
 
