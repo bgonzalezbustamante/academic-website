@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- Responsive, quality-95 WebP variants are generated locally; Next.js image optimisation would add an unnecessary re-encoding step. */
 import { imageAssets } from '@/content/image-assets.generated'
 
 import type { SelectedPainting } from '@/content/paintings'
