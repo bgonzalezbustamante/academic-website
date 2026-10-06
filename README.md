@@ -131,6 +131,10 @@ The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke
 
 The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` for rollback and can be archived after the post-migration observation period.
 
+### Repository visibility
+
+The GitHub repository remains private during rc.2 review. After merging, production verification and a complete Git history/asset rights/security scan, the repository may be made public through GitHub's repository visibility settings. Publishing the repository exposes its existing branches and commit history, not just the current `main` tree. Confirm that source imagery, licence notices and any historical files are suitable for public distribution; never rely on `.gitignore` to protect material already committed.
+
 ### Release procedure
 
 For rc.2, keep PR #11 unmerged until approval. In the final release commit, update the version/date/status in `CHANGELOG.md`, `README.md` and `lib/releases.ts`, with rc.1 marked as the preceding release. Merge the reviewed PR, verify the production deployment and new routes, then create the `v6.0.0-rc.2` tag **on the merged `main` commit**. Publish a GitHub release named `v6.0.0-rc.2 “Bold River”` and mark it as a **pre-release**; use a concise visitor-facing summary, not a copy of the technical CHANGELOG. Never tag an unmerged feature-branch commit.

@@ -22,7 +22,7 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 - Integrated the standalone Weekly Penguin Timeline's seven-day component at `/weekly-timeline`, preserving rolling daily/weekly navigation and the roughly three-month window on either side of today. Tester, full state gallery and standalone release notes remain separate.
 - Ported its validated public work/coffee, conference, availability, Teaching-season and Catholic Calendar rules into `lib/weekly-timeline/`, using the website's existing anonymous-safe Supabase client.
 - Reused the standalone site's optimised penguin WebP illustrations (CC BY-NC 4.0) without copying its large PNG source collection. Recorded the external image-host dependency and source revision in the documentation and rights notices.
-- Scoped timeline styles to the route, added sitemap and metadata coverage, and linked it beneath the Home Activity over time heatmap. The explanatory note links to the standalone timeline site.
+- Scoped timeline styles to the route, added sitemap and metadata coverage, and linked it beneath the Home Activity over time heatmap. Added a compact information icon to the explanatory note linking to the standalone timeline site.
 
 ### Profile, imagery and footer
 

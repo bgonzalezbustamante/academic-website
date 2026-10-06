@@ -1115,6 +1115,13 @@
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.83rem;
 }
+.weekly-timeline-source-icon {
+  width: 0.78rem;
+  height: 0.78rem;
+  margin-right: 0.18rem;
+  color: var(--oxford-coral);
+  vertical-align: -0.04em;
+}
 .weekly-timeline-source-note a {
   color: var(--oxford-coral);
   font-weight: 600;

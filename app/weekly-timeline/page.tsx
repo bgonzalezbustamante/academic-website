@@ -1,3 +1,5 @@
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 
 import WeeklyPenguinTimeline from '@/components/weekly-timeline/weekly-penguin-timeline'
@@ -149,6 +151,11 @@ export default async function WeeklyTimelinePage() {
           )}
         </div>
         <p className="weekly-timeline-source-note">
+          <FontAwesomeIcon
+            className="weekly-timeline-source-icon"
+            icon={faCircleInfo}
+            aria-hidden="true"
+          />{' '}
           A reusable Next.js component that transforms seven days of public
           working-time and coffee data into an illustrated timeline.{' '}
           Further details at{' '}
