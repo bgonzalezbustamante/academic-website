@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import PaintingCard from '@/components/painting-card'
+import PageHomeLink from '@/components/page-home-link'
 import {
   selectedPaintings,
   unreproducedPaintings,
@@ -27,6 +28,8 @@ export default function PaintingsPage() {
             collections.
           </p>
         </div>
+
+        <PageHomeLink />
 
         <div className="painting-mosaic">
           {selectedPaintings.map((painting) => (

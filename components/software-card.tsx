@@ -43,7 +43,7 @@ export default function SoftwareCard({ item }: Props) {
             </span>
           )}
           {item.repository_visibility === 'private' && (
-            <span className="metadata-tag">
+            <span className="metadata-tag software-private-tag">
               <FontAwesomeIcon icon={faLock} aria-hidden="true" />
               Private repository
             </span>

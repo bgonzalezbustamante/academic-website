@@ -446,7 +446,7 @@ h4 {
 .academic-link svg {
   width: 1rem;
   min-width: 1rem;
-  color: var(--oxford-coral);
+  color: var(--oxford-blue);
   font-size: 1rem;
 }
 
@@ -886,7 +886,7 @@ h4 {
 
 .publication-profile-kpi-label svg {
   width: 0.62rem;
-  color: var(--oxford-coral);
+  color: var(--oxford-blue);
 }
 
 .publication-profile-kpis strong {
@@ -923,7 +923,7 @@ h4 {
   width: 0.65rem;
   flex: 0 0 0.65rem;
   margin-top: 0.13rem;
-  color: var(--oxford-coral);
+  color: var(--oxford-blue);
 }
 
 .publication-profile-exclusion-note a {
@@ -3936,6 +3936,16 @@ h4 {
   margin-top: 0.8rem;
 }
 
+.software-private-tag {
+  gap: 0.22rem;
+}
+
+.software-private-tag svg {
+  width: 0.54rem;
+  height: 0.54rem;
+  flex: 0 0 0.54rem;
+}
+
 .software-card-period {
   margin: 0.65rem 0 0;
   color: var(--oxford-ash);
@@ -4718,7 +4728,7 @@ h4 {
 
 .trajectory-legend svg {
   width: 0.68rem;
-  color: var(--oxford-coral);
+  color: var(--oxford-blue);
 }
 
 
@@ -4811,7 +4821,7 @@ h4 {
 
 .paintings-page-heading .page-lead {
   max-width: none;
-  margin-bottom: 1.35rem;
+  margin-bottom: 0.8rem;
 }
 
 .painting-mosaic {

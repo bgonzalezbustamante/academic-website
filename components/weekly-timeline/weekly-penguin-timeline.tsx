@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+import PageHomeLink from '@/components/page-home-link'
 import PenguinSprite from '@/components/weekly-timeline/penguin-sprite'
 import { formatDisplayDate, formatMinutes } from '@/lib/weekly-timeline/timeline'
 import type { TimelineWeek } from '@/types/weekly-timeline'
@@ -184,6 +185,8 @@ export default function WeeklyPenguinTimeline({
           </p>
         </div>
       </div>
+
+      <PageHomeLink />
 
       <div className="week-pagination-scroll">
         <nav className="week-pagination" aria-label="Weekly timeline pagination">

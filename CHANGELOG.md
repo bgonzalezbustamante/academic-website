@@ -16,6 +16,7 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 - Arranged the uncropped desktop mosaic in 8+4, 4+4+4, 7+5 and 5+7 grid rows (ending with `The Colossus` and `The Tower of Babel`); mobile uses natural image proportions in one column.
 - Added compact institutional links and copyright explanations for works by Leonora Carrington, Matthew Wong and Pablo Picasso whose reproductions are not republished.
 - Linked Selected paintings below Main Interests on Home. Reproductions are local, source-attributed WebPs rather than externally loaded museum images.
+- Reused the Academic trajectory Home return link on Selected paintings, Software Ecosystem and Weekly timeline; adjusted the private-repository lock size and spacing.
 
 ### Weekly timeline
 
@@ -29,7 +30,7 @@ Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alon
 - Built a deterministic Sharp pipeline for `assets/sources/` portrait, painting and institutional-logo originals. It emits content-hashed, ignored WebPs and a local manifest: up to 660px/quality 95 for the portrait, responsive quality-95 painting variants, and lossless 168px logos.
 - Validated generated WebP formats, dimensions, painting `srcSet` candidates and file sizes; verified Leiden's transparent background. Original image-source and licence information remains available.
 - Centralised current appointments in `content/positions.ts`, so the Home position list and navbar logos share the same order; retired unused branding WebPs.
-- Standardised general-purpose information, academic-link, trajectory-legend and Google Scholar SVG icons to Oxford coral, while preserving state-specific colours for conference progress, co-authorship, private-repository metadata and Weekly Timeline.
+- Standardised most general-purpose information and Google Scholar SVG icons to Oxford coral; retained Oxford blue for Home academic links, the Academic trajectory legend and unusually large collaboration exclusion cues, alongside existing state-specific colours.
 - Added a two-item Catholic Calendar footer display using the published package, semantic Christicons and Dashboard-controlled visibility/stress settings. Added deterministic long-label regression fixtures and a separate full 2000–2100 audit.
 - Moved the Creative Commons/year/name footer line above the email address; aligned the Website Carbon note with the other footer information on mobile.
 - Updated 404 penguin artwork and the post-rc.1 publication-population targets.

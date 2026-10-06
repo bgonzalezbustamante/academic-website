@@ -2,6 +2,7 @@ import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 
+import PageHomeLink from '@/components/page-home-link'
 import WeeklyPenguinTimeline from '@/components/weekly-timeline/weekly-penguin-timeline'
 import { getConfiguredSpecialDates } from '@/lib/weekly-timeline/special-dates'
 import { getPublicAvailability } from '@/lib/weekly-timeline/availability'
@@ -141,6 +142,7 @@ export default async function WeeklyTimelinePage() {
                 <p className="eyebrow">Seven-day view</p>
                 <h1 id="weekly-timeline-title">Weekly timeline</h1>
               </div>
+              <PageHomeLink />
               <div className="data-error" role="status">
                 <strong>Live timeline unavailable.</strong>
                 <span>Public timeline data could not be loaded. Please try again later.</span>

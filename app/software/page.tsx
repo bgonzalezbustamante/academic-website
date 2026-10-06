@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import PageHomeLink from '@/components/page-home-link'
 import SoftwareCard from '@/components/software-card'
 import SoftwareStagePill, {
   SOFTWARE_DEVELOPMENT_STAGES,
@@ -38,6 +39,7 @@ export default async function SoftwarePage() {
             Applications, websites, packages, utilities and reusable tools
             represented in my public software portfolio.
           </p>
+          <PageHomeLink />
           <div
             className="software-stage-legend"
             aria-label="Development stage legend"
