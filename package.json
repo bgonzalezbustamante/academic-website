@@ -15,8 +15,9 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "precheck": "npm run assets:build",
-    "check": "npm run lint && npm run typecheck && npm run check:calendar-footer",
+    "check": "npm run lint && npm run typecheck && npm run check:calendar-footer && npm run check:site-indexing",
     "check:calendar-footer": "node scripts/check-calendar-footer.mjs",
+    "check:site-indexing": "node scripts/check-site-indexing.mjs",
     "audit:calendar-footer": "node scripts/audit-calendar-footer.mjs",
     "check:public-contract": "node --env-file=.env.local scripts/check-public-contract.mjs"
   },
