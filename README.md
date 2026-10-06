@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The site is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify. While [PR #11](https://github.com/bgonzalezbustamante/academic-website/pull/11) is awaiting approval, production still runs rc.1.
+Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -142,7 +142,7 @@ Finalise `README.md`, `CHANGELOG.md` and `lib/releases.ts` on the release branch
 ## Release history
 
 - Technical v6 history: [CHANGELOG.md](CHANGELOG.md)
-- Plain-language [Release Notes](/release-notes) (source: `lib/releases.ts`)
+- Plain-language [Release Notes](https://bgonzalezbustamante.com/release-notes) (source: `lib/releases.ts`)
 - Detailed pre-v6 history: [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md)
 
 
