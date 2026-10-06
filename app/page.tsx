@@ -191,19 +191,19 @@ export default async function HomePage() {
           </div>
 
           <div className="profile-aside-details">
-              <div className="research-interests">
-                <p className="kicker">Main Interests</p>
-                <ul className="interest-list">
-                  {siteProfile.researchAreas.map((area) => (
-                    <li key={area}>{area}</li>
-                  ))}
-                </ul>
-              </div>
+            <div className="research-interests">
+              <p className="kicker">Main Interests</p>
+              <ul className="interest-list">
+                {siteProfile.researchAreas.map((area) => (
+                  <li key={area}>{area}</li>
+                ))}
+              </ul>
+            </div>
 
-              <Link className="profile-personal-link" href="/paintings">
-                <FontAwesomeIcon icon={faPalette} aria-hidden="true" />
-                Selected paintings
-              </Link>
+            <Link className="profile-personal-link" href="/paintings">
+              <FontAwesomeIcon icon={faPalette} aria-hidden="true" />
+              Selected paintings
+            </Link>
           </div>
         </div>
       </section>
