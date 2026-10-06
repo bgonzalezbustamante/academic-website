@@ -35,6 +35,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Added a non-navigation Selected paintings page with a rights-aware editorial mosaic, visible image provenance, and a single-column mobile fallback.',
           'Expanded the mosaic with El coloso and Pieter Bruegel the Elder’s Turmbau zu Babel, reorganised selections whose images are not republished into compact linked cards, and standardised artwork titles to the canonical catalogue wording used by each holding institution.',
+          'Made painting images load from the website itself, with high-quality versions that adapt to different screen sizes.',
         ],
       },
       {
@@ -43,6 +44,7 @@ export const releases: ReleaseNote[] = [
           'Aligned the Activity over time heatmap with the revised Research Dashboard working-hour ranges, from 0h through 12h+.',
           'Normalised publication author arrays before collaboration calculations and identified the exceptional large collaboration by stable slug rather than exact title.',
           'Moved the Creative Commons/year/name line to the left footer column above the public email address and added a Dashboard-controlled Catholic Calendar composed display above Website Carbon, including a maximum-width stress mode.',
+          'Improved the profile photograph and university logo delivery, and aligned Website Carbon with other footer details on mobile.',
           'Included the updated 404 penguin assets and revised publication population target already added after rc.1.',
         ],
       },
