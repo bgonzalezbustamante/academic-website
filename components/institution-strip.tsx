@@ -1,17 +1,18 @@
+import { imageAssets } from '@/content/image-assets.generated'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const logos = [
   {
-    src: '/branding/leiden.webp',
+    src: imageAssets.branding.leiden,
     alt: 'Leiden University',
   },
   {
-    src: '/branding/udp.webp',
+    src: imageAssets.branding.udp,
     alt: 'Universidad Diego Portales',
   },
   {
-    src: '/branding/ocpsg.webp',
+    src: imageAssets.branding.ocpsg,
     alt: 'Oxford Computational Political Science Group',
   },
 ] as const
@@ -32,6 +33,7 @@ export default function InstitutionStrip() {
             alt=""
             width={42}
             height={42}
+            unoptimized
           />
         </span>
       ))}
