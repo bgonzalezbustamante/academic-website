@@ -26,11 +26,48 @@ The site is allowed to call only:
 - `get_public_project(text)`
 - `list_public_conference_presentations()`
 - `list_public_teaching()`
+- `list_public_software()`
+- `get_public_software(text)`
+- `get_public_calendar_settings()`
 - `get_public_work_analytics(year)`
+- `list_public_availability(year)`
+- `get_public_teaching_settings()`
 
 The current production contract can validly return zero public papers when no Dashboard paper has been explicitly marked Public. The site must treat that as a curated empty state rather than falling back to private tables or the legacy publication corpus.
 
 Aggregate work analytics are rendered on the homepage for the current Europe/Amsterdam calendar year. The public site reproduces the Dashboard Activity over time heatmap from daily net working minutes and shows only the two annual averages already exposed by the RPC: net working time per working day and coffees per working day.
+
+### Software Ecosystem
+
+Software Ecosystem is supplied exclusively through `list_public_software()`. The public `/software` page renders self-contained cards and does not expose software detail routes. Cards may show the public name, short description, category, current version, development stage, status, repository visibility, safe repository URL, production URL, documentation URL, lifecycle years and Featured state.
+
+Repository visibility is independent from profile exposure. When `repository_visibility` is `private`, `repository_url` must remain null even for an otherwise public Software Ecosystem profile. `get_public_software(text)` is validated as part of the public contract for forward compatibility, but rc.2 does not use it for navigation because its current detail shape is intentionally identical to the listing shape.
+
+The homepage links to `/software` inline beside Academic trajectory. Software is intentionally absent from the primary navigation.
+
+### Selected paintings
+
+`/paintings` is intentionally local editorial content rather than an Academic API contract. The small curated dataset lives in `content/paintings.ts` and records artwork metadata, official museum links, image-source URLs, image-rights metadata and one of a small set of editorial layout hints. Display titles follow the canonical catalogue wording used by the holding institution, preserving the institution’s own language rather than imposing English translations.
+
+Desktop presentation uses a controlled 12-column mosaic that exploits the works' contrasting proportions while preserving every complete image with `object-fit: contain`. The four complete rows use 8+4, 4+4+4, 7+5 and 5+7 column spans, with `The Colossus` and `The Tower of Babel` forming the mirrored final row. At 760px and below, all grid spans are discarded and the page becomes a single-column sequence using each image's natural aspect ratio.
+
+The nine reproduced artwork JPEG sources are kept at `assets/sources/paintings/<slug>.jpg` and compiled into hashed quality-95 WebP variants served locally from `public/paintings/generated/`. The artwork cards use native responsive `srcSet`/ `sizes` instead of recompressing the generated WebP through Next.js. Original Wikimedia Commons URLs remain linked as provenance, and the images remain outside the repository's own software/content licences. The rights line is visible on every reproduced card. `Las distracciones de Dagoberto` by Leonora Carrington, `A Walk through Primordial Garden` by Matthew Wong and `L'étagère` by Pablo Picasso are represented in compact bottom mini-cards, with links to MALBA, Van Gogh Museum material and ALBERTINA respectively, because suitable republication rights have not been established.
+
+### Weekly timeline integration
+
+The non-navigation `/weekly-timeline` route integrates the seven-day `WeeklyPenguinTimeline` and `PenguinSprite` components from `weekly-penguin-timeline` (`main` revision `3c284218abf95353e128babf1e89ec04812992f0`). It excludes the standalone state tester, gallery and release notes. The isolated `lib/weekly-timeline/` namespace ports its validated public work/coffee, conference, availability, teaching and Catholic Calendar logic without duplicating the website's anonymous-safe Supabase client. The page is dynamic to respect the Amsterdam civil date and uses the source's special-day precedence and fail-closed public API handling.
+
+`app/weekly-timeline/weekly-timeline.css` scopes the source project's timeline and responsive navigation styles to `.weekly-timeline-embed` to protect the academic website's global layout. The 46 original penguin PNG masters and their WebP generation pipeline remain in the standalone repository; this page serves the published WebP derivatives via `https://timeline.bgonzalezbustamante.com/penguins/` (there is no iframe or remote JavaScript). This creates an intentional dependency on the standalone image host. The graphics retain the original CC BY-NC 4.0 artwork licence as documented in `NOTICE`. The route is included in the sitemap and linked beneath the homepage Activity over time heatmap.
+
+### Static raster image pipeline
+
+`scripts/build-images.mjs` is the only generator for three intentionally supported image families. It reads `assets/sources/profile/avatar.png`, the nine slug-matched `assets/sources/paintings/*.jpg` files and `assets/sources/branding/{leiden,udp,ocpsg}.png`. The pre-development, pre-check and pre-build scripts run it automatically. An explicit direct run is available as `npm run assets:build`.
+
+The output contains content-hashed `.webp` files under `public/{profile,paintings,branding}/generated/` and an ignored `content/image-assets.generated.ts` manifest with the public URLs. The generated directories are rebuilt from scratch; old files never accumulate. The portrait preserves the full source aspect ratio and is resized without upscaling to fit 660px, at quality 95. The nine paintings receive distinct responsive widths up to 1800px, also at quality 95. Branding is resized without upscaling to fit 168px and encoded losslessly. Source originals are not published under `public/`.
+
+The profile image is delivered without additional Next.js optimisation to avoid a second lossy encode. Branding images are also delivered without re-encoding so lossless colours and edges are preserved. After conversion, the build reopens the resulting WebP files and checks their format and dimensions, confirms the painting `srcSet` candidates and file sizes, and verifies that the Leiden logo still has fully transparent pixels. This validation runs as part of the normal image-generation step. Projects, funders, teaching, publication imagery and vector Christicons retain their existing handling. The unused legacy `oxford.webp` has been removed.
+
+The homepage exposes `/paintings` through a small Selected paintings link below Main Interests. The page is deliberately absent from the primary navigation.
 
 ### Publication Key highlights
 
@@ -85,7 +122,7 @@ TERGAP geographic coverage is sourced from the separate public [tergap-dashboard
 /public/data/tergap-map.json
 ```
 
-It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry. TERGAP uses the original dashboard treatment exactly for the map canvas/background (`#eef0f7`), not-collected geography (`#e8eaed`), six-step logarithmic scale (`#e7eaf4` → `#001158`) and teal hover (`#007679`). Conferences uses the same canvas and grey no-data geography with an Oxford aqua/blue data scale and Oxford coral reserved for hover. The TERGAP map is shown on the TERGAP detail page; project cards use funder imagery instead, with the TERGAP ERC logo supplied locally as a presentation fallback.
+It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry. TERGAP uses the original dashboard treatment exactly for the map canvas/background (`#eef0f7`), not-collected geography (`#e8eaed`), six-step logarithmic scale (`#e7eaf4` → `#001158`) and teal hover (`#007679`). Conferences uses the same canvas and grey no-data geography with an Oxford aqua/blue data scale and Oxford coral reserved for hover. The TERGAP map alone uses the source dashboard's Africa-centred Equal Earth viewport (centre [15°, 5°], scale 245); the shared Conferences map retains its default world projection (scale 150). The TERGAP map is shown on the TERGAP detail page; project cards use funder imagery instead, with the TERGAP ERC logo supplied locally as a presentation fallback.
 
 ## Information architecture
 
@@ -133,7 +170,7 @@ The public site deliberately shares a visual family with Research Dashboard whil
 - A washed Oxford-blue surface (`#edf2f7`) provides supporting backgrounds without competing with the primary blue/coral identity.
 - Locally bundled Font Awesome provides interface, brand and scholarly-profile icons; no external icon stylesheet/font is required at runtime.
 
-Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
+Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. `content/positions.ts` is the single ordered configuration for current roles, institutions, links and generated branding assets: rearranging that array simultaneously reorders the homepage positions and navbar logo strip. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. This local presentation boundary can eventually be replaced by Academic API current-position records without maintaining two separate ordering lists. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
 
 ## Immediate data sources
 
@@ -184,6 +221,14 @@ The check deliberately calls public RPCs only. It provides a reproducible way to
 The Hugo/Wowchemy and Next.js sites share many publication detail slugs, so matching `/publication/[slug]` URLs remain canonical without a redirect. `next.config.ts` contains only exact permanent redirects for routes with a clear replacement, including the former singular section indexes, author profile, CPS Ranking landing page and selected legacy Project pages.
 
 There is intentionally no legacy catch-all. Old research resources or publications that are not yet represented by the current public site should return normal not-found behaviour until a genuine replacement exists, rather than being redirected to a generic section page.
+
+### Catholic Calendar footer
+
+The footer consumes the exact `@bgonzalezbustamante/catholic-calendar@0.1.0-beta.1` package rather than duplicating calendar rules. A small client component polls `get_public_calendar_settings()` every five minutes. When `catholic_calendar_active` is false, the calendar footer is hidden. When it is true and `stress_test_active` is true, the footer renders the deterministic maximum-width stress composition from 21 November 2027; otherwise it resolves the current civil date in `Europe/Amsterdam` through `getCatholicCalendarState()` and `getCalendarDisplaySummary()`.
+
+The composed display remains fixed at the package contract's maximum of two items. The entire display links to `https://catholic.bgonzalezbustamante.com/` and uses local Christicons masks corresponding to the semantic icon identifiers returned by the package. The right-hand footer order is Catholic Calendar → Website Carbon → release version.
+
+`scripts/check-calendar-footer.mjs` runs fast deterministic footer fixtures before production builds. It protects the 85-character maximum-width composition identified by the full beta.1 range audit — `Our Lord Jesus Christ, King of the Universe · Presentation of the Blessed Virgin Mary` — together with the long St Michael's Lent/countdown composition and the 5 October 2026 integration sample. `scripts/audit-calendar-footer.mjs` retains the exhaustive 2000–2100 scan for deliberate package/release audits rather than every deployment.
 
 ## Development and deployment
 

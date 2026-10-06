@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 
+import PageHomeLink from '@/components/page-home-link'
+
 export const metadata: Metadata = {
   title: 'DORA',
   description:
@@ -21,6 +23,7 @@ export default function DoraPage() {
         <p className="page-lead">
           San Francisco Declaration on Research Assessment
         </p>
+        <PageHomeLink />
 
         <div className="practice-page-badge dora-page-badge">
           <Image

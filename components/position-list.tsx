@@ -8,7 +8,7 @@ export default function PositionList() {
   return (
     <div className="position-list" aria-label="Academic positions">
       {siteProfile.positions.map((position) => (
-        <div className="position-line" key={position.institution}>
+        <div className="position-line" key={position.id}>
           <a
             className="position-logo-link"
             href={position.href}
@@ -23,6 +23,7 @@ export default function PositionList() {
               alt=""
               width={26}
               height={26}
+              unoptimized
             />
           </a>
           <p>

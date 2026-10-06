@@ -15,43 +15,60 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
-    version: 'v6.0.0-rc.1',
-    codename: 'Swift Harbour',
+    version: 'v6.0.0-rc.2',
+    codename: 'Bold River',
     status: 'Current release',
-    releasedOn: '1 Oct 2026',
-    comparison: 'First release candidate in the Next.js repository',
+    releasedOn: '6 Oct 2026',
+    comparison: 'Second release candidate',
     summary:
-      'Swift Harbour is the first release candidate for the rebuilt academic website and the production version of bgonzalezbustamante.com: a modern public research profile connected safely to Research Dashboard, deployed after staged validation and production-domain migration.',
+      'Bold River adds new ways to explore my software, favourite paintings and weekly activity, with improvements across the website.',
     sections: [
       {
-        title: 'Academic profile and trajectory',
+        title: 'New things to explore',
         items: [
-          'Introduced a new portrait-led homepage with current appointments, research interests, institutional links, DORA and CRediT research-practice information, and an Academic trajectory page covering selected education and professional positions.',
-          'Added a clearer view of completed and ongoing appointments while keeping the main navigation focused on the core public research sections.',
+          'Explore the Software Ecosystem catalogue of applications, packages and other tools.',
+          'Browse Selected paintings, with museum links and image credits.',
+          'Visit the Weekly timeline to see illustrated penguins representing daily work and coffee activity.',
         ],
       },
       {
-        title: 'Research portfolio',
+        title: 'Website improvements',
         items: [
-          'Expanded Publications with filters, citation information, language indicators, related projects, publication analytics and a co-authorship network.',
-          'Added Projects, Conferences and Teaching sections, including research outputs, funding information, presentation maps and roadmaps, keynote markers, controlled teaching-role tags, academic-level tags, and cumulative teaching information.',
+          'Refreshed the profile photograph and artwork, and improved navigation on mobile.',
+          'Made research activity and collaboration summaries clearer, and updated the illustrated page-not-found screen.',
+          'Added Catholic Calendar highlights to the footer and clearer information about artwork credits.',
+        ],
+      },
+    ],
+  },
+  {
+    version: 'v6.0.0-rc.1',
+    codename: 'Swift Harbour',
+    status: 'Previous release',
+    releasedOn: '1 Oct 2026',
+    comparison: 'First release candidate',
+    summary:
+      'Swift Harbour launched the rebuilt academic website with a clearer research profile and a responsive design.',
+    sections: [
+      {
+        title: 'Academic profile and research',
+        items: [
+          'Introduced the new homepage, Academic trajectory and information about research practices.',
+          'Expanded Publications, Projects, Conferences and Teaching, including research links, maps and summaries.',
         ],
       },
       {
-        title: 'Activity and site coverage',
+        title: 'Activity and navigation',
         items: [
-          'Added public yearly work-activity summaries and a compact view of recent and forthcoming conference presentations.',
-          'Added population-progress indicators showing how much of the intended Publications, Projects, Conferences and Teaching record has been added while the new site is still being populated.',
+          'Added yearly work-activity summaries and recent and forthcoming conference presentations.',
+          'Made the site easier to navigate on different screens and improved links from the previous website.',
         ],
       },
       {
-        title: 'Platform and privacy',
+        title: 'Website experience',
         items: [
-          'Rebuilt the site with Next.js and a responsive Oxford-inspired visual system designed for the new public academic profile.',
-          'Connected the site to Research Dashboard only through deliberately public, anonymous-safe data contracts; private research-management records, account information and individual work sessions remain outside the public website.',
-          'Improved search metadata, preview indexing safeguards, keyboard/reduced-motion accessibility, browser security headers and homepage loading behaviour for the production launch.',
-          'Added permanent redirects for legacy website URLs that have clear replacements while preserving unchanged publication URLs and normal not-found behaviour for material without a current equivalent.',
-          'Added a Website Carbon estimate in the footer, maintained as a local snapshot rather than fetched from an external service on each visit; the production site was re-tested after cut-over.',
+          'Improved accessibility, page loading and search visibility while keeping private research-management records off the public site.',
+          'Added a Website Carbon estimate to the footer and introduced the illustrated page-not-found screen.',
         ],
       },
     ],

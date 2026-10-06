@@ -1,9 +1,7 @@
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 import AcademicTrajectory from '@/components/academic-trajectory'
+import PageHomeLink from '@/components/page-home-link'
 
 export const metadata: Metadata = {
   title: 'Academic trajectory',
@@ -28,12 +26,7 @@ export default function TrajectoryPage() {
           </p>
         </div>
 
-        <div className="trajectory-toolbar">
-          <Link href="/">
-            <FontAwesomeIcon icon={faArrowLeft} aria-hidden="true" />
-            Home
-          </Link>
-        </div>
+        <PageHomeLink />
 
         <AcademicTrajectory />
       </div>

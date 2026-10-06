@@ -106,3 +106,51 @@ export type PublicTeachingItem = {
   student_count: number
   course_image_filename: string | null
 }
+
+export type PublicSoftwareCategory =
+  | 'Application'
+  | 'Website'
+  | 'Utility'
+  | 'Reusable component'
+  | 'Package/library'
+  | 'API/service'
+  | 'Data product'
+  | 'Template'
+  | 'Other'
+
+export type PublicSoftwareDevelopmentStage =
+  | 'Alpha'
+  | 'Beta'
+  | 'Release candidate'
+  | 'Stable'
+  | 'Maintenance'
+
+export type PublicSoftwareStatus =
+  | 'active'
+  | 'paused'
+  | 'completed'
+  | 'archived'
+
+export type PublicRepositoryVisibility = 'public' | 'private'
+
+export type PublicSoftwareItem = {
+  slug: string
+  name: string
+  short_description: string
+  category: PublicSoftwareCategory
+  current_version: string | null
+  development_stage: PublicSoftwareDevelopmentStage
+  status: PublicSoftwareStatus
+  repository_visibility: PublicRepositoryVisibility
+  repository_url: string | null
+  production_url: string | null
+  documentation_url: string | null
+  start_year: number | null
+  end_year: number | null
+  featured: boolean
+}
+
+export type PublicCalendarSettings = {
+  catholic_calendar_active: boolean
+  stress_test_active: boolean
+}

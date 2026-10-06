@@ -1,28 +1,8 @@
+import { currentAcademicPositions } from '@/content/positions'
+
 export const siteProfile = {
   name: 'Bastián González-Bustamante',
-  positions: [
-    {
-      role: 'Post-doctoral Researcher in Computational Social Science',
-      institution: 'Leiden University',
-      href: 'https://www.universiteitleiden.nl/en',
-      logo: '/branding/leiden.webp',
-      logoAlt: 'Leiden University',
-    },
-    {
-      role: 'Associate Professor of Public Administration',
-      institution: 'Universidad Diego Portales',
-      href: 'https://www.udp.cl/',
-      logo: '/branding/udp.webp',
-      logoAlt: 'Universidad Diego Portales',
-    },
-    {
-      role: 'Research Leader',
-      institution: 'Oxford Computational Political Science Group',
-      href: 'https://www.politics.ox.ac.uk/oxford-computational-political-science-group',
-      logo: '/branding/ocpsg.webp',
-      logoAlt: 'Oxford Computational Political Science Group',
-    },
-  ],
+  positions: currentAcademicPositions,
   researchAreas: [
     'Comparative politics',
     'Ministerial turnover',

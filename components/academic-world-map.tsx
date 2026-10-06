@@ -19,6 +19,7 @@ export type WorldMapCountry = {
 }
 
 type MapPalette = 'tergap' | 'conference'
+type MapView = 'world' | 'africa'
 
 type Props = {
   countries: WorldMapCountry[]
@@ -28,6 +29,7 @@ type Props = {
   compact?: boolean
   updatedAt?: string | null
   palette?: MapPalette
+  view?: MapView
   noDataLabel?: string
 }
 
@@ -37,6 +39,9 @@ type HoveredCountry = {
 }
 
 const WORLD_MAP = worldMap as unknown as GeographyData
+
+// Matches the latest TERGAP Dashboard Equal Earth viewport.
+const AFRICA_CENTRE: [number, number] = [15, 5]
 
 const MAP_PALETTES: Record<
   MapPalette,
@@ -132,6 +137,7 @@ export default function AcademicWorldMap({
   compact = false,
   updatedAt = null,
   palette = 'tergap',
+  view = 'world',
   noDataLabel = 'Not collected',
 }: Props) {
   const byIso3 = useMemo(
@@ -178,7 +184,11 @@ export default function AcademicWorldMap({
       >
         <ComposableMap
           projection="geoEqualEarth"
-          projectionConfig={{ scale: 150 }}
+          projectionConfig={
+            view === 'africa'
+              ? { center: AFRICA_CENTRE, scale: 245 }
+              : { scale: 150 }
+          }
           width={800}
           height={430}
           aria-label={ariaLabel}

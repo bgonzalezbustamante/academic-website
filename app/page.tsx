@@ -1,4 +1,8 @@
-import { faRoute } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCode,
+  faPalette,
+  faRoute,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 import Image from 'next/image'
@@ -13,7 +17,7 @@ import ProjectCard from '@/components/project-card'
 import PublicationCard from '@/components/publication-card'
 import ResearchPracticeCards from '@/components/research-practice-cards'
 import SitePopulationProgress from '@/components/site-population-progress'
-import { profilePortrait } from '@/content/profile-portrait.generated'
+import { imageAssets } from '@/content/image-assets.generated'
 import { siteProfile } from '@/content/site'
 import { listPublicConferencePresentations } from '@/lib/conferences'
 import { listPublicPapers } from '@/lib/publications'
@@ -101,26 +105,18 @@ export default async function HomePage() {
             <div className="portrait-frame">
               <Image
                 className="profile-portrait"
-                src={profilePortrait.src}
+                src={imageAssets.profile.src}
                 alt={siteProfile.name}
-                width={660}
-                height={660}
-                sizes="220px"
-                quality={95}
+                width={imageAssets.profile.width}
+                height={imageAssets.profile.height}
+                sizes="(max-width: 480px) 112px, (max-width: 760px) 150px, 220px"
+                unoptimized
                 priority
               />
             </div>
 
             <AcademicLinks />
 
-            <div className="research-interests">
-              <p className="kicker">Main Interests</p>
-              <ul className="interest-list">
-                {siteProfile.researchAreas.map((area) => (
-                  <li key={area}>{area}</li>
-                ))}
-              </ul>
-            </div>
           </aside>
 
           <div className="profile-main">
@@ -175,14 +171,39 @@ export default async function HomePage() {
                 </ExternalInlineLink>
               </p>
 
-              <Link
-                className="bio-trajectory-link"
-                href="/trajectory"
-              >
-                <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
-                Academic trajectory
-              </Link>
+              <div className="bio-profile-links">
+                <Link
+                  className="bio-profile-link"
+                  href="/trajectory"
+                >
+                  <FontAwesomeIcon icon={faRoute} aria-hidden="true" />
+                  Academic trajectory
+                </Link>
+                <Link
+                  className="bio-profile-link"
+                  href="/software"
+                >
+                  <FontAwesomeIcon icon={faCode} aria-hidden="true" />
+                  Software ecosystem
+                </Link>
+              </div>
             </div>
+          </div>
+
+          <div className="profile-aside-details">
+            <div className="research-interests">
+              <p className="kicker">Main Interests</p>
+              <ul className="interest-list">
+                {siteProfile.researchAreas.map((area) => (
+                  <li key={area}>{area}</li>
+                ))}
+              </ul>
+            </div>
+
+            <Link className="profile-personal-link" href="/paintings">
+              <FontAwesomeIcon icon={faPalette} aria-hidden="true" />
+              Selected paintings
+            </Link>
           </div>
         </div>
       </section>
@@ -286,7 +307,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-
 
       {conferencesAvailable ? (
         <PresentationRoadmap

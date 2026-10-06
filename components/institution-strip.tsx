@@ -1,20 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const logos = [
-  {
-    src: '/branding/leiden.webp',
-    alt: 'Leiden University',
-  },
-  {
-    src: '/branding/udp.webp',
-    alt: 'Universidad Diego Portales',
-  },
-  {
-    src: '/branding/ocpsg.webp',
-    alt: 'Oxford Computational Political Science Group',
-  },
-] as const
+import { siteProfile } from '@/content/site'
 
 export default function InstitutionStrip() {
   return (
@@ -24,14 +11,15 @@ export default function InstitutionStrip() {
       aria-label="Bastián González-Bustamante home"
       title="Home"
     >
-      {logos.map((logo) => (
-        <span className="institution-mark" key={logo.alt}>
+      {siteProfile.positions.map((position) => (
+        <span className="institution-mark" key={position.id}>
           <Image
             className="institution-logo-image"
-            src={logo.src}
+            src={position.logo}
             alt=""
             width={42}
             height={42}
+            unoptimized
           />
         </span>
       ))}

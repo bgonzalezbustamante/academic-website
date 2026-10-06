@@ -1,24 +1,28 @@
 {
   "name": "academic-website",
-  "version": "6.0.0-rc.1",
+  "version": "6.0.0-rc.2",
   "private": true,
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
-    "profile:sync": "node scripts/sync-profile-portrait.mjs",
-    "predev": "npm run profile:sync",
+    "assets:build": "node scripts/build-images.mjs",
+    "predev": "npm run assets:build",
     "dev": "next dev",
-    "prebuild": "npm run profile:sync",
+    "prebuild": "npm run assets:build && npm run check:calendar-footer",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "precheck": "npm run profile:sync",
-    "check": "npm run lint && npm run typecheck",
+    "precheck": "npm run assets:build",
+    "check": "npm run lint && npm run typecheck && npm run check:calendar-footer && npm run check:site-indexing",
+    "check:calendar-footer": "node scripts/check-calendar-footer.mjs",
+    "check:site-indexing": "node scripts/check-site-indexing.mjs",
+    "audit:calendar-footer": "node scripts/audit-calendar-footer.mjs",
     "check:public-contract": "node --env-file=.env.local scripts/check-public-contract.mjs"
   },
   "dependencies": {
+    "@bgonzalezbustamante/catholic-calendar": "0.1.0-beta.1",
     "@fortawesome/fontawesome-svg-core": "7.3.1",
     "@fortawesome/free-brands-svg-icons": "7.3.1",
     "@fortawesome/free-solid-svg-icons": "7.3.1",
@@ -29,6 +33,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-simple-maps": "5.0.5",
+    "sharp": "0.35.4",
     "world-atlas": "2.0.2"
   },
   "devDependencies": {

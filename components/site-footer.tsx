@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
+import CatholicCalendarFooter from '@/components/catholic-calendar-footer'
 import { siteProfile } from '@/content/site'
 import { siteCarbonMeasurement } from '@/content/site-carbon'
 import { currentRelease } from '@/lib/releases'
@@ -39,6 +40,14 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="site-shell footer-inner">
         <div className="footer-contact">
+          <p className="footer-license">
+            <FontAwesomeIcon
+              icon={faCreativeCommons}
+              aria-hidden="true"
+            />
+            <span>{new Date().getFullYear()} Dr. {siteProfile.name}</span>
+          </p>
+
           <a href={`mailto:${siteProfile.contact.email}`}>
             <FontAwesomeIcon icon={faEnvelope} aria-hidden="true" />
             <span>{siteProfile.contact.email}</span>
@@ -50,6 +59,8 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer-meta">
+          <CatholicCalendarFooter />
+
           {siteCarbonMeasurement.showInFooter && (
             <a
               className="footer-carbon-note"
@@ -63,13 +74,6 @@ export default function SiteFooter() {
             </a>
           )}
 
-          <p className="footer-license">
-            <FontAwesomeIcon
-              icon={faCreativeCommons}
-              aria-hidden="true"
-            />
-            <span>{new Date().getFullYear()} Dr. {siteProfile.name}</span>
-          </p>
 
           <p className="footer-release">
             <FontAwesomeIcon icon={faGithub} aria-hidden="true" />

@@ -1,5 +1,49 @@
 # CHANGELOG
 
+## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
+
+Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alongside improvements to academic activity, imagery, footer presentation and public-data safeguards.
+
+### Software Ecosystem
+
+- Added `/software`, an unlisted-in-primary-navigation catalogue supplied exclusively through `list_public_software()`. Cards show category, current version, lifecycle years, status, Featured state and available Live/Code/Documentation links.
+- Added colour-coded Alpha, Beta, Release candidate, Stable and Maintenance stages with a legend beneath the software cards, and linked Software ecosystem below Academic trajectory on Home.
+- Suppressed repository URLs when the public software record is marked `private`; validated the RPC detail and listing contracts without directly querying Dashboard tables.
+
+### Selected paintings
+
+- Added `/paintings`, a manually curated nine-artwork mosaic with visible museum, image source and licence links. Original catalogue-language titles are retained, including the Prado's attribution of `The Colossus`.
+- Arranged the uncropped desktop mosaic in 8+4, 4+4+4, 7+5 and 5+7 grid rows (ending with `The Colossus` and `The Tower of Babel`); mobile uses natural image proportions in one column.
+- Added compact institutional links and copyright explanations for works by Leonora Carrington, Matthew Wong and Pablo Picasso whose reproductions are not republished.
+- Linked Selected paintings beneath Main Interests on Home, left-aligned on desktop and right-aligned on mobile; on mobile, both appear after Academic Profile. Reproductions are locally generated, source-attributed WebPs.
+
+### Weekly timeline
+
+- Integrated the standalone Weekly Penguin Timeline's seven-day component at `/weekly-timeline`, preserving rolling daily/weekly navigation and the roughly three-month window on either side of today. Tester, full state gallery and standalone release notes remain separate.
+- Ported its validated public work/coffee, conference, availability, Teaching-season and Catholic Calendar rules into `lib/weekly-timeline/`, using the website's existing anonymous-safe Supabase client.
+- Reused the standalone site's optimised penguin WebP illustrations (CC BY-NC 4.0) without copying its large PNG source collection. Recorded the external image-host dependency and source revision in the documentation and rights notices.
+- Scoped timeline styles to the route, added sitemap and metadata coverage, and linked it beneath the Home Activity over time heatmap. Added a compact information icon to the explanatory note linking to the standalone timeline site.
+
+### Profile, imagery and footer
+
+- Built and validated a deterministic Sharp pipeline for `assets/sources/` portrait, paintings and institutional logos. It generates ignored, content-hashed WebPs and a local manifest: portrait up to 660px at quality 95, responsive quality-95 paintings, lossless 168px logos, and checks for dimensions, `srcSet` candidates and transparency. Image credits remain available.
+- Centralised current appointments in `content/positions.ts`, so the Home position list and navbar logos share the same order; retired unused branding WebPs.
+- Reused the Academic trajectory Home link on Selected paintings, Software Ecosystem, Weekly timeline, DORA and CRediT; refined private-repository lock spacing and restored the external-link arrow on the CRediT source citation.
+- Standardised most general-purpose information and Google Scholar SVG icons to Oxford coral; retained Oxford blue for Home academic links, the Academic trajectory legend and unusually large collaboration exclusion cues, alongside existing state-specific colours.
+- Added a two-item Catholic Calendar footer display using the published package, 0.95rem coral Christicons and Dashboard-controlled visibility/stress settings. Added deterministic long-label regression fixtures and a separate full 2000–2100 audit.
+- Moved the Creative Commons/year/name footer line above the email address; aligned the Website Carbon note with the other footer information on mobile.
+- Updated 404 penguin artwork and the post-rc.1 publication-population targets.
+
+### Research data, security and public readiness
+
+- Matched TERGAP Dashboard's Africa-centred Equal Earth projection (15° E, 5° N; scale 245) in the project's choropleth without changing the shared Conferences world map.
+- Aligned the Activity over time heatmap with Research Dashboard's six revised working-time intervals (`0h`, `<4h`, `4–8h`, `8–10h`, `10–12h`, `12h+`).
+- Normalised and deduplicated publication authors before co-authorship analysis; excluded the exceptional large collaboration by stable paper slug rather than title text.
+- Expanded the public-contract checker to validate Software controlled vocabularies and repository privacy, calendar settings, author arrays, timeline conference/travel flags, coffee counts, public availability and the Teaching-season flag.
+- Hardened preview SEO safeguards by embedding Netlify's deployment context in Next.js metadata and `robots.txt` logic; added regression checks for production and preview indexing.
+- Updated `source-map-js` to 1.2.2 to clear the reported production advisory. The unpatched `braces` advisory remains confined to development-tooling dependencies; no forced ESLint downgrade was applied.
+- Added `LICENSE` (MIT software), `CONTENT-LICENSE.md` (CC BY 4.0 original editorial content) and `NOTICE` (third-party images, Christicons and CC BY-NC penguin artwork) to make rights boundaries explicit before any future repository visibility change.
+
 ## v6.0.0-rc.1 "Swift Harbour" (1 Oct 2026)
 
 ### Summary

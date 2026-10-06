@@ -17,7 +17,12 @@ export function getSiteUrl() {
 }
 
 export function isProductionSiteUrl(url = getSiteUrl()) {
+  const deployContext =
+    process.env.SITE_DEPLOY_CONTEXT || process.env.CONTEXT
+
   return (
+    (!deployContext || deployContext === 'production') &&
+    process.env.NETLIFY_PREVIEW_SERVER !== 'true' &&
     url.protocol === 'https:' &&
     PRODUCTION_HOSTS.has(url.hostname.toLowerCase())
   )

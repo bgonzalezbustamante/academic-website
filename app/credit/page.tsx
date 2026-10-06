@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 
+import ExternalInlineLink from '@/components/external-inline-link'
+import PageHomeLink from '@/components/page-home-link'
+
 export const metadata: Metadata = {
   title: 'CRediT',
   description:
@@ -104,6 +107,7 @@ export default function CreditPage() {
         <p className="eyebrow">Contributor transparency</p>
         <h1>CRediT</h1>
         <p className="page-lead">Contributor Roles Taxonomy</p>
+        <PageHomeLink />
 
         <div className="practice-prose">
           <p>
@@ -150,13 +154,9 @@ export default function CreditPage() {
 
         <p className="practice-source">
           Source: compiled using badges from{' '}
-          <a
-            href="https://github.com/CenterForOpenScience/open_research_badges"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ExternalInlineLink href="https://github.com/CenterForOpenScience/open_research_badges">
             Center for Open Science
-          </a>{' '}
+          </ExternalInlineLink>{' '}
           and core definitions from CASRAI.
         </p>
       </div>
