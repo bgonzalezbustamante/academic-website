@@ -17,6 +17,10 @@
 - Kept the date and observance display on the same Amsterdam-local calendar day; Dashboard stress-test mode shows its fixture date alongside the corresponding fixture display.
 - Preserved the compact single-line treatment on wider screens; on mobile, the date and each composed calendar item occupy their own row with separators removed, while long labels can still wrap within their row.
 
+### Weekly timeline
+
+- Tightened the Work/Coffee metric-chip spacing in the embedded Weekly timeline and added a smaller mobile treatment so the longest working-time label, `10–12h`, remains inside its chip without changing the seven-day horizontal timeline layout.
+
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
 Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alongside improvements to academic activity, imagery, footer presentation and public-data safeguards.
