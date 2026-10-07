@@ -15,6 +15,25 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
+    version: 'v6.0.0',
+    codename: 'Crimson Delta',
+    status: 'In development',
+    releasedOn: 'In development',
+    comparison: 'Stable v6.0.0 release in preparation',
+    summary:
+      'Crimson Delta is a final polish pass before the first stable v6 release.',
+    sections: [
+      {
+        title: 'Small refinements',
+        items: [
+          'Made the main navigation clearer with coral hover states and Oxford-blue current-section highlighting.',
+          'Added a dated Catholic Calendar footer with a calendar icon and better mobile handling for long observances.',
+          'Applied a security maintenance update to the website image-processing tools.',
+        ],
+      },
+    ],
+  },
+  {
     version: 'v6.0.0-rc.2',
     codename: 'Bold River',
     status: 'Current release',

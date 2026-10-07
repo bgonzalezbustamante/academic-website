@@ -11,6 +11,12 @@
 
 - Updated `sharp` from 0.35.4 to 0.35.5 and its matching libvips binaries from 1.3.3 to 1.3.4 to address the high-severity librsvg advisory CVE-2026-96889 (GHSA-wq5f-xc86-pv6w). Updated the npm lockfile for all supported platforms without changing unrelated dependencies.
 
+### Footer
+
+- Prefixed the Catholic Calendar footer display with a small calendar icon and its effective date in `D Mon YYYY` format (for example, `7 Oct 2026`), separated from the daily display by a subtle middle dot.
+- Kept the date and observance display on the same Amsterdam-local calendar day; Dashboard stress-test mode shows its fixture date alongside the corresponding fixture display.
+- Preserved the compact single-line treatment on wider screens; on mobile, the date and each composed calendar item occupy their own row with separators removed, while long labels can still wrap within their row.
+
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
 Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alongside improvements to academic activity, imagery, footer presentation and public-data safeguards.
