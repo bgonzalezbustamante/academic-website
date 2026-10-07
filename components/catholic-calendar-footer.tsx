@@ -7,6 +7,8 @@ import {
   type CalendarDisplayIcon,
   type CalendarDisplayItem,
 } from '@bgonzalezbustamante/catholic-calendar'
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { CSSProperties } from 'react'
 import { useEffect, useState } from 'react'
 
@@ -113,7 +115,12 @@ export default function CatholicCalendarFooter() {
           className="footer-calendar-date"
           dateTime={display.date}
         >
-          {formattedDate}
+          <FontAwesomeIcon
+            className="footer-calendar-date-icon"
+            icon={faCalendarDays}
+            aria-hidden="true"
+          />
+          <span>{formattedDate}</span>
         </time>
         <span
           className="footer-calendar-separator"
