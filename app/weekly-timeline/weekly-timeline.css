@@ -343,10 +343,10 @@
   min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 0.28rem;
+  gap: 0.24rem;
   border: 1px solid var(--stone);
   border-radius: 0.35rem;
-  padding: 0.32rem 0.38rem;
+  padding: 0.32rem;
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.68rem;
   font-weight: 650;
@@ -968,6 +968,13 @@
 }
 
 @media (max-width: 760px) {
+  .metric-chip {
+    justify-content: center;
+    gap: 0.14rem;
+    padding-inline: 0.18rem;
+    font-size: 0.62rem;
+  }
+
   .week-pagination {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-areas:
