@@ -11,6 +11,7 @@ import type { CSSProperties } from 'react'
 import { useEffect, useState } from 'react'
 
 import { getPublicCalendarSettings } from '@/lib/calendar-settings'
+import { formatFooterCalendarDate } from '@/lib/calendar-footer-date'
 
 const CATHOLIC_CALENDAR_URL =
   'https://catholic.bgonzalezbustamante.com/'
@@ -18,20 +19,28 @@ const CALENDAR_TIME_ZONE = 'Europe/Amsterdam'
 const CALENDAR_REFRESH_MS = 5 * 60 * 1000
 const STRESS_TEST_DATE = '2027-11-21'
 
-function displayItemsForDate(date: string) {
-  return getCalendarDisplaySummary(
-    getCatholicCalendarState(date)
-  ).items
+type FooterCalendarDisplay = {
+  date: string
+  items: CalendarDisplayItem[]
 }
 
-function currentDisplayItems() {
-  return displayItemsForDate(
+function displayForDate(date: string): FooterCalendarDisplay {
+  return {
+    date,
+    items: getCalendarDisplaySummary(
+      getCatholicCalendarState(date)
+    ).items,
+  }
+}
+
+function currentDisplay() {
+  return displayForDate(
     todayInTimeZone(CALENDAR_TIME_ZONE)
   )
 }
 
-function stressTestDisplayItems() {
-  return displayItemsForDate(STRESS_TEST_DATE)
+function stressTestDisplay() {
+  return displayForDate(STRESS_TEST_DATE)
 }
 
 function calendarIconStyle(
@@ -44,9 +53,8 @@ function calendarIconStyle(
 }
 
 export default function CatholicCalendarFooter() {
-  const [items, setItems] = useState<CalendarDisplayItem[] | null>(
-    null
-  )
+  const [display, setDisplay] =
+    useState<FooterCalendarDisplay | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -58,17 +66,17 @@ export default function CatholicCalendarFooter() {
         if (cancelled) return
 
         if (!settings.catholic_calendar_active) {
-          setItems(null)
+          setDisplay(null)
           return
         }
 
-        setItems(
+        setDisplay(
           settings.stress_test_active
-            ? stressTestDisplayItems()
-            : currentDisplayItems()
+            ? stressTestDisplay()
+            : currentDisplay()
         )
       } catch {
-        if (!cancelled) setItems(null)
+        if (!cancelled) setDisplay(null)
       }
     }
 
@@ -84,9 +92,11 @@ export default function CatholicCalendarFooter() {
     }
   }, [])
 
-  if (!items || items.length === 0) {
+  if (!display || display.items.length === 0) {
     return null
   }
+
+  const formattedDate = formatFooterCalendarDate(display.date)
 
   return (
     <div className="footer-calendar-row">
@@ -95,9 +105,24 @@ export default function CatholicCalendarFooter() {
         href={CATHOLIC_CALENDAR_URL}
         target="_blank"
         rel="noreferrer"
-        aria-label={items.map((item) => item.label).join(' · ')}
+        aria-label={`${formattedDate} · ${display.items
+          .map((item) => item.label)
+          .join(' · ')}`}
       >
-        {items.map((item, index) => (
+        <time
+          className="footer-calendar-date"
+          dateTime={display.date}
+        >
+          {formattedDate}
+        </time>
+        <span
+          className="footer-calendar-separator"
+          aria-hidden="true"
+        >
+          ·
+        </span>
+
+        {display.items.map((item, index) => (
           <span className="footer-calendar-group" key={item.id}>
             {index > 0 && (
               <span
