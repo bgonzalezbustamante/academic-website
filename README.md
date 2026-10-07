@@ -4,7 +4,7 @@ Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.co
 
 Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
-**In development:** v6.0.0 "Crimson Delta" is being prepared through successive small pull requests. The navigation refinements and Sharp security patch are merged into `main`; further changes are collected on `crimson-delta-3` in a draft pull request. The stable v6.0.0 release remains unpublished; until release finalisation, `package.json` and public Release Notes continue to identify v6.0.0-rc.2 as the current release.
+**In development:** v6.0.0 "Crimson Delta" is being prepared through successive small pull requests. The navigation refinements and Sharp security patch are merged into `main`; further changes are collected on `crimson-delta-3` in a draft pull request. Release Notes now show Crimson Delta as **In development**, while `package.json`, footer release metadata and the **Current release** designation remain at v6.0.0-rc.2 until stable release finalisation.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -45,7 +45,7 @@ The public website provides:
 - Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
-- Catholic Calendar highlights in the footer, linked to the standalone calendar and controlled by the public calendar settings;
+- dated Catholic Calendar highlights in the footer, linked to the standalone calendar and controlled by the public calendar settings;
 - public-facing Release Notes and a separate technical CHANGELOG.
 
 The homepage population indicator tracks migration progress; it does not claim that all research records are complete. The Software, Timeline and Paintings pages are linked from Home rather than the primary navigation.
