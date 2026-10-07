@@ -19,7 +19,7 @@
 
 ### Weekly timeline
 
-- Tightened the Work/Coffee metric-chip spacing in the embedded Weekly timeline and added a smaller mobile treatment so the longest working-time label, `10–12h`, remains inside its chip without changing the seven-day horizontal timeline layout.
+- Tightened the Work/Coffee metric-chip spacing in the embedded Weekly timeline across desktop and mobile, with an additional compact mobile treatment, so the longest working-time label, `10–12h`, remains inside its chip without changing the seven-day horizontal timeline layout.
 
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
