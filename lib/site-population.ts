@@ -18,7 +18,7 @@ export const POPULATION_TARGETS = {
   publications: 64,
   projects: 16,
   conferences: 139,
-  teaching: 35,
+  teaching: 51,
 } as const
 
 export type PopulationDomain = keyof typeof POPULATION_TARGETS
