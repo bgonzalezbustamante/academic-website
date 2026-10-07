@@ -28,6 +28,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Made the main navigation clearer with coral hover states and Oxford-blue current-section highlighting.',
           'Added a dated Catholic Calendar footer with a calendar icon and better mobile handling for long observances.',
+          'Improved Weekly timeline metric labels so longer working-time ranges stay within their boxes.',
           'Applied a security maintenance update to the website image-processing tools.',
         ],
       },
