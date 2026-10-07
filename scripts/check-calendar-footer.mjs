@@ -1,11 +1,46 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import { runInNewContext } from 'node:vm'
 
 import {
   getCalendarDisplaySummary,
   getCatholicCalendarState,
 } from '@bgonzalezbustamante/catholic-calendar'
+import ts from 'typescript'
 
 const MAX_COMPOSED_DISPLAY_CHARACTERS = 85
+
+const formatterSource = readFileSync(
+  new URL('../lib/calendar-footer-date.ts', import.meta.url),
+  'utf8'
+)
+const compiledFormatter = ts.transpileModule(formatterSource, {
+  compilerOptions: {
+    module: ts.ModuleKind.CommonJS,
+    target: ts.ScriptTarget.ES2022,
+  },
+}).outputText
+const formatterExports = {}
+
+runInNewContext(compiledFormatter, {
+  Date,
+  Intl,
+  Number,
+  exports: formatterExports,
+})
+
+const { formatFooterCalendarDate } = formatterExports
+
+assert.equal(
+  formatFooterCalendarDate('2026-10-07'),
+  '7 Oct 2026',
+  'Footer date must use D Mon YYYY.'
+)
+assert.equal(
+  formatFooterCalendarDate('2027-11-21'),
+  '21 Nov 2027',
+  'Stress-test footer date must match the stress-test display date.'
+)
 
 const FIXTURES = [
   {
@@ -54,6 +89,6 @@ for (const fixture of FIXTURES) {
   }
 
   console.log(
-    `✓ Catholic footer calendar: ${fixture.date} → ${display.text}`
+    `✓ Catholic footer calendar: ${formatFooterCalendarDate(fixture.date)} · ${display.text}`
   )
 }
