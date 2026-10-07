@@ -4087,6 +4087,18 @@ h4 {
   color: var(--oxford-coral);
 }
 
+.footer-calendar-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+}
+
+.footer-calendar-date-icon {
+  width: 0.72rem;
+  flex: 0 0 0.72rem;
+  color: var(--oxford-coral);
+}
+
 .footer-calendar-group,
 .footer-calendar-item {
   display: inline-flex;
@@ -4524,7 +4536,35 @@ h4 {
 
   .footer-calendar-row {
     width: 100%;
+    overflow-x: visible;
     justify-self: start;
+  }
+
+  .footer-calendar-link {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 0.28rem;
+    white-space: normal;
+  }
+
+  .footer-calendar-group {
+    max-width: 100%;
+    min-width: 0;
+    flex: 0 1 auto;
+    align-items: flex-start;
+  }
+
+  .footer-calendar-item {
+    max-width: 100%;
+    min-width: 0;
+    align-items: flex-start;
+  }
+
+  .footer-calendar-item > span:last-child {
+    min-width: 0;
+    white-space: normal;
   }
 
   .footer-inner .footer-carbon-note {
