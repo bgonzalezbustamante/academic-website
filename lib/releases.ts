@@ -21,19 +21,14 @@ export const releases: ReleaseNote[] = [
     releasedOn: 'In development',
     comparison: 'Stable v6.0.0 release in preparation',
     summary:
-      'Crimson Delta is the final refinement pass before the first stable v6 release, focused on small interface improvements and maintenance.',
+      'Crimson Delta is a final polish pass before the first stable v6 release.',
     sections: [
       {
-        title: 'Website refinements',
+        title: 'Small refinements',
         items: [
-          'Updated the main navigation so hover and keyboard-focus highlights use coral, while the current section remains Oxford blue.',
-          'Added the date before the Catholic Calendar footer display so each daily highlight is easier to place in context.',
-        ],
-      },
-      {
-        title: 'Maintenance',
-        items: [
-          'Updated the website image-processing dependency to address a reported security issue while keeping the production dependency audit clear.',
+          'Made the main navigation clearer with coral hover states and Oxford-blue current-section highlighting.',
+          'Added a dated Catholic Calendar footer with a calendar icon and better mobile handling for long observances.',
+          'Applied a security maintenance update to the website image-processing tools.',
         ],
       },
     ],
