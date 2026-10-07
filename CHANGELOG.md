@@ -15,7 +15,7 @@
 
 - Prefixed the Catholic Calendar footer display with a small calendar icon and its effective date in `D Mon YYYY` format (for example, `7 Oct 2026`), separated from the daily display by a subtle middle dot.
 - Kept the date and observance display on the same Amsterdam-local calendar day; Dashboard stress-test mode shows its fixture date alongside the corresponding fixture display.
-- Preserved the compact single-line treatment on wider screens while allowing long observance combinations to wrap naturally on mobile, so the full stress-test display remains visible without horizontal scrolling.
+- Preserved the compact single-line treatment on wider screens; on mobile, the date and each composed calendar item occupy their own row with separators removed, while long labels can still wrap within their row.
 
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
