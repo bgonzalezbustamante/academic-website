@@ -722,7 +722,7 @@ h4 {
 .section-population-note {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 0.32rem;
   margin: 0.38rem 0 0;
   color: var(--oxford-ash);
