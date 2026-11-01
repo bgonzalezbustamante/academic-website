@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import detailedWorldMap from 'world-atlas/countries-50m.json'
 
 import AcademicWorldMap, {
+  type GeographyData,
   type WorldMapCountry,
 } from '@/components/academic-world-map'
 
@@ -13,6 +15,9 @@ const MAP_VIEWS = [
 ] as const
 
 type ConferenceMapView = (typeof MAP_VIEWS)[number]['value']
+
+// Keep the original 110m atlas for World; render regional borders at 50m.
+const DETAILED_MAP = detailedWorldMap as unknown as GeographyData
 
 export default function ConferenceRegionMap({
   countries,
@@ -48,6 +53,8 @@ export default function ConferenceRegionMap({
         key={view}
         countries={countries}
         view={view}
+        geography={view === 'world' ? undefined : DETAILED_MAP}
+        mapHeight={view === 'america' ? 560 : 430}
         ariaLabel={`${selected.label} map showing conference presentations by country across all years`}
         valueLabel="presentations"
         singularValueLabel="presentation"

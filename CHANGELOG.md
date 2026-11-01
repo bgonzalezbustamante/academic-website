@@ -37,6 +37,7 @@ Some security and public-API compatibility fixes have already been deployed inde
 
 - Added an accessible Europe / America / World view selector to the Conferences choropleth, defaulting to Europe. Regional views use different Equal Earth projection centres and scales while sharing the original worldwide country totals, log-scaled blue/aqua palette and country tooltip behaviour.
 - Kept the World overview available for presentations outside Europe and America, including Asia; preserved the Africa-centred TERGAP projection and excluded virtual presentations from mapped counts. No new mapping dependencies.
+- Improved regional map fidelity by using the existing `world-atlas` 1:50m country boundaries instead of magnifying the 1:110m World map. Used finer, rounded regional strokes and re-centred the America projection (72° W, 5° N; scale 230) in a taller 800 × 560 viewport so both North and South America remain visible. World and TERGAP rendering retain their previous geometry and framing.
 
 ### Public API compatibility
 

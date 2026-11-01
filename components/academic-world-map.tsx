@@ -10,7 +10,7 @@ import {
 } from 'react-simple-maps'
 import worldMap from 'world-atlas/countries-110m.json'
 
-type GeographyData = ComponentProps<typeof Geographies>['geography']
+export type GeographyData = ComponentProps<typeof Geographies>['geography']
 
 export type WorldMapCountry = {
   iso3: string
@@ -30,6 +30,8 @@ type Props = {
   updatedAt?: string | null
   palette?: MapPalette
   view?: MapView
+  geography?: GeographyData
+  mapHeight?: number
   noDataLabel?: string
 }
 
@@ -48,7 +50,7 @@ const MAP_PROJECTIONS: Record<
   world: { scale: 150 },
   africa: { center: [15, 5], scale: 245 },
   europe: { center: [12, 51], scale: 500 },
-  america: { center: [-86, 6], scale: 250 },
+  america: { center: [-72, 5], scale: 230 },
 }
 
 const MAP_PALETTES: Record<
@@ -146,6 +148,8 @@ export default function AcademicWorldMap({
   updatedAt = null,
   palette = 'tergap',
   view = 'world',
+  geography = WORLD_MAP,
+  mapHeight = 430,
   noDataLabel = 'Not collected',
 }: Props) {
   const byIso3 = useMemo(
@@ -194,10 +198,10 @@ export default function AcademicWorldMap({
           projection="geoEqualEarth"
           projectionConfig={MAP_PROJECTIONS[view]}
           width={800}
-          height={430}
+          height={mapHeight}
           aria-label={ariaLabel}
         >
-          <Geographies geography={WORLD_MAP}>
+          <Geographies geography={geography}>
             {({ geographies }) =>
               geographies.map((geo) => {
                 const iso3 = numericIdToIso3(geo.id)
@@ -230,7 +234,8 @@ export default function AcademicWorldMap({
                           )
                     }
                     stroke={mapPalette.border}
-                    strokeWidth={0.55}
+                    strokeWidth={view === 'world' || view === 'africa' ? 0.55 : 0.4}
+                    strokeLinejoin={view === 'europe' || view === 'america' ? 'round' : undefined}
                     tabIndex={datum && !compact ? 0 : -1}
                     aria-label={
                       datum && !compact
