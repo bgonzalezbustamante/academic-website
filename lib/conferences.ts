@@ -8,6 +8,7 @@ const PRESENTATION_TYPES: ConferencePresentationType[] = [
   'Conference paper',
   'Keynote',
   'Workshop',
+  'Guest lecture',
 ]
 
 function nullableString(value: unknown) {

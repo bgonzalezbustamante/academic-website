@@ -40,6 +40,7 @@ export type ConferencePresentationType =
   | 'Conference paper'
   | 'Keynote'
   | 'Workshop'
+  | 'Guest lecture'
 
 export type PublicProject = {
   slug: string

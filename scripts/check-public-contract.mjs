@@ -96,6 +96,7 @@ const PUBLIC_CONFERENCE_TYPES = new Set([
   'Conference paper',
   'Keynote',
   'Workshop',
+  'Guest lecture',
 ])
 
 const PUBLIC_SOFTWARE_FIELDS = [
@@ -447,7 +448,7 @@ function assertConferenceShape(presentation) {
     )
   ) {
     fail(
-      'Conference presentation presentation_type must be Conference paper, Keynote, or Workshop.'
+      'Conference presentation presentation_type must be Conference paper, Keynote, Workshop, or Guest lecture.'
     )
   }
 

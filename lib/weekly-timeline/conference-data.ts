@@ -8,6 +8,7 @@ const PUBLIC_CONFERENCE_TYPES = new Set<ConferencePresentationType>([
   'Conference paper',
   'Keynote',
   'Workshop',
+  'Guest lecture',
 ])
 
 const PUBLIC_CONFERENCE_KEYS = [
@@ -148,7 +149,7 @@ export function parsePublicConferencePresentations(
       )
     ) {
       throw new Error(
-        `${label} presentation_type must be Conference paper, Keynote or Workshop.`
+        `${label} presentation_type must be Conference paper, Keynote, Workshop or Guest lecture.`
       )
     }
     assertNullableHttpUrl(entry.url, `${label} url`)

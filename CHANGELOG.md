@@ -27,6 +27,11 @@
 - Aligned the section-level population progress information icon directly beside its explanatory text, replacing the spaced-apart alignment.
 - Updated the manually maintained Teaching population target in `lib/site-population.ts` from 35 to 51 records.
 
+### Public API compatibility
+
+- Accepted the new `Guest lecture` presentation type in public Conferences, project-linked presentations, the homepage and the embedded Weekly timeline, and updated the contract checker to recognise it; previously, these records could cause entire sections to report unavailable.
+- Added `Dataset` after `Preprint` in the Publications index filter and publication-profile ordering. Publication indexes remain string-valued, so future dataset records will not themselves cause an availability error.
+
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
 Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alongside improvements to academic activity, imagery, footer presentation and public-data safeguards.

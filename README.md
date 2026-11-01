@@ -38,11 +38,11 @@ The public website provides:
 - a Software Ecosystem catalogue of public tools and applications, with versions, development stages and relevant links;
 - a seven-day illustrated Weekly timeline, linked from the Home activity chart;
 - a Selected paintings gallery with nine reproduced works, source and rights credits, and links to other favourites that cannot be reproduced;
-- Publications with filters, citation information, language indicators, public research links, detail pages and associated projects;
+- Publications with index filters (including Dataset), citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
 - Projects with funding information, associated publications, conference presentations and project visuals, including the TERGAP map;
-- Conferences with KPI cards, presentation geography, paginated records, Keynote markers and the current-year roadmap;
+- Conferences with KPI cards, presentation geography, paginated records (including guest lectures), Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
 - dated Catholic Calendar highlights in the footer, linked to the standalone calendar and controlled by the public calendar settings;
