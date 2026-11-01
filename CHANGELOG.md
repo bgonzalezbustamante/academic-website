@@ -2,6 +2,8 @@
 
 ## Unreleased — v6.0.0 "Crimson Delta"
 
+Some security and public-API compatibility fixes have already been deployed independently during stabilisation. The website continues to identify v6.0.0-rc.2 as its current release until stable v6.0.0 is approved.
+
 ### Navigation
 
 - Updated primary navigation so hover and keyboard-focus highlights use Oxford coral, while the active section remains Oxford blue.
@@ -31,6 +33,10 @@
 
 - Accepted the new `Guest lecture` presentation type in public Conferences, project-linked presentations, the homepage and the embedded Weekly timeline, and updated the contract checker to recognise it; previously, these records could cause entire sections to report unavailable.
 - Added `Dataset` after `Preprint` in the Publications index filter and publication-profile ordering. Publication indexes remain string-valued, so future dataset records will not themselves cause an availability error.
+
+### Release preparation
+
+- Corrected the README's repository visibility and stable-release instructions; documented reproducible local setup, the full-history secret scan and the approved-only Netlify deployment workflow, including merge-message skip markers.
 
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 

@@ -4,7 +4,7 @@ Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.co
 
 Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
-**In development:** v6.0.0 "Crimson Delta" is being prepared through successive small pull requests. Release Notes now show Crimson Delta as **In development**, while `package.json`, footer release metadata and the **Current release** designation remain at v6.0.0-rc.2 until stable release finalisation.
+**In development:** v6.0.0 "Crimson Delta" is being prepared through draft pull requests and local validation. Release Notes show Crimson Delta as **In development**, while `package.json`, footer metadata and the **Current release** designation remain at v6.0.0-rc.2 until stable release finalisation. Netlify development builds are paused until explicitly approved.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -69,7 +69,7 @@ This project requires **Node.js 22 or later**.
 ```bash
 git clone https://github.com/bgonzalezbustamante/academic-website.git
 cd academic-website
-npm install
+npm ci
 cp .env.example .env.local
 npm run dev
 ```
@@ -121,13 +121,16 @@ npm run check
 npm run check:public-contract
 npm run build
 npm audit --omit=dev
+gitleaks detect --source . --log-opts="--all" --no-banner --redact --verbose
 ```
 
-`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and the deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Check the Netlify preview on desktop and mobile and run a secrets scan before repository-publication decisions.
+`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. During the Netlify pause, validate locally; perform browser and Deploy Preview checks only when deployments resume for an approved release.
 
 ## Deployment
 
-Development remains local-first and follows the validation gate above. Only approved, validated pull requests are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
+Development is local-first. While Crimson Delta is being finalised, its pull request stays draft and unmerged, with `[skip netlify]` in the PR title and each development commit to suppress routine previews and branch builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
+
+Only approved, validated changes are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. When a production deployment is approved, ensure **both the merge commit title and body** omit `[skip netlify]`: GitHub can copy a PR title into the merge message and inadvertently suppress the build. Verify the published Netlify deployment against the expected `main` commit. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, quality hardening, legacy redirect verification, SEO verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and `bgonzalezbustamante.netlify.app` redirects permanently to the corresponding canonical `.com` path.
 
@@ -135,11 +138,11 @@ The predecessor remains temporarily available at `legacy-bgonzalezbustamante.net
 
 ### Repository visibility
 
-The GitHub repository remains private pending the complete publication review. Make it public only after merging, production verification and review of historical files, security and asset redistribution rights. Publishing the repository exposes its existing branches and commit history, not just the current `main` tree. Confirm that source imagery, licence notices and any historical files are suitable for public distribution; never rely on `.gitignore` to protect material already committed.
+The GitHub repository is public. Before committing new files, check for secrets, personal data and third-party asset redistribution restrictions. Published Git history and branches can expose previously committed content, not just the current `main` tree; `.gitignore` does not protect material already committed. Keep image rights and attribution consistent with `CONTENT-LICENSE.md` and `NOTICE`.
 
 ### Release procedure
 
-Finalise `README.md`, `CHANGELOG.md` and `lib/releases.ts` on the release branch. After explicit approval, merge the PR and verify the production deployment and new routes. Tag **the merged `main` commit**, never an unmerged branch head; then publish a GitHub **pre-release** with a short summary. For Bold River, the tag is `v6.0.0-rc.2` and the release title is `v6.0.0-rc.2 “Bold River”`.
+Finalise `README.md`, `CHANGELOG.md` and `lib/releases.ts` on the release branch. After explicit approval, merge the PR and verify the production deployment and affected routes. Tag **the merged `main` commit**, never an unmerged branch head, and publish a concise GitHub Release: mark release candidates (such as `v6.0.0-rc.2`) as **pre-releases**, but publish stable `v6.0.0` as a **standard release**. Update the package, footer and Release Notes metadata only at the approved stable-release gate.
 
 ## Release history
 
