@@ -30,6 +30,7 @@ const PUBLICATION_INDEX_ORDER = [
   'SciELO/Latindex',
   'Working paper',
   'Preprint',
+  'Dataset',
 ] as const
 
 const PAGE_SIZE = 10

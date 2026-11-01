@@ -30,6 +30,7 @@ export const releases: ReleaseNote[] = [
           'Added a dated Catholic Calendar footer with a calendar icon and better mobile handling for long observances.',
           'Improved Weekly timeline metric labels so longer working-time ranges stay within their boxes.',
           'Updated important website tools to address recent security issues.',
+          'Kept project, conference and timeline pages compatible with new presentation types, and added a Dataset publication filter.',
         ],
       },
     ],

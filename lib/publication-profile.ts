@@ -17,6 +17,7 @@ const PUBLICATION_INDEX_ORDER = [
   'SciELO/Latindex',
   'Working paper',
   'Preprint',
+  'Dataset',
 ] as const
 
 const LANGUAGE_ORDER: PublicPaperLanguage[] = [

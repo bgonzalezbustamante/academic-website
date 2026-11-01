@@ -53,6 +53,7 @@ export type ConferencePresentationType =
   | 'Conference paper'
   | 'Keynote'
   | 'Workshop'
+  | 'Guest lecture'
 
 export type PublicConferencePresentation = {
   event_name: string
