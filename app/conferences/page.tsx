@@ -6,9 +6,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { Metadata } from 'next'
 
-import AcademicWorldMap, {
-  type WorldMapCountry,
-} from '@/components/academic-world-map'
+import type { WorldMapCountry } from '@/components/academic-world-map'
+import ConferenceRegionMap from '@/components/conference-region-map'
 import ConferenceOverviewTable from '@/components/conference-overview-table'
 import PresentationRoadmap from '@/components/presentation-roadmap'
 import SectionPopulationProgress from '@/components/section-population-progress'
@@ -204,14 +203,7 @@ export default async function ConferencesPage() {
                 </div>
               </div>
 
-              <AcademicWorldMap
-                countries={mapCountries}
-                ariaLabel="World map showing conference presentations by country across all years"
-                valueLabel="presentations"
-                singularValueLabel="presentation"
-                palette="conference"
-                noDataLabel="No presentations"
-              />
+              <ConferenceRegionMap countries={mapCountries} />
             </section>
 
             <section className="conference-overview-section">

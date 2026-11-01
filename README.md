@@ -41,8 +41,8 @@ The public website provides:
 - Publications with index filters (including Dataset), citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
-- Projects with a featured selection, a paginated portfolio (five per page), funding information, associated publications, conference presentations and visuals, including the TERGAP map;
-- Conferences with KPI cards, presentation geography, paginated records (including guest lectures), Keynote markers and the current-year roadmap;
+- Projects with a featured selection, a paginated portfolio (six per page), funding information, associated publications, conference presentations and visuals, including the TERGAP map;
+- Conferences with KPI cards, a Europe/America/World map selector, paginated records (including guest lectures), Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
 - dated Catholic Calendar highlights in the footer, linked to the standalone calendar and controlled by the public calendar settings;

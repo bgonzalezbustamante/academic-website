@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import ProjectCard from '@/components/project-card'
 import type { PublicProject } from '@/types/public'
 
-const PAGE_SIZE = 5
+const PAGE_SIZE = 6
 
 type Props = {
   projects: PublicProject[]

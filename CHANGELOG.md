@@ -31,7 +31,12 @@ Some security and public-API compatibility fixes have already been deployed inde
 
 ### Projects
 
-- Kept Featured projects visible above the portfolio and added client-side pagination for remaining public projects (five per page), with First/Previous/Next/Last controls both above and below the cards, a visible result range and keyboard-accessible page changes. The public RPC and ordering are unchanged.
+- Kept Featured projects visible above the portfolio and added client-side pagination for remaining public projects (six per page), with First/Previous/Next/Last controls both above and below the cards, a visible result range and keyboard-accessible page changes. The public RPC and ordering are unchanged.
+
+### Conference map
+
+- Added an accessible Europe / America / World view selector to the Conferences choropleth, defaulting to Europe. Regional views use different Equal Earth projection centres and scales while sharing the original worldwide country totals, log-scaled blue/aqua palette and country tooltip behaviour.
+- Kept the World overview available for presentations outside Europe and America, including Asia; preserved the Africa-centred TERGAP projection and excluded virtual presentations from mapped counts. No new mapping dependencies.
 
 ### Public API compatibility
 

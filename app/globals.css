@@ -2785,6 +2785,54 @@ h4 {
 
 /* Conferences */
 
+.conference-map-region-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-roboto), Arial, sans-serif;
+}
+
+.conference-map-region-label {
+  color: var(--oxford-ash);
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.conference-map-region-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.conference-map-region-controls button {
+  border: 1px solid var(--oxford-stone);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  background: var(--paper);
+  color: var(--oxford-blue);
+  font-size: 0.72rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.conference-map-region-controls button[aria-pressed='true'] {
+  border-color: var(--oxford-blue);
+  background: var(--oxford-blue-wash);
+}
+
+.conference-map-region-controls button:hover {
+  border-color: var(--oxford-coral);
+  color: var(--oxford-coral);
+}
+
+.conference-map-region-controls button:focus-visible {
+  outline: 2px solid var(--oxford-coral);
+  outline-offset: 2px;
+}
+
 .conference-map-section,
 .conference-overview-section {
   margin-top: 2rem;
