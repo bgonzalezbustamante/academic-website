@@ -29,6 +29,10 @@ Some security and public-API compatibility fixes have already been deployed inde
 - Aligned the section-level population progress information icon directly beside its explanatory text, replacing the spaced-apart alignment.
 - Updated the manually maintained Teaching population target in `lib/site-population.ts` from 35 to 51 records.
 
+### Projects
+
+- Kept Featured projects visible above the portfolio and added client-side pagination for remaining public projects (five per page), with First/Previous/Next/Last controls both above and below the cards, a visible result range and keyboard-accessible page changes. The public RPC and ordering are unchanged.
+
 ### Public API compatibility
 
 - Accepted the new `Guest lecture` presentation type in public Conferences, project-linked presentations, the homepage and the embedded Weekly timeline, and updated the contract checker to recognise it; previously, these records could cause entire sections to report unavailable.

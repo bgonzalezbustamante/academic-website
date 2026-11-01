@@ -2307,6 +2307,11 @@ h4 {
   gap: 0.9rem;
 }
 
+.project-pagination-top {
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+}
+
 .publication-associated-projects {
   margin-top: 2rem;
 }

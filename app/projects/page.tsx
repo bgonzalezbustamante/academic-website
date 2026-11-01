@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import ProjectCard from '@/components/project-card'
+import ProjectPortfolioList from '@/components/project-portfolio-list'
 import SectionPopulationProgress from '@/components/section-population-progress'
 import {
   listPublicProjects,
@@ -94,27 +95,10 @@ export default async function ProjectsPage() {
             )}
 
             {remaining.length > 0 && (
-              <section className="project-group">
-                <div className="section-heading compact-heading">
-                  <div>
-                    <p className="eyebrow">
-                      {featured.length > 0 ? 'Portfolio' : 'Research portfolio'}
-                    </p>
-                    <h2>
-                      {featured.length > 0 ? 'Other projects' : 'Projects'}
-                    </h2>
-                  </div>
-                </div>
-
-                <div className="project-grid">
-                  {remaining.map((project) => (
-                    <ProjectCard
-                      key={project.slug}
-                      project={project}
-                    />
-                  ))}
-                </div>
-              </section>
+              <ProjectPortfolioList
+                projects={remaining}
+                hasFeatured={featured.length > 0}
+              />
             )}
           </>
         )}
