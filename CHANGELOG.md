@@ -21,6 +21,11 @@
 
 - Tightened the Work/Coffee metric-chip spacing in the embedded Weekly timeline across desktop and mobile, with an additional compact mobile treatment, so the longest working-time label, `10–12h`, remains inside its chip without changing the seven-day horizontal timeline layout.
 
+### Population progress
+
+- Aligned the section-level population progress information icon directly beside its explanatory text, replacing the spaced-apart alignment.
+- Updated the manually maintained Teaching population target in `lib/site-population.ts` from 35 to 51 records.
+
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
 Bold River adds Software Ecosystem, Selected paintings and Weekly timeline, alongside improvements to academic activity, imagery, footer presentation and public-data safeguards.
