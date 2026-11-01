@@ -10,6 +10,7 @@
 ### Security and dependencies
 
 - Updated `sharp` from 0.35.4 to 0.35.5 and its matching libvips binaries from 1.3.3 to 1.3.4 to address the high-severity librsvg advisory CVE-2026-96889 (GHSA-wq5f-xc86-pv6w). Updated the npm lockfile for all supported platforms without changing unrelated dependencies.
+- Updated the declared `next` and `eslint-config-next` versions from `16.3.8` to `16.4.3` to incorporate October 2026 Next.js security fixes: Cache Components remote-code execution (GHSA-673q-mjm6-r5xr), Server Actions denial of service (GHSA-p3m5-59mp-jv5r), and Image Optimisation remote-code execution (GHSA-2464-fhr4-w9xw). The independent `sharp@0.35.5` protection remains in place.
 
 ### Footer
 
