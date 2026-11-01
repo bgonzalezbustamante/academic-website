@@ -2,7 +2,7 @@
 
 ## Unreleased — v6.0.0 "Crimson Delta"
 
-Some security and public-API compatibility fixes have already been deployed independently during stabilisation. The website continues to identify v6.0.0-rc.2 as its current release until stable v6.0.0 is approved.
+Some security and public-API compatibility fixes have already been deployed independently during stabilisation. The website continues to identify v6.0.0-rc.2 as its current release until stable v6.0.0.
 
 ### Navigation
 
