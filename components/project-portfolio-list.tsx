@@ -52,7 +52,7 @@ export default function ProjectPortfolioList({
           {hasFeatured ? 'other projects' : 'projects'}
         </p>
 
-        <div className="conference-pagination-controls">
+        <div className="conference-pagination-controls project-pagination-controls">
           <button
             type="button"
             disabled={currentPage === 1}

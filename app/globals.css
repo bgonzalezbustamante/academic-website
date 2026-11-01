@@ -2312,6 +2312,10 @@ h4 {
   margin-bottom: 0.9rem;
 }
 
+.project-pagination-controls {
+  flex-wrap: wrap;
+}
+
 .publication-associated-projects {
   margin-top: 2rem;
 }
