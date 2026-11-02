@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 
 import { createClient } from '@supabase/supabase-js'
 
@@ -214,11 +214,29 @@ function fail(message) {
   throw new Error(message)
 }
 
+// Windows ignores filename case, but Netlify's Linux build and the generated
+// manifest do not, so every path segment must match exactly.
+function sourceExists(key) {
+  let directory = IMAGE_SOURCES_ROOT
+
+  for (const segment of key.split('/')) {
+    let entries
+
+    try {
+      entries = readdirSync(directory)
+    } catch {
+      return false
+    }
+
+    if (!entries.includes(segment)) return false
+    directory = new URL(`${encodeURIComponent(segment)}/`, directory)
+  }
+
+  return true
+}
+
 function hasImageSource(key) {
-  return (
-    Boolean(FIGURE_ALIASES[key]) ||
-    existsSync(new URL(key, IMAGE_SOURCES_ROOT))
-  )
+  return sourceExists(FIGURE_ALIASES[key] ?? key)
 }
 
 async function assertImageSources(supabase, { papers, projects, teaching }) {
