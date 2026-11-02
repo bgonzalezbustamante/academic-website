@@ -12,6 +12,10 @@ import worldMap from 'world-atlas/countries-110m.json'
 
 export type GeographyData = ComponentProps<typeof Geographies>['geography']
 
+type MapProjection = Parameters<
+  ComponentProps<typeof Geographies>['children']
+>[0]['projection']
+
 export type WorldMapCountry = {
   iso3: string
   label: string
@@ -98,6 +102,34 @@ function numericIdToIso3(value: string | number | undefined) {
   return isoCountries.numericToAlpha3(
     String(value).padStart(3, '0')
   )
+}
+
+// True when any vertex of the country falls inside the map's viewBox.
+function isGeographyInView(
+  geometry: unknown,
+  projection: MapProjection,
+  width: number,
+  height: number
+) {
+  function visit(coordinates: unknown): boolean {
+    if (!Array.isArray(coordinates)) return false
+
+    if (typeof coordinates[0] === 'number') {
+      const point = projection(coordinates as [number, number])
+
+      return Boolean(
+        point &&
+          point[0] >= 0 &&
+          point[0] <= width &&
+          point[1] >= 0 &&
+          point[1] <= height
+      )
+    }
+
+    return coordinates.some(visit)
+  }
+
+  return visit((geometry as { coordinates?: unknown } | null)?.coordinates)
 }
 
 function getFill(
@@ -201,12 +233,22 @@ export default function AcademicWorldMap({
           aria-label={ariaLabel}
         >
           <Geographies geography={geography}>
-            {({ geographies }) =>
+            {({ geographies, projection }) =>
               geographies.map((geo) => {
                 const iso3 = numericIdToIso3(geo.id)
                 const datum = iso3
                   ? byIso3.get(iso3)
                   : undefined
+                // Countries outside a regional view stay out of the tab order.
+                const focusable =
+                  Boolean(datum) &&
+                  !compact &&
+                  isGeographyInView(
+                    geo.geometry,
+                    projection,
+                    800,
+                    mapHeight
+                  )
                 const geographyName =
                   typeof geo.properties?.name === 'string'
                     ? geo.properties.name
@@ -235,9 +277,9 @@ export default function AcademicWorldMap({
                     stroke={mapPalette.border}
                     strokeWidth={view === 'europe' ? 0.4 : 0.55}
                     strokeLinejoin={view === 'europe' ? 'round' : undefined}
-                    tabIndex={datum && !compact ? 0 : -1}
+                    tabIndex={focusable ? 0 : -1}
                     aria-label={
-                      datum && !compact
+                      focusable && datum
                         ? `${datum.label}: ${formatValue(datum.value)}`
                         : undefined
                     }
