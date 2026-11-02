@@ -2,9 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
-
-**In development:** v6.0.0 "Crimson Delta" is being prepared through draft pull requests and local validation. Release Notes show Crimson Delta as **In development**, while `package.json`, footer metadata and the **Current release** designation remain at v6.0.0-rc.2 until stable release finalisation. Netlify development builds are paused until explicitly approved.
+Current release: **v6.0.0 "Crimson Delta"** (2 Nov 2026), the first stable v6 release; previous release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -137,7 +135,7 @@ When the TERGAP dashboard data changes, regenerate the snapshot from the TERGAP 
 
 ## Validation
 
-Before merging or deploying a release candidate, run:
+Before merging or deploying a release, run:
 
 ```bash
 npm run check
@@ -147,11 +145,11 @@ npm audit --omit=dev
 gitleaks detect --source . --log-opts="--all" --no-banner --redact --verbose
 ```
 
-`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. During the Netlify pause, validate locally; perform browser and Deploy Preview checks only when deployments resume for an approved release.
+`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Validate locally; perform browser and Deploy Preview checks only for an approved release.
 
 ## Deployment
 
-Development is local-first. While Crimson Delta is being finalised, its pull request stays draft and unmerged, with `[skip netlify]` in the PR title and each development commit to suppress routine previews and branch builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
+Development is local-first. Work in progress stays in draft, unmerged pull requests, with `[skip netlify]` in the PR title and each development commit to suppress routine previews and branch builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
 
 Only approved, validated changes are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. When a production deployment is approved, ensure **both the merge commit title and body** omit `[skip netlify]`: GitHub can copy a PR title into the merge message and inadvertently suppress the build. Verify the published Netlify deployment against the expected `main` commit. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 

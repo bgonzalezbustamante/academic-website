@@ -41,7 +41,7 @@ Aggregate work analytics are rendered on the homepage for the current Europe/Ams
 
 Software Ecosystem is supplied exclusively through `list_public_software()`. The public `/software` page renders self-contained cards and does not expose software detail routes. Cards may show the public name, short description, category, current version, development stage, status, repository visibility, safe repository URL, production URL, documentation URL, lifecycle years and Featured state.
 
-Repository visibility is independent from profile exposure. When `repository_visibility` is `private`, `repository_url` must remain null even for an otherwise public Software Ecosystem profile. `get_public_software(text)` is validated as part of the public contract for forward compatibility, but rc.2 does not use it for navigation because its current detail shape is intentionally identical to the listing shape.
+Repository visibility is independent from profile exposure. When `repository_visibility` is `private`, `repository_url` must remain null even for an otherwise public Software Ecosystem profile. `get_public_software(text)` is validated as part of the public contract for forward compatibility, but the website does not use it for navigation because its current detail shape is intentionally identical to the listing shape.
 
 The homepage links to `/software` inline beside Academic trajectory. Software is intentionally absent from the primary navigation.
 

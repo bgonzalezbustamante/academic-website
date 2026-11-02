@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Unreleased — v6.0.0 "Crimson Delta"
+## v6.0.0 "Crimson Delta" (2 Nov 2026)
 
-Some security and public-API compatibility fixes have already been deployed independently during stabilisation. The website continues to identify v6.0.0-rc.2 as its current release until stable v6.0.0.
+Crimson Delta is the first stable v6 release. It refines navigation, the Catholic Calendar footer, project browsing, the conference map and the Weekly timeline, and compiles project, publication and logo images into responsive WebP. Some security and public-API compatibility fixes were deployed independently during stabilisation.
 
 ### Navigation
 

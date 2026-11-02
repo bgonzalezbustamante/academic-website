@@ -17,11 +17,11 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0',
     codename: 'Crimson Delta',
-    status: 'In development',
-    releasedOn: 'In development',
-    comparison: 'Stable v6.0.0 release in preparation',
+    status: 'Current release',
+    releasedOn: '2 Nov 2026',
+    comparison: 'First stable v6 release',
     summary:
-      'Crimson Delta makes navigation, calendars and research pages clearer while preparing for the first stable v6 release.',
+      'Crimson Delta is the first stable v6 release, making navigation, calendars, research pages and images clearer and faster.',
     sections: [
       {
         title: 'Small refinements',
@@ -40,7 +40,7 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.2',
     codename: 'Bold River',
-    status: 'Current release',
+    status: 'Previous release',
     releasedOn: '6 Oct 2026',
     comparison: 'Second release candidate',
     summary:
@@ -67,7 +67,6 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.1',
     codename: 'Swift Harbour',
-    status: 'Previous release',
     releasedOn: '1 Oct 2026',
     comparison: 'First release candidate',
     summary:
