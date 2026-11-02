@@ -16,6 +16,9 @@
 /public/profile/generated/
 /public/paintings/generated/
 /public/branding/generated/
+/public/projects/generated/
+/public/publication-highlights/generated/
+/public/logos/generated/
 /content/image-assets.generated.ts
 
 # misc

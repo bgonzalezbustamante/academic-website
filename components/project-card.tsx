@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
 import ProjectCardVisual from '@/components/project-card-visual'
+import { figureImage, logoImage } from '@/lib/local-images'
 import type { PublicProject } from '@/types/public'
 
 // Only the fields a card renders, so client lists don't receive whole records.
@@ -70,16 +71,17 @@ export default function ProjectCard({
 }: Props) {
   const years = formatProjectYears(project)
   const status = formatProjectStatus(project.status)
-  const projectImage = project.project_image_filename
-    ? `/projects/${project.slug}/${project.project_image_filename}`
-    : null
+  const projectImage = figureImage(
+    'projects',
+    project.slug,
+    project.project_image_filename
+  )
   const isTergap =
     project.slug === 'terrorist-group-adaptation'
-  const funderImage = project.funder_image_filename
-    ? `/funders/${project.funder_image_filename}`
-    : isTergap
-      ? '/funders/erc-logo.png'
-      : null
+  const funderImage = logoImage(
+    project.funder_image_filename ??
+      (isTergap ? 'erc-logo.png' : null)
+  )
 
   return (
     <article

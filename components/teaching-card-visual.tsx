@@ -1,21 +1,17 @@
-'use client'
-
+/* eslint-disable @next/next/no-img-element -- Teaching logos are WebP generated locally by scripts/build-images.mjs; Next.js image optimisation would re-encode them. */
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Image from 'next/image'
-import { useState } from 'react'
+
+import { logoImage } from '@/lib/local-images'
 
 export default function TeachingCardVisual({
   filename,
 }: {
   filename: string | null
 }) {
-  const [failed, setFailed] = useState(false)
-  const src = filename ? `/teaching/${filename}` : null
-  const isLossless =
-    src?.toLowerCase().endsWith('.png') ?? false
+  const image = logoImage(filename)
 
-  if (!src || failed) {
+  if (!image) {
     return (
       <FontAwesomeIcon
         className="teaching-fallback-icon"
@@ -26,16 +22,14 @@ export default function TeachingCardVisual({
   }
 
   return (
-    <Image
+    <img
       className="teaching-card-image"
-      src={src}
+      src={image.src}
+      width={image.width}
+      height={image.height}
       alt=""
-      width={720}
-      height={440}
-      sizes="190px"
-      quality={isLossless ? undefined : 90}
-      unoptimized={isLossless}
-      onError={() => setFailed(true)}
+      loading="lazy"
+      decoding="async"
     />
   )
 }

@@ -1,0 +1,10 @@
+{
+  "aliases": {
+    "publication-highlights/estudio-analisis-de-uso-del-tiempo/ENUT_spider_plot.png": "projects/time-use-and-cultural-participation/ENUT_spider_plot.png",
+    "publication-highlights/uncovering-the-rule-of-law-in-european-countries/cross_lingual_pipeline.jpg": "projects/unravelling-the-rule-of-law/RoL_pipeline.jpg"
+  },
+  "sharpen": {
+    "projects/integrating-foia-data-and-generative-ai/secuencia_politicos.png": 0.6,
+    "publication-highlights/chile-top-heavy-parity-and-technocratic-elites/educational_subjects.png": 0.6
+  }
+}

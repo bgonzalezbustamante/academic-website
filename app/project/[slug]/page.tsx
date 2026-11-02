@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- Project figures and funder logos are WebP generated locally by scripts/build-images.mjs; Next.js image optimisation would re-encode them. */
 import {
   faArrowUpRightFromSquare,
   faCircleInfo,
@@ -14,8 +15,8 @@ import {
 } from '@/components/project-card'
 import PublicationCard from '@/components/publication-card'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
-import ResilientLocalImage from '@/components/resilient-local-image'
 import TergapProjectMap from '@/components/tergap-project-map'
+import { figureImage, logoImage } from '@/lib/local-images'
 import { listPublicPapers } from '@/lib/publications'
 import { getPublicProject } from '@/lib/projects'
 import type { PublicPaper } from '@/types/public'
@@ -75,20 +76,17 @@ export default async function ProjectPage({ params }: Props) {
 
   const years = formatProjectYears(project)
   const status = formatProjectStatus(project.status)
-  const projectImage = project.project_image_filename
-    ? `/projects/${project.slug}/${project.project_image_filename}`
-    : null
-  const projectImageIsLossless =
-    projectImage?.toLowerCase().endsWith('.png') ?? false
+  const projectImage = figureImage(
+    'projects',
+    project.slug,
+    project.project_image_filename
+  )
   const isTergap =
     project.slug === 'terrorist-group-adaptation'
-  const funderImage = project.funder_image_filename
-    ? `/funders/${project.funder_image_filename}`
-    : isTergap
-      ? '/funders/erc-logo.png'
-      : null
-  const funderImageIsLossless =
-    funderImage?.toLowerCase().endsWith('.png') ?? false
+  const funderImage = logoImage(
+    project.funder_image_filename ??
+      (isTergap ? 'erc-logo.png' : null)
+  )
 
   return (
     <article className="page-section">
@@ -129,14 +127,14 @@ export default async function ProjectPage({ params }: Props) {
             }
           >
             {projectImage ? (
-              <ResilientLocalImage
-                src={projectImage}
-                alt={`${project.short_title || project.title} project visual`}
-                width={1800}
-                height={1100}
+              <img
+                src={projectImage.src}
+                srcSet={projectImage.srcSet}
                 sizes="(max-width: 932px) calc(100vw - 2rem), 900px"
-                quality={projectImageIsLossless ? undefined : 90}
-                unoptimized={projectImageIsLossless}
+                width={projectImage.width}
+                height={projectImage.height}
+                alt={`${project.short_title || project.title} project visual`}
+                decoding="async"
               />
             ) : (
               <FontAwesomeIcon
@@ -201,14 +199,13 @@ export default async function ProjectPage({ params }: Props) {
               {(project.funder || funderImage) && (
                 <div className="project-detail-funder">
                   {funderImage && (
-                    <ResilientLocalImage
-                      src={funderImage}
+                    <img
+                      src={funderImage.src}
+                      width={funderImage.width}
+                      height={funderImage.height}
                       alt={project.funder ? `${project.funder} logo` : 'Funder logo'}
-                      width={150}
-                      height={80}
-                      sizes="150px"
-                      quality={funderImageIsLossless ? undefined : 90}
-                      unoptimized={funderImageIsLossless}
+                      loading="lazy"
+                      decoding="async"
                     />
                   )}
 
