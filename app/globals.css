@@ -485,13 +485,6 @@ h4 {
   color: var(--oxford-aqua);
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  margin-top: 1.4rem;
-}
-
 .button {
   min-height: 40px;
   display: inline-flex;
@@ -741,7 +734,6 @@ h4 {
 }
 
 /* Publications */
-
 
 .publication-filters {
   display: grid;
@@ -1446,7 +1438,6 @@ h4 {
   margin-bottom: 0.9rem;
 }
 
-
 .publication-list {
   display: grid;
   gap: 0.8rem;
@@ -1622,12 +1613,6 @@ h4 {
   font-size: 0.95rem;
 }
 
-.publication-date {
-  color: var(--oxford-ash);
-  font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.82rem;
-}
-
 .abstract-section {
   margin-top: 2.4rem;
   padding-top: 1.6rem;
@@ -1648,9 +1633,6 @@ h4 {
 .abstract-section > .research-markdown-rendered {
   margin-top: 0.75rem;
 }
-
-
-
 
 .publication-detail-meta {
   display: flex;
@@ -1841,66 +1823,10 @@ h4 {
   line-height: 1.5;
 }
 
-
 /* Featured project carousel */
 
 .featured-projects-section {
   background: var(--paper);
-}
-
-.featured-projects-carousel {
-  position: relative;
-}
-
-.carousel-controls {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.4rem;
-  margin: -0.2rem 0 0.65rem;
-}
-
-.carousel-controls button {
-  width: 34px;
-  height: 34px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--oxford-stone);
-  border-radius: 50%;
-  background: var(--paper);
-  color: var(--oxford-blue);
-  cursor: pointer;
-}
-
-.carousel-controls button:hover,
-.carousel-controls button:focus-visible {
-  border-color: rgba(254, 97, 90, 0.55);
-  background: var(--oxford-blue-wash);
-  color: var(--oxford-coral-text);
-}
-
-.carousel-controls svg {
-  width: 0.72rem;
-}
-
-.featured-projects-track {
-  display: flex;
-  gap: 0.9rem;
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  scroll-behavior: smooth;
-  scroll-snap-type: inline mandatory;
-  scrollbar-width: thin;
-  padding: 0.1rem 0 0.55rem;
-}
-
-.featured-project-slide {
-  flex: 0 0 min(560px, calc(100vw - 3rem));
-  scroll-snap-align: start;
-}
-
-.featured-project-slide .project-card {
-  height: 100%;
 }
 
 /* Presentation roadmap */
@@ -2290,7 +2216,6 @@ h4 {
 
 /* Projects */
 
-
 .projects-page-heading {
   max-width: 760px;
 }
@@ -2374,15 +2299,6 @@ h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.project-card-map-visual {
-  align-items: stretch;
-  padding: 0.45rem;
-}
-
-.project-card-map-visual .academic-world-map {
-  align-self: center;
 }
 
 .project-detail-map {
@@ -2847,7 +2763,6 @@ h4 {
   margin-top: 1rem;
 }
 
-
 .conference-stat-card {
   display: flex;
   align-items: center;
@@ -3004,28 +2919,6 @@ h4 {
 
 .conference-table-note .conference-keynote-icon {
   margin-left: 0;
-}
-
-.conference-table-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--oxford-stone);
-  border-radius: 50%;
-  color: var(--oxford-coral-text);
-  text-decoration: none;
-}
-
-.conference-table-link:hover,
-.conference-table-link:focus-visible {
-  border-color: rgba(254, 97, 90, 0.55);
-  background: var(--oxford-blue-wash);
-}
-
-.conference-table-link svg {
-  width: 0.7rem;
 }
 
 .conference-pagination {
@@ -3918,7 +3811,6 @@ h4 {
   font-weight: 500;
 }
 
-
 /* Software Ecosystem */
 
 .software-page-heading .page-lead {
@@ -4348,10 +4240,6 @@ h4 {
     flex-direction: column;
   }
 
-  .featured-project-slide {
-    flex-basis: min(500px, calc(100vw - 2rem));
-  }
-
   .population-metrics-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4520,10 +4408,6 @@ h4 {
     min-height: 185px;
   }
 
-  .featured-project-slide {
-    flex-basis: calc(100vw - 2rem);
-  }
-
   .roadmap-label {
     width: 136px;
     font-size: 0.7rem;
@@ -4636,7 +4520,6 @@ h4 {
     justify-self: start;
   }
 }
-
 
 /* Academic trajectory */
 
@@ -4877,7 +4760,6 @@ h4 {
   color: var(--oxford-blue);
 }
 
-
 .trajectory-status-swatch {
   width: 1rem;
   height: 0.34rem;
@@ -4923,7 +4805,6 @@ h4 {
   }
 }
 
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -4938,7 +4819,6 @@ h4 {
     transition-duration: 0.01ms !important;
   }
 }
-
 
 /* Selected paintings */
 

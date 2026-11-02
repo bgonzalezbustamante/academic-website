@@ -284,13 +284,6 @@ export function yearsForTimelineWindow(
   return Array.from(years).sort((left, right) => left - right)
 }
 
-export function yearsForCurrentWeek(
-  now = new Date(),
-  timeZone = 'Europe/Amsterdam'
-) {
-  return yearsForTimelineWindow(now, timeZone, 0, 0)
-}
-
 export function yearsForWorkAnalyticsWindow(
   now = new Date(),
   timeZone = 'Europe/Amsterdam',
@@ -305,13 +298,6 @@ export function yearsForWorkAnalyticsWindow(
     pastWeeks,
     futureWeeks
   ).filter((year) => year >= 2000 && year <= latestApiYear)
-}
-
-export function yearsForWorkAnalytics(
-  now = new Date(),
-  timeZone = 'Europe/Amsterdam'
-) {
-  return yearsForWorkAnalyticsWindow(now, timeZone, 0, 0)
 }
 
 export function buildTimelineWeeks({

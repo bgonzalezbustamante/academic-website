@@ -43,6 +43,13 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - Added a headers-only root `netlify.toml` that serves the content-hashed images under `/{profile,paintings,branding,logos,projects,publication-highlights}/generated/` with `Cache-Control: public, max-age=31536000, immutable`. Netlify serves `public/` files directly, so `next.config.ts` headers never reached them and they were revalidated on every visit. Build settings remain in the Netlify UI.
 
+### Clean-up
+
+- Removed the unused `FeaturedProjectsCarousel` component and its styles, plus other `app/globals.css` rules whose classes no longer appear anywhere (`.hero-actions`, `.publication-date`, `.project-card-map-visual`, `.conference-table-link`): 17 rules.
+- Removed 56 rules carried over from the standalone Weekly Penguin Timeline that this site never renders (state tester, state matrix, special-state gallery, notes grid and release pagination) from `app/weekly-timeline/weekly-timeline.css`.
+- Removed the unused `WORK_BUCKETS` and `COFFEE_BUCKETS` constants and the `yearsForCurrentWeek` and `yearsForWorkAnalytics` helpers from `lib/weekly-timeline/`.
+- Removed the `images` block from `next.config.ts`: no image requests a non-default `quality`, and the Weekly timeline penguins are `unoptimized`, so `qualities` and the `timeline.bgonzalezbustamante.com` `remotePatterns` entry were unused.
+
 ### Notices
 
 - Added `NOTICE` sections for the flag-icons SVG flags in `public/flags` (MIT, with its copyright and permission notice), the world-atlas/Natural Earth map data including the derived `public/data/europe-map-50m.json` (ISC, with its notice) and the TERGAP snapshot `public/data/tergap-map.json`. The Weekly Penguin Timeline section now covers the 404 illustration, which is part of the same CC BY-NC 4.0 artwork and is kept at `assets/sources/errors/404_penguin.png`.
