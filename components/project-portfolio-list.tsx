@@ -2,13 +2,14 @@
 
 import { useRef, useState } from 'react'
 
-import ProjectCard from '@/components/project-card'
-import type { PublicProject } from '@/types/public'
+import ProjectCard, {
+  type ProjectCardData,
+} from '@/components/project-card'
 
 const PAGE_SIZE = 6
 
 type Props = {
-  projects: PublicProject[]
+  projects: ProjectCardData[]
   hasFeatured: boolean
 }
 

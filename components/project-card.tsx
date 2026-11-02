@@ -5,12 +5,48 @@ import Link from 'next/link'
 import ProjectCardVisual from '@/components/project-card-visual'
 import type { PublicProject } from '@/types/public'
 
-type Props = {
+// Only the fields a card renders, so client lists don't receive whole records.
+export type ProjectCardData = Pick<
+  PublicProject,
+  | 'slug'
+  | 'short_title'
+  | 'title'
+  | 'funder'
+  | 'url'
+  | 'start_year'
+  | 'end_year'
+  | 'status'
+  | 'featured'
+  | 'project_image_filename'
+  | 'funder_image_filename'
+>
+
+export function toProjectCardData(
   project: PublicProject
+): ProjectCardData {
+  return {
+    slug: project.slug,
+    short_title: project.short_title,
+    title: project.title,
+    funder: project.funder,
+    url: project.url,
+    start_year: project.start_year,
+    end_year: project.end_year,
+    status: project.status,
+    featured: project.featured,
+    project_image_filename: project.project_image_filename,
+    funder_image_filename: project.funder_image_filename,
+  }
+}
+
+type Props = {
+  project: ProjectCardData
   featured?: boolean
 }
 
-export function formatProjectYears(project: PublicProject) {
+export function formatProjectYears(
+  project: Pick<PublicProject, 'start_year' | 'end_year'>
+) {
   const { start_year: start, end_year: end } = project
 
   if (start && end) {

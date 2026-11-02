@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 
-import ProjectCard from '@/components/project-card'
+import ProjectCard, {
+  toProjectCardData,
+} from '@/components/project-card'
 import ProjectPortfolioList from '@/components/project-portfolio-list'
 import SectionPopulationProgress from '@/components/section-population-progress'
 import {
@@ -96,7 +98,7 @@ export default async function ProjectsPage() {
 
             {remaining.length > 0 && (
               <ProjectPortfolioList
-                projects={remaining}
+                projects={remaining.map(toProjectCardData)}
                 hasFeatured={featured.length > 0}
               />
             )}
