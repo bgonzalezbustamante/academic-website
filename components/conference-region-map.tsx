@@ -54,7 +54,7 @@ export default function ConferenceRegionMap({
         countries={countries}
         view={view}
         geography={view === 'world' ? undefined : DETAILED_MAP}
-        mapHeight={view === 'america' ? 560 : 430}
+        mapHeight={view === 'america' ? 680 : 430}
         ariaLabel={`${selected.label} map showing conference presentations by country across all years`}
         valueLabel="presentations"
         singularValueLabel="presentation"

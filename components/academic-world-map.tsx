@@ -50,7 +50,7 @@ const MAP_PROJECTIONS: Record<
   world: { scale: 150 },
   africa: { center: [15, 5], scale: 245 },
   europe: { center: [12, 51], scale: 500 },
-  america: { center: [-72, 5], scale: 230 },
+  america: { center: [-95, 5], scale: 275 },
 }
 
 const MAP_PALETTES: Record<
