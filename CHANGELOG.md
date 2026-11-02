@@ -43,6 +43,10 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - Added a headers-only root `netlify.toml` that serves the content-hashed images under `/{profile,paintings,branding,logos,projects,publication-highlights}/generated/` with `Cache-Control: public, max-age=31536000, immutable`. Netlify serves `public/` files directly, so `next.config.ts` headers never reached them and they were revalidated on every visit. Build settings remain in the Netlify UI.
 
+### Notices
+
+- Added `NOTICE` sections for the flag-icons SVG flags in `public/flags` (MIT, with its copyright and permission notice), the world-atlas/Natural Earth map data including the derived `public/data/europe-map-50m.json` (ISC, with its notice) and the TERGAP snapshot `public/data/tergap-map.json`. The Weekly Penguin Timeline section now covers the 404 illustration, which is part of the same CC BY-NC 4.0 artwork and is kept at `assets/sources/errors/404_penguin.png`.
+
 ### Legacy website
 
 - Retired the pre-v6 deployment at `legacy-bgonzalezbustamante.netlify.app`: it now redirects every path permanently (301) to the same path on `https://bgonzalezbustamante.com`, so it is no longer indexable as a duplicate site and no longer loads Google Analytics. The change lives in the archived `academic-kickstart` repository; this repository's README and ARCHITECTURE were updated accordingly.
