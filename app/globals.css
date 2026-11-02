@@ -10,6 +10,8 @@
   --oxford-cool-grey: #e4f0ef;
   --oxford-sky-blue: #b9d6f2;
   --oxford-coral: #fe615a;
+  /* Coral for text: #fe615a is 2.97:1 on white, below WCAG AA 4.5:1. */
+  --oxford-coral-text: #b8322c;
   --oxford-aqua: #00aab4;
   --paper: #ffffff;
   --max-width: 1120px;
@@ -52,7 +54,7 @@ a {
 }
 
 a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 :where(
@@ -206,7 +208,7 @@ main {
 .nav-list a:hover,
 .nav-list a:focus-visible {
   background: rgba(254, 97, 90, 0.1);
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .nav-list a[aria-current='page'],
@@ -230,7 +232,7 @@ h4 {
 .eyebrow,
 .kicker {
   margin: 0 0 0.65rem;
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
@@ -369,7 +371,7 @@ h4 {
 }
 
 .position-line a:not(.position-logo-link):hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .inline-external-icon {
@@ -406,7 +408,7 @@ h4 {
 }
 
 .bio-copy a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .bio-external-icon {
@@ -568,7 +570,7 @@ h4 {
 }
 
 .section-link span {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .page-section h1 {
@@ -794,7 +796,7 @@ h4 {
 .publication-filter-reset:hover {
   border-color: rgba(254, 97, 90, 0.55);
   background: var(--oxford-blue-wash);
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .publication-filter-links {
@@ -825,7 +827,7 @@ h4 {
 }
 
 .publication-filter-link:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .publication-profile-page-heading .page-lead {
@@ -1165,7 +1167,7 @@ h4 {
 }
 
 .publication-profile-citation-row a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .publication-profile-citation-row small {
@@ -1407,7 +1409,7 @@ h4 {
 }
 
 .publication-citation .citation-bold {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
   font-weight: 700;
 }
 
@@ -1475,7 +1477,7 @@ h4 {
 }
 
 .publication-card h2 a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .metadata-tags {
@@ -1874,7 +1876,7 @@ h4 {
 .carousel-controls button:focus-visible {
   border-color: rgba(254, 97, 90, 0.55);
   background: var(--oxford-blue-wash);
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .carousel-controls svg {
@@ -1941,7 +1943,7 @@ h4 {
 }
 
 .roadmap-full-note a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .roadmap-scroll {
@@ -2430,7 +2432,7 @@ h4 {
 }
 
 .project-card h2 a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .project-funder {
@@ -2825,7 +2827,7 @@ h4 {
 
 .conference-map-region-controls button:hover {
   border-color: var(--oxford-coral);
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .conference-map-region-controls button:focus-visible {
@@ -2975,7 +2977,7 @@ h4 {
 
 .conference-presentation-title-link:hover,
 .conference-presentation-title-link:focus-visible {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .conference-presentation-title-link .inline-external-icon {
@@ -3012,7 +3014,7 @@ h4 {
   height: 28px;
   border: 1px solid var(--oxford-stone);
   border-radius: 50%;
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
   text-decoration: none;
 }
 
@@ -3062,7 +3064,7 @@ h4 {
 .conference-pagination-controls button:focus-visible:not(:disabled) {
   border-color: rgba(254, 97, 90, 0.55);
   background: var(--oxford-blue-wash);
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .conference-pagination-controls button:disabled {
@@ -3106,7 +3108,7 @@ h4 {
 .publication-pagination-controls button:focus-visible:not(:disabled) {
   border-color: rgba(254, 97, 90, 0.55);
   background: var(--oxford-blue-wash);
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .publication-pagination-controls button:disabled {
@@ -3200,7 +3202,7 @@ h4 {
 
 .population-metric-heading strong {
   flex: 0 0 auto;
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
   font-family: var(--font-noto-serif), Georgia, serif;
   font-size: 1.1rem;
   font-weight: 700;
@@ -3452,7 +3454,7 @@ h4 {
 }
 
 .practice-card:hover .practice-link {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .practice-page {
@@ -4137,7 +4139,7 @@ h4 {
 }
 
 .footer-calendar-link:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .footer-calendar-date {
@@ -4200,7 +4202,7 @@ h4 {
 }
 
 .footer-carbon-note:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .footer-meta {
@@ -4666,7 +4668,7 @@ h4 {
 }
 
 .bio-profile-link:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .trajectory-page-heading .page-lead {
@@ -4805,7 +4807,7 @@ h4 {
 }
 
 .trajectory-role-ongoing small {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
   font-weight: 650;
 }
 
@@ -4960,7 +4962,7 @@ h4 {
 }
 
 .profile-personal-link:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .paintings-page-heading .page-lead {
@@ -5076,7 +5078,7 @@ h4 {
 }
 
 .painting-copy h2 a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .painting-byline {
@@ -5117,7 +5119,7 @@ h4 {
 }
 
 .painting-rights a:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 .painting-rights-note {
@@ -5191,7 +5193,7 @@ h4 {
 }
 
 .painting-unreproduced-link:hover {
-  color: var(--oxford-coral);
+  color: var(--oxford-coral-text);
 }
 
 @media (max-width: 760px) {

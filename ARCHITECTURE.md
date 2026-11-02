@@ -174,7 +174,7 @@ The public site deliberately shares a visual family with Research Dashboard whil
 - Noto Serif is used for longer editorial/body text.
 - Oxford blue (`#002147`) is the primary structural colour.
 - Research Dashboard charcoal, ash, stone, off-white, cool-grey and sky-blue tokens provide the neutral surface system.
-- Oxford coral (`#FE615A`) is the main secondary accent for links, rules and emphasis.
+- Oxford coral (`#FE615A`) is the main secondary accent for rules, underlines, icons and emphasis. Wherever coral colours text (small labels, link and navigation hover, highlighted citations), the darker text coral `--oxford-coral-text` (`#B8322C`, 5.95:1 on white) is used instead, because `#FE615A` is only 2.97:1 and fails WCAG AA for text.
 - Oxford aqua (`#00AAB4`) is deliberately limited to small interactive states.
 - A washed Oxford-blue surface (`#edf2f7`) provides supporting backgrounds without competing with the primary blue/coral identity.
 - Locally bundled Font Awesome provides interface, brand and scholarly-profile icons; no external icon stylesheet/font is required at runtime.

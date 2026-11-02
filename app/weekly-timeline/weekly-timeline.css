@@ -13,6 +13,7 @@
   --cool-grey: #e4f0ef;
   --sky: #b9d6f2;
   --coral: #fe615a;
+  --coral-text: #b8322c;
   --aqua: #00aab4;
   --paper: #ffffff;
   color: var(--charcoal);
@@ -222,7 +223,7 @@
   border-radius: 999px;
   background: rgba(254, 97, 90, 0.09);
   padding: 0.18rem 0.4rem;
-  color: var(--coral);
+  color: var(--coral-text);
   font-size: 0.64rem;
   font-weight: 700;
 }
@@ -324,7 +325,7 @@
   border-radius: 999px;
   background: rgba(254, 97, 90, 0.09);
   padding: 0.18rem 0.38rem;
-  color: var(--coral);
+  color: var(--coral-text);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.65rem;
   font-weight: 700;
@@ -486,7 +487,7 @@
 }
 
 .data-error strong {
-  color: var(--coral);
+  color: var(--coral-text);
   font-family: var(--font-roboto), Arial, sans-serif;
 }
 

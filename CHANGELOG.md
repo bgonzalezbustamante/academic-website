@@ -14,6 +14,7 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 ### Accessibility
 
+- Added a text-safe coral token, `--oxford-coral-text` (`#B8322C`, 5.95:1 on white and about 5.3:1 on the off-white page background), and applied it to every rule where coral colours text: eyebrow and kicker labels, link, navigation and card-title hovers, highlighted citation names, pagination and map-selector hover, footer link hovers and the Weekly timeline chips. Bright Oxford coral (`#FE615A`, 2.97:1) remains for icons, list markers, underlines, borders and backgrounds.
 - Restored the visible keyboard focus ring on the Weekly timeline week navigation, page and jump buttons. Their `:focus-visible` rules set `outline: none`, which overrode the site-wide coral focus outline and left only a low-contrast aqua border; the border remains as an additional cue.
 
 ### Image uploads
