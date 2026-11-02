@@ -17,6 +17,7 @@ export default function ProjectPortfolioList({
   hasFeatured,
 }: Props) {
   const [page, setPage] = useState(1)
+  const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
 
   const totalPages = Math.max(1, Math.ceil(projects.length / PAGE_SIZE))
@@ -30,8 +31,23 @@ export default function ProjectPortfolioList({
 
     setPage(Math.max(1, Math.min(destination, totalPages)))
     window.requestAnimationFrame(() => {
+      const section = sectionRef.current
+      if (section) {
+        // Offset by the sticky header, which is taller when it wraps on mobile.
+        const headerHeight =
+          document
+            .querySelector('.site-header')
+            ?.getBoundingClientRect().height ?? 0
+        const top =
+          section.getBoundingClientRect().top +
+          window.scrollY -
+          headerHeight -
+          16
+
+        window.scrollTo({ top: Math.max(0, top) })
+      }
+
       headingRef.current?.focus({ preventScroll: true })
-      headingRef.current?.scrollIntoView({ block: 'start' })
     })
   }
 
@@ -88,7 +104,11 @@ export default function ProjectPortfolioList({
   }
 
   return (
-    <section className="project-group" aria-labelledby="project-portfolio-heading">
+    <section
+      ref={sectionRef}
+      className="project-group"
+      aria-labelledby="project-portfolio-heading"
+    >
       <div className="section-heading compact-heading">
         <div>
           <p className="eyebrow">
