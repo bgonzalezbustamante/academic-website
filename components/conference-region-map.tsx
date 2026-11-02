@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import detailedWorldMap from 'world-atlas/countries-50m.json'
 
 import AcademicWorldMap, {
   type GeographyData,
   type WorldMapCountry,
 } from '@/components/academic-world-map'
+import europeMap from '@/public/data/europe-map-50m.json'
 
 const MAP_VIEWS = [
   { value: 'europe', label: 'Europe' },
@@ -15,8 +15,9 @@ const MAP_VIEWS = [
 
 type ConferenceMapView = (typeof MAP_VIEWS)[number]['value']
 
-// Keep the original 110m atlas for World; use finer 50m borders for Europe.
-const DETAILED_MAP = detailedWorldMap as unknown as GeographyData
+// Keep the original 110m atlas for World; use finer 50m borders for Europe,
+// trimmed to the Europe viewport by scripts/build-europe-map.mjs.
+const DETAILED_MAP = europeMap as unknown as GeographyData
 
 export default function ConferenceRegionMap({
   countries,
