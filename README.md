@@ -4,7 +4,9 @@ Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.co
 
 Current release: **v6.0.0 "Crimson Delta"** (2 Nov 2026), the first stable v6 release; previous release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
-The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
+**In development:** v6.1.0 "Jade Prairie", planned for 1 Dec 2026. Release Notes show it as **In development**; `package.json`, the footer and the **Current release** designation stay at v6.0.0 until its approved release.
+
+The pre-v6 Hugo/Wowchemy implementation was retired on 2 Nov 2026: `legacy-bgonzalezbustamante.netlify.app` now redirects every path permanently to the same path on this site, and the archived `academic-kickstart` repository keeps its source. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
 ## Architecture
 
@@ -155,7 +157,7 @@ Only approved, validated changes are merged into `main`, which deploys to the Ne
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, quality hardening, legacy redirect verification, SEO verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and `bgonzalezbustamante.netlify.app` redirects permanently to the corresponding canonical `.com` path.
 
-The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` for rollback and can be archived after the post-migration observation period.
+The predecessor deployment at `legacy-bgonzalezbustamante.netlify.app` was retired on 2 Nov 2026 with a permanent redirect of every path to the same path on `https://bgonzalezbustamante.com`; its Netlify deploy is locked and the `academic-kickstart` repository is archived.
 
 ### Repository visibility
 

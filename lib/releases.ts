@@ -15,6 +15,23 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
+    version: 'v6.1.0',
+    codename: 'Jade Prairie',
+    status: 'In development',
+    releasedOn: 'In development',
+    comparison: 'Next minor release in preparation',
+    summary:
+      'Jade Prairie is a set of improvements to accessibility, search visibility and loading speed.',
+    sections: [
+      {
+        title: 'Small refinements',
+        items: [
+          'Retired the old version of the website, which now forwards visitors to this one.',
+        ],
+      },
+    ],
+  },
+  {
     version: 'v6.0.0',
     codename: 'Crimson Delta',
     status: 'Current release',

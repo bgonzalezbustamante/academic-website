@@ -1,6 +1,6 @@
 # Architecture
 
-This repository is the Next.js production implementation of [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and the continuation of the academic website previously implemented in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart). The predecessor is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy.
+This repository is the Next.js production implementation of [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and the continuation of the academic website previously implemented in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart). The predecessor deployment at `legacy-bgonzalezbustamante.netlify.app` was retired on 2 Nov 2026 and now redirects permanently to this site.
 
 The full pre-v6 history is retained in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md). This repository starts a fresh changelog at v6.0.0-rc.1 "Swift Harbour".
 
@@ -249,10 +249,9 @@ Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, SEO/accessibility/security/performance hardening, exact legacy-redirect verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and the default production Netlify hostname redirects permanently to the equivalent canonical `.com` path.
 
-The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy.
+The predecessor deployment at `legacy-bgonzalezbustamante.netlify.app` was retired on 2 Nov 2026: a locked Netlify deploy redirects every path permanently (301) to the same path on this site, and the `academic-kickstart` repository is archived.
 
 ## Deferred work
 
 - Continue population and reconciliation of historical publication, project, conference and teaching records as required.
 - Add remaining profile/service/CV material only when it has a clear place in the current information architecture.
-- Archive the legacy Netlify project and predecessor repository after the post-migration observation period and once rollback is no longer required.

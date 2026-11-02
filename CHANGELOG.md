@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Unreleased — v6.1.0 "Jade Prairie"
+
+Jade Prairie is in development for release on 1 Dec 2026. The website continues to identify v6.0.0 "Crimson Delta" as its current release until then.
+
+### Legacy website
+
+- Retired the pre-v6 deployment at `legacy-bgonzalezbustamante.netlify.app`: it now redirects every path permanently (301) to the same path on `https://bgonzalezbustamante.com`, so it is no longer indexable as a duplicate site and no longer loads Google Analytics. The change lives in the archived `academic-kickstart` repository; this repository's README and ARCHITECTURE were updated accordingly.
+
 ## v6.0.0 "Crimson Delta" (2 Nov 2026)
 
 Crimson Delta is the first stable v6 release. It refines navigation, the Catholic Calendar footer, project browsing, the conference map and the Weekly timeline, and compiles project, publication and logo images into responsive WebP. Some security and public-API compatibility fixes were deployed independently during stabilisation.
