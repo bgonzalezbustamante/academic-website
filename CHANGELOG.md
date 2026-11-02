@@ -4,6 +4,10 @@
 
 Jade Prairie is in development for release on 1 Dec 2026. The website continues to identify v6.0.0 "Crimson Delta" as its current release until then.
 
+### Freshness
+
+- Added daily revalidation (`revalidate = 86400`) to `/trajectory`, `/credit`, `/dora`, `/paintings` and `/release-notes`. These pages were fully static, so the footer copyright year and the current-year logic on Academic trajectory would only have changed on the next deploy after New Year.
+
 ### Legacy website
 
 - Retired the pre-v6 deployment at `legacy-bgonzalezbustamante.netlify.app`: it now redirects every path permanently (301) to the same path on `https://bgonzalezbustamante.com`, so it is no longer indexable as a duplicate site and no longer loads Google Analytics. The change lives in the archived `academic-kickstart` repository; this repository's README and ARCHITECTURE were updated accordingly.

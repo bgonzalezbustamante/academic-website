@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   },
 }
 
+export const revalidate = 86400
+
 const roles = [
   {
     badge: 'conceptualization.png',
