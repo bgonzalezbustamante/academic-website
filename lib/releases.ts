@@ -26,7 +26,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Small refinements',
         items: [
-          'Made project lists easier to browse and added regional views to the conference map.',
+          'Made project lists easier to browse and added a closer view of Europe to the conference map.',
           'Added dates to the Catholic Calendar footer and improved its mobile layout.',
           'Improved the fit of longer working-time labels in the Weekly timeline.',
           'Restored project and conference displays for guest lectures, and added Dataset to publication filters.',

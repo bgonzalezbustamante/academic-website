@@ -19,7 +19,7 @@ export type WorldMapCountry = {
 }
 
 type MapPalette = 'tergap' | 'conference'
-type MapView = 'world' | 'africa' | 'europe' | 'america'
+type MapView = 'world' | 'africa' | 'europe'
 
 type Props = {
   countries: WorldMapCountry[]
@@ -42,15 +42,14 @@ type HoveredCountry = {
 
 const WORLD_MAP = worldMap as unknown as GeographyData
 
-// Preserve the established TERGAP projection while offering conference-only regional views.
+// Keep the original World and TERGAP projections, with a closer Europe-only view.
 const MAP_PROJECTIONS: Record<
   MapView,
   { scale: number; center?: [number, number] }
 > = {
   world: { scale: 150 },
   africa: { center: [15, 5], scale: 245 },
-  europe: { center: [12, 51], scale: 500 },
-  america: { center: [-95, 5], scale: 275 },
+  europe: { center: [10, 51], scale: 700 },
 }
 
 const MAP_PALETTES: Record<
@@ -234,8 +233,8 @@ export default function AcademicWorldMap({
                           )
                     }
                     stroke={mapPalette.border}
-                    strokeWidth={view === 'world' || view === 'africa' ? 0.55 : 0.4}
-                    strokeLinejoin={view === 'europe' || view === 'america' ? 'round' : undefined}
+                    strokeWidth={view === 'europe' ? 0.4 : 0.55}
+                    strokeLinejoin={view === 'europe' ? 'round' : undefined}
                     tabIndex={datum && !compact ? 0 : -1}
                     aria-label={
                       datum && !compact
