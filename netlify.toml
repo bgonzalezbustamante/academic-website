@@ -32,3 +32,8 @@
   for = "/publication-highlights/generated/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/errors/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -19,6 +19,7 @@
 /public/projects/generated/
 /public/publication-highlights/generated/
 /public/logos/generated/
+/public/errors/generated/
 /content/image-assets.generated.ts
 
 # misc

@@ -30,6 +30,7 @@ export const releases: ReleaseNote[] = [
           'Made keyboard focus easier to see in the Weekly timeline.',
           'Made small coral labels and link highlights easier to read.',
           'Made the browser tab icon much lighter to download.',
+          'Made the page-not-found illustration much faster to load.',
           'Applied routine software maintenance updates.',
         ],
       },

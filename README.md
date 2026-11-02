@@ -106,6 +106,8 @@ Run `npm run assets:build` to create content-hashed WebP files under `public/{pr
 
 The navbar and Home positions list use these generated institutional logo assets.
 
+The 404 page illustration is compiled the same way from `assets/sources/errors/404_penguin.png` (the 4096px original) into WebP at 320, 480, 640 and 960px under `public/errors/generated/`, losslessly where that is not much heavier than quality 95, and with its transparent background verified.
+
 The favicon, `app/icon.png`, is a committed 192 × 192px palette PNG (about 19 KB) derived from `assets/sources/logos/leiden.png`; 192px is a multiple of 48px, as Google Search asks for favicons. Regenerate it from that source if the seal changes.
 
 ### Project, publication and logo images

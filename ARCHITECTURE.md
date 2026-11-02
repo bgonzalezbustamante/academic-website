@@ -61,7 +61,7 @@ The non-navigation `/weekly-timeline` route integrates the seven-day `WeeklyPeng
 
 ### Static raster image pipeline
 
-`scripts/build-images.mjs` is the only generator for the website's raster images. It reads `assets/sources/profile/avatar.png`, the nine slug-matched `assets/sources/paintings/*.jpg` files and `assets/sources/branding/{leiden,udp,ocpsg}.png`, plus the Dashboard-referenced figures and logos described below. The pre-development, pre-check and pre-build scripts run it automatically. An explicit direct run is available as `npm run assets:build`.
+`scripts/build-images.mjs` is the only generator for the website's raster images. It reads `assets/sources/profile/avatar.png`, the nine slug-matched `assets/sources/paintings/*.jpg` files, `assets/sources/branding/{leiden,udp,ocpsg}.png` and the 404 illustration `assets/sources/errors/404_penguin.png` (responsive WebP at 320–960px for its 480px slot), plus the Dashboard-referenced figures and logos described below. The pre-development, pre-check and pre-build scripts run it automatically. An explicit direct run is available as `npm run assets:build`.
 
 The output contains content-hashed `.webp` files under `public/{profile,paintings,branding}/generated/` and an ignored `content/image-assets.generated.ts` manifest with the public URLs. The generated directories are rebuilt from scratch; old files never accumulate. The portrait preserves the full source aspect ratio and is resized without upscaling to fit 660px, at quality 95. The nine paintings receive distinct responsive widths up to 1800px, also at quality 95. Branding is resized without upscaling to fit 168px and encoded losslessly. Source originals are not published under `public/`.
 

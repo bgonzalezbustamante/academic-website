@@ -1,7 +1,11 @@
-import Image from 'next/image'
+/* eslint-disable @next/next/no-img-element -- The illustration is WebP generated locally by scripts/build-images.mjs; Next.js image optimisation would re-encode it. */
 import Link from 'next/link'
 
+import { imageAssets } from '@/content/image-assets.generated'
+
 export default function NotFound() {
+  const illustration = imageAssets.errors.notFound
+
   return (
     <section className="page-section not-found-section">
       <div className="site-shell not-found-layout">
@@ -17,14 +21,15 @@ export default function NotFound() {
         </div>
 
         <div className="not-found-illustration">
-          <Image
-            src="/errors/404_penguin.svg"
+          <img
+            src={illustration.src}
+            srcSet={illustration.srcSet}
+            sizes="(max-width: 560px) 78vw, (max-width: 760px) 72vw, 480px"
+            width={illustration.width}
+            height={illustration.height}
             alt="Penguin reading beside a stack of books"
-            width={1600}
-            height={1600}
-            sizes="(max-width: 760px) 72vw, 44vw"
-            priority
-            unoptimized
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
       </div>
