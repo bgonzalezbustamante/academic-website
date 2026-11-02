@@ -10,6 +10,7 @@ import Link from 'next/link'
 
 import AcademicLinks from '@/components/academic-links'
 import ExternalInlineLink from '@/components/external-inline-link'
+import JsonLd from '@/components/json-ld'
 import PositionList from '@/components/position-list'
 import PresentationRoadmap from '@/components/presentation-roadmap'
 import PublicWorkAnalyticsSection from '@/components/public-work-analytics'
@@ -25,6 +26,7 @@ import {
   listPublicProjects,
   orderPublicProjects,
 } from '@/lib/projects'
+import { getAbsoluteSiteUrl } from '@/lib/site-url'
 import { listPublicTeaching } from '@/lib/teaching'
 import { getPublicWorkAnalytics } from '@/lib/work-analytics'
 export const metadata: Metadata = {
@@ -53,6 +55,22 @@ function getCurrentAmsterdamDateParts() {
     year: Number(value.year),
     date: `${value.year}-${value.month}-${value.day}`,
   }
+}
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteProfile.name,
+  url: getAbsoluteSiteUrl('/'),
+  image: getAbsoluteSiteUrl(imageAssets.profile.src),
+  jobTitle: siteProfile.positions.map((position) => position.role),
+  affiliation: siteProfile.positions.map((position) => ({
+    '@type': 'Organization',
+    name: position.institution,
+    url: position.href,
+  })),
+  knowsAbout: siteProfile.researchAreas,
+  sameAs: Object.values(siteProfile.links),
 }
 
 export default async function HomePage() {
@@ -334,6 +352,7 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+      <JsonLd data={personJsonLd} />
     </>
   )
 }

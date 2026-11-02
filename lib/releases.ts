@@ -31,6 +31,7 @@ export const releases: ReleaseNote[] = [
           'Made small coral labels and link highlights easier to read.',
           'Made the browser tab icon much lighter to download.',
           'Made the page-not-found illustration much faster to load.',
+          'Helped search engines and Google Scholar find and describe every publication, and added a preview card for when the website is shared.',
           'Applied routine software maintenance updates.',
         ],
       },

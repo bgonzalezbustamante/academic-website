@@ -18,6 +18,10 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - Added site-wide Open Graph and Twitter defaults in the root layout (`og:site_name`, `en_GB` locale, `summary_large_image`) and a 1200 × 630 social preview card, `app/opengraph-image.tsx`, generated at build time from the portrait source with the name, research areas and site address. Publication and project pages, which define their own Open Graph data, restate the card explicitly because a page-level `openGraph` replaces the inherited one.
 
+- Added structured data through a small `JsonLd` component: a `Person` on Home (name, portrait, current roles and affiliations, research areas and ORCID, GitHub, Google Scholar and LinkedIn profiles) and a `ScholarlyArticle` on every publication page (title, authors, publication date unless forthcoming, venue, plain-text abstract, language and DOI).
+- Added Google Scholar (Highwire) `citation_*` meta tags to publication pages: title, each author, publication date (`YYYY/MM/DD`, or the year for forthcoming work), venue, DOI, language and the abstract page URL. DOIs are read from `doi_url` or, as is the case for all 35 current DOIs, from `publication_url`.
+- Publication and project meta descriptions now use a plain-text summary of the abstract (`lib/plain-text.ts`) truncated to about 160 characters, instead of the full Markdown/LaTeX abstract.
+
 ### Accessibility
 
 - Added a text-safe coral token, `--oxford-coral-text` (`#B8322C`, 5.95:1 on white and about 5.3:1 on the off-white page background), and applied it to every rule where coral colours text: eyebrow and kicker labels, link, navigation and card-title hovers, highlighted citation names, pagination and map-selector hover, footer link hovers and the Weekly timeline chips. Bright Oxford coral (`#FE615A`, 2.97:1) remains for icons, list markers, underlines, borders and backgrounds.

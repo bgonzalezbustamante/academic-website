@@ -17,6 +17,7 @@ import PublicationCard from '@/components/publication-card'
 import ResearchMarkdownEnhancer from '@/components/research-markdown-enhancer'
 import TergapProjectMap from '@/components/tergap-project-map'
 import { figureImage, logoImage } from '@/lib/local-images'
+import { plainSummary } from '@/lib/plain-text'
 import { listPublicPapers } from '@/lib/publications'
 import { getPublicProject } from '@/lib/projects'
 import type { PublicPaper } from '@/types/public'
@@ -33,8 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!project) return { title: 'Project not found' }
 
-  const description =
-    project.abstract || project.funder || 'Academic research project.'
+  const description = project.abstract
+    ? plainSummary(project.abstract)
+    : project.funder || 'Academic research project.'
 
   return {
     title: project.title,
@@ -46,6 +48,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: project.title,
       description,
       type: 'article',
+      siteName: 'Bastián González-Bustamante',
+      locale: 'en_GB',
+      // A page-level openGraph replaces the inherited one, so restate the default card.
+      images: ['/opengraph-image'],
     },
   }
 }

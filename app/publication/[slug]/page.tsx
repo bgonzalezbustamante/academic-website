@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import JsonLd from '@/components/json-ld'
 import ProjectCard from '@/components/project-card'
 import PublicationKeyHighlight from '@/components/publication-key-highlight'
 import PublicationLanguageFlag from '@/components/publication-language-flag'
@@ -10,12 +11,14 @@ import {
   formatPublicationMonthYear,
   isForthcomingPublicationDate,
 } from '@/lib/publication-dates'
+import { doiFromUrl, plainSummary } from '@/lib/plain-text'
 import { getPublicPaper } from '@/lib/publications'
 import {
   listPublicProjects,
   orderPublicProjects,
 } from '@/lib/projects'
-import type { PublicProject } from '@/types/public'
+import { getAbsoluteSiteUrl } from '@/lib/site-url'
+import type { PublicPaperDetail, PublicProject } from '@/types/public'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -29,8 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!paper) return { title: 'Publication not found' }
 
-  const description =
-    paper.abstract ?? paper.venue ?? 'Academic publication.'
+  const description = paper.abstract
+    ? plainSummary(paper.abstract)
+    : paper.venue ?? 'Academic publication.'
 
   return {
     title: paper.title,
@@ -42,7 +46,69 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: paper.title,
       description,
       type: 'article',
+      siteName: 'Bastián González-Bustamante',
+      locale: 'en_GB',
+      // A page-level openGraph replaces the inherited one, so restate the default card.
+      images: ['/opengraph-image'],
     },
+    other: scholarCitationMeta(paper),
+  }
+}
+
+// Google Scholar reads these Highwire-style tags from publication pages.
+function scholarCitationMeta(paper: PublicPaperDetail) {
+  const meta: Record<string, string | string[]> = {
+    citation_title: paper.title,
+    citation_abstract_html_url: getAbsoluteSiteUrl(
+      `/publication/${paper.slug}`
+    ),
+  }
+  const date = scholarPublicationDate(paper.publication_date)
+  const doi = doiFromUrl(paper.doi_url ?? paper.publication_url)
+
+  if (paper.authors.length > 0) meta.citation_author = paper.authors
+  if (date) meta.citation_publication_date = date
+  if (paper.venue) meta.citation_journal_title = paper.venue
+  if (doi) meta.citation_doi = doi
+  if (paper.language) meta.citation_language = paper.language
+
+  return meta
+}
+
+// Scholar expects YYYY/MM/DD; forthcoming papers give only their year.
+function scholarPublicationDate(date: string | null) {
+  const value = date?.slice(0, 10)
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null
+
+  return isForthcomingPublicationDate(value)
+    ? value.slice(0, 4)
+    : value.replaceAll('-', '/')
+}
+
+function scholarlyArticleJsonLd(paper: PublicPaperDetail) {
+  const url = getAbsoluteSiteUrl(`/publication/${paper.slug}`)
+  const doi = doiFromUrl(paper.doi_url ?? paper.publication_url)
+  const date = paper.publication_date?.slice(0, 10)
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ScholarlyArticle',
+    '@id': url,
+    url,
+    headline: paper.title,
+    name: paper.title,
+    author: paper.authors.map((name) => ({ '@type': 'Person', name })),
+    ...(date && !isForthcomingPublicationDate(date)
+      ? { datePublished: date }
+      : {}),
+    ...(paper.venue
+      ? { isPartOf: { '@type': 'Periodical', name: paper.venue } }
+      : {}),
+    ...(paper.abstract
+      ? { abstract: plainSummary(paper.abstract, 5000) }
+      : {}),
+    ...(paper.language ? { inLanguage: paper.language } : {}),
+    ...(doi ? { sameAs: `https://doi.org/${doi}` } : {}),
   }
 }
 
@@ -140,6 +206,7 @@ export default async function PublicationPage({ params }: Props) {
 
         <ResearchMarkdownEnhancer />
       </div>
+      <JsonLd data={scholarlyArticleJsonLd(paper)} />
     </article>
   )
 }
