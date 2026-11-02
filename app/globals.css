@@ -4117,21 +4117,17 @@ h4 {
   min-height: 1.25rem;
   display: flex;
   align-items: center;
-  overflow-x: auto;
   justify-self: end;
-  scrollbar-width: none;
 }
 
-.footer-calendar-row::-webkit-scrollbar {
-  display: none;
-}
-
+/* Wrap between the date and observance groups rather than clipping them. */
 .footer-calendar-link {
-  width: max-content;
+  max-width: 100%;
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.42rem;
+  gap: 0.2rem 0.42rem;
   color: var(--oxford-ash);
   font-size: inherit;
   font-weight: 400;

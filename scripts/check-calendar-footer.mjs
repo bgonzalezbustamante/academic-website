@@ -9,6 +9,8 @@ import {
 import ts from 'typescript'
 
 const MAX_COMPOSED_DISPLAY_CHARACTERS = 85
+// The composed display plus the longest date prefix, "16 Sept 2026 · ".
+const MAX_VISIBLE_FOOTER_CHARACTERS = 100
 
 const formatterSource = readFileSync(
   new URL('../lib/calendar-footer-date.ts', import.meta.url),
@@ -78,6 +80,13 @@ for (const fixture of FIXTURES) {
     `Footer display exceeds the reviewed ${MAX_COMPOSED_DISPLAY_CHARACTERS}-character width envelope on ${fixture.date}.`
   )
 
+  const visibleText = `${formatFooterCalendarDate(fixture.date)} · ${display.text}`
+
+  assert.ok(
+    visibleText.length <= MAX_VISIBLE_FOOTER_CHARACTERS,
+    `Dated footer display exceeds the reviewed ${MAX_VISIBLE_FOOTER_CHARACTERS}-character width envelope on ${fixture.date}.`
+  )
+
   assert.ok(
     display.items.length <= 2,
     `Composed display exceeded two items on ${fixture.date}.`
@@ -89,6 +98,6 @@ for (const fixture of FIXTURES) {
   }
 
   console.log(
-    `✓ Catholic footer calendar: ${formatFooterCalendarDate(fixture.date)} · ${display.text}`
+    `✓ Catholic footer calendar (${visibleText.length} chars): ${visibleText}`
   )
 }
