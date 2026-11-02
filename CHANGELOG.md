@@ -12,6 +12,10 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - Added daily revalidation (`revalidate = 86400`) to `/trajectory`, `/credit`, `/dora`, `/paintings` and `/release-notes`. These pages were fully static, so the footer copyright year and the current-year logic on Academic trajectory would only have changed on the next deploy after New Year.
 
+### Search visibility
+
+- `/publications` now renders every filtered publication card on the server and hides those outside the current page with the HTML `hidden` attribute, so all publication detail links are present in the HTML. Previously only the first 10 were, because pagination is client-side and uses buttons; the other pages were reachable only through the sitemap. The visible layout and pagination are unchanged.
+
 ### Accessibility
 
 - Added a text-safe coral token, `--oxford-coral-text` (`#B8322C`, 5.95:1 on white and about 5.3:1 on the off-white page background), and applied it to every rule where coral colours text: eyebrow and kicker labels, link, navigation and card-title hovers, highlighted citation names, pagination and map-selector hover, footer link hovers and the Weekly timeline chips. Bright Oxford coral (`#FE615A`, 2.97:1) remains for icons, list markers, underlines, borders and backgrounds.
