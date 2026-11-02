@@ -4,6 +4,10 @@
 
 Jade Prairie is in development for release on 1 Dec 2026. The website continues to identify v6.0.0 "Crimson Delta" as its current release until then.
 
+### Dependencies
+
+- Updated `next` and `eslint-config-next` from 16.4.3 to 16.4.4, and `react` and `react-dom` from 19.2.8 to 19.3.1 (with `scheduler` 0.28.0), pinned exactly. No published advisory affected the previous versions; this is routine maintenance.
+
 ### Freshness
 
 - Added daily revalidation (`revalidate = 86400`) to `/trajectory`, `/credit`, `/dora`, `/paintings` and `/release-notes`. These pages were fully static, so the footer copyright year and the current-year logic on Academic trajectory would only have changed on the next deploy after New Year.
