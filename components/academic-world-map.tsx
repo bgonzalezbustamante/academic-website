@@ -10,7 +10,11 @@ import {
 } from 'react-simple-maps'
 import worldMap from 'world-atlas/countries-110m.json'
 
-type GeographyData = ComponentProps<typeof Geographies>['geography']
+export type GeographyData = ComponentProps<typeof Geographies>['geography']
+
+type MapProjection = Parameters<
+  ComponentProps<typeof Geographies>['children']
+>[0]['projection']
 
 export type WorldMapCountry = {
   iso3: string
@@ -19,7 +23,7 @@ export type WorldMapCountry = {
 }
 
 type MapPalette = 'tergap' | 'conference'
-type MapView = 'world' | 'africa'
+type MapView = 'world' | 'africa' | 'europe'
 
 type Props = {
   countries: WorldMapCountry[]
@@ -30,6 +34,8 @@ type Props = {
   updatedAt?: string | null
   palette?: MapPalette
   view?: MapView
+  geography?: GeographyData
+  mapHeight?: number
   noDataLabel?: string
 }
 
@@ -40,8 +46,15 @@ type HoveredCountry = {
 
 const WORLD_MAP = worldMap as unknown as GeographyData
 
-// Matches the latest TERGAP Dashboard Equal Earth viewport.
-const AFRICA_CENTRE: [number, number] = [15, 5]
+// Keep the original World and TERGAP projections, with a closer Europe-only view.
+const MAP_PROJECTIONS: Record<
+  MapView,
+  { scale: number; center?: [number, number] }
+> = {
+  world: { scale: 150 },
+  africa: { center: [15, 5], scale: 245 },
+  europe: { center: [10, 51], scale: 700 },
+}
 
 const MAP_PALETTES: Record<
   MapPalette,
@@ -91,6 +104,34 @@ function numericIdToIso3(value: string | number | undefined) {
   )
 }
 
+// True when any vertex of the country falls inside the map's viewBox.
+function isGeographyInView(
+  geometry: unknown,
+  projection: MapProjection,
+  width: number,
+  height: number
+) {
+  function visit(coordinates: unknown): boolean {
+    if (!Array.isArray(coordinates)) return false
+
+    if (typeof coordinates[0] === 'number') {
+      const point = projection(coordinates as [number, number])
+
+      return Boolean(
+        point &&
+          point[0] >= 0 &&
+          point[0] <= width &&
+          point[1] >= 0 &&
+          point[1] <= height
+      )
+    }
+
+    return coordinates.some(visit)
+  }
+
+  return visit((geometry as { coordinates?: unknown } | null)?.coordinates)
+}
+
 function getFill(
   value: number,
   maximum: number,
@@ -138,6 +179,8 @@ export default function AcademicWorldMap({
   updatedAt = null,
   palette = 'tergap',
   view = 'world',
+  geography = WORLD_MAP,
+  mapHeight = 430,
   noDataLabel = 'Not collected',
 }: Props) {
   const byIso3 = useMemo(
@@ -184,22 +227,28 @@ export default function AcademicWorldMap({
       >
         <ComposableMap
           projection="geoEqualEarth"
-          projectionConfig={
-            view === 'africa'
-              ? { center: AFRICA_CENTRE, scale: 245 }
-              : { scale: 150 }
-          }
+          projectionConfig={MAP_PROJECTIONS[view]}
           width={800}
-          height={430}
+          height={mapHeight}
           aria-label={ariaLabel}
         >
-          <Geographies geography={WORLD_MAP}>
-            {({ geographies }) =>
+          <Geographies geography={geography}>
+            {({ geographies, projection }) =>
               geographies.map((geo) => {
                 const iso3 = numericIdToIso3(geo.id)
                 const datum = iso3
                   ? byIso3.get(iso3)
                   : undefined
+                // Countries outside a regional view stay out of the tab order.
+                const focusable =
+                  Boolean(datum) &&
+                  !compact &&
+                  isGeographyInView(
+                    geo.geometry,
+                    projection,
+                    800,
+                    mapHeight
+                  )
                 const geographyName =
                   typeof geo.properties?.name === 'string'
                     ? geo.properties.name
@@ -226,10 +275,11 @@ export default function AcademicWorldMap({
                           )
                     }
                     stroke={mapPalette.border}
-                    strokeWidth={0.55}
-                    tabIndex={datum && !compact ? 0 : -1}
+                    strokeWidth={view === 'europe' ? 0.4 : 0.55}
+                    strokeLinejoin={view === 'europe' ? 'round' : undefined}
+                    tabIndex={focusable ? 0 : -1}
                     aria-label={
-                      datum && !compact
+                      focusable && datum
                         ? `${datum.label}: ${formatValue(datum.value)}`
                         : undefined
                     }

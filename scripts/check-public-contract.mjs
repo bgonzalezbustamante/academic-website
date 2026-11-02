@@ -1,4 +1,14 @@
+import { existsSync, readFileSync } from 'node:fs'
+
 import { createClient } from '@supabase/supabase-js'
+
+// Image filenames from the Dashboard must have an uploaded source (or alias)
+// in assets/sources/ for scripts/build-images.mjs to generate.
+const IMAGE_SOURCES_ROOT = new URL('../assets/sources/', import.meta.url)
+const FIGURE_ALIASES =
+  JSON.parse(
+    readFileSync(new URL('figures.json', IMAGE_SOURCES_ROOT), 'utf8')
+  ).aliases ?? {}
 
 const PUBLIC_PAPER_FIELDS = [
   'slug',
@@ -202,6 +212,64 @@ const PRIVATE_FIELDS = [
 
 function fail(message) {
   throw new Error(message)
+}
+
+function hasImageSource(key) {
+  return (
+    Boolean(FIGURE_ALIASES[key]) ||
+    existsSync(new URL(key, IMAGE_SOURCES_ROOT))
+  )
+}
+
+async function assertImageSources(supabase, { papers, projects, teaching }) {
+  const references = []
+
+  for (const project of projects) {
+    if (project.project_image_filename) {
+      references.push(
+        `projects/${project.slug}/${project.project_image_filename}`
+      )
+    }
+    if (project.funder_image_filename) {
+      references.push(`logos/${project.funder_image_filename}`)
+    }
+  }
+
+  for (const item of teaching) {
+    if (item.course_image_filename) {
+      references.push(`logos/${item.course_image_filename}`)
+    }
+  }
+
+  for (const paper of papers) {
+    const detailResult = await supabase.rpc('get_public_paper', {
+      p_slug: paper.slug,
+    })
+
+    if (detailResult.error) {
+      fail(
+        `get_public_paper(text) failed for ${paper.slug}: ${detailResult.error.message}`
+      )
+    }
+
+    const filename = detailResult.data?.[0]?.highlight_image_filename
+
+    if (filename) {
+      references.push(
+        `publication-highlights/${paper.slug}/${filename}`
+      )
+    }
+  }
+
+  const missing = references.filter((key) => !hasImageSource(key))
+
+  if (missing.length > 0) {
+    fail(
+      `Public image filename(s) without an uploaded source in assets/sources/: ${missing.join(', ')}`
+    )
+  }
+
+  return references.length
 }
 
 function requireEnvironment() {
@@ -781,6 +849,16 @@ async function main() {
 
   console.log(
     `✓ list_public_teaching(): ${teaching.length} public teaching item(s); controlled roles validated; private activity/session metadata absent`
+  )
+
+  const imageReferenceCount = await assertImageSources(supabase, {
+    papers,
+    projects,
+    teaching,
+  })
+
+  console.log(
+    `✓ Image sources: ${imageReferenceCount} public project, funder, course and highlight image reference(s) resolve to assets/sources/`
   )
 
   const conferenceResult = await supabase.rpc(

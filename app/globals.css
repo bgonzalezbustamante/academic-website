@@ -2307,6 +2307,15 @@ h4 {
   gap: 0.9rem;
 }
 
+.project-pagination-top {
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+}
+
+.project-pagination-controls {
+  flex-wrap: wrap;
+}
+
 .publication-associated-projects {
   margin-top: 2rem;
 }
@@ -2775,6 +2784,54 @@ h4 {
 }
 
 /* Conferences */
+
+.conference-map-region-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-roboto), Arial, sans-serif;
+}
+
+.conference-map-region-label {
+  color: var(--oxford-ash);
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.conference-map-region-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.conference-map-region-controls button {
+  border: 1px solid var(--oxford-stone);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  background: var(--paper);
+  color: var(--oxford-blue);
+  font-size: 0.72rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.conference-map-region-controls button[aria-pressed='true'] {
+  border-color: var(--oxford-blue);
+  background: var(--oxford-blue-wash);
+}
+
+.conference-map-region-controls button:hover {
+  border-color: var(--oxford-coral);
+  color: var(--oxford-coral);
+}
+
+.conference-map-region-controls button:focus-visible {
+  outline: 2px solid var(--oxford-coral);
+  outline-offset: 2px;
+}
 
 .conference-map-section,
 .conference-overview-section {
@@ -4060,21 +4117,17 @@ h4 {
   min-height: 1.25rem;
   display: flex;
   align-items: center;
-  overflow-x: auto;
   justify-self: end;
-  scrollbar-width: none;
 }
 
-.footer-calendar-row::-webkit-scrollbar {
-  display: none;
-}
-
+/* Wrap between the date and observance groups rather than clipping them. */
 .footer-calendar-link {
-  width: max-content;
+  max-width: 100%;
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.42rem;
+  gap: 0.2rem 0.42rem;
   color: var(--oxford-ash);
   font-size: inherit;
   font-weight: 400;

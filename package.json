@@ -1,12 +1,13 @@
 {
   "name": "academic-website",
-  "version": "6.0.0-rc.2",
+  "version": "6.0.0",
   "private": true,
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
     "assets:build": "node scripts/build-images.mjs",
+    "map:europe": "node scripts/build-europe-map.mjs",
     "predev": "npm run assets:build",
     "dev": "next dev",
     "prebuild": "npm run assets:build && npm run check:calendar-footer",

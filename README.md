@@ -2,9 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026); previous release: **v6.0.0-rc.1 "Swift Harbour"** (1 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
-
-**In development:** v6.0.0 "Crimson Delta" is being prepared through successive small pull requests. Release Notes now show Crimson Delta as **In development**, while `package.json`, footer release metadata and the **Current release** designation remain at v6.0.0-rc.2 until stable release finalisation.
+Current release: **v6.0.0 "Crimson Delta"** (2 Nov 2026), the first stable v6 release; previous release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
 The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -41,8 +39,8 @@ The public website provides:
 - Publications with index filters (including Dataset), citation information, language indicators, public research links, detail pages and associated projects;
 - a Publication profile with output, citation, language, venue and authorship summaries;
 - a Co-authorship network for publications with five or fewer authors;
-- Projects with funding information, associated publications, conference presentations and project visuals, including the TERGAP map;
-- Conferences with KPI cards, presentation geography, paginated records (including guest lectures), Keynote markers and the current-year roadmap;
+- Projects with a featured selection, a paginated portfolio (six per page), funding information, associated publications, conference presentations and visuals, including the TERGAP map;
+- Conferences with KPI cards, a closer Europe/World map selector, paginated records (including guest lectures), Keynote markers and the current-year roadmap;
 - Teaching with public course/supervision information, controlled teaching-role and academic-level tags, and cumulative indicators;
 - aggregate current-year work activity and homepage population-progress indicators;
 - dated Catholic Calendar highlights in the footer, linked to the standalone calendar and controlled by the public calendar settings;
@@ -69,7 +67,7 @@ This project requires **Node.js 22 or later**.
 ```bash
 git clone https://github.com/bgonzalezbustamante/academic-website.git
 cd academic-website
-npm install
+npm ci
 cp .env.example .env.local
 npm run dev
 ```
@@ -102,32 +100,58 @@ The Next.js page, calendar logic and data validation run locally in this reposit
 
 The canonical raster sources live outside `public/`: one `assets/sources/profile/avatar.png`, nine slug-named JPEGs in `assets/sources/paintings/`, and three logo PNGs (`leiden.png`, `udp.png`, `ocpsg.png`) in `assets/sources/branding/`. Keep original source files unchanged; their museum links, licence terms and institutional ownership are preserved in the painting metadata and `NOTICE`.
 
-Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Project, teaching and funder images and Christicons are deliberately outside this pipeline.
+Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Christicons and other vector or static assets remain outside this pipeline.
 
 The navbar and Home positions list use these generated institutional logo assets.
 
+### Project, publication and logo images
+
+Project figures, publication Key highlight figures, and funder and teaching logos follow the same process as the portrait. The Research Dashboard stores only the filename; the original lives in `assets/sources/`:
+
+```text
+assets/sources/projects/<project-slug>/<project_image_filename>
+assets/sources/publication-highlights/<paper-slug>/<highlight_image_filename>
+assets/sources/logos/<funder_image_filename or course_image_filename>
+```
+
+To add or replace an image, save the original at that path with exactly the filename entered in the Dashboard and run `npm run dev` (or `npm run assets:build`). Commit only the source file; the WebP output under `public/{projects,publication-highlights,logos}/generated/` is regenerated on every machine and deployment. `npm run check:public-contract` fails if a public project, funder, course or highlight filename has no uploaded source.
+
+Figures receive responsive WebP sizes of 640, 960, 1440 and 1800px, never enlarged. PNG figures are kept lossless where that is not much heavier than quality-95 WebP; flat-colour charts up to 2400px wide keep their exact original pixels when that is the lightest option; other figures use quality-95 WebP. Smaller sizes are kept only when they are also lighter. Logos fit within 400 × 400px under the same lossless rule. Outputs are cached by content, so only new or changed images are encoded; a first full build takes about two minutes.
+
+`assets/sources/figures.json` holds two optional settings:
+
+- `aliases` reuse one source for a second page, avoiding duplicate files (for example, the ENUT spider plot serves both its project and its publication highlight);
+- `sharpen` applies a light unsharp mask (σ) to a specific soft original after resizing; it is used for two figures whose best available exports are slightly blurred.
+
 ### TERGAP map snapshot
 
-The TERGAP project map uses a compact derived snapshot at `public/data/tergap-map.json` rather than copying the full TERGAP dashboard metrics file. Its Africa-centred view matches the standalone TERGAP Dashboard; Conferences retains its global map.
+The TERGAP project map uses a compact derived snapshot at `public/data/tergap-map.json` rather than copying the full TERGAP dashboard metrics file. Its Africa-centred view matches the standalone TERGAP Dashboard; Conferences offers Europe (default) and World views.
+
+### Europe map subset
+
+The Conferences Europe view uses `public/data/europe-map-50m.json`, a derived subset of the `world-atlas` 1:50m countries containing only those visible in that viewport. Run `npm run map:europe` to regenerate it if the Europe projection changes, and commit the derived JSON.
 
 When the TERGAP dashboard data changes, regenerate the snapshot from the TERGAP repository and commit only the derived academic-website JSON.
 
 ## Validation
 
-Before merging or deploying a release candidate, run:
+Before merging or deploying a release, run:
 
 ```bash
 npm run check
 npm run check:public-contract
 npm run build
 npm audit --omit=dev
+gitleaks detect --source . --log-opts="--all" --no-banner --redact --verbose
 ```
 
-`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and the deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Check the Netlify preview on desktop and mobile and run a secrets scan before repository-publication decisions.
+`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Validate locally; perform browser and Deploy Preview checks only for an approved release.
 
 ## Deployment
 
-Development remains local-first and follows the validation gate above. Only approved, validated pull requests are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
+Development is local-first. Work in progress stays in draft, unmerged pull requests, with `[skip netlify]` in the PR title and each development commit to suppress routine previews and branch builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
+
+Only approved, validated changes are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. When a production deployment is approved, ensure **both the merge commit title and body** omit `[skip netlify]`: GitHub can copy a PR title into the merge message and inadvertently suppress the build. Verify the published Netlify deployment against the expected `main` commit. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, quality hardening, legacy redirect verification, SEO verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and `bgonzalezbustamante.netlify.app` redirects permanently to the corresponding canonical `.com` path.
 
@@ -135,11 +159,11 @@ The predecessor remains temporarily available at `legacy-bgonzalezbustamante.net
 
 ### Repository visibility
 
-The GitHub repository remains private pending the complete publication review. Make it public only after merging, production verification and review of historical files, security and asset redistribution rights. Publishing the repository exposes its existing branches and commit history, not just the current `main` tree. Confirm that source imagery, licence notices and any historical files are suitable for public distribution; never rely on `.gitignore` to protect material already committed.
+The GitHub repository is public. Before committing new files, check for secrets, personal data and third-party asset redistribution restrictions. Published Git history and branches can expose previously committed content, not just the current `main` tree; `.gitignore` does not protect material already committed. Keep image rights and attribution consistent with `CONTENT-LICENSE.md` and `NOTICE`.
 
 ### Release procedure
 
-Finalise `README.md`, `CHANGELOG.md` and `lib/releases.ts` on the release branch. After explicit approval, merge the PR and verify the production deployment and new routes. Tag **the merged `main` commit**, never an unmerged branch head; then publish a GitHub **pre-release** with a short summary. For Bold River, the tag is `v6.0.0-rc.2` and the release title is `v6.0.0-rc.2 “Bold River”`.
+Finalise `README.md`, `CHANGELOG.md` and `lib/releases.ts` on the release branch. After explicit approval, merge the PR and verify the production deployment and affected routes. Tag **the merged `main` commit**, never an unmerged branch head, and publish a concise GitHub Release: mark release candidates (such as `v6.0.0-rc.2`) as **pre-releases**, but publish stable `v6.0.0` as a **standard release**. Update the package, footer and Release Notes metadata only at the approved stable-release gate.
 
 ## Release history
 

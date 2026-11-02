@@ -17,20 +17,22 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0',
     codename: 'Crimson Delta',
-    status: 'In development',
-    releasedOn: 'In development',
-    comparison: 'Stable v6.0.0 release in preparation',
+    status: 'Current release',
+    releasedOn: '2 Nov 2026',
+    comparison: 'First stable v6 release',
     summary:
-      'Crimson Delta is a final polish pass before the first stable v6 release.',
+      'Crimson Delta is the first stable v6 release, making navigation, calendars, research pages and images clearer and faster.',
     sections: [
       {
         title: 'Small refinements',
         items: [
-          'Made the main navigation clearer with coral hover states and Oxford-blue current-section highlighting.',
-          'Added a dated Catholic Calendar footer with a calendar icon and better mobile handling for long observances.',
-          'Improved Weekly timeline metric labels so longer working-time ranges stay within their boxes.',
-          'Updated important website tools to address recent security issues.',
-          'Kept project, conference and timeline pages compatible with new presentation types, and added a Dataset publication filter.',
+          'Made the current section easier to see in the main menu.',
+          'Made project lists easier to browse and added a closer view of Europe to the conference map.',
+          'Made project and publication images load faster while keeping their quality.',
+          'Added dates to the Catholic Calendar footer and improved its mobile layout.',
+          'Improved the fit of longer working-time labels in the Weekly timeline.',
+          'Restored project and conference displays for guest lectures, and added Dataset to publication filters.',
+          'Applied security updates to important website tools.',
         ],
       },
     ],
@@ -38,7 +40,7 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.2',
     codename: 'Bold River',
-    status: 'Current release',
+    status: 'Previous release',
     releasedOn: '6 Oct 2026',
     comparison: 'Second release candidate',
     summary:
@@ -65,7 +67,6 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.1',
     codename: 'Swift Harbour',
-    status: 'Previous release',
     releasedOn: '1 Oct 2026',
     comparison: 'First release candidate',
     summary:

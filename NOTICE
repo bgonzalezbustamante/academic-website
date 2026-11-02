@@ -8,7 +8,7 @@ Academic Website uses separate licensing boundaries for software, original edito
 
 Third-party names, logos, crests, trademarks, service marks, institutional branding, publication material, externally sourced graphics, photographs, flags, and other assets whose rights are not held by Bastián González-Bustamante remain subject to the rights, policies, licences, and permissions of their respective owners.
 
-This includes, without limitation, institutional and organisational assets under `assets/sources/branding`, `assets/sources/paintings`, `public/branding`, `public/funders`, `public/dora`, `public/credit`, and `public/teaching`, as well as publication/project imagery and other credited or externally derived assets.
+This includes, without limitation, institutional and organisational assets under `assets/sources/branding`, `assets/sources/paintings`, `assets/sources/logos`, `public/branding`, `public/logos`, `public/dora`, and `public/credit`, as well as publication/project imagery under `assets/sources/projects`, `assets/sources/publication-highlights` and their generated `public/` derivatives and other credited or externally derived assets.
 
 The presence of an asset in this repository does not grant trademark rights or imply that the asset is licensed under MIT or CC BY 4.0.
 

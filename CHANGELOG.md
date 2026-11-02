@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## Unreleased — v6.0.0 "Crimson Delta"
+## v6.0.0 "Crimson Delta" (2 Nov 2026)
+
+Crimson Delta is the first stable v6 release. It refines navigation, the Catholic Calendar footer, project browsing, the conference map and the Weekly timeline, and compiles project, publication and logo images into responsive WebP. Some security and public-API compatibility fixes were deployed independently during stabilisation.
 
 ### Navigation
 
@@ -17,15 +19,48 @@
 - Prefixed the Catholic Calendar footer display with a small calendar icon and its effective date in `D Mon YYYY` format (for example, `7 Oct 2026`), separated from the daily display by a subtle middle dot.
 - Kept the date and observance display on the same Amsterdam-local calendar day; Dashboard stress-test mode shows its fixture date alongside the corresponding fixture display.
 - Preserved the compact single-line treatment on wider screens; on mobile, the date and each composed calendar item occupy their own row with separators removed, while long labels can still wrap within their row.
+- Let the wider-screen display wrap between the date and observance groups when space runs out, instead of clipping it inside a hidden horizontal scroll area. `scripts/check-calendar-footer.mjs` now also checks the full dated display against a 100-character envelope (the 85-character composition plus the longest date prefix, `16 Sept 2026 · `).
 
 ### Weekly timeline
 
 - Tightened the Work/Coffee metric-chip spacing in the embedded Weekly timeline across desktop and mobile, with an additional compact mobile treatment, so the longest working-time label, `10–12h`, remains inside its chip without changing the seven-day horizontal timeline layout.
 
+### Population progress
+
+- Aligned the section-level population progress information icon directly beside its explanatory text, replacing the spaced-apart alignment.
+- Updated the manually maintained Teaching population target in `lib/site-population.ts` from 35 to 51 records.
+
+### Projects
+
+- Kept Featured projects visible above the portfolio and added client-side pagination for remaining public projects (six per page), with First/Previous/Next/Last controls both above and below the cards, a visible result range and keyboard-accessible page changes. The public RPC and ordering are unchanged.
+- Page changes scroll the portfolio to just below the sticky site header, measured at run time so the wrapped mobile header is respected, before moving keyboard focus to its heading.
+- Portfolio cards now receive only the fields they render (`ProjectCardData`), so abstracts, funder notes, publication slugs and conference presentations are no longer serialised to the browser for the paginated list.
+- Added local project images for "From Bronze to Benchmark" and "Executive Triangle in the Chilean Case" under `assets/sources/projects/<slug>/`.
+
+### Images
+
+- Moved project figures, publication Key highlight figures, and funder and teaching logos from `public/` into `assets/sources/{projects,publication-highlights,logos}/`, and extended `scripts/build-images.mjs` to compile them into content-hashed, responsive WebP with a manifest, as already done for the portrait, paintings and branding. Dashboard filenames are unchanged; old direct URLs such as `/projects/<slug>/<file>` and `/funders/<file>` now return 404.
+- PNG figures stay lossless where that is not much heavier than quality-95 WebP; flat-colour charts up to 2400px keep their exact original pixels when that is lightest; other figures use quality-95 WebP. Logos fit within 400 × 400px. Outputs are cached by content and settings, so only new or changed images are encoded.
+- Pages now serve these images as native `<img>` elements with `srcSet` instead of full-size originals or a second Next.js encode. For example, the CPS Ranking figure falls from 1.2 MB to 99 KB, and homepage, `/projects` and `/teaching` logo payloads fall from 165, 295 and 218 KB to 50, 65 and 60 KB. The unused `ResilientLocalImage` component was removed.
+- Removed duplicate sources: the ENUT spider plot and the rule-of-law pipeline each serve a project and a publication highlight through aliases in `assets/sources/figures.json`, and the UDP and Usach logos are shared by funders and teaching. A light unsharp mask (σ 0.6) is applied to the two softest originals, `secuencia_politicos.png` and `educational_subjects.png`.
+- `npm run check:public-contract` now fails when a public project, funder, course or highlight image filename has no uploaded source.
+- Added Key highlight figures for "Machine Learning and Political Events" and "Uncovering the Rule of Law in European Countries".
+
+### Conference map
+
+- Added an accessible Europe / World selector to the Conferences choropleth, defaulting to a closer Europe view centred at 10° E, 51° N (Equal Earth scale 700; 800 × 510 viewport). The World view retains its original framing.
+- Used the existing `world-atlas` 1:50m country boundaries and finer, rounded strokes for Europe while preserving the 1:110m World map, global country counts, shared blue/aqua scale, tooltips and the TERGAP Africa view. Virtual presentations remain excluded from mapped totals; no new dependencies.
+- Replaced the full 1:50m atlas in the Europe view with `public/data/europe-map-50m.json`, a derived subset of the 74 countries visible in that viewport, reducing the atlas payload on `/conferences` from about 756 KB to 224 KB (about 73 KB gzipped). `npm run map:europe` regenerates it deterministically with `scripts/build-europe-map.mjs`.
+- Kept countries that fall entirely outside the visible map area out of the keyboard tab order in every view, including the TERGAP Africa view.
+
 ### Public API compatibility
 
 - Accepted the new `Guest lecture` presentation type in public Conferences, project-linked presentations, the homepage and the embedded Weekly timeline, and updated the contract checker to recognise it; previously, these records could cause entire sections to report unavailable.
 - Added `Dataset` after `Preprint` in the Publications index filter and publication-profile ordering. Publication indexes remain string-valued, so future dataset records will not themselves cause an availability error.
+
+### Release preparation
+
+- Corrected the README's repository visibility and stable-release instructions; documented reproducible local setup, the full-history secret scan and the approved-only Netlify deployment workflow, including merge-message skip markers.
 
 ## v6.0.0-rc.2 "Bold River" (6 Oct 2026)
 
