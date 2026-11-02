@@ -61,11 +61,13 @@ The non-navigation `/weekly-timeline` route integrates the seven-day `WeeklyPeng
 
 ### Static raster image pipeline
 
-`scripts/build-images.mjs` is the only generator for three intentionally supported image families. It reads `assets/sources/profile/avatar.png`, the nine slug-matched `assets/sources/paintings/*.jpg` files and `assets/sources/branding/{leiden,udp,ocpsg}.png`. The pre-development, pre-check and pre-build scripts run it automatically. An explicit direct run is available as `npm run assets:build`.
+`scripts/build-images.mjs` is the only generator for the website's raster images. It reads `assets/sources/profile/avatar.png`, the nine slug-matched `assets/sources/paintings/*.jpg` files and `assets/sources/branding/{leiden,udp,ocpsg}.png`, plus the Dashboard-referenced figures and logos described below. The pre-development, pre-check and pre-build scripts run it automatically. An explicit direct run is available as `npm run assets:build`.
 
 The output contains content-hashed `.webp` files under `public/{profile,paintings,branding}/generated/` and an ignored `content/image-assets.generated.ts` manifest with the public URLs. The generated directories are rebuilt from scratch; old files never accumulate. The portrait preserves the full source aspect ratio and is resized without upscaling to fit 660px, at quality 95. The nine paintings receive distinct responsive widths up to 1800px, also at quality 95. Branding is resized without upscaling to fit 168px and encoded losslessly. Source originals are not published under `public/`.
 
-The profile image is delivered without additional Next.js optimisation to avoid a second lossy encode. Branding images are also delivered without re-encoding so lossless colours and edges are preserved. After conversion, the build reopens the resulting WebP files and checks their format and dimensions, confirms the painting `srcSet` candidates and file sizes, and verifies that the Leiden logo still has fully transparent pixels. This validation runs as part of the normal image-generation step. Projects, funders, teaching, publication imagery and vector Christicons retain their existing handling. The unused legacy `oxford.webp` has been removed.
+The profile image is delivered without additional Next.js optimisation to avoid a second lossy encode. Branding images are also delivered without re-encoding so lossless colours and edges are preserved. After conversion, the build reopens the resulting WebP files and checks their format and dimensions, confirms the painting `srcSet` candidates and file sizes, and verifies that the Leiden logo still has fully transparent pixels. This validation runs as part of the normal image-generation step. Vector Christicons retain their existing handling. The unused legacy `oxford.webp` has been removed.
+
+Project figures, publication Key highlight figures and funder/teaching logos are discovered dynamically under `assets/sources/projects/<slug>/`, `assets/sources/publication-highlights/<slug>/` and `assets/sources/logos/`, because their filenames come from the Research Dashboard rather than a fixed list. Figures receive responsive WebP widths of 640, 960, 1440 and 1800px without upscaling. PNG figures stay lossless unless that is more than 1.25 times the quality-95 size; a PNG up to 2400px wide keeps its exact, unresized pixels as the largest size when that is the lightest option; other figures use quality-95 WebP; and smaller sizes are kept only when they are also lighter. Logos fit within 400 × 400px under the same lossless rule. Transparency must survive conversion. `assets/sources/figures.json` maps duplicate page paths to one source (`aliases`) and applies a per-file unsharp mask (`sharpen`). These outputs live in `public/{projects,publication-highlights,logos}/generated/`, are named by a hash of the source and settings, and are reused between runs so that only new or changed images are encoded; unreferenced outputs are removed. The manifest exposes them as `figures` (keyed `<family>/<slug>/<filename>`) and `logos` (keyed by filename), resolved through `lib/local-images.ts`. Pages render them as native `<img>` elements with `srcSet`, without a second Next.js encode.
 
 The homepage exposes `/paintings` through a small Selected paintings link below Main Interests. The page is deliberately absent from the primary navigation.
 
@@ -79,11 +81,11 @@ Citation and Key highlights are deliberately detail-only presentation metadata. 
 - `highlight_image_alt`
 - `highlight_image_caption`
 
-When configured, the publication detail route resolves the image only from the academic website's local static convention:
+When configured, the publication detail route resolves the image only from the academic website's local image pipeline:
 
 ```text
-/public/publication-highlights/<paper-slug>/<filename>
-→ /publication-highlights/<paper-slug>/<filename>
+assets/sources/publication-highlights/<paper-slug>/<filename>
+→ /publication-highlights/generated/<name>-<hash>-<width>w.webp
 ```
 
 The site never derives a Supabase Storage URL for these assets. The supplied alt text is used when an image filename exists, captions remain optional, and an entirely empty highlight configuration renders nothing. On `/publications`, the citation replaces the separate visible title/authors/venue presentation while the year/index/Featured tags and resource links remain. Year and Publication index filters are client-side filters over the already-public list metadata. The publication-index menu includes `Dataset` after `Preprint`; publication-index values remain string-valued, without a failure-prone closed vocabulary at render time.
@@ -92,11 +94,11 @@ The site never derives a Supabase Storage URL for these assets. The supplied alt
 
 Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. The website intentionally does not consume or render a Project role, even if the upstream public payload exposes one. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first. The `/projects` page keeps Featured projects above a client-paginated portfolio of the remaining projects (six per page, in existing order, with First/Previous/Next/Last controls above and below); portfolio cards receive only the fields they render rather than whole project records.
 
-Project images and funder logos are local static assets:
+Project images and funder logos are local sources compiled by the image pipeline:
 
 ```text
-/public/projects/<slug>/<project_image_filename>
-/public/funders/<funder_image_filename>
+assets/sources/projects/<slug>/<project_image_filename>
+assets/sources/logos/<funder_image_filename>
 ```
 
 Conferences are supplied exclusively through `list_public_conference_presentations()`. The choropleth provides Europe and World views, with a Europe-focused Equal Earth projection centred at 10° E, 51° N, scale 700 and an 800 × 510 viewport. Europe uses finer, rounded 1:50m borders from `public/data/europe-map-50m.json`, a derived subset of `world-atlas/countries-50m.json` containing only the countries visible in that viewport; regenerate it with `npm run map:europe` if the Europe projection changes. Only countries with presentations that fall inside the current view are keyboard-focusable. World keeps the original `countries-110m.json` geometry and scale 150. Both views retain the same global country counts, log-scaled aqua/blue palette and tooltips, while virtual presentations are counted separately and not mapped. The TERGAP Africa view retains its original geometry and projection settings. The shared website and embedded timeline parsers accept `Conference paper`, `Keynote`, `Workshop` and `Guest lecture`, including guest-lecture presentations attached to public projects. The standalone Conferences dashboard derives its country count from the final `City, Country` location segment, computes the Keynote percentage from public `presentation_type`, presents KPI cards before an Oxford aqua/blue map with coral hover, and uses a compact 10-row paginated presentation table while preserving the RPC's descending-date record order. Keynote rows are identified with a small star beside the presentation title and a legend below the shared table, including when that table is reused inside project Research outputs. The homepage Roadmap filters presentations to the current Europe/Amsterdam year, orders them chronologically by `presentation_date`, groups them into rows of at most five, and connects successive rows as one continuous timeline while showing the public short event name with the presentation location beneath it. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
@@ -105,14 +107,14 @@ Conferences are supplied exclusively through `list_public_conference_presentatio
 
 Teaching is supplied exclusively through `list_public_teaching()`. The public website consumes only the course name, institution, summary, controlled teaching role, period/current state, `levels[]`, cumulative times taught, cumulative student count and optional course-image filename. Teaching roles are limited by the public contract to Course Convenor, Lecturer, Tutor, Thesis Supervisor and Examiner, and are rendered as metadata tags after the academic level tag(s). The RPC may also expose an optional slug for contract stability, but the academic website does not use it for navigation: Teaching cards are deliberately self-contained and there is no `/teaching/[slug]` route.
 
-Teaching activity-label relationships, tracked teaching hours, session counts, owner metadata and internal IDs remain private and are neither requested nor inferred by the academic website. Course imagery follows the local static convention:
+Teaching activity-label relationships, tracked teaching hours, session counts, owner metadata and internal IDs remain private and are neither requested nor inferred by the academic website. Course imagery shares the logo sources with funders:
 
 ```text
-/public/teaching/<course_image_filename>
-→ /teaching/<course_image_filename>
+assets/sources/logos/<course_image_filename>
+→ /logos/generated/<name>-<hash>.webp
 ```
 
-If a configured local course image is absent, the card falls back to a teaching icon rather than attempting to derive an asset from Research Dashboard.
+If a configured course image has no uploaded source, the card falls back to a teaching icon rather than attempting to derive an asset from Research Dashboard; `npm run check:public-contract` reports such missing uploads.
 
 ### TERGAP geographic snapshot
 

@@ -28,6 +28,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Made the current section easier to see in the main menu.',
           'Made project lists easier to browse and added a closer view of Europe to the conference map.',
+          'Made project and publication images load faster while keeping their quality.',
           'Added dates to the Catholic Calendar footer and improved its mobile layout.',
           'Improved the fit of longer working-time labels in the Weekly timeline.',
           'Restored project and conference displays for guest lectures, and added Dataset to publication filters.',

@@ -35,7 +35,16 @@ Some security and public-API compatibility fixes have already been deployed inde
 - Kept Featured projects visible above the portfolio and added client-side pagination for remaining public projects (six per page), with First/Previous/Next/Last controls both above and below the cards, a visible result range and keyboard-accessible page changes. The public RPC and ordering are unchanged.
 - Page changes scroll the portfolio to just below the sticky site header, measured at run time so the wrapped mobile header is respected, before moving keyboard focus to its heading.
 - Portfolio cards now receive only the fields they render (`ProjectCardData`), so abstracts, funder notes, publication slugs and conference presentations are no longer serialised to the browser for the paginated list.
-- Added local project images for "From Bronze to Benchmark" and "Executive Triangle in the Chilean Case" under `public/projects/<slug>/`.
+- Added local project images for "From Bronze to Benchmark" and "Executive Triangle in the Chilean Case" under `assets/sources/projects/<slug>/`.
+
+### Images
+
+- Moved project figures, publication Key highlight figures, and funder and teaching logos from `public/` into `assets/sources/{projects,publication-highlights,logos}/`, and extended `scripts/build-images.mjs` to compile them into content-hashed, responsive WebP with a manifest, as already done for the portrait, paintings and branding. Dashboard filenames are unchanged; old direct URLs such as `/projects/<slug>/<file>` and `/funders/<file>` now return 404.
+- PNG figures stay lossless where that is not much heavier than quality-95 WebP; flat-colour charts up to 2400px keep their exact original pixels when that is lightest; other figures use quality-95 WebP. Logos fit within 400 × 400px. Outputs are cached by content and settings, so only new or changed images are encoded.
+- Pages now serve these images as native `<img>` elements with `srcSet` instead of full-size originals or a second Next.js encode. For example, the CPS Ranking figure falls from 1.2 MB to 99 KB, and homepage, `/projects` and `/teaching` logo payloads fall from 165, 295 and 218 KB to 50, 65 and 60 KB. The unused `ResilientLocalImage` component was removed.
+- Removed duplicate sources: the ENUT spider plot and the rule-of-law pipeline each serve a project and a publication highlight through aliases in `assets/sources/figures.json`, and the UDP and Usach logos are shared by funders and teaching. A light unsharp mask (σ 0.6) is applied to the two softest originals, `secuencia_politicos.png` and `educational_subjects.png`.
+- `npm run check:public-contract` now fails when a public project, funder, course or highlight image filename has no uploaded source.
+- Added Key highlight figures for "Machine Learning and Political Events" and "Uncovering the Rule of Law in European Countries".
 
 ### Conference map
 

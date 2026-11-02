@@ -102,9 +102,28 @@ The Next.js page, calendar logic and data validation run locally in this reposit
 
 The canonical raster sources live outside `public/`: one `assets/sources/profile/avatar.png`, nine slug-named JPEGs in `assets/sources/paintings/`, and three logo PNGs (`leiden.png`, `udp.png`, `ocpsg.png`) in `assets/sources/branding/`. Keep original source files unchanged; their museum links, licence terms and institutional ownership are preserved in the painting metadata and `NOTICE`.
 
-Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Project, teaching and funder images and Christicons are deliberately outside this pipeline.
+Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Christicons and other vector or static assets remain outside this pipeline.
 
 The navbar and Home positions list use these generated institutional logo assets.
+
+### Project, publication and logo images
+
+Project figures, publication Key highlight figures, and funder and teaching logos follow the same process as the portrait. The Research Dashboard stores only the filename; the original lives in `assets/sources/`:
+
+```text
+assets/sources/projects/<project-slug>/<project_image_filename>
+assets/sources/publication-highlights/<paper-slug>/<highlight_image_filename>
+assets/sources/logos/<funder_image_filename or course_image_filename>
+```
+
+To add or replace an image, save the original at that path with exactly the filename entered in the Dashboard and run `npm run dev` (or `npm run assets:build`). Commit only the source file; the WebP output under `public/{projects,publication-highlights,logos}/generated/` is regenerated on every machine and deployment. `npm run check:public-contract` fails if a public project, funder, course or highlight filename has no uploaded source.
+
+Figures receive responsive WebP sizes of 640, 960, 1440 and 1800px, never enlarged. PNG figures are kept lossless where that is not much heavier than quality-95 WebP; flat-colour charts up to 2400px wide keep their exact original pixels when that is the lightest option; other figures use quality-95 WebP. Smaller sizes are kept only when they are also lighter. Logos fit within 400 × 400px under the same lossless rule. Outputs are cached by content, so only new or changed images are encoded; a first full build takes about two minutes.
+
+`assets/sources/figures.json` holds two optional settings:
+
+- `aliases` reuse one source for a second page, avoiding duplicate files (for example, the ENUT spider plot serves both its project and its publication highlight);
+- `sharpen` applies a light unsharp mask (σ) to a specific soft original after resizing; it is used for two figures whose best available exports are slightly blurred.
 
 ### TERGAP map snapshot
 
