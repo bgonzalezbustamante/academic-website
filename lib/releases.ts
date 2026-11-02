@@ -27,6 +27,7 @@ export const releases: ReleaseNote[] = [
         title: 'Small refinements',
         items: [
           'Retired the old version of the website, which now forwards visitors to this one.',
+          'Made keyboard focus easier to see in the Weekly timeline.',
         ],
       },
     ],
