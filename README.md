@@ -108,7 +108,11 @@ The navbar and Home positions list use these generated institutional logo assets
 
 ### TERGAP map snapshot
 
-The TERGAP project map uses a compact derived snapshot at `public/data/tergap-map.json` rather than copying the full TERGAP dashboard metrics file. Its Africa-centred view matches the standalone TERGAP Dashboard; Conferences retains its global map.
+The TERGAP project map uses a compact derived snapshot at `public/data/tergap-map.json` rather than copying the full TERGAP dashboard metrics file. Its Africa-centred view matches the standalone TERGAP Dashboard; Conferences offers Europe (default) and World views.
+
+### Europe map subset
+
+The Conferences Europe view uses `public/data/europe-map-50m.json`, a derived subset of the `world-atlas` 1:50m countries containing only those visible in that viewport. Run `npm run map:europe` to regenerate it if the Europe projection changes, and commit the derived JSON.
 
 When the TERGAP dashboard data changes, regenerate the snapshot from the TERGAP repository and commit only the derived academic-website JSON.
 

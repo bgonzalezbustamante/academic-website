@@ -90,7 +90,7 @@ The site never derives a Supabase Storage URL for these assets. The supplied alt
 
 ### Projects and Conferences
 
-Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. The website intentionally does not consume or render a Project role, even if the upstream public payload exposes one. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first.
+Projects are supplied exclusively through `list_public_projects()` and `get_public_project(text)`. The website intentionally does not consume or render a Project role, even if the upstream public payload exposes one. Associated papers are represented only as already-public publication slugs and are resolved against `list_public_papers()`; the website never queries project-paper tables. Projects may also expose `conference_presentations[]`, using the same intentionally public presentation shape as the standalone Conferences contract. Project detail renders a peer-level **Research outputs** section after **About the project**, with **Associated publications** and **Conference presentations** subsections as applicable; **Funding** is always rendered last. Project Funding presentation may use the public `funder_note`, and project cards prefer the configured funder image before the project image. Homepage Featured projects are ordered by later `end_year` first. The `/projects` page keeps Featured projects above a client-paginated portfolio of the remaining projects (six per page, in existing order, with First/Previous/Next/Last controls above and below); portfolio cards receive only the fields they render rather than whole project records.
 
 Project images and funder logos are local static assets:
 
@@ -99,7 +99,7 @@ Project images and funder logos are local static assets:
 /public/funders/<funder_image_filename>
 ```
 
-Conferences are supplied exclusively through `list_public_conference_presentations()`. The choropleth provides Europe and World views, with a Europe-focused Equal Earth projection centred at 10° E, 51° N, scale 700 and an 800 × 510 viewport. Europe uses the existing `world-atlas/countries-50m.json` dataset with finer, rounded borders. World keeps the original `countries-110m.json` geometry and scale 150. Both views retain the same global country counts, log-scaled aqua/blue palette and tooltips, while virtual presentations are counted separately and not mapped. The TERGAP Africa view retains its original geometry and projection settings. The shared website and embedded timeline parsers accept `Conference paper`, `Keynote`, `Workshop` and `Guest lecture`, including guest-lecture presentations attached to public projects. The standalone Conferences dashboard derives its country count from the final `City, Country` location segment, computes the Keynote percentage from public `presentation_type`, presents KPI cards before an Oxford aqua/blue map with coral hover, and uses a compact 10-row paginated presentation table while preserving the RPC's descending-date record order. Keynote rows are identified with a small star beside the presentation title and a legend below the shared table, including when that table is reused inside project Research outputs. The homepage Roadmap filters presentations to the current Europe/Amsterdam year, orders them chronologically by `presentation_date`, groups them into rows of at most five, and connects successive rows as one continuous timeline while showing the public short event name with the presentation location beneath it. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
+Conferences are supplied exclusively through `list_public_conference_presentations()`. The choropleth provides Europe and World views, with a Europe-focused Equal Earth projection centred at 10° E, 51° N, scale 700 and an 800 × 510 viewport. Europe uses finer, rounded 1:50m borders from `public/data/europe-map-50m.json`, a derived subset of `world-atlas/countries-50m.json` containing only the countries visible in that viewport; regenerate it with `npm run map:europe` if the Europe projection changes. Only countries with presentations that fall inside the current view are keyboard-focusable. World keeps the original `countries-110m.json` geometry and scale 150. Both views retain the same global country counts, log-scaled aqua/blue palette and tooltips, while virtual presentations are counted separately and not mapped. The TERGAP Africa view retains its original geometry and projection settings. The shared website and embedded timeline parsers accept `Conference paper`, `Keynote`, `Workshop` and `Guest lecture`, including guest-lecture presentations attached to public projects. The standalone Conferences dashboard derives its country count from the final `City, Country` location segment, computes the Keynote percentage from public `presentation_type`, presents KPI cards before an Oxford aqua/blue map with coral hover, and uses a compact 10-row paginated presentation table while preserving the RPC's descending-date record order. Keynote rows are identified with a small star beside the presentation title and a legend below the shared table, including when that table is reused inside project Research outputs. The homepage Roadmap filters presentations to the current Europe/Amsterdam year, orders them chronologically by `presentation_date`, groups them into rows of at most five, and connects successive rows as one continuous timeline while showing the public short event name with the presentation location beneath it. Notes, internal owner IDs and optional Dashboard paper relationships are intentionally absent and are neither requested nor inferred.
 
 ### Teaching Portfolio
 
@@ -122,7 +122,7 @@ TERGAP geographic coverage is sourced from the separate public [tergap-dashboard
 /public/data/tergap-map.json
 ```
 
-It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry. TERGAP uses the original dashboard treatment exactly for the map canvas/background (`#eef0f7`), not-collected geography (`#e8eaed`), six-step logarithmic scale (`#e7eaf4` → `#001158`) and teal hover (`#007679`). Conferences uses the same canvas and grey no-data geography with an Oxford aqua/blue data scale and Oxford coral reserved for hover. The TERGAP map alone uses the source dashboard's Africa-centred Equal Earth viewport (centre [15°, 5°], scale 245); the shared Conferences map retains its default world projection (scale 150). The TERGAP map is shown on the TERGAP detail page; project cards use funder imagery instead, with the TERGAP ERC logo supplied locally as a presentation fallback.
+It contains only the TERGAP dashboard generation timestamp, collection window and country-level ISO-3/article-count values required for the map. The shared map component uses `react-simple-maps` and bundled `world-atlas` geometry. TERGAP uses the original dashboard treatment exactly for the map canvas/background (`#eef0f7`), not-collected geography (`#e8eaed`), six-step logarithmic scale (`#e7eaf4` → `#001158`) and teal hover (`#007679`). Conferences uses the same canvas and grey no-data geography with an Oxford aqua/blue data scale and Oxford coral reserved for hover. The TERGAP map alone uses the source dashboard's Africa-centred Equal Earth viewport (centre [15°, 5°], scale 245); Conferences offers Europe (default) and World views, with World keeping the default world projection (scale 150). The TERGAP map is shown on the TERGAP detail page; project cards use funder imagery instead, with the TERGAP ERC logo supplied locally as a presentation fallback.
 
 ## Information architecture
 
@@ -141,6 +141,8 @@ The public structure is:
 └── contact / external links
 
 /publications
+├── /publications/profile
+├── /publications/coauthorship
 └── /publication/[slug]
 
 /projects
@@ -149,6 +151,11 @@ The public structure is:
 /conferences
 
 /teaching
+
+/trajectory
+/software
+/paintings
+/weekly-timeline
 
 /dora
 /credit
@@ -228,11 +235,13 @@ The footer consumes the exact `@bgonzalezbustamante/catholic-calendar@0.1.0-beta
 
 The composed display remains fixed at the package contract's maximum of two items. The entire display links to `https://catholic.bgonzalezbustamante.com/` and uses local Christicons masks corresponding to the semantic icon identifiers returned by the package. The right-hand footer order is Catholic Calendar → Website Carbon → release version.
 
-`scripts/check-calendar-footer.mjs` runs fast deterministic footer fixtures before production builds. It protects the 85-character maximum-width composition identified by the full beta.1 range audit — `Our Lord Jesus Christ, King of the Universe · Presentation of the Blessed Virgin Mary` — together with the long St Michael's Lent/countdown composition and the 5 October 2026 integration sample. `scripts/audit-calendar-footer.mjs` retains the exhaustive 2000–2100 scan for deliberate package/release audits rather than every deployment.
+The display is prefixed with a small calendar icon and its effective date in `D Mon YYYY` form (`en-GB` short months, so September appears as `Sept`); in stress-test mode the date is the fixture date. On wider screens the date and composed items stay on one line where they fit and wrap between groups rather than being clipped; at 760px and below, the date and each item stack on their own rows.
+
+`scripts/check-calendar-footer.mjs` runs fast deterministic footer fixtures before production builds. It protects the 85-character maximum-width composition identified by the full beta.1 range audit — `Our Lord Jesus Christ, King of the Universe · Presentation of the Blessed Virgin Mary` — together with the long St Michael's Lent/countdown composition and the 5 October 2026 integration sample. It also checks the full dated display, including the date prefix, against a 100-character envelope. `scripts/audit-calendar-footer.mjs` retains the exhaustive 2000–2100 scan for deliberate package/release audits rather than every deployment.
 
 ## Development and deployment
 
-Development remains local-first. After the local npm/public-contract/build gate passes, validated changes are merged into `main` and deployed through the Netlify project `bgonzalezbustamante`, which serves the canonical production domain `https://bgonzalezbustamante.com`.
+Development remains local-first. After the local npm/public-contract/build gate passes, validated changes are merged into `main` and deployed through the Netlify project `bgonzalezbustamante`, which serves the canonical production domain `https://bgonzalezbustamante.com`. Netlify builds run only with explicit approval; see README Deployment for the `[skip netlify]` rule and merge-message requirements.
 
 Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`.
 

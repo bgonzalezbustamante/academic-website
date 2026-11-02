@@ -19,6 +19,7 @@ Some security and public-API compatibility fixes have already been deployed inde
 - Prefixed the Catholic Calendar footer display with a small calendar icon and its effective date in `D Mon YYYY` format (for example, `7 Oct 2026`), separated from the daily display by a subtle middle dot.
 - Kept the date and observance display on the same Amsterdam-local calendar day; Dashboard stress-test mode shows its fixture date alongside the corresponding fixture display.
 - Preserved the compact single-line treatment on wider screens; on mobile, the date and each composed calendar item occupy their own row with separators removed, while long labels can still wrap within their row.
+- Let the wider-screen display wrap between the date and observance groups when space runs out, instead of clipping it inside a hidden horizontal scroll area. `scripts/check-calendar-footer.mjs` now also checks the full dated display against a 100-character envelope (the 85-character composition plus the longest date prefix, `16 Sept 2026 · `).
 
 ### Weekly timeline
 
@@ -32,11 +33,16 @@ Some security and public-API compatibility fixes have already been deployed inde
 ### Projects
 
 - Kept Featured projects visible above the portfolio and added client-side pagination for remaining public projects (six per page), with First/Previous/Next/Last controls both above and below the cards, a visible result range and keyboard-accessible page changes. The public RPC and ordering are unchanged.
+- Page changes scroll the portfolio to just below the sticky site header, measured at run time so the wrapped mobile header is respected, before moving keyboard focus to its heading.
+- Portfolio cards now receive only the fields they render (`ProjectCardData`), so abstracts, funder notes, publication slugs and conference presentations are no longer serialised to the browser for the paginated list.
+- Added local project images for "From Bronze to Benchmark" and "Executive Triangle in the Chilean Case" under `public/projects/<slug>/`.
 
 ### Conference map
 
 - Added an accessible Europe / World selector to the Conferences choropleth, defaulting to a closer Europe view centred at 10° E, 51° N (Equal Earth scale 700; 800 × 510 viewport). The World view retains its original framing.
 - Used the existing `world-atlas` 1:50m country boundaries and finer, rounded strokes for Europe while preserving the 1:110m World map, global country counts, shared blue/aqua scale, tooltips and the TERGAP Africa view. Virtual presentations remain excluded from mapped totals; no new dependencies.
+- Replaced the full 1:50m atlas in the Europe view with `public/data/europe-map-50m.json`, a derived subset of the 74 countries visible in that viewport, reducing the atlas payload on `/conferences` from about 756 KB to 224 KB (about 73 KB gzipped). `npm run map:europe` regenerates it deterministically with `scripts/build-europe-map.mjs`.
+- Kept countries that fall entirely outside the visible map area out of the keyboard tab order in every view, including the TERGAP Africa view.
 
 ### Public API compatibility
 
