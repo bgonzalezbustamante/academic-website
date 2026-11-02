@@ -245,7 +245,7 @@ The display is prefixed with a small calendar icon and its effective date in `D 
 
 Development remains local-first. After the local npm/public-contract/build gate passes, validated changes are merged into `main` and deployed through the Netlify project `bgonzalezbustamante`, which serves the canonical production domain `https://bgonzalezbustamante.com`. Netlify builds run only with explicit approval; see README Deployment for the `[skip netlify]` rule and merge-message requirements.
 
-Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`.
+Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`; they apply to Next.js responses but not to files Netlify serves directly from `public/`. A headers-only root `netlify.toml` gives the content-hashed `/*/generated/` images a one-year immutable `Cache-Control`; build settings remain in the Netlify UI.
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, SEO/accessibility/security/performance hardening, exact legacy-redirect verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and the default production Netlify hostname redirects permanently to the equivalent canonical `.com` path.
 

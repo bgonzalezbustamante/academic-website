@@ -8,6 +8,10 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - Added daily revalidation (`revalidate = 86400`) to `/trajectory`, `/credit`, `/dora`, `/paintings` and `/release-notes`. These pages were fully static, so the footer copyright year and the current-year logic on Academic trajectory would only have changed on the next deploy after New Year.
 
+### Caching
+
+- Added a headers-only root `netlify.toml` that serves the content-hashed images under `/{profile,paintings,branding,logos,projects,publication-highlights}/generated/` with `Cache-Control: public, max-age=31536000, immutable`. Netlify serves `public/` files directly, so `next.config.ts` headers never reached them and they were revalidated on every visit. Build settings remain in the Netlify UI.
+
 ### Legacy website
 
 - Retired the pre-v6 deployment at `legacy-bgonzalezbustamante.netlify.app`: it now redirects every path permanently (301) to the same path on `https://bgonzalezbustamante.com`, so it is no longer indexable as a duplicate site and no longer loads Google Analytics. The change lives in the archived `academic-kickstart` repository; this repository's README and ARCHITECTURE were updated accordingly.
