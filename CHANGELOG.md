@@ -21,6 +21,10 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - Made the `check:public-contract` image guard compare every path segment with the exact directory listing. Windows ignores filename case, so a Dashboard filename such as `nwo.jpg` previously passed against `NWO.jpg` locally while the case-sensitive manifest and Netlify's Linux build would show no image. Aliases now also require their target to exist with the exact case.
 
+### Favicon
+
+- Replaced the 512 × 512px, 169 KB favicon (`app/icon.png`, a copy of the full Leiden seal) with a 192 × 192px palette PNG of about 19 KB, keeping its transparent corners. It was the largest image on most pages, and 192px is a multiple of 48px, as Google Search asks for favicons.
+
 ### Caching
 
 - Added a headers-only root `netlify.toml` that serves the content-hashed images under `/{profile,paintings,branding,logos,projects,publication-highlights}/generated/` with `Cache-Control: public, max-age=31536000, immutable`. Netlify serves `public/` files directly, so `next.config.ts` headers never reached them and they were revalidated on every visit. Build settings remain in the Netlify UI.

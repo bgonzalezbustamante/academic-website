@@ -106,6 +106,8 @@ Run `npm run assets:build` to create content-hashed WebP files under `public/{pr
 
 The navbar and Home positions list use these generated institutional logo assets.
 
+The favicon, `app/icon.png`, is a committed 192 × 192px palette PNG (about 19 KB) derived from `assets/sources/logos/leiden.png`; 192px is a multiple of 48px, as Google Search asks for favicons. Regenerate it from that source if the seal changes.
+
 ### Project, publication and logo images
 
 Project figures, publication Key highlight figures, and funder and teaching logos follow the same process as the portrait. The Research Dashboard stores only the filename; the original lives in `assets/sources/`:
