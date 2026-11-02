@@ -45,6 +45,14 @@ export const metadata: Metadata = {
   ],
   creator: 'Bastián González-Bustamante',
   publisher: 'Bastián González-Bustamante',
+  openGraph: {
+    type: 'website',
+    siteName: 'Bastián González-Bustamante',
+    locale: 'en_GB',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
   robots: allowIndexing
     ? {
         index: true,

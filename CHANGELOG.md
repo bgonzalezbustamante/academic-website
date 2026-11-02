@@ -16,6 +16,8 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - `/publications` now renders every filtered publication card on the server and hides those outside the current page with the HTML `hidden` attribute, so all publication detail links are present in the HTML. Previously only the first 10 were, because pagination is client-side and uses buttons; the other pages were reachable only through the sitemap. The visible layout and pagination are unchanged.
 
+- Added site-wide Open Graph and Twitter defaults in the root layout (`og:site_name`, `en_GB` locale, `summary_large_image`) and a 1200 × 630 social preview card, `app/opengraph-image.tsx`, generated at build time from the portrait source with the name, research areas and site address. Publication and project pages, which define their own Open Graph data, restate the card explicitly because a page-level `openGraph` replaces the inherited one.
+
 ### Accessibility
 
 - Added a text-safe coral token, `--oxford-coral-text` (`#B8322C`, 5.95:1 on white and about 5.3:1 on the off-white page background), and applied it to every rule where coral colours text: eyebrow and kicker labels, link, navigation and card-title hovers, highlighted citation names, pagination and map-selector hover, footer link hovers and the Weekly timeline chips. Bright Oxford coral (`#FE615A`, 2.97:1) remains for icons, list markers, underlines, borders and backgrounds.
