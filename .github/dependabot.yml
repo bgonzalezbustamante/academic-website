@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 2
+    # Netlify builds only with approval: the marker keeps Dependabot commits
+    # (and merge commits that quote their titles) from deploying.
+    commit-message:
+      prefix: '[skip netlify]'
+    # Major upgrades (Next.js, React, ESLint, TypeScript) are planned
+    # deliberately and land in a named release, not raised automatically.
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-major
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+      # Security fixes still open as soon as an advisory is published,
+      # but together in one pull request instead of one per package.
+      security:
+        applies-to: security-updates
+        patterns:
+          - '*'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: '[skip netlify]'
+    groups:
+      actions:
+        patterns:
+          - '*'
