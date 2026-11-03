@@ -584,14 +584,17 @@
   margin-top: 0.28rem;
 }
 
-@media (max-width: 760px) {
+/* Up to the upstream shell width (1180px) the seven-day grid sits at or near
+   its 1050px minimum, so long Work/Coffee labels need the compact chip. */
+@media (max-width: 1180px) {
   .metric-chip {
-    justify-content: center;
     gap: 0.14rem;
     padding-inline: 0.18rem;
     font-size: 0.62rem;
   }
+}
 
+@media (max-width: 760px) {
   .week-pagination {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-areas:
