@@ -1,5 +1,11 @@
-# Headers only: build settings stay in the Netlify UI. Netlify serves public/
-# files directly, so next.config.ts headers do not reach them.
+# Build command and publish settings stay in the Netlify UI; this file pins the
+# Node version and sets headers for public/ files, which Netlify serves directly
+# (next.config.ts headers do not reach them).
+
+# Node 22 LTS, the minimum in package.json engines and the lower CI version.
+# A file-based value also overrides any NODE_VERSION set in the UI.
+[build.environment]
+  NODE_VERSION = "22"
 
 # Generated images are named by a hash of their content and settings
 # (scripts/build-images.mjs), so they can be cached for a year.
