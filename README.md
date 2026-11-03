@@ -151,11 +151,17 @@ npm audit --omit=dev
 gitleaks detect --source . --log-opts="--all" --no-banner --redact --verbose
 ```
 
-`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Validate locally; perform browser and Deploy Preview checks only for an approved release.
+`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Validate locally, including browser checks against `npm run start`; Netlify Deploy Previews are switched off.
+
+GitHub Actions CI (`.github/workflows/ci.yml`) runs `npm audit --omit=dev --audit-level=high` and `npm run check` on Node 22 and 24 for every pull request and push to `main`. The production build and `check:public-contract` need the Supabase environment and stay in the local gate above.
+
+### Dependency updates
+
+Dependabot (`.github/dependabot.yml`) opens one grouped pull request per week for npm minor and patch updates and one per month for GitHub Actions; major upgrades are planned deliberately in a named release. Its commits carry `[skip netlify]`. Dependabot pull requests are not merged into `main` directly: their bumps are applied with `npm install --save-exact` on the active release branch and pass the full gate, and Dependabot closes its pull request once `main` has the new versions. Dependabot alerts and security updates are enabled; a security fix that cannot wait for the next release becomes an approved hotfix.
 
 ## Deployment
 
-Development is local-first. Work in progress stays in draft, unmerged pull requests, with `[skip netlify]` in the PR title and each development commit to suppress routine previews and branch builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
+Development is local-first. Work in progress stays in draft, unmerged pull requests, with `[skip netlify]` in the PR title and each development commit. Netlify Deploy Previews are switched off, so pull requests never build; the marker remains a second safeguard against unintended builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
 
 Only approved, validated changes are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. When a production deployment is approved, ensure **both the merge commit title and body** omit `[skip netlify]`: GitHub can copy a PR title into the merge message and inadvertently suppress the build. Verify the published Netlify deployment against the expected `main` commit. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 

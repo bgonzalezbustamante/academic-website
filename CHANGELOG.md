@@ -43,6 +43,12 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 - Added a headers-only root `netlify.toml` that serves the content-hashed images under `/{profile,paintings,branding,logos,projects,publication-highlights}/generated/` with `Cache-Control: public, max-age=31536000, immutable`. Netlify serves `public/` files directly, so `next.config.ts` headers never reached them and they were revalidated on every visit. Build settings remain in the Netlify UI.
 
+### Maintenance automation
+
+- Added Dependabot (`.github/dependabot.yml`, PR #23, which lands on `main` ahead of this release): weekly grouped npm minor and patch updates with majors ignored, and monthly grouped GitHub Actions updates, all with a `[skip netlify]` commit prefix. Dependabot alerts and security updates are enabled for the repository.
+- Added GitHub Actions CI (`.github/workflows/ci.yml`): `npm ci`, `npm audit --omit=dev --audit-level=high` and `npm run check` on Node 22 and 24 for every pull request and push to `main`, with actions pinned by commit SHA. The production build and `check:public-contract` stay in the local gate because they need the Supabase environment.
+- Netlify Deploy Previews are switched off, so pull requests never start a build; `[skip netlify]` remains a second safeguard.
+
 ### Clean-up
 
 - Removed the unused `FeaturedProjectsCarousel` component and its styles, plus other `app/globals.css` rules whose classes no longer appear anywhere (`.hero-actions`, `.publication-date`, `.project-card-map-visual`, `.conference-table-link`): 17 rules.
