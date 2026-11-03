@@ -6,6 +6,7 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 ### Dependencies
 
+- Updated `@bgonzalezbustamante/catholic-calendar` from 0.1.0-beta.1 to 0.1.0-beta.2 "Ivory Delta", pinned exactly. It names the celebration that impedes another instead of a generic label, orders equal-rank celebrations deterministically without changing any supported date, and adds `isSupportedCalendarDate()`. `check:calendar-footer` and the full 2000–2100 `audit:calendar-footer` pass; the longest footer composition stays at 85 characters.
 - Updated `next` and `eslint-config-next` from 16.4.3 to 16.4.4, and `react` and `react-dom` from 19.2.8 to 19.3.1 (with `scheduler` 0.28.0), pinned exactly. No published advisory affected the previous versions; this is routine maintenance.
 
 ### Freshness
@@ -27,6 +28,7 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 ### Accessibility
 
 - Added a text-safe coral token, `--oxford-coral-text` (`#B8322C`, 5.95:1 on white and about 5.3:1 on the off-white page background), and applied it to every rule where coral colours text: eyebrow and kicker labels, link, navigation and card-title hovers, highlighted citation names, pagination and map-selector hover, footer link hovers and the Weekly timeline chips. Bright Oxford coral (`#FE615A`, 2.97:1) remains for icons, list markers, underlines, borders and backgrounds.
+- Ported weekly-penguin-timeline beta.3's compact Weekly timeline metric chips (`c57d3ee`): the tighter gap, inline padding and 0.62rem font now apply up to 1180px instead of 760px, so long Work/Coffee labels such as `10–12h`, `12h+`, `8–10` and `11+` also fit on tablet widths, where the seven-day grid sits at its 1050px minimum. The rest of the port already matched upstream beta.3, including Guest lecture support and the redrawn artwork.
 - Restored the visible keyboard focus ring on the Weekly timeline week navigation, page and jump buttons. Their `:focus-visible` rules set `outline: none`, which overrode the site-wide coral focus outline and left only a low-contrast aqua border; the border remains as an additional cue.
 
 ### Image uploads
