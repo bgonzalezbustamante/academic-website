@@ -1,7 +1,15 @@
 /* eslint-disable @next/next/no-img-element -- The illustration is WebP generated locally by scripts/build-images.mjs; Next.js image optimisation would re-encode it. */
+import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { imageAssets } from '@/content/image-assets.generated'
+
+// Next.js adds its own noindex tag to 404 responses. This replaces the root
+// layout's tag (index, follow in production), so the two tags agree.
+export const metadata: Metadata = {
+  title: 'Page not found',
+  robots: { index: false, follow: true },
+}
 
 export default function NotFound() {
   const illustration = imageAssets.errors.notFound
