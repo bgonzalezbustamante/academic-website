@@ -23,7 +23,7 @@
     "check:public-contract": "node --env-file=.env.local scripts/check-public-contract.mjs"
   },
   "dependencies": {
-    "@bgonzalezbustamante/catholic-calendar": "0.1.0-beta.1",
+    "@bgonzalezbustamante/catholic-calendar": "0.1.0-beta.2",
     "@fortawesome/fontawesome-svg-core": "7.3.1",
     "@fortawesome/free-brands-svg-icons": "7.3.1",
     "@fortawesome/free-solid-svg-icons": "7.3.1",
