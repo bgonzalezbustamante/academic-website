@@ -9,6 +9,13 @@ function nullableString(value: unknown) {
   return value == null ? null : String(value)
 }
 
+// Some Dashboard links still use http://doi.org or http://dx.doi.org; both
+// resolvers redirect, so serve the canonical https://doi.org form directly.
+function nullableUrl(value: unknown) {
+  const url = nullableString(value)
+  return url?.replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, 'https://doi.org/') ?? null
+}
+
 function nullableNonNegativeInteger(value: unknown) {
   if (value == null) return null
 
@@ -45,13 +52,13 @@ function normalizePaper(row: Record<string, unknown>): PublicPaper {
     abstract: nullableString(row.abstract),
     venue: nullableString(row.venue),
     publication_date: nullableString(row.publication_date),
-    doi_url: nullableString(row.doi_url),
-    publication_url: nullableString(row.publication_url),
-    preprint_url: nullableString(row.preprint_url),
-    github_url: nullableString(row.github_url),
-    dataset_url: nullableString(row.dataset_url),
-    project_url: nullableString(row.project_url),
-    si_file_url: nullableString(row.si_file_url),
+    doi_url: nullableUrl(row.doi_url),
+    publication_url: nullableUrl(row.publication_url),
+    preprint_url: nullableUrl(row.preprint_url),
+    github_url: nullableUrl(row.github_url),
+    dataset_url: nullableUrl(row.dataset_url),
+    project_url: nullableUrl(row.project_url),
+    si_file_url: nullableUrl(row.si_file_url),
     featured: row.featured === true,
     publication_index: nullableString(row.publication_index),
     language: normalizePaperLanguage(row.language),
