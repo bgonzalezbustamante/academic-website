@@ -157,7 +157,9 @@ GitHub Actions CI (`.github/workflows/ci.yml`) runs `npm audit --omit=dev --audi
 
 ### Dependency updates
 
-Dependabot (`.github/dependabot.yml`) opens one grouped pull request per week for npm minor and patch updates and one per month for GitHub Actions; major upgrades are planned deliberately in a named release. Its commits carry `[skip netlify]`. Dependabot pull requests are not merged into `main` directly: their bumps are applied with `npm install --save-exact` on the active release branch and pass the full gate, and Dependabot closes its pull request once `main` has the new versions. Dependabot alerts and security updates are enabled; a security fix that cannot wait for the next release becomes an approved hotfix.
+Dependabot (`.github/dependabot.yml`) opens one grouped pull request per week for npm minor and patch updates and one per month for GitHub Actions; major upgrades are planned deliberately in a named release. Its commits carry `[skip netlify]`. Dependabot pull requests are not merged into `main` directly: their bumps are applied with `npm install --save-exact` on the active release branch and pass the full gate, and Dependabot closes its pull request once `main` has the new versions. Dependabot alerts, malware alerts and grouped security updates are enabled; a security fix that cannot wait for the next release becomes an approved hotfix.
+
+The "Protect main" ruleset requires a pull request and both CI checks (`check (22)`, `check (24)`) before anything merges into `main`, and blocks force-pushes and deletion. CodeQL default setup scans the code and workflows, and security issues can be reported privately through GitHub's private vulnerability reporting.
 
 ## Deployment
 
