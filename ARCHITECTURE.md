@@ -181,43 +181,19 @@ The public site deliberately shares a visual family with Research Dashboard whil
 
 Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. `content/positions.ts` is the single ordered configuration for current roles, institutions, links and generated branding assets: rearranging that array simultaneously reorders the homepage positions and navbar logo strip. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. This local presentation boundary can eventually be replaced by Academic API current-position records without maintaining two separate ordering lists. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
 
-## Immediate data sources
+## Data sources
 
-### Research Dashboard public contracts
+### Research Dashboard
 
-Available now:
+Everything dynamic comes from the RPCs listed under [Public contracts](#public-contracts): publications (including detail-only citations and Key highlights), projects with their associated publications and conference presentations, conference presentations, teaching cards and settings, software, aggregate work analytics, availability and the Catholic Calendar footer settings. `scripts/check-public-contract.mjs` holds the exact field lists.
 
-- publication title
-- ordered authors
-- abstract
-- current venue
-- publication date
-- DOI/publication URL
-- preprint URL
-- GitHub URL
-- Dataverse/dataset URL
-- featured state
-- publication index
-- aggregate work analytics
-- detail-only publication Key highlight metadata
-- public projects with canonical URL, years, status, Featured state, funder note and static asset filenames
-- associated publication slugs restricted to independently Public papers
-- conference presentations with public short event names and presentation-specific ordered authors
-- public Teaching Portfolio cards with institution, summary, years/current state, multiple levels, cumulative times taught/students and a local course-image filename
+### Local presentation content
 
-### Legacy academic website
+The homepage profile, positions, portrait, email and institutional address, the academic trajectory, paintings, site carbon figures, the DORA statement and the CRediT taxonomy page are maintained directly in this repository (`content/` and `lib/site-population.ts`) as presentation content rather than Dashboard records. They should not be copied into a new database or CMS in this repository.
 
-Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart):
+### Not migrated
 
-- education detail beyond the current short biography
-- legacy project/resource material not yet represented by a Public Research Dashboard project record
-- service detail
-- CV asset/link
-- historic publication corpus not yet present in Research Dashboard
-
-The homepage profile, three main appointments, portrait, selected project links, email and institutional address are now maintained directly in this public repository as presentation content. The same applies to the DORA statement and the migrated CRediT taxonomy page, which are static research-practice content rather than Dashboard-managed records.
-
-These should not be copied into a new database or CMS in this repository.
+The legacy website was retired on 2 Nov 2026: every path on `legacy-bgonzalezbustamante.netlify.app` redirects permanently to the same path here, and the [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart) repository is archived. Material that was not carried over (detailed education and service records, the CV file and older publications not in the Research Dashboard) remains only in that archive; legacy URLs without a current equivalent return 404.
 
 ## Local validation
 
@@ -247,7 +223,7 @@ Development remains local-first. After the local npm/public-contract/build gate 
 
 Search and sharing metadata: the root layout sets Open Graph and Twitter defaults, and `app/opengraph-image.tsx` generates a 1200 × 630 preview card at build time from the portrait source; publication and project pages restate that card because their own `openGraph` replaces the inherited one. Home emits `Person` JSON-LD and publication pages emit `ScholarlyArticle` JSON-LD plus Google Scholar `citation_*` meta tags (DOIs come from `doi_url` or `publication_url`). `/publications` renders every filtered card with non-current pages `hidden`, so all publication links are crawlable while pagination stays client-side.
 
-Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`; they apply to Next.js responses but not to files Netlify serves directly from `public/`. A headers-only root `netlify.toml` gives the content-hashed `/*/generated/` images a one-year immutable `Cache-Control`; build settings remain in the Netlify UI.
+Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`; they apply to Next.js responses but not to files Netlify serves directly from `public/`. The root `netlify.toml` (headers plus a Node 22 pin) gives the content-hashed `/*/generated/` images a one-year immutable `Cache-Control`; build settings remain in the Netlify UI.
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, SEO/accessibility/security/performance hardening, exact legacy-redirect verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and the default production Netlify hostname redirects permanently to the equivalent canonical `.com` path.
 

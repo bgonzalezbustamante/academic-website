@@ -90,13 +90,13 @@ Use a Supabase publishable key (`sb_publishable_...`), never a service-role key.
 
 Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS production hosts are indexable; localhost, branch/preview deployments and the temporary Netlify hostname emit `noindex` metadata and a disallowing `robots.txt`. Netlify's build context is embedded in Next.js so that Deploy Previews stay non-indexable even when they inherit the production site URL. Production `robots.txt` also advertises the generated public sitemap.
 
-Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when Swift Harbour has a clear successor. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
+Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when the current site has a clear successor page. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
 
 ### Weekly timeline
 
 The `/weekly-timeline` page integrates **only** the seven-day interactive component from [Weekly Penguin Timeline](https://github.com/bgonzalezbustamante/weekly-penguin-timeline), adapted from its `main` revision `3c284218abf9` (v0.1.0-beta.2). Navigation spans roughly three months before and after the current week; illustrations reflect public working time and coffee counts, selected Catholic dates, conferences, travel, availability and teaching-season Saturdays. The standalone tester, asset gallery and release notes are intentionally omitted.
 
-The Next.js page, calendar logic and data validation run locally in this repository through the anonymous-safe Academic API. To avoid duplicating 46 large PNG source artworks before rc.2, its penguin graphics load as already generated WebP files from `https://timeline.bgonzalezbustamante.com/penguins/`. This is an explicit dependency on the standalone deployment; no iframe or external JavaScript is used. Artwork is CC BY-NC 4.0 (see `NOTICE`). The page links to the full standalone site.
+The Next.js page, calendar logic and data validation run locally in this repository through the anonymous-safe Academic API. To avoid duplicating the 46 large PNG source artworks, its penguin graphics load as already generated WebP files from `https://timeline.bgonzalezbustamante.com/penguins/`. This is an explicit dependency on the standalone deployment; no iframe or external JavaScript is used. Artwork is CC BY-NC 4.0 (see `NOTICE`). The page links to the full standalone site.
 
 ### Local image assets
 
