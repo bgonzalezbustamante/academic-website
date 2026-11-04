@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.1.0 "Jade Prairie"** (6 Nov 2026), the first minor v6 release; previous release: **v6.0.0 "Crimson Delta"** (2 Nov 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
+Current release: **v6.1.0 "Jade Prairie"** (4 Nov 2026), the first minor v6 release; previous release: **v6.0.0 "Crimson Delta"** (2 Nov 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
 The pre-v6 Hugo/Wowchemy implementation was retired on 2 Nov 2026: `legacy-bgonzalezbustamante.netlify.app` now redirects every path permanently to the same path on this site, and the archived `academic-kickstart` repository keeps its source. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 

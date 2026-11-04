@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v6.1.0 "Jade Prairie" (6 Nov 2026)
+## v6.1.0 "Jade Prairie" (4 Nov 2026)
 
 Jade Prairie is the first minor v6 release, brought forward from 1 Dec 2026. It improves accessibility (text-safe coral, a 3:1 focus outline and the restored Weekly timeline focus ring), search visibility (crawlable publication links, structured data, Google Scholar tags, sitemap dates and a social preview card), loading speed (a lighter favicon and 404 illustration and long-term caching of generated images) and resilience to new Dashboard values, and adds Dependabot, CI and repository security settings.
 
