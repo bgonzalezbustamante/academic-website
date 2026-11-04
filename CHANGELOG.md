@@ -6,12 +6,17 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 
 ### Dependencies
 
+- Updated `next` and `eslint-config-next` from 16.4.4 to 16.4.5 (3 Nov 2026), pinned exactly. Its seven moderate advisories do not apply to this site: it uses no `'use cache'` or Cache Components, no Edge runtime routes and no proxy, and does not pass SVGs through the image optimiser; the image, Edge-cookie and binary-argument advisories also stop at 16.4.2, below production's 16.4.3. This is routine maintenance.
 - Updated `@bgonzalezbustamante/catholic-calendar` from 0.1.0-beta.1 to 0.1.0-beta.2 "Ivory Delta", pinned exactly. It names the celebration that impedes another instead of a generic label, orders equal-rank celebrations deterministically without changing any supported date, and adds `isSupportedCalendarDate()`. `check:calendar-footer` and the full 2000–2100 `audit:calendar-footer` pass; the longest footer composition stays at 85 characters.
 - Updated `next` and `eslint-config-next` from 16.4.3 to 16.4.4, and `react` and `react-dom` from 19.2.8 to 19.3.1 (with `scheduler` 0.28.0), pinned exactly. No published advisory affected the previous versions; this is routine maintenance.
 
 ### Freshness
 
 - Added daily revalidation (`revalidate = 86400`) to `/trajectory`, `/credit`, `/dora`, `/paintings` and `/release-notes`. These pages were fully static, so the footer copyright year and the current-year logic on Academic trajectory would only have changed on the next deploy after New Year.
+
+### Resilience
+
+- An unknown conference presentation type or a presentation without dates no longer empties the Projects and Conferences data: `normalizeConferencePresentations()` in `lib/conferences.ts` (used by `listPublicConferencePresentations` and by each project's presentations in `lib/projects.ts`) drops and logs the invalid row. `listPublicSoftware` does the same for an unknown category, development stage, status or repository visibility; dropping the whole row keeps an unrecognised visibility from ever exposing a repository link. `check:public-contract` still fails on these values, so they are caught at the release gate. This is how a new Dashboard value such as "Guest lecture" previously broke these pages. The Weekly timeline port keeps upstream's strict validation.
 
 ### Search visibility
 

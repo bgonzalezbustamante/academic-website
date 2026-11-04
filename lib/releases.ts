@@ -35,6 +35,7 @@ export const releases: ReleaseNote[] = [
           'Made the page-not-found illustration much faster to load.',
           'Helped search engines and Google Scholar find and describe every publication, and added a preview card for when the website is shared.',
           'Made older publication and dataset links open through secure addresses.',
+          'Kept project, conference and software pages working when the research database adds a new kind of entry.',
           'Applied routine software maintenance updates.',
         ],
       },
