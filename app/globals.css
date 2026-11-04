@@ -12,6 +12,9 @@
   --oxford-coral: #fe615a;
   /* Coral for text: #fe615a is 2.97:1 on white, below WCAG AA 4.5:1. */
   --oxford-coral-text: #b8322c;
+  /* Focus rings sit on white or off-white and need 3:1 (WCAG 1.4.11); bright
+     coral is 2.97:1 on white, so they use the text-safe coral. */
+  --focus-ring: var(--oxford-coral-text);
   --oxford-aqua: #00aab4;
   --paper: #ffffff;
   --max-width: 1120px;
@@ -65,7 +68,7 @@ a:hover {
   select,
   [tabindex]:not([tabindex='-1'])
 ):focus-visible {
-  outline: 3px solid var(--oxford-coral);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -95,7 +98,7 @@ main {
 
 .skip-link:focus-visible {
   transform: translateY(0);
-  outline: 3px solid var(--oxford-coral);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -768,7 +771,7 @@ h4 {
 
 .publication-filters select:focus-visible,
 .publication-filter-reset:focus-visible {
-  outline: 2px solid var(--oxford-coral);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -2747,7 +2750,7 @@ h4 {
 }
 
 .conference-map-region-controls button:focus-visible {
-  outline: 2px solid var(--oxford-coral);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 

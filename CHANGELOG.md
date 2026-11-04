@@ -55,7 +55,8 @@ Jade Prairie is in development for release on 1 Dec 2026. The website continues 
 - Added GitHub Actions CI (`.github/workflows/ci.yml`): `npm ci`, `npm audit --omit=dev --audit-level=high` and `npm run check` on Node 22 and 24 for every pull request and push to `main`, with actions pinned by commit SHA. The production build and `check:public-contract` stay in the local gate because they need the Supabase environment.
 - Grouped Dependabot security updates for npm into one pull request (PR #25); they still open as soon as an advisory is published.
 - Hardened the repository: the "Protect main" ruleset now requires both CI checks to pass before anything merges into `main` (it already required a pull request and blocked force-pushes and deletion), CodeQL default setup scans the JavaScript, TypeScript and workflows, and private vulnerability reporting and Dependabot malware alerts are enabled.
-- Pinned the Netlify build to Node 22 (`[build.environment] NODE_VERSION` in `netlify.toml`), the minimum in `package.json` `engines` and the lower CI version; a file-based value also takes precedence over the Netlify UI.
+- Pinned the Netlify build to Node 24 LTS (`[build.environment] NODE_VERSION` in `netlify.toml`) and added `.nvmrc` with `24`, matching organisation-site-template and local development; a file-based value also takes precedence over the Netlify UI. `package.json` `engines` still allows Node 22, and CI tests both 22 and 24.
+- Added `.gitattributes` (`* text=auto eol=lf`), as in organisation-site-template, so text files keep LF line endings on every platform.
 - Switched off Netlify Deploy Previews and branch deploys, so pull requests and branch pushes never start a build; only `main` deploys, and `[skip netlify]` remains a second safeguard.
 
 ### Clean-up

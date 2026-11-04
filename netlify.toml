@@ -2,10 +2,10 @@
 # Node version and sets headers for public/ files, which Netlify serves directly
 # (next.config.ts headers do not reach them).
 
-# Node 22 LTS, the minimum in package.json engines and the lower CI version.
-# A file-based value also overrides any NODE_VERSION set in the UI.
+# Node 24 LTS, as in .nvmrc and organisation-site-template; package.json engines
+# still allow 22, which CI also tests. A file-based value overrides the UI.
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION = "24"
 
 # Generated images are named by a hash of their content and settings
 # (scripts/build-images.mjs), so they can be cached for a year.
