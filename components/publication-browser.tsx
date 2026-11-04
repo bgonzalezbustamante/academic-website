@@ -87,11 +87,6 @@ export default function PublicationBrowser({ papers }: Props) {
     Math.ceil(filtered.length / PAGE_SIZE)
   )
 
-  const visible = useMemo(() => {
-    const start = (page - 1) * PAGE_SIZE
-    return filtered.slice(start, start + PAGE_SIZE)
-  }, [filtered, page])
-
   const start = filtered.length === 0
     ? 0
     : (page - 1) * PAGE_SIZE + 1
@@ -214,11 +209,17 @@ export default function PublicationBrowser({ papers }: Props) {
 
       {filtered.length > 0 ? (
         <>
+          {/* Every filtered card is rendered so all publication links are in the
+              HTML for crawlers; cards outside the current page are hidden. */}
           <div className="publication-list">
-            {visible.map((paper) => (
+            {filtered.map((paper, index) => (
               <PublicationCitationCard
                 key={paper.slug}
                 paper={paper}
+                hidden={
+                  index < (page - 1) * PAGE_SIZE ||
+                  index >= page * PAGE_SIZE
+                }
               />
             ))}
           </div>

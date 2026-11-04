@@ -82,6 +82,26 @@ export function normalizeConferencePresentation(
   }
 }
 
+// One unknown presentation type or a row without dates should not empty the
+// Projects and Conferences pages: such rows are dropped and logged here, while
+// check:public-contract still fails on them.
+export function normalizeConferencePresentations(
+  rows: unknown[]
+): PublicConferencePresentation[] {
+  return rows.flatMap((row) => {
+    try {
+      return [
+        normalizeConferencePresentation(row as Record<string, unknown>),
+      ]
+    } catch (error) {
+      console.warn(
+        `Dropped public conference presentation: ${error instanceof Error ? error.message : 'invalid row'}`
+      )
+      return []
+    }
+  })
+}
+
 export async function listPublicConferencePresentations(): Promise<
   PublicConferencePresentation[]
 > {
@@ -94,7 +114,5 @@ export async function listPublicConferencePresentations(): Promise<
     throw new Error('Could not load public conference presentations.')
   }
 
-  return ((data ?? []) as Record<string, unknown>[]).map(
-    normalizeConferencePresentation
-  )
+  return normalizeConferencePresentations((data ?? []) as unknown[])
 }

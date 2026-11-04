@@ -1,5 +1,87 @@
 # CHANGELOG
 
+## v6.1.0 "Jade Prairie" (4 Nov 2026)
+
+Jade Prairie is the first minor v6 release, brought forward from 1 Dec 2026. It improves accessibility (text-safe coral, a 3:1 focus outline and the restored Weekly timeline focus ring), search visibility (crawlable publication links, structured data, Google Scholar tags, sitemap dates and a social preview card), loading speed (a lighter favicon and 404 illustration and long-term caching of generated images) and resilience to new Dashboard values, and adds Dependabot, CI and repository security settings.
+
+### Dependencies
+
+- Applied Dependabot PR #24: `@supabase/supabase-js` 2.117.1 → 2.118.0 and `@types/node` 22.20.4 → 22.20.5, now pinned exactly (its `react`/`react-dom` 19.3.1 bump was already on the branch).
+- Updated `next` and `eslint-config-next` from 16.4.4 to 16.4.5 (3 Nov 2026), pinned exactly. Its seven moderate advisories do not apply to this site: it uses no `'use cache'` or Cache Components, no Edge runtime routes and no proxy, and does not pass SVGs through the image optimiser; the image, Edge-cookie and binary-argument advisories also stop at 16.4.2, below production's 16.4.3. This is routine maintenance.
+- Updated `@bgonzalezbustamante/catholic-calendar` from 0.1.0-beta.1 to 0.1.0-beta.2 "Ivory Delta", pinned exactly. It names the celebration that impedes another instead of a generic label, orders equal-rank celebrations deterministically without changing any supported date, and adds `isSupportedCalendarDate()`. `check:calendar-footer` and the full 2000–2100 `audit:calendar-footer` pass; the longest footer composition stays at 85 characters.
+- Updated `next` and `eslint-config-next` from 16.4.3 to 16.4.4, and `react` and `react-dom` from 19.2.8 to 19.3.1 (with `scheduler` 0.28.0), pinned exactly. No published advisory affected the previous versions; this is routine maintenance.
+
+### Freshness
+
+- Added daily revalidation (`revalidate = 86400`) to `/trajectory`, `/credit`, `/dora`, `/paintings` and `/release-notes`. These pages were fully static, so the footer copyright year and the current-year logic on Academic trajectory would only have changed on the next deploy after New Year.
+
+### Resilience
+
+- An unknown conference presentation type or a presentation without dates no longer empties the Projects and Conferences data: `normalizeConferencePresentations()` in `lib/conferences.ts` (used by `listPublicConferencePresentations` and by each project's presentations in `lib/projects.ts`) drops and logs the invalid row. `listPublicSoftware` does the same for an unknown category, development stage, status or repository visibility; dropping the whole row keeps an unrecognised visibility from ever exposing a repository link. `check:public-contract` still fails on these values, so they are caught at the release gate. This is how a new Dashboard value such as "Guest lecture" previously broke these pages. The Weekly timeline port keeps upstream's strict validation.
+
+### Search visibility
+
+- `app/sitemap.ts` now gives `lastModified` where the data dates the content: each publication's date, the latest past publication date for `/publications`, and for each project the latest past date among its publications and conference presentations (74 of 94 entries). Other pages carry no date rather than an invented one, and forthcoming dates are never used.
+- Publication links from the Dashboard that still use `http://doi.org` or `http://dx.doi.org` (11 links across DOI, publication, preprint, dataset and project URLs) are normalised to `https://doi.org` in `lib/publications.ts`, so visitors and crawlers skip a redirect and the structured data uses the canonical form.
+- `/publications` now renders every filtered publication card on the server and hides those outside the current page with the HTML `hidden` attribute, so all publication detail links are present in the HTML. Previously only the first 10 were, because pagination is client-side and uses buttons; the other pages were reachable only through the sitemap. The visible layout and pagination are unchanged.
+
+- Added site-wide Open Graph and Twitter defaults in the root layout (`og:site_name`, `en_GB` locale, `summary_large_image`) and a 1200 × 630 social preview card, `app/opengraph-image.tsx`, generated at build time from the portrait source with the name, research areas and site address. Publication and project pages, which define their own Open Graph data, restate the card explicitly because a page-level `openGraph` replaces the inherited one.
+
+- Added structured data through a small `JsonLd` component: a `Person` on Home (name, portrait, current roles and affiliations, research areas and ORCID, GitHub, Google Scholar and LinkedIn profiles) and a `ScholarlyArticle` on every publication page (title, authors, publication date unless forthcoming, venue, plain-text abstract, language and DOI).
+- Added Google Scholar (Highwire) `citation_*` meta tags to publication pages: title, each author, publication date (`YYYY/MM/DD`, or the year for forthcoming work), venue, DOI, language and the abstract page URL. DOIs are read from `doi_url` or, as is the case for all 35 current DOIs, from `publication_url`.
+- Publication and project meta descriptions now use a plain-text summary of the abstract (`lib/plain-text.ts`) truncated to about 160 characters, instead of the full Markdown/LaTeX abstract.
+
+### Accessibility
+
+- Added a text-safe coral token, `--oxford-coral-text` (`#B8322C`, 5.95:1 on white and about 5.3:1 on the off-white page background), and applied it to every rule where coral colours text: eyebrow and kicker labels, link, navigation and card-title hovers, highlighted citation names, pagination and map-selector hover, footer link hovers and the Weekly timeline chips. Bright Oxford coral (`#FE615A`, 2.97:1) remains for icons, list markers, underlines, borders and backgrounds.
+- Ported weekly-penguin-timeline beta.3's compact Weekly timeline metric chips (`c57d3ee`): the tighter gap, inline padding and 0.62rem font now apply up to 1180px instead of 760px, so long Work/Coffee labels such as `10–12h`, `12h+`, `8–10` and `11+` also fit on tablet widths, where the seven-day grid sits at its 1050px minimum. The rest of the port already matched upstream beta.3, including Guest lecture support and the redrawn artwork.
+- The keyboard focus outline now uses a `--focus-ring` token set to the text-safe coral `#B8322C` instead of bright coral `#FE615A`, in the site-wide `:focus-visible` rule, the skip link, the publication filters and the conference map region buttons. Bright coral reached only 2.97:1 on white and 2.62:1 on the `#F2F0F0` page background, below the 3:1 that WCAG 1.4.11 asks of focus indicators; the new colour reaches 5.95:1 and 5.24:1. Width and offset are unchanged. Found while comparing the site with organisation-site-template, which keeps its focus colour as a separate token.
+- Restored the visible keyboard focus ring on the Weekly timeline week navigation, page and jump buttons. Their `:focus-visible` rules set `outline: none`, which overrode the site-wide coral focus outline and left only a low-contrast aqua border; the border remains as an additional cue.
+
+### Image uploads
+
+- Made the `check:public-contract` image guard compare every path segment with the exact directory listing. Windows ignores filename case, so a Dashboard filename such as `nwo.jpg` previously passed against `NWO.jpg` locally while the case-sensitive manifest and Netlify's Linux build would show no image. Aliases now also require their target to exist with the exact case.
+
+### 404 page
+
+- Replaced the 404 illustration, a 3.4 MB SVG that only wrapped a base64 PNG and was preloaded on every missing URL (about 2.5 MB compressed), with responsive WebP generated by `scripts/build-images.mjs` from the 4096px original, now at `assets/sources/errors/404_penguin.png`: 39 KB at 320px, 70 KB at 480px and 194 KB at 960px, with its transparent background preserved. Removed the SVG and the unused 2048px PNG (12.7 MB of public assets in total), and added `/errors/generated/*` to the one-year image caching in `netlify.toml`.
+
+- The 404 page now has its own "Page not found" title and robots metadata (`noindex, follow`). Previously it inherited the root layout's `index, follow` in production alongside the `noindex` tag Next.js adds to 404 responses, giving search engines conflicting directives.
+
+### Favicon
+
+- Replaced the 512 × 512px, 169 KB favicon (`app/icon.png`, a copy of the full Leiden seal) with a 192 × 192px palette PNG of about 19 KB, keeping its transparent corners. It was the largest image on most pages, and 192px is a multiple of 48px, as Google Search asks for favicons.
+
+### Caching
+
+- Added a headers-only root `netlify.toml` that serves the content-hashed images under `/{profile,paintings,branding,logos,projects,publication-highlights}/generated/` with `Cache-Control: public, max-age=31536000, immutable`. Netlify serves `public/` files directly, so `next.config.ts` headers never reached them and they were revalidated on every visit. Build settings remain in the Netlify UI.
+
+### Maintenance automation
+
+- Added Dependabot (`.github/dependabot.yml`, PR #23, which lands on `main` ahead of this release): weekly grouped npm minor and patch updates with majors ignored, and monthly grouped GitHub Actions updates, all with a `[skip netlify]` commit prefix. Dependabot alerts and security updates are enabled for the repository.
+- Added GitHub Actions CI (`.github/workflows/ci.yml`): `npm ci`, `npm audit --omit=dev --audit-level=high` and `npm run check` on Node 22 and 24 for every pull request and push to `main`, with actions pinned by commit SHA. The production build and `check:public-contract` stay in the local gate because they need the Supabase environment.
+- Grouped Dependabot security updates for npm into one pull request (PR #25); they still open as soon as an advisory is published.
+- Hardened the repository: the "Protect main" ruleset now requires both CI checks to pass before anything merges into `main` (it already required a pull request and blocked force-pushes and deletion), CodeQL default setup scans the JavaScript, TypeScript and workflows, and private vulnerability reporting and Dependabot malware alerts are enabled.
+- Pinned the Netlify build to Node 24 LTS (`[build.environment] NODE_VERSION` in `netlify.toml`) and added `.nvmrc` with `24`, matching organisation-site-template and local development; a file-based value also takes precedence over the Netlify UI. `package.json` `engines` still allows Node 22, and CI tests both 22 and 24.
+- Added `.gitattributes` (`* text=auto eol=lf`), as in organisation-site-template, so text files keep LF line endings on every platform.
+- Switched off Netlify Deploy Previews and branch deploys, so pull requests and branch pushes never start a build; only `main` deploys, and `[skip netlify]` remains a second safeguard.
+
+### Clean-up
+
+- Refreshed outdated README and ARCHITECTURE wording: the legacy-redirect rule no longer refers to the Swift Harbour release candidate, the Weekly timeline note no longer mentions rc.2, and ARCHITECTURE's "Immediate data sources" and "Legacy academic website" sections became "Data sources", covering the Dashboard RPCs, local presentation content and what remains only in the archived legacy repository.
+- Removed the unused `FeaturedProjectsCarousel` component and its styles, plus other `app/globals.css` rules whose classes no longer appear anywhere (`.hero-actions`, `.publication-date`, `.project-card-map-visual`, `.conference-table-link`): 17 rules.
+- Removed 56 rules carried over from the standalone Weekly Penguin Timeline that this site never renders (state tester, state matrix, special-state gallery, notes grid and release pagination) from `app/weekly-timeline/weekly-timeline.css`.
+- Removed the unused `WORK_BUCKETS` and `COFFEE_BUCKETS` constants and the `yearsForCurrentWeek` and `yearsForWorkAnalytics` helpers from `lib/weekly-timeline/`.
+- Removed the `images` block from `next.config.ts`: no image requests a non-default `quality`, and the Weekly timeline penguins are `unoptimized`, so `qualities` and the `timeline.bgonzalezbustamante.com` `remotePatterns` entry were unused.
+
+### Notices
+
+- Added `NOTICE` sections for the flag-icons SVG flags in `public/flags` (MIT, with its copyright and permission notice), the world-atlas/Natural Earth map data including the derived `public/data/europe-map-50m.json` (ISC, with its notice) and the TERGAP snapshot `public/data/tergap-map.json`. The Weekly Penguin Timeline section now covers the 404 illustration, which is part of the same CC BY-NC 4.0 artwork and is kept at `assets/sources/errors/404_penguin.png`.
+
+### Legacy website
+
+- Retired the pre-v6 deployment at `legacy-bgonzalezbustamante.netlify.app`: it now redirects every path permanently (301) to the same path on `https://bgonzalezbustamante.com`, so it is no longer indexable as a duplicate site and no longer loads Google Analytics. The change lives in the archived `academic-kickstart` repository; this repository's README and ARCHITECTURE were updated accordingly.
+
 ## v6.0.0 "Crimson Delta" (2 Nov 2026)
 
 Crimson Delta is the first stable v6 release. It refines navigation, the Catholic Calendar footer, project browsing, the conference map and the Weekly timeline, and compiles project, publication and logo images into responsive WebP. Some security and public-API compatibility fixes were deployed independently during stabilisation.

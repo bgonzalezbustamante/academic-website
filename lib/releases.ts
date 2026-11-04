@@ -15,9 +15,31 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
+    version: 'v6.1.0',
+    codename: 'Jade Prairie',
+    status: 'Current release',
+    releasedOn: '4 Nov 2026',
+    comparison: 'First minor v6 release',
+    summary:
+      'Jade Prairie makes the website easier to read and use with a keyboard, easier to find in search and faster to load.',
+    sections: [
+      {
+        title: 'Small refinements',
+        items: [
+          'Made keyboard focus and small coral text easier to see, and Weekly timeline labels fit better on tablets.',
+          'Helped search engines and Google Scholar find and describe every publication, and added a preview card for shared links.',
+          'Made the tab icon and the page-not-found illustration much lighter, and let browsers keep images for longer.',
+          'Kept research pages working when the research database adds a new kind of entry.',
+          'Retired the old version of the website, which now forwards visitors here.',
+          'Applied routine security and maintenance updates.',
+        ],
+      },
+    ],
+  },
+  {
     version: 'v6.0.0',
     codename: 'Crimson Delta',
-    status: 'Current release',
+    status: 'Previous release',
     releasedOn: '2 Nov 2026',
     comparison: 'First stable v6 release',
     summary:
@@ -40,7 +62,6 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.2',
     codename: 'Bold River',
-    status: 'Previous release',
     releasedOn: '6 Oct 2026',
     comparison: 'Second release candidate',
     summary:

@@ -38,11 +38,16 @@ function renderCitation(citation: string) {
 
 export default function PublicationCitationCard({
   paper,
+  hidden = false,
 }: {
   paper: CitationPaper
+  hidden?: boolean
 }) {
   return (
-    <article className="publication-card publication-citation-card">
+    <article
+      className="publication-card publication-citation-card"
+      hidden={hidden}
+    >
       <div className="metadata-tags publication-meta">
         <span className="metadata-tag">
           {publicationYearLabel(paper.publication_date)}

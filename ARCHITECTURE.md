@@ -1,6 +1,6 @@
 # Architecture
 
-This repository is the Next.js production implementation of [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and the continuation of the academic website previously implemented in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart). The predecessor is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy.
+This repository is the Next.js production implementation of [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and the continuation of the academic website previously implemented in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart). The predecessor deployment at `legacy-bgonzalezbustamante.netlify.app` was retired on 2 Nov 2026 and now redirects permanently to this site.
 
 The full pre-v6 history is retained in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md). This repository starts a fresh changelog at v6.0.0-rc.1 "Swift Harbour".
 
@@ -61,7 +61,7 @@ The non-navigation `/weekly-timeline` route integrates the seven-day `WeeklyPeng
 
 ### Static raster image pipeline
 
-`scripts/build-images.mjs` is the only generator for the website's raster images. It reads `assets/sources/profile/avatar.png`, the nine slug-matched `assets/sources/paintings/*.jpg` files and `assets/sources/branding/{leiden,udp,ocpsg}.png`, plus the Dashboard-referenced figures and logos described below. The pre-development, pre-check and pre-build scripts run it automatically. An explicit direct run is available as `npm run assets:build`.
+`scripts/build-images.mjs` is the only generator for the website's raster images. It reads `assets/sources/profile/avatar.png`, the nine slug-matched `assets/sources/paintings/*.jpg` files, `assets/sources/branding/{leiden,udp,ocpsg}.png` and the 404 illustration `assets/sources/errors/404_penguin.png` (responsive WebP at 320–960px for its 480px slot), plus the Dashboard-referenced figures and logos described below. The pre-development, pre-check and pre-build scripts run it automatically. An explicit direct run is available as `npm run assets:build`.
 
 The output contains content-hashed `.webp` files under `public/{profile,paintings,branding}/generated/` and an ignored `content/image-assets.generated.ts` manifest with the public URLs. The generated directories are rebuilt from scratch; old files never accumulate. The portrait preserves the full source aspect ratio and is resized without upscaling to fit 660px, at quality 95. The nine paintings receive distinct responsive widths up to 1800px, also at quality 95. Branding is resized without upscaling to fit 168px and encoded losslessly. Source originals are not published under `public/`.
 
@@ -174,50 +174,26 @@ The public site deliberately shares a visual family with Research Dashboard whil
 - Noto Serif is used for longer editorial/body text.
 - Oxford blue (`#002147`) is the primary structural colour.
 - Research Dashboard charcoal, ash, stone, off-white, cool-grey and sky-blue tokens provide the neutral surface system.
-- Oxford coral (`#FE615A`) is the main secondary accent for links, rules and emphasis.
+- Oxford coral (`#FE615A`) is the main secondary accent for rules, underlines, icons and emphasis. Wherever coral colours text (small labels, link and navigation hover, highlighted citations), the darker text coral `--oxford-coral-text` (`#B8322C`, 5.95:1 on white) is used instead, because `#FE615A` is only 2.97:1 and fails WCAG AA for text.
 - Oxford aqua (`#00AAB4`) is deliberately limited to small interactive states.
 - A washed Oxford-blue surface (`#edf2f7`) provides supporting backgrounds without competing with the primary blue/coral identity.
 - Locally bundled Font Awesome provides interface, brand and scholarly-profile icons; no external icon stylesheet/font is required at runtime.
 
 Institutional branding is presented as a compact monochrome affiliation strip using the supplied Leiden University, Universidad Diego Portales and OCPSG assets. `content/positions.ts` is the single ordered configuration for current roles, institutions, links and generated branding assets: rearranging that array simultaneously reorders the homepage positions and navbar logo strip. The strip links back to the website home page; the smaller logos next to each position link to the corresponding institution. This local presentation boundary can eventually be replaced by Academic API current-position records without maintaining two separate ordering lists. The supplied Leiden seal is also the favicon. The profile portrait is carried forward from `academic-kickstart`.
 
-## Immediate data sources
+## Data sources
 
-### Research Dashboard public contracts
+### Research Dashboard
 
-Available now:
+Everything dynamic comes from the RPCs listed under [Public contracts](#public-contracts): publications (including detail-only citations and Key highlights), projects with their associated publications and conference presentations, conference presentations, teaching cards and settings, software, aggregate work analytics, availability and the Catholic Calendar footer settings. `scripts/check-public-contract.mjs` holds the exact field lists.
 
-- publication title
-- ordered authors
-- abstract
-- current venue
-- publication date
-- DOI/publication URL
-- preprint URL
-- GitHub URL
-- Dataverse/dataset URL
-- featured state
-- publication index
-- aggregate work analytics
-- detail-only publication Key highlight metadata
-- public projects with canonical URL, years, status, Featured state, funder note and static asset filenames
-- associated publication slugs restricted to independently Public papers
-- conference presentations with public short event names and presentation-specific ordered authors
-- public Teaching Portfolio cards with institution, summary, years/current state, multiple levels, cumulative times taught/students and a local course-image filename
+### Local presentation content
 
-### Legacy academic website
+The homepage profile, positions, portrait, email and institutional address, the academic trajectory, paintings, site carbon figures, the DORA statement and the CRediT taxonomy page are maintained directly in this repository (`content/` and `lib/site-population.ts`) as presentation content rather than Dashboard records. They should not be copied into a new database or CMS in this repository.
 
-Still static/deferred in [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart):
+### Not migrated
 
-- education detail beyond the current short biography
-- legacy project/resource material not yet represented by a Public Research Dashboard project record
-- service detail
-- CV asset/link
-- historic publication corpus not yet present in Research Dashboard
-
-The homepage profile, three main appointments, portrait, selected project links, email and institutional address are now maintained directly in this public repository as presentation content. The same applies to the DORA statement and the migrated CRediT taxonomy page, which are static research-practice content rather than Dashboard-managed records.
-
-These should not be copied into a new database or CMS in this repository.
+The legacy website was retired on 2 Nov 2026: every path on `legacy-bgonzalezbustamante.netlify.app` redirects permanently to the same path here, and the [academic-kickstart](https://github.com/bgonzalezbustamante/academic-kickstart) repository is archived. Material that was not carried over (detailed education and service records, the CV file and older publications not in the Research Dashboard) remains only in that archive; legacy URLs without a current equivalent return 404.
 
 ## Local validation
 
@@ -245,14 +221,15 @@ The display is prefixed with a small calendar icon and its effective date in `D 
 
 Development remains local-first. After the local npm/public-contract/build gate passes, validated changes are merged into `main` and deployed through the Netlify project `bgonzalezbustamante`, which serves the canonical production domain `https://bgonzalezbustamante.com`. Netlify builds run only with explicit approval; see README Deployment for the `[skip netlify]` rule and merge-message requirements.
 
-Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`.
+Search and sharing metadata: the root layout sets Open Graph and Twitter defaults, and `app/opengraph-image.tsx` generates a 1200 × 630 preview card at build time from the portrait source; publication and project pages restate that card because their own `openGraph` replaces the inherited one. Home emits `Person` JSON-LD and publication pages emit `ScholarlyArticle` JSON-LD plus Google Scholar `citation_*` meta tags (DOIs come from `doi_url` or `publication_url`). `/publications` renders every filtered card with non-current pages `hidden`, so all publication links are crawlable while pagination stays client-side.
+
+Search metadata is environment-aware. Canonicals use `NEXT_PUBLIC_SITE_URL`; non-production hosts receive metadata-level `noindex` plus a disallowing `robots.txt`, while production `robots.txt` allows indexing and advertises the generated sitemap. Baseline security headers are configured in `next.config.ts`; they apply to Next.js responses but not to files Netlify serves directly from `public/`. The root `netlify.toml` (headers plus a Node 24 pin, matching `.nvmrc`) gives the content-hashed `/*/generated/` images a one-year immutable `Cache-Control`; build settings remain in the Netlify UI.
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, SEO/accessibility/security/performance hardening, exact legacy-redirect verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and the default production Netlify hostname redirects permanently to the equivalent canonical `.com` path.
 
-The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy.
+The predecessor deployment at `legacy-bgonzalezbustamante.netlify.app` was retired on 2 Nov 2026: a locked Netlify deploy redirects every path permanently (301) to the same path on this site, and the `academic-kickstart` repository is archived.
 
 ## Deferred work
 
 - Continue population and reconciliation of historical publication, project, conference and teaching records as required.
 - Add remaining profile/service/CV material only when it has a clear place in the current information architecture.
-- Archive the legacy Netlify project and predecessor repository after the post-migration observation period and once rollback is no longer required.

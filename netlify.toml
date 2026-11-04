@@ -1,0 +1,45 @@
+# Build command and publish settings stay in the Netlify UI; this file pins the
+# Node version and sets headers for public/ files, which Netlify serves directly
+# (next.config.ts headers do not reach them).
+
+# Node 24 LTS, as in .nvmrc and organisation-site-template; package.json engines
+# still allow 22, which CI also tests. A file-based value overrides the UI.
+[build.environment]
+  NODE_VERSION = "24"
+
+# Generated images are named by a hash of their content and settings
+# (scripts/build-images.mjs), so they can be cached for a year.
+[[headers]]
+  for = "/profile/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/paintings/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/branding/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/logos/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/projects/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/publication-highlights/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/errors/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

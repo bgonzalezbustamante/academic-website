@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   },
 }
 
+export const revalidate = 86400
+
 export default function PaintingsPage() {
   return (
     <section className="page-section paintings-page">

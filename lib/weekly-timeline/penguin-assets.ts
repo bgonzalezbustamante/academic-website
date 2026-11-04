@@ -6,24 +6,6 @@ import type {
   WorkBucket,
 } from '@/types/weekly-timeline'
 
-export const WORK_BUCKETS: WorkBucket[] = [
-  'zero',
-  'light',
-  'normal',
-  'heavy',
-  'very-heavy',
-  'extreme',
-]
-
-export const COFFEE_BUCKETS: CoffeeBucket[] = [
-  'zero',
-  'light',
-  'normal',
-  'heavy',
-  'very-heavy',
-  'extreme',
-]
-
 const SPECIAL_ASSETS: Partial<Record<PenguinMode, string>> = {
   sunday: 'https://timeline.bgonzalezbustamante.com/penguins/states/webp/sunday.webp',
   'winter-holiday': 'https://timeline.bgonzalezbustamante.com/penguins/states/webp/winter-holiday.webp',

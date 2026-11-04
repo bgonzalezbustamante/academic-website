@@ -2,9 +2,9 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.0.0 "Crimson Delta"** (2 Nov 2026), the first stable v6 release; previous release: **v6.0.0-rc.2 "Bold River"** (6 Oct 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
+Current release: **v6.1.0 "Jade Prairie"** (4 Nov 2026), the first minor v6 release; previous release: **v6.0.0 "Crimson Delta"** (2 Nov 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
-The pre-v6 Hugo/Wowchemy implementation is retained temporarily at `legacy-bgonzalezbustamante.netlify.app` as a rollback copy. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
+The pre-v6 Hugo/Wowchemy implementation was retired on 2 Nov 2026: `legacy-bgonzalezbustamante.netlify.app` now redirects every path permanently to the same path on this site, and the archived `academic-kickstart` repository keeps its source. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
 ## Architecture
 
@@ -62,7 +62,7 @@ These files are deliberately local configuration/content rather than Research Da
 
 ## Local development
 
-This project requires **Node.js 22 or later**.
+This project requires **Node.js 22 or later**; `.nvmrc` and the Netlify build use Node 24.
 
 ```bash
 git clone https://github.com/bgonzalezbustamante/academic-website.git
@@ -88,13 +88,13 @@ Use a Supabase publishable key (`sb_publishable_...`), never a service-role key.
 
 Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS production hosts are indexable; localhost, branch/preview deployments and the temporary Netlify hostname emit `noindex` metadata and a disallowing `robots.txt`. Netlify's build context is embedded in Next.js so that Deploy Previews stay non-indexable even when they inherit the production site URL. Production `robots.txt` also advertises the generated public sitemap.
 
-Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when Swift Harbour has a clear successor. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
+Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when the current site has a clear successor page. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
 
 ### Weekly timeline
 
 The `/weekly-timeline` page integrates **only** the seven-day interactive component from [Weekly Penguin Timeline](https://github.com/bgonzalezbustamante/weekly-penguin-timeline), adapted from its `main` revision `3c284218abf9` (v0.1.0-beta.2). Navigation spans roughly three months before and after the current week; illustrations reflect public working time and coffee counts, selected Catholic dates, conferences, travel, availability and teaching-season Saturdays. The standalone tester, asset gallery and release notes are intentionally omitted.
 
-The Next.js page, calendar logic and data validation run locally in this repository through the anonymous-safe Academic API. To avoid duplicating 46 large PNG source artworks before rc.2, its penguin graphics load as already generated WebP files from `https://timeline.bgonzalezbustamante.com/penguins/`. This is an explicit dependency on the standalone deployment; no iframe or external JavaScript is used. Artwork is CC BY-NC 4.0 (see `NOTICE`). The page links to the full standalone site.
+The Next.js page, calendar logic and data validation run locally in this repository through the anonymous-safe Academic API. To avoid duplicating the 46 large PNG source artworks, its penguin graphics load as already generated WebP files from `https://timeline.bgonzalezbustamante.com/penguins/`. This is an explicit dependency on the standalone deployment; no iframe or external JavaScript is used. Artwork is CC BY-NC 4.0 (see `NOTICE`). The page links to the full standalone site.
 
 ### Local image assets
 
@@ -103,6 +103,10 @@ The canonical raster sources live outside `public/`: one `assets/sources/profile
 Run `npm run assets:build` to create content-hashed WebP files under `public/{profile,paintings,branding}/generated/` and the local image manifest. It runs automatically before `npm run dev`, `npm run check` and `npm run build`; generated files are not committed. The portrait and responsive painting variants use quality 95; logos use lossless WebP. The generated portrait is served without a second compression step to preserve image quality. The build also checks the actual WebP dimensions and reports their file sizes; the Leiden logo must retain a genuinely transparent background. Christicons and other vector or static assets remain outside this pipeline.
 
 The navbar and Home positions list use these generated institutional logo assets.
+
+The 404 page illustration is compiled the same way from `assets/sources/errors/404_penguin.png` (the 4096px original) into WebP at 320, 480, 640 and 960px under `public/errors/generated/`, losslessly where that is not much heavier than quality 95, and with its transparent background verified.
+
+The favicon, `app/icon.png`, is a committed 192 × 192px palette PNG (about 19 KB) derived from `assets/sources/logos/leiden.png`; 192px is a multiple of 48px, as Google Search asks for favicons. Regenerate it from that source if the seal changes.
 
 ### Project, publication and logo images
 
@@ -145,17 +149,25 @@ npm audit --omit=dev
 gitleaks detect --source . --log-opts="--all" --no-banner --redact --verbose
 ```
 
-`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Validate locally; perform browser and Deploy Preview checks only for an approved release.
+`npm run check:public-contract` requires a configured `.env.local` and validates the website's anonymous-safe Academic API, including controlled presentation types, Software, activity/coffee data, teaching settings, availability and repository privacy. `npm run check` covers linting, TypeScript and deterministic Catholic Calendar footer fixtures. The exhaustive calendar audit is available separately through `npm run audit:calendar-footer`. Validate locally, including browser checks against `npm run start`; Netlify Deploy Previews and branch deploys are switched off.
+
+GitHub Actions CI (`.github/workflows/ci.yml`) runs `npm audit --omit=dev --audit-level=high` and `npm run check` on Node 22 and 24 for every pull request and push to `main`. The production build and `check:public-contract` need the Supabase environment and stay in the local gate above.
+
+### Dependency updates
+
+Dependabot (`.github/dependabot.yml`) opens one grouped pull request per week for npm minor and patch updates and one per month for GitHub Actions; major upgrades are planned deliberately in a named release. Its commits carry `[skip netlify]`. Dependabot pull requests are not merged into `main` directly: their bumps are applied with `npm install --save-exact` on the active release branch and pass the full gate, and Dependabot closes its pull request once `main` has the new versions. Dependabot alerts, malware alerts and grouped security updates are enabled; a security fix that cannot wait for the next release becomes an approved hotfix.
+
+The "Protect main" ruleset requires a pull request and both CI checks (`check (22)`, `check (24)`) before anything merges into `main`, and blocks force-pushes and deletion. CodeQL default setup scans the code and workflows, and security issues can be reported privately through GitHub's private vulnerability reporting.
 
 ## Deployment
 
-Development is local-first. Work in progress stays in draft, unmerged pull requests, with `[skip netlify]` in the PR title and each development commit to suppress routine previews and branch builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
+Development is local-first. Work in progress stays in draft, unmerged pull requests, with `[skip netlify]` in the PR title and each development commit. Netlify Deploy Previews and branch deploys are switched off, so pull requests and branch pushes never build; only `main` deploys, and the marker remains a second safeguard against unintended builds. No Netlify build should be initiated without explicit approval, including for an exceptional production hotfix.
 
 Only approved, validated changes are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. When a production deployment is approved, ensure **both the merge commit title and body** omit `[skip netlify]`: GitHub can copy a PR title into the merge message and inadvertently suppress the build. Verify the published Netlify deployment against the expected `main` commit. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, quality hardening, legacy redirect verification, SEO verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and `bgonzalezbustamante.netlify.app` redirects permanently to the corresponding canonical `.com` path.
 
-The predecessor remains temporarily available at `legacy-bgonzalezbustamante.netlify.app` for rollback and can be archived after the post-migration observation period.
+The predecessor deployment at `legacy-bgonzalezbustamante.netlify.app` was retired on 2 Nov 2026 with a permanent redirect of every path to the same path on `https://bgonzalezbustamante.com`; its Netlify deploy is locked and the `academic-kickstart` repository is archived.
 
 ### Repository visibility
 
