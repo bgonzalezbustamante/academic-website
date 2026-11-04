@@ -17,11 +17,11 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.1.0',
     codename: 'Jade Prairie',
-    status: 'In development',
-    releasedOn: 'In development',
-    comparison: 'Next minor release in preparation',
+    status: 'Current release',
+    releasedOn: '6 Nov 2026',
+    comparison: 'First minor v6 release',
     summary:
-      'Jade Prairie is a set of improvements to accessibility, search visibility and loading speed.',
+      'Jade Prairie improves accessibility, search visibility and loading speed, and keeps research pages working when new kinds of entries are added.',
     sections: [
       {
         title: 'Small refinements',
@@ -44,7 +44,7 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0',
     codename: 'Crimson Delta',
-    status: 'Current release',
+    status: 'Previous release',
     releasedOn: '2 Nov 2026',
     comparison: 'First stable v6 release',
     summary:
@@ -67,7 +67,6 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0-rc.2',
     codename: 'Bold River',
-    status: 'Previous release',
     releasedOn: '6 Oct 2026',
     comparison: 'Second release candidate',
     summary:

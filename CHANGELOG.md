@@ -1,11 +1,12 @@
 # CHANGELOG
 
-## Unreleased — v6.1.0 "Jade Prairie"
+## v6.1.0 "Jade Prairie" (6 Nov 2026)
 
-Jade Prairie is in development for release on 1 Dec 2026. The website continues to identify v6.0.0 "Crimson Delta" as its current release until then.
+Jade Prairie is the first minor v6 release, brought forward from 1 Dec 2026. It improves accessibility (text-safe coral, a 3:1 focus outline and the restored Weekly timeline focus ring), search visibility (crawlable publication links, structured data, Google Scholar tags, sitemap dates and a social preview card), loading speed (a lighter favicon and 404 illustration and long-term caching of generated images) and resilience to new Dashboard values, and adds Dependabot, CI and repository security settings.
 
 ### Dependencies
 
+- Applied Dependabot PR #24: `@supabase/supabase-js` 2.117.1 → 2.118.0 and `@types/node` 22.20.4 → 22.20.5, now pinned exactly (its `react`/`react-dom` 19.3.1 bump was already on the branch).
 - Updated `next` and `eslint-config-next` from 16.4.4 to 16.4.5 (3 Nov 2026), pinned exactly. Its seven moderate advisories do not apply to this site: it uses no `'use cache'` or Cache Components, no Edge runtime routes and no proxy, and does not pass SVGs through the image optimiser; the image, Edge-cookie and binary-argument advisories also stop at 16.4.2, below production's 16.4.3. This is routine maintenance.
 - Updated `@bgonzalezbustamante/catholic-calendar` from 0.1.0-beta.1 to 0.1.0-beta.2 "Ivory Delta", pinned exactly. It names the celebration that impedes another instead of a generic label, orders equal-rank celebrations deterministically without changing any supported date, and adds `isSupportedCalendarDate()`. `check:calendar-footer` and the full 2000–2100 `audit:calendar-footer` pass; the longest footer composition stays at 85 characters.
 - Updated `next` and `eslint-config-next` from 16.4.3 to 16.4.4, and `react` and `react-dom` from 19.2.8 to 19.3.1 (with `scheduler` 0.28.0), pinned exactly. No published advisory affected the previous versions; this is routine maintenance.
