@@ -28,6 +28,7 @@ export const releases: ReleaseNote[] = [
         items: [
           'Retired the old version of the website, which now forwards visitors to this one.',
           'Made keyboard focus easier to see in the Weekly timeline.',
+          'Made the keyboard focus outline easier to see across the site.',
           'Made activity labels in the Weekly timeline fit better on tablets.',
           'Made small coral labels and link highlights easier to read.',
           'Made the browser tab icon much lighter to download.',
