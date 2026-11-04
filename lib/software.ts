@@ -103,5 +103,17 @@ export async function listPublicSoftware(): Promise<PublicSoftwareItem[]> {
     throw new Error('Could not load public software.')
   }
 
-  return ((data ?? []) as Record<string, unknown>[]).map(normalizeSoftware)
+  // A row with an unknown category, stage, status or repository visibility is
+  // dropped and logged rather than emptying the page; dropping it whole also
+  // means an unrecognised visibility can never expose a repository link.
+  return ((data ?? []) as Record<string, unknown>[]).flatMap((row) => {
+    try {
+      return [normalizeSoftware(row)]
+    } catch (error) {
+      console.warn(
+        `Dropped public software item: ${error instanceof Error ? error.message : 'invalid row'}`
+      )
+      return []
+    }
+  })
 }

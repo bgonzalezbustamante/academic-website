@@ -1,4 +1,4 @@
-import { normalizeConferencePresentation } from '@/lib/conferences'
+import { normalizeConferencePresentations } from '@/lib/conferences'
 import { createPublicSupabaseClient } from '@/lib/supabase/public'
 import type { PublicProject } from '@/types/public'
 
@@ -58,11 +58,7 @@ function normalizeProject(
     conference_presentations: Array.isArray(
       row.conference_presentations
     )
-      ? row.conference_presentations.map((presentation) =>
-          normalizeConferencePresentation(
-            presentation as Record<string, unknown>
-          )
-        )
+      ? normalizeConferencePresentations(row.conference_presentations)
       : [],
   }
 }
