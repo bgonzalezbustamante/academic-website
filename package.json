@@ -1,6 +1,6 @@
 {
   "name": "academic-website",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "private": true,
   "engines": {
     "node": ">=22.0.0"
@@ -28,7 +28,7 @@
     "@fortawesome/free-brands-svg-icons": "7.3.1",
     "@fortawesome/free-solid-svg-icons": "7.3.1",
     "@fortawesome/react-fontawesome": "3.5.0",
-    "@supabase/supabase-js": "^2.112.3",
+    "@supabase/supabase-js": "2.118.0",
     "i18n-iso-countries": "7.14.0",
     "next": "16.4.5",
     "react": "19.3.1",
@@ -38,7 +38,7 @@
     "world-atlas": "2.0.2"
   },
   "devDependencies": {
-    "@types/node": "^22",
+    "@types/node": "22.20.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
