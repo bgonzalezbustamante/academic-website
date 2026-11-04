@@ -64,7 +64,7 @@ These files are deliberately local configuration/content rather than Research Da
 
 ## Local development
 
-This project requires **Node.js 22 or later**.
+This project requires **Node.js 22 or later**; `.nvmrc` and the Netlify build use Node 24.
 
 ```bash
 git clone https://github.com/bgonzalezbustamante/academic-website.git
