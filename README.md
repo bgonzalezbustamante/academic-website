@@ -165,6 +165,8 @@ Development is local-first. Work in progress stays in draft, unmerged pull reque
 
 Only approved, validated changes are merged into `main`, which deploys to the Netlify project `bgonzalezbustamante` and serves `https://bgonzalezbustamante.com`. When a production deployment is approved, ensure **both the merge commit title and body** omit `[skip netlify]`: GitHub can copy a PR title into the merge message and inadvertently suppress the build. Verify the published Netlify deployment against the expected `main` commit. The production environment uses `NEXT_PUBLIC_SITE_URL=https://bgonzalezbustamante.com`; non-production hosts remain protected by environment-aware `noindex`/robots behaviour.
 
+Production and its data sources are monitored on the public status page [status.empirialab.cl](https://status.empirialab.cl) (Better Stack), which tracks bgonzalezbustamante.com, the Research Dashboard and the Academic API alongside the Empiria Lab services. Check it first when the site, a data section or the Weekly timeline looks wrong, and after a production deploy.
+
 The production cut-over completed on 1 Oct 2026 after temporary-deployment smoke testing, quality hardening, legacy redirect verification, SEO verification and a post-cut-over Website Carbon re-test. `www.bgonzalezbustamante.com` redirects to the apex domain, and `bgonzalezbustamante.netlify.app` redirects permanently to the corresponding canonical `.com` path.
 
 The predecessor deployment at `legacy-bgonzalezbustamante.netlify.app` was retired on 2 Nov 2026 with a permanent redirect of every path to the same path on `https://bgonzalezbustamante.com`; its Netlify deploy is locked and the `academic-kickstart` repository is archived.
