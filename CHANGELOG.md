@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Unreleased — v6.1.1 "Verdant Quartz"
+## v6.1.1 "Verdant Quartz" (23 Nov 2026)
 
-Verdant Quartz is a patch release in development. The website continues to identify v6.1.0 "Jade Prairie" as its current release until then.
+Verdant Quartz is a patch release. It redirects the historical document validation pages to the public document verifier and applies routine dependency updates; no security advisory affected the previous release.
 
 ### Redirects
 

@@ -17,9 +17,9 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.1.1',
     codename: 'Verdant Quartz',
-    status: 'In development',
-    releasedOn: 'In development',
-    comparison: 'Patch release in preparation',
+    status: 'Current release',
+    releasedOn: '23 Nov 2026',
+    comparison: 'First v6.1 patch release',
     summary:
       'Verdant Quartz brings back old document validation links and applies routine maintenance updates.',
     sections: [
@@ -35,7 +35,7 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.1.0',
     codename: 'Jade Prairie',
-    status: 'Current release',
+    status: 'Previous release',
     releasedOn: '4 Nov 2026',
     comparison: 'First minor v6 release',
     summary:
@@ -57,7 +57,6 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v6.0.0',
     codename: 'Crimson Delta',
-    status: 'Previous release',
     releasedOn: '2 Nov 2026',
     comparison: 'First stable v6 release',
     summary:
