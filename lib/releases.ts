@@ -15,6 +15,24 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
+    version: 'v6.1.1',
+    codename: 'Verdant Quartz',
+    status: 'In development',
+    releasedOn: 'In development',
+    comparison: 'Patch release in preparation',
+    summary:
+      'Verdant Quartz brings back old document validation links and applies routine maintenance updates.',
+    sections: [
+      {
+        title: 'Small refinements',
+        items: [
+          'Old document validation links now open the new verification site.',
+          'Applied routine maintenance updates.',
+        ],
+      },
+    ],
+  },
+  {
     version: 'v6.1.0',
     codename: 'Jade Prairie',
     status: 'Current release',
