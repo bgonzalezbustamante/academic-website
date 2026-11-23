@@ -4,6 +4,14 @@
 
 Verdant Quartz is a patch release in development. The website continues to identify v6.1.0 "Jade Prairie" as its current release until then.
 
+### Redirects
+
+- Added a permanent redirect for the 12 historical document validation pages (20 July 2022 – 4 January 2024): `/validation/docs/:slug` matching `YYYY-MM-DD-document` now goes to `https://verify.bgonzalezbustamante.com/legacy/:slug`, where the public document verifier shows each record. Links with the original trailing slash reach it in two permanent hops. Other `/validation/` paths still return 404, in keeping with the no-catch-all rule.
+
+### Dependencies
+
+- Updated `next` and `eslint-config-next` from 16.4.5 to 16.4.6 (backported bug fixes, including automatic compression of route handler responses) and `@supabase/supabase-js` from 2.118.0 to 2.119.2, pinned exactly; applies Dependabot PR #28. No security advisory affects 16.4.5 or 16.4.6: the 3 Nov Next.js advisories affect versions up to 16.4.4.
+
 ## v6.1.0 "Jade Prairie" (4 Nov 2026)
 
 Jade Prairie is the first minor v6 release, brought forward from 1 Dec 2026. It improves accessibility (text-safe coral, a 3:1 focus outline and the restored Weekly timeline focus ring), search visibility (crawlable publication links, structured data, Google Scholar tags, sitemap dates and a social preview card), loading speed (a lighter favicon and 404 illustration and long-term caching of generated images) and resilience to new Dashboard values, and adds Dependabot, CI and repository security settings.
