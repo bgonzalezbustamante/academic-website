@@ -85,6 +85,12 @@ const legacyRedirects = [
     destination: '/credit',
     permanent: true,
   },
+  {
+    // Historical document validations now live on the public verifier.
+    source: '/validation/docs/:slug(\\d{4}-\\d{2}-\\d{2}-document)',
+    destination: 'https://verify.bgonzalezbustamante.com/legacy/:slug',
+    permanent: true,
+  },
 ]
 
 const nextConfig: NextConfig = {
