@@ -2,7 +2,7 @@
 
 Next.js replacement for [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) and continuation of the academic website maintained in [`academic-kickstart`](https://github.com/bgonzalezbustamante/academic-kickstart).
 
-Current release: **v6.1.0 "Jade Prairie"** (4 Nov 2026), the first minor v6 release; previous release: **v6.0.0 "Crimson Delta"** (2 Nov 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
+Current release: **v6.1.1 "Verdant Quartz"** (23 Nov 2026), a patch release; previous release: **v6.1.0 "Jade Prairie"** (4 Nov 2026). The website is deployed from validated `main` to [bgonzalezbustamante.com](https://bgonzalezbustamante.com/) via Netlify.
 
 The pre-v6 Hugo/Wowchemy implementation was retired on 2 Nov 2026: `legacy-bgonzalezbustamante.netlify.app` now redirects every path permanently to the same path on this site, and the archived `academic-kickstart` repository keeps its source. Its detailed history is preserved in the [academic-kickstart CHANGELOG](https://github.com/bgonzalezbustamante/academic-kickstart/blob/master/CHANGELOG.md).
 
@@ -88,7 +88,7 @@ Use a Supabase publishable key (`sb_publishable_...`), never a service-role key.
 
 Canonical metadata resolves against `NEXT_PUBLIC_SITE_URL`. Only the final HTTPS production hosts are indexable; localhost, branch/preview deployments and the temporary Netlify hostname emit `noindex` metadata and a disallowing `robots.txt`. Netlify's build context is embedded in Next.js so that Deploy Previews stay non-indexable even when they inherit the production site URL. Production `robots.txt` also advertises the generated public sitemap.
 
-Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when the current site has a clear successor page. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page.
+Legacy URL migration uses a deliberately small set of permanent redirects in `next.config.ts`. Section indexes and legacy pages are redirected only when the current site has a clear successor page. Existing publication slugs that already remain canonical are not redirected, and legacy material without a current equivalent is allowed to return the normal 404 rather than being sent to an unrelated generic page. The historical document validation pages (`/validation/docs/YYYY-MM-DD-document`) redirect permanently to the public document verifier at `verify.bgonzalezbustamante.com/legacy/<slug>`.
 
 ### Weekly timeline
 
